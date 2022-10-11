@@ -1,0 +1,17 @@
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Debug\net6.0\VS.Core.Repository.deps.json
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Debug\net6.0\VS.Core.Repository.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Debug\net6.0\VS.Core.Repository.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.csproj.AssemblyReference.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.AssemblyInfoInputs.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.AssemblyInfo.cs
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.csproj.CoreCompileInputs.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\refint\VS.Core.Repository.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\ref\VS.Core.Repository.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Debug\net6.0\VS.Core.dataEntry.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Debug\net6.0\VS.Core.dataEntry.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Debug\net6.0\VS.Core.Repository.csproj.CopyComplete
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Debug\net6.0\VS.core.Request.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Debug\net6.0\VS.core.Request.pdb

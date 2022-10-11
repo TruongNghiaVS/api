@@ -1,0 +1,17 @@
+﻿
+using VS.core.Request;
+using VS.Core.dataEntry.User;
+
+namespace VS.Core.Business.Interface
+{
+    public interface IEmployeeBusiness : IGenericBussine<Account>
+    {
+        Task<Account> Getbyid(string Id);
+
+        Task<bool> CheckDuplicate(string userName, string phone);
+        Task<EmployeeSearchReponse> GetALl(EmployeeSearchRequest request);
+
+        Task<EmployeeSearchReponse> GetDataForExport(EmployeeSearchRequest request);
+
+    }
+}

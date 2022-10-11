@@ -1,0 +1,173 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using VS.core.API.Error.Model;
+using VS.core.API.model;
+using VS.core.Request;
+using VS.Core.Business.Interface;
+using VS.Core.dataEntry.User;
+
+
+namespace vsrolAPI2022.Controllers
+{
+    [ApiController]
+    [Authorize]
+    [Route("[controller]")]
+    public class GroupReasonController : BaseController
+    {
+
+        private readonly IGroupResonBussiness _GroupReasonBusiness;
+        public GroupReasonController(IGroupResonBussiness GroupReasonBusiness,
+            IUserBusiness userBusiness) : base(userBusiness)
+        {
+            _GroupReasonBusiness = GroupReasonBusiness;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/groupReason/getById")]
+        public async Task<IResult> GetById(InputIdRequest inputRequest)
+        {
+            if (string.IsNullOrEmpty(inputRequest.Id) ||
+                string.IsNullOrEmpty(inputRequest.Id))
+            {
+                return Results.BadRequest(_message.CommonError_ErrorRequestInput);
+            }
+            var result = await _GroupReasonBusiness.Getbyid(inputRequest.Id);
+            return Results.Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/groupReason/getAll")]
+        public async Task<IResult> getAll(GroupReasonSearchInput request)
+        {
+            //var user = GetCurrentUser();
+
+            var searchRequest = new GroupReasonRequest()
+            {
+                UserId = "1",
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = request.Limit,
+                To = request.To,
+                From = request.From
+
+            };
+            var resultSearch = await _GroupReasonBusiness.GetALl(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/groupReason/add")]
+        public async Task<IResult> Add(GroupReasonAdd employeeAdd)
+        {
+            var user = GetCurrentUser();
+
+            if (string.IsNullOrEmpty(employeeAdd.Code))
+            {
+                return Results.BadRequest("Không có thông tin mã code");
+            }
+
+            if (string.IsNullOrEmpty(employeeAdd.FullName))
+            {
+                return Results.BadRequest("Không có thông tin tên");
+            }
+
+            var resultcheck = await _GroupReasonBusiness.CheckDuplicate(employeeAdd.Code);
+            if (resultcheck == true)
+            {
+                return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
+            }
+
+            var account = new GroupReason()
+            {
+                Code = employeeAdd.Code,
+                FullName = employeeAdd.FullName,
+                Status = employeeAdd.Status,
+                Folder = employeeAdd.Folder,
+                Description = employeeAdd.Description,
+                CreatedBy = "1"
+            };
+            var result = await _GroupReasonBusiness.AddAsync(account);
+            return Results.Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/groupReason/update")]
+        public async Task<IResult> Update(GroupReasonUpdate request)
+        {
+            //var user = GetCurrentUser();
+            if (string.IsNullOrEmpty(request.Id))
+            {
+                return Results.BadRequest("Không có thông tin ID");
+            }
+
+            if (string.IsNullOrEmpty(request.FullName))
+            {
+                return Results.BadRequest("Không có thông tin họ tên");
+            }
+
+            var accoutUpdate = await _GroupReasonBusiness.GetByIdAsync(request.Id);
+            if (accoutUpdate == null)
+            {
+                return Results.BadRequest("Không có thông tin profile tương ứng");
+            }
+            accoutUpdate.FullName = request.FullName;
+            accoutUpdate.Description = request.Description;
+            accoutUpdate.Folder = request.Folder;
+            accoutUpdate.Status = request.Status;
+
+
+
+            var result = await _GroupReasonBusiness.UpdateAsyn(accoutUpdate);
+            return Results.Ok(result);
+        }
+
+        //[Authorize]
+        //[HttpPost("~/employee/delete")]
+
+        [AllowAnonymous]
+        [HttpPost("~/api/groupReason/delete")]
+        public async Task<IResult> Delete(DeleteModelRequest request)
+        {
+
+            if (string.IsNullOrEmpty(request.Id))
+            {
+                return Results.BadRequest(_message.CommonError_ErrorRequestInput);
+            }
+            var accoutDelete = await _GroupReasonBusiness.GetByIdAsync(request.Id);
+            if (accoutDelete == null)
+            {
+
+                return Results.Ok(new ErrorReponse()
+                {
+                    StatusCode = StatusCodes.Status200OK,
+                    Success = false,
+                    Message = _message.CommonError_NotFound
+
+                });
+            }
+            var result = _GroupReasonBusiness.Delete(accoutDelete);
+            return Results.Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/groupReason/exportData")]
+        public async Task<IResult> ExportData(GroupReasonSearchInput request)
+        {
+            var searchRequest = new GroupReasonRequest()
+            {
+                UserId = "1",
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = 1000,
+                To = request.To,
+                From = request.From
+            };
+            var resultSearch = await _GroupReasonBusiness.GetDataForExport(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+
+    }
+}
