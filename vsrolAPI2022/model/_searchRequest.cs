@@ -21,4 +21,11 @@
 
 
     }
+
+
+    public partial class CampagnSearchInput : BaseInputSearch
+    {
+
+
+    }
 }

@@ -8,39 +8,36 @@ using VS.Core.Repository.Model;
 
 namespace VS.Core.Repository
 {
-    public class GroupReasonRepository : RepositoryBase<GroupReason>, IGroupReasonRepository
+    public class CampagnRepository : RepositoryBase<Campagn>, ICampagnRepository
     {
 
         private readonly IConfiguration _configuration;
 
-        private readonly string tableName = "GroupReason";
-        public GroupReasonRepository(IConfiguration configuration) : base(configuration)
+        private readonly string tableName = "campagn";
+        public CampagnRepository(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
             _baseTable = tableName;
         }
 
-        public async Task<int> AddAsync(GroupReason entity)
+        public async Task<int> AddAsync(Campagn entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
-            var par = GetParams(entity,
-            new string[] {
+            var par = GetParams(entity, new string[] {
                 nameof(entity.UpdatedBy),
                 nameof(entity.UpdateAt),
                 nameof(entity.Id),
                 nameof(entity.CreateAt),
                 nameof(entity.Deleted)
-            }
-            , "Id");
+            }, "Id");
 
             try
             {
                 using (var _con = GetConnection())
                 {
-                    var result = await _con.ExecuteAsync(_Sql.Group_reason_insert,
-                        par,
-                        commandType: CommandType.StoredProcedure);
+                    var result = await _con.ExecuteAsync(_Sql.MasterData_reason_insert, par, commandType: CommandType.StoredProcedure);
+
                     return 1;
                 }
             }
@@ -59,7 +56,7 @@ namespace VS.Core.Repository
             using (var con = GetConnection())
             {
                 var sql = "SELECT * FROM " + _baseTable + " WHERE code = @Code";
-                var result = await con.QuerySingleOrDefaultAsync<GroupReason>(sql, new { Code = code });
+                var result = await con.QuerySingleOrDefaultAsync<Campagn>(sql, new { Code = code });
 
                 if (result == null)
                 {
@@ -70,7 +67,7 @@ namespace VS.Core.Repository
         }
 
 
-        public async Task<GroupReasonReponse> GetALl(GroupReasonRequest request)
+        public async Task<CampagnRequestReponse> GetALl(CampagnRequest request)
         {
             int page = request.Page;
             int limit = request.Limit;
@@ -80,7 +77,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<GroupReasonIndexModel>(_Sql.Group_reason_getAll, new
+                    var result = await con.QueryAsync<CampagnIndexModel>(_Sql.MasterData_reason_getAll, new
                     {
                         request.Token,
                         request.From,
@@ -96,7 +93,7 @@ namespace VS.Core.Repository
                     {
                         totalRecord = fistElement.TotalRecord;
                     }
-                    var reponse = new GroupReasonReponse()
+                    var reponse = new CampagnRequestReponse()
                     {
                         Total = totalRecord,
 
@@ -111,7 +108,7 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<GroupReasonReponse> GetDataForExport(GroupReasonRequest request)
+        public async Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request)
         {
 
             int page = request.Page;
@@ -122,7 +119,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<GroupReasonIndexModel>(_Sql.Group_reason_exportData, new
+                    var result = await con.QueryAsync<CampagnIndexModel>(_Sql.MasterData_reason_getAll, new
                     {
                         request.Token,
                         request.From,
@@ -138,7 +135,7 @@ namespace VS.Core.Repository
                     {
                         totalRecord = fistElement.TotalRecord;
                     }
-                    var reponse = new GroupReasonReponse()
+                    var reponse = new CampagnRequestReponse()
                     {
                         Total = totalRecord,
 
@@ -153,7 +150,7 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<int> UpdateAsyn(GroupReason entity)
+        public async Task<int> UpdateAsyn(Campagn entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -169,7 +166,7 @@ namespace VS.Core.Repository
             {
                 using (var _con = GetConnection())
                 {
-                    var result = await _con.ExecuteAsync(_Sql.Group_reason_update, par, commandType: CommandType.StoredProcedure);
+                    var result = await _con.ExecuteAsync(_Sql.MasterData_reason_update, par, commandType: CommandType.StoredProcedure);
 
                     return 1;
                 }

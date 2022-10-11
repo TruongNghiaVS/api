@@ -10,17 +10,20 @@ namespace VS.Core.Repository
 
         public IMasterDataRepository MasterRe { get; }
         public IGroupReasonRepository GroupRe { get; }
+        public ICampagnRepository CampagnRe { get; }
 
         public UnitOfWork(IEmployeeRepository employeeRepository,
              IUserRepository userRepository,
              IMasterDataRepository masterDataRepository,
-            IGroupReasonRepository groupRe
+             IGroupReasonRepository groupRe,
+             ICampagnRepository campagnRepository
             )
         {
             Employees = employeeRepository;
             UserRe = userRepository;
             MasterRe = masterDataRepository;
             GroupRe = groupRe;
+            CampagnRe = campagnRepository;
         }
 
     }

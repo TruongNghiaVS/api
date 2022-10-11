@@ -9,6 +9,7 @@ namespace VS.Core.Repository.baseConfig
         IUserRepository UserRe { get; }
         IMasterDataRepository MasterRe { get; }
         IGroupReasonRepository GroupRe { get; }
+        ICampagnRepository CampagnRe { get; }
 
     }
 }

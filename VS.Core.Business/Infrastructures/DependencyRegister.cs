@@ -19,6 +19,8 @@ namespace VS.Core.Business.Infrastructures
 
             services.AddScoped<IGroupResonBussiness, GroupResonBusiness>();
 
+            services.AddScoped<ICampagnBussiness, CampagnBusiness>();
+
 
         }
     }

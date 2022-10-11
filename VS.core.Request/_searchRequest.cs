@@ -70,4 +70,26 @@
             Total = 0;
         }
     }
+
+
+    public class CampagnRequest : BaseSearchRequest
+    {
+        public string Msg { get; set; }
+        public CampagnRequest()
+        {
+            this.Page = 1;
+            this.Limit = 10;
+            this.From = new DateTime(2022, 09, 20);
+            this.To = new DateTime(2022, 10, 01);
+        }
+    }
+
+    public class CampagnRequestReponse : BaseSearchRepons
+
+    {
+        public CampagnRequestReponse()
+        {
+            Total = 0;
+        }
+    }
 }
