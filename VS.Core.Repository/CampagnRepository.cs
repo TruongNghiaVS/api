@@ -13,7 +13,7 @@ namespace VS.Core.Repository
 
         private readonly IConfiguration _configuration;
 
-        private readonly string tableName = "campagn";
+        private readonly string tableName = "Campaign";
         public CampagnRepository(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
@@ -36,7 +36,7 @@ namespace VS.Core.Repository
             {
                 using (var _con = GetConnection())
                 {
-                    var result = await _con.ExecuteAsync(_Sql.MasterData_reason_insert, par, commandType: CommandType.StoredProcedure);
+                    var result = await _con.ExecuteAsync(_Sql.Campaign_insert, par, commandType: CommandType.StoredProcedure);
 
                     return 1;
                 }
@@ -77,7 +77,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<CampagnIndexModel>(_Sql.MasterData_reason_getAll, new
+                    var result = await con.QueryAsync<CampagnIndexModel>(_Sql.Campaign_getAll, new
                     {
                         request.Token,
                         request.From,
@@ -119,16 +119,17 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<CampagnIndexModel>(_Sql.MasterData_reason_getAll, new
-                    {
-                        request.Token,
-                        request.From,
-                        request.To,
-                        request.Limit,
-                        request.Page,
-                        request.OrderBy
-                    }, commandType: CommandType.StoredProcedure);
-
+                    var result = await con.QueryAsync<CampagnIndexModel>(_Sql.Campaign_getAll,
+                        new
+                        {
+                            request.Token,
+                            request.From,
+                            request.To,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy
+                        },
+                    commandType: CommandType.StoredProcedure);
                     var fistElement = result.FirstOrDefault();
                     var totalRecord = 0;
                     if (fistElement != null)
@@ -155,18 +156,16 @@ namespace VS.Core.Repository
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
             var par = GetParams(entity, new string[] {
-
                 nameof(entity.UpdateAt),
                 nameof(entity.CreateAt),
                 nameof(entity.Deleted),
                 nameof(entity.CreatedBy)
             });
-
             try
             {
                 using (var _con = GetConnection())
                 {
-                    var result = await _con.ExecuteAsync(_Sql.MasterData_reason_update, par, commandType: CommandType.StoredProcedure);
+                    var result = await _con.ExecuteAsync(_Sql.Campaign_update, par, commandType: CommandType.StoredProcedure);
 
                     return 1;
                 }

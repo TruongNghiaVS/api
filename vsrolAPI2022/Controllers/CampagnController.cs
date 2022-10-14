@@ -31,7 +31,6 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest(_message.CommonError_ErrorRequestInput);
             }
-
             var result = await _campagnBusiness.Getbyid(inputRequest.Id);
             return Results.Ok(result);
 
@@ -43,17 +42,14 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(CampagnSearchInput request)
         {
             //var user = GetCurrentUser();
-
             var searchRequest = new CampagnRequest()
             {
-
                 Token = request.Token,
                 Status = request.Status,
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
                 From = request.From
-
             };
             var resultSearch = await _campagnBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
@@ -69,18 +65,24 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin mã code");
             }
-
-
             var resultcheck = await _campagnBusiness.CheckDuplicate(employeeAdd.Code);
+
             if (resultcheck == true)
             {
                 return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
             }
-
             var account = new Campagn()
             {
                 Code = employeeAdd.Code,
-
+                CompanyId = employeeAdd.CompanyId,
+                DisplayName = employeeAdd.DisplayName,
+                Status = true,
+                SumCount = employeeAdd.SumCount,
+                ProcessingCount = employeeAdd.ProcessingCount,
+                ClosedCount = employeeAdd.ClosedCount,
+                BeginTime = employeeAdd.BeginTime,
+                EndTime = employeeAdd.EndTime,
+                Priority = employeeAdd.Priority
             };
             var result = await _campagnBusiness.AddAsync(account);
             return Results.Ok(result);
@@ -96,11 +98,6 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Không có thông tin ID");
             }
 
-            //if (string.IsNullOrEmpty(request.FullName))
-            //{
-            //    return Results.BadRequest("Không có thông tin họ tên");
-            //}
-
             var accoutUpdate = await _campagnBusiness.GetByIdAsync(request.Id);
             if (accoutUpdate == null)
             {
@@ -109,6 +106,14 @@ namespace vsrolAPI2022.Controllers
 
             accoutUpdate.DisplayName = request.DisplayName;
 
+            accoutUpdate.UpdatedBy = "1";
+            accoutUpdate.SumCount = request.SumCount;
+            accoutUpdate.ProcessingCount = request.ProcessingCount;
+            accoutUpdate.ClosedCount = request.ClosedCount;
+            accoutUpdate.Status = request.Status;
+            accoutUpdate.BeginTime = request.BeginTime;
+            accoutUpdate.EndTime = request.EndTime;
+            accoutUpdate.Priority = request.Priority;
             accoutUpdate.UpdatedBy = "1";
             var result = await _campagnBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
@@ -129,7 +134,6 @@ namespace vsrolAPI2022.Controllers
             var accoutDelete = await _campagnBusiness.GetByIdAsync(request.Id);
             if (accoutDelete == null)
             {
-
                 return Results.Ok(new ErrorReponse()
                 {
                     StatusCode = StatusCodes.Status200OK,
@@ -157,9 +161,6 @@ namespace vsrolAPI2022.Controllers
                 From = request.From
             };
             var resultSearch = await _campagnBusiness.GetDataForExport(searchRequest);
-
-
-
             return Results.Ok(resultSearch);
         }
 

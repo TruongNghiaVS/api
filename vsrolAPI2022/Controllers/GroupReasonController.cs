@@ -15,11 +15,11 @@ namespace vsrolAPI2022.Controllers
     public class GroupReasonController : BaseController
     {
 
-        private readonly IGroupResonBussiness _GroupReasonBusiness;
+        private readonly IGroupResonBussiness _groupReasonBusiness;
         public GroupReasonController(IGroupResonBussiness GroupReasonBusiness,
             IUserBusiness userBusiness) : base(userBusiness)
         {
-            _GroupReasonBusiness = GroupReasonBusiness;
+            _groupReasonBusiness = GroupReasonBusiness;
         }
 
         [AllowAnonymous]
@@ -31,7 +31,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest(_message.CommonError_ErrorRequestInput);
             }
-            var result = await _GroupReasonBusiness.Getbyid(inputRequest.Id);
+            var result = await _groupReasonBusiness.Getbyid(inputRequest.Id);
             return Results.Ok(result);
         }
 
@@ -52,7 +52,7 @@ namespace vsrolAPI2022.Controllers
                 From = request.From
 
             };
-            var resultSearch = await _GroupReasonBusiness.GetALl(searchRequest);
+            var resultSearch = await _groupReasonBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
         }
 
@@ -72,7 +72,7 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Không có thông tin tên");
             }
 
-            var resultcheck = await _GroupReasonBusiness.CheckDuplicate(employeeAdd.Code);
+            var resultcheck = await _groupReasonBusiness.CheckDuplicate(employeeAdd.Code);
             if (resultcheck == true)
             {
                 return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
@@ -87,7 +87,7 @@ namespace vsrolAPI2022.Controllers
                 Description = employeeAdd.Description,
                 CreatedBy = "1"
             };
-            var result = await _GroupReasonBusiness.AddAsync(account);
+            var result = await _groupReasonBusiness.AddAsync(account);
             return Results.Ok(result);
         }
 
@@ -106,7 +106,7 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Không có thông tin họ tên");
             }
 
-            var accoutUpdate = await _GroupReasonBusiness.GetByIdAsync(request.Id);
+            var accoutUpdate = await _groupReasonBusiness.GetByIdAsync(request.Id);
             if (accoutUpdate == null)
             {
                 return Results.BadRequest("Không có thông tin profile tương ứng");
@@ -118,7 +118,7 @@ namespace vsrolAPI2022.Controllers
 
 
 
-            var result = await _GroupReasonBusiness.UpdateAsyn(accoutUpdate);
+            var result = await _groupReasonBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }
 
@@ -134,7 +134,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest(_message.CommonError_ErrorRequestInput);
             }
-            var accoutDelete = await _GroupReasonBusiness.GetByIdAsync(request.Id);
+            var accoutDelete = await _groupReasonBusiness.GetByIdAsync(request.Id);
             if (accoutDelete == null)
             {
 
@@ -146,7 +146,7 @@ namespace vsrolAPI2022.Controllers
 
                 });
             }
-            var result = _GroupReasonBusiness.Delete(accoutDelete);
+            var result = _groupReasonBusiness.Delete(accoutDelete);
             return Results.Ok(result);
         }
 
@@ -164,7 +164,7 @@ namespace vsrolAPI2022.Controllers
                 To = request.To,
                 From = request.From
             };
-            var resultSearch = await _GroupReasonBusiness.GetDataForExport(searchRequest);
+            var resultSearch = await _groupReasonBusiness.GetDataForExport(searchRequest);
             return Results.Ok(resultSearch);
         }
 

@@ -52,8 +52,6 @@ namespace VS.Core.Repository
 
         }
 
-
-
         public async Task<bool> CheckDuplicate(string code)
         {
             using (var con = GetConnection())
@@ -99,7 +97,6 @@ namespace VS.Core.Repository
                     var reponse = new GroupReasonReponse()
                     {
                         Total = totalRecord,
-
                         Data = result
                     };
                     return reponse;

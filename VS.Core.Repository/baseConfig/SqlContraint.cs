@@ -48,6 +48,17 @@
 
 
 
+        public string Campaign_insert = "sp_Campaign_Insert";
+
+        public string Campaign_update = "sp_Campaign_update";
+
+        public string Campaign_getAll = "sp_campaign_getAll";
+
+        public string Campaign_exportData = "sp_Employee_exportData";
+
+
+
+
 
 
     }

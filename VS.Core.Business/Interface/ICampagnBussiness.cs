@@ -11,5 +11,7 @@ namespace VS.Core.Business.Interface
 
         Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request);
 
+
+
     }
 }

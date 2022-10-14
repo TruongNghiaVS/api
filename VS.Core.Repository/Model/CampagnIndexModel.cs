@@ -15,9 +15,9 @@
 
         public int? ClosedCount { get; set; }
 
-        public DateTime? From { get; set; }
+        public DateTime? BeginTime { get; set; }
 
-        public DateTime? To { get; set; }
+        public DateTime? EndTime { get; set; }
 
         public int? Priority { get; set; }
 

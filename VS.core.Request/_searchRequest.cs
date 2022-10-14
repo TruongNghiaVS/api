@@ -53,6 +53,7 @@
     public class GroupReasonRequest : BaseSearchRequest
     {
         public string Msg { get; set; }
+
         public GroupReasonRequest()
         {
             this.Page = 1;

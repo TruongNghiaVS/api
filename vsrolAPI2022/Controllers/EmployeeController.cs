@@ -65,30 +65,22 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> Add(EmployeeAdd employeeAdd)
         {
             var user = GetCurrentUser();
-
-
             if (string.IsNullOrEmpty(employeeAdd.UserName))
             {
                 return Results.BadRequest("Không có thông tin tên đăng nhập");
             }
-
-
-
             if (string.IsNullOrEmpty(employeeAdd.Phone))
             {
                 return Results.BadRequest("Không có thông tin số điện thoại");
             }
-
             if (string.IsNullOrEmpty(employeeAdd.Pass))
             {
                 return Results.BadRequest("Không có thông tin mật khẩu");
             }
-
             if (string.IsNullOrEmpty(employeeAdd.FullName))
             {
                 return Results.BadRequest("Không có thông tin họ tên");
             }
-
             var resultcheck = await _employeeBusiness.CheckDuplicate(employeeAdd.UserName, employeeAdd.Phone);
             if (resultcheck == true)
             {

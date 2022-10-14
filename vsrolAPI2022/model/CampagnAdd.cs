@@ -9,12 +9,13 @@
         public int? SumCount { get; set; }
         public int? ProcessingCount { get; set; }
         public int? ClosedCount { get; set; }
-        public DateTime? From { get; set; }
-        public DateTime? To { get; set; }
+        public DateTime? BeginTime { get; set; }
+        public DateTime? EndTime { get; set; }
         public int? Priority { get; set; }
         public CampagnAdd()
         {
             Priority = 1;
+
         }
 
 
@@ -35,9 +36,9 @@
 
         public int? ClosedCount { get; set; }
 
-        public DateTime? From { get; set; }
+        public DateTime? BeginTime { get; set; }
 
-        public DateTime? To { get; set; }
+        public DateTime? EndTime { get; set; }
 
         public int? Priority { get; set; }
 

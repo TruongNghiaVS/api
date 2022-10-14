@@ -20,7 +20,6 @@
 
         public string UpdateByName
         {
-
             get
             {
                 return "Nguyễn Trường Nghĩa";
