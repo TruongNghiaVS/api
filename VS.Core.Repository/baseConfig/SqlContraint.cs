@@ -57,6 +57,13 @@
         public string Campaign_exportData = "sp_Employee_exportData";
 
 
+        public string CampaignProfile_insert = "sp_CampaignProfile_Insert";
+
+        public string CampaignProfile_update = "sp_CampaignProfile_update";
+
+        public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
+
+
 
 
 

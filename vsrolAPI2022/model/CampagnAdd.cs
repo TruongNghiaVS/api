@@ -12,6 +12,7 @@
         public DateTime? BeginTime { get; set; }
         public DateTime? EndTime { get; set; }
         public int? Priority { get; set; }
+        public string? ShortDes { get; set; }
         public CampagnAdd()
         {
             Priority = 1;
@@ -41,6 +42,8 @@
         public DateTime? EndTime { get; set; }
 
         public int? Priority { get; set; }
+
+        public string? ShortDes { get; set; }
 
         public CampagnUpdate()
         {

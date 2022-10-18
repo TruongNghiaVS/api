@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using VS.core.API.Error.Model;
 using VS.core.API.model;
 using VS.core.Request;
 using VS.Core.Business.Interface;
+using VS.Core.Business.Model;
 using VS.Core.dataEntry.User;
 
 
@@ -60,7 +62,6 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> Add(CampagnAdd employeeAdd)
         {
             var user = GetCurrentUser();
-
             if (string.IsNullOrEmpty(employeeAdd.Code))
             {
                 return Results.BadRequest("Không có thông tin mã code");
@@ -74,7 +75,7 @@ namespace vsrolAPI2022.Controllers
             var account = new Campagn()
             {
                 Code = employeeAdd.Code,
-                CompanyId = employeeAdd.CompanyId,
+                CompanyId = "-1",
                 DisplayName = employeeAdd.DisplayName,
                 Status = true,
                 SumCount = employeeAdd.SumCount,
@@ -82,7 +83,8 @@ namespace vsrolAPI2022.Controllers
                 ClosedCount = employeeAdd.ClosedCount,
                 BeginTime = employeeAdd.BeginTime,
                 EndTime = employeeAdd.EndTime,
-                Priority = employeeAdd.Priority
+                Priority = employeeAdd.Priority,
+                ShortDes = employeeAdd.ShortDes
             };
             var result = await _campagnBusiness.AddAsync(account);
             return Results.Ok(result);
@@ -107,6 +109,7 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.DisplayName = request.DisplayName;
 
             accoutUpdate.UpdatedBy = "1";
+            accoutUpdate.ShortDes = request.ShortDes;
             accoutUpdate.SumCount = request.SumCount;
             accoutUpdate.ProcessingCount = request.ProcessingCount;
             accoutUpdate.ClosedCount = request.ClosedCount;
@@ -164,6 +167,49 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
+
+        [AllowAnonymous]
+        [HttpPost("~/api/campagn/importDataById")]
+        public async Task<IResult> ImportData([FromForm] CampanginDataImport request)
+        {
+
+            var fileRequest = request.FileData;
+            if (fileRequest == null || fileRequest.Count == 0)
+            {
+                return Results.BadRequest("No error report");
+            }
+            var fileHandler = fileRequest.FirstOrDefault();
+            if (fileHandler == null)
+            {
+                return Results.BadRequest("No error report");
+            }
+            using (MemoryStream ms = new MemoryStream())
+            {
+                await fileHandler.CopyToAsync(ms);
+                using (ExcelPackage package = new ExcelPackage(ms))
+                {
+                    ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                    int totalRows = workSheet.Dimension.Rows;
+                    List<ProfileHandler> profileList = new List<ProfileHandler>();
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        if (i < 7)
+                        {
+                            continue;
+                        }
+                        profileList.Add(new ProfileHandler
+                        {
+                            CustomerName = workSheet.Cells[i, 2] != null ? workSheet.Cells[i, 5].Value.ToString() : "",
+                            NoAgreement = workSheet.Cells[i, 3] != null ? workSheet.Cells[i, 5].Value.ToString() : "",
+                            DayOfBirth = DateTime.Now,
+                            NationalId = workSheet.Cells[i, 5] != null ? workSheet.Cells[i, 5].Value.ToString() : "",
+
+                        });
+                    }
+                }
+            }
+            return Results.Ok();
+        }
 
     }
 }

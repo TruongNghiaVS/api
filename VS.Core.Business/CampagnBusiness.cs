@@ -12,7 +12,6 @@ namespace VS.Core.Business
         {
 
         }
-
         public Task<int> AddAsync(Campagn entity)
         {
             return _unitOfWork.CampagnRe.AddAsync(entity);
@@ -33,6 +32,7 @@ namespace VS.Core.Business
             return _unitOfWork.CampagnRe.GetALl(request);
         }
 
+
         public Task<Campagn> Getbyid(string Id)
         {
             return _unitOfWork.CampagnRe.GetByIdAsync(Id);
@@ -52,6 +52,36 @@ namespace VS.Core.Business
         {
 
             return _unitOfWork.CampagnRe.UpdateAsyn(entity);
+        }
+        public Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request)
+        {
+            return _unitOfWork.CampagnProfileRe.GetALlProfileByCampaign(request);
+        }
+
+
+        public Task<int> UpdateProfile(Profile entity)
+        {
+
+            return _unitOfWork.CampagnProfileRe.UpdateAsyn(entity);
+        }
+
+        public Task<int> AddProfile(Profile entity)
+        {
+            return _unitOfWork.CampagnProfileRe.AddAsync(entity);
+        }
+
+        public Task<Profile> GetProfile(string id)
+        {
+            return _unitOfWork.CampagnProfileRe.GetByIdAsync(id);
+        }
+        public Task DeleteProfile(Profile entity)
+        {
+            return _unitOfWork.CampagnProfileRe.Delete(entity);
+        }
+
+        public Task<bool> HandleImport(CampanginDataImportRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

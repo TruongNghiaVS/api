@@ -10,6 +10,9 @@ namespace VS.Core.Repository.baseConfig
         Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request);
         Task<bool> CheckDuplicate(string code);
 
+
+
+
     }
 
 

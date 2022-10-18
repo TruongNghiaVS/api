@@ -93,4 +93,25 @@
             Total = 0;
         }
     }
+
+
+
+
+    public class GetAllProfileByCampang : BaseSearchRequest
+    {
+        public string? Id { get; set; }
+
+
+    }
+
+
+    public class GetAllProfileByCampangReponse : BaseSearchRepons
+
+    {
+        public GetAllProfileByCampangReponse()
+        {
+            Total = 0;
+        }
+    }
+
 }

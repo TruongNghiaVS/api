@@ -13,6 +13,7 @@ namespace VS.Core.Repository.Infrastructures
             services.AddScoped<IMasterDataRepository, MasterdataRepository>();
             services.AddScoped<IGroupReasonRepository, GroupReasonRepository>();
             services.AddScoped<ICampagnRepository, CampagnRepository>();
+            services.AddScoped<IProfileCampagnRepository, ProfileCampagnRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }

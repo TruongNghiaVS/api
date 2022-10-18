@@ -10,6 +10,9 @@ namespace VS.Core.Repository.baseConfig
         IMasterDataRepository MasterRe { get; }
         IGroupReasonRepository GroupRe { get; }
         ICampagnRepository CampagnRe { get; }
+        IProfileCampagnRepository CampagnProfileRe { get; }
+
+
 
     }
 }

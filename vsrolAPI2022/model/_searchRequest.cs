@@ -28,4 +28,14 @@
 
 
     }
+
+    public partial class CampagnProfileSearchInput : BaseInputSearch
+    {
+        public string? Id { get; set; }
+
+    }
+
+
+
+
 }
