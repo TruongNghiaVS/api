@@ -38,11 +38,11 @@ namespace vsrolAPI2022.Controllers
         }
 
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost("~/api/campagnProfile/getAll")]
         public async Task<IResult> getAll(CampagnProfileSearchInput request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
             var searchRequest = new GetAllProfileByCampang()
             {
                 Token = request.Token,
@@ -51,13 +51,15 @@ namespace vsrolAPI2022.Controllers
                 Limit = request.Limit,
                 To = request.To,
                 Id = request.Id,
-                From = request.From
+                From = request.From,
+                UserId = user.Id
+
             };
             var resultSearch = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
             return Results.Ok(resultSearch);
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost("~/api/campagnProfile/add")]
         public async Task<IResult> Add(CampagnProfileAdd employeeAdd)
         {
@@ -66,12 +68,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin mã hợp đồng");
             }
-            //var resultcheck = await _campagnBusiness.CheckDuplicate(employeeAdd.Code);
 
-            //if (resultcheck == true)
-            //{
-            //    return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
-            //}
             var account = new Profile()
             {
 
@@ -94,19 +91,52 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin profile tương ứng");
             }
+            accoutUpdate.CustomerName = request.CustomerName;
+            accoutUpdate.NoAgreement = request.NoAgreement;
+            accoutUpdate.NationalId = request.NationalId;
+            accoutUpdate.MobilePhone = request.MobilePhone;
+            accoutUpdate.Phone1 = request.Phone1;
+            accoutUpdate.HouseNumber = request.HouseNumber;
+            accoutUpdate.OfficeNumber = request.OfficeNumber;
+            accoutUpdate.OtherPhone = request.OtherPhone;
+            accoutUpdate.Email = request.Email;
+            accoutUpdate.DayOfBirth = request.DayOfBirth;
+            accoutUpdate.Road = request.Road;
+            accoutUpdate.SuburbanDir = request.SuburbanDir;
+            accoutUpdate.Provice = request.Provice;
 
-            //accoutUpdate.DisplayName = request.DisplayName;
+            accoutUpdate.Road1 = request.Road1;
+            accoutUpdate.SuburbanDir1 = request.SuburbanDir1;
 
-            //accoutUpdate.UpdatedBy = "1";
-            //accoutUpdate.ShortDes = request.ShortDes;
-            //accoutUpdate.SumCount = request.SumCount;
-            //accoutUpdate.ProcessingCount = request.ProcessingCount;
-            //accoutUpdate.ClosedCount = request.ClosedCount;
-            //accoutUpdate.Status = request.Status;
-            //accoutUpdate.BeginTime = request.BeginTime;
-            //accoutUpdate.EndTime = request.EndTime;
-            //accoutUpdate.Priority = request.Priority;
-            //accoutUpdate.UpdatedBy = "1";
+            accoutUpdate.Provice1 = request.Provice1;
+            accoutUpdate.Road2 = request.Road2;
+
+            accoutUpdate.SuburbanDir2 = request.SuburbanDir2;
+            accoutUpdate.Provice2 = request.Provice2;
+
+            accoutUpdate.StatusPayMent = request.StatusPayMent;
+            accoutUpdate.DPD = request.DPD;
+
+
+            accoutUpdate.RegisterDay = request.RegisterDay;
+            accoutUpdate.DebitOriginal = request.DebitOriginal;
+            accoutUpdate.AmountLoan = request.AmountLoan;
+            accoutUpdate.EMI = request.EMI;
+
+            accoutUpdate.TotalFines = request.TotalFines;
+            accoutUpdate.TotalMoneyPaid = request.TotalMoneyPaid;
+            accoutUpdate.TotalFines = request.TotalFines;
+            accoutUpdate.TotalMoneyPaid = request.TotalMoneyPaid;
+            accoutUpdate.Tenure = request.Tenure;
+            accoutUpdate.NoTenure = request.NoTenure;
+            accoutUpdate.TotalPaid = request.TotalPaid;
+
+            accoutUpdate.LastPaid = request.LastPaid;
+            accoutUpdate.LastPadDay = request.LastPadDay;
+            accoutUpdate.NameProduct = request.NameProduct;
+            accoutUpdate.CodeProduct = request.CodeProduct;
+            accoutUpdate.PriceProduct = request.PriceProduct;
+            accoutUpdate.NoteFirstTime = request.NoteFirstTime;
             var result = await _campagnBusiness.UpdateProfile(accoutUpdate);
             return Results.Ok(result);
         }

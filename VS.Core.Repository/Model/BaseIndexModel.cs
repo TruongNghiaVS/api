@@ -10,22 +10,11 @@
         public DateTime? CreatedTime { get; set; }
 
         public DateTime? UpdatedTime { get; set; }
-        public string AuthorName
-        {
-            get
-            {
-                return "Nguyễn Trường Nghĩa";
-
-            }
-        }
+        public string AuthorName { get; set; }
 
         public string UpdateByName
         {
-            get
-            {
-                return "Nguyễn Trường Nghĩa";
-
-            }
+            get; set;
         }
         public BaseIndexModel()
         {

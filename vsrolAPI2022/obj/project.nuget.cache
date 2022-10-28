@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "2eTiFJFm6jLvOsnF6X9JrbxYhmrK9NGNLx4bao1CQM/WVeHVCzI/G/Hm69086ofdOOX5A5qpl66GDOQbNp751g==",
+  "dgSpecHash": "dOuARInww3iWIgRuhX2UzVEwKpc1vWdZGLQfOqX0+GKTtaynACZq/vbt318xh9Iaw3CjpFThUMCakLrdS/Rl9g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\vsrolAPI2022\\VS.core.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\epplus\\4.5.3.2\\epplus.4.5.3.2.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.9\\microsoft.aspnetcore.authentication.jwtbearer.6.0.9.nupkg.sha512",
-    "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.extensions.configuration\\2.2.0\\microsoft.extensions.configuration.2.2.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",

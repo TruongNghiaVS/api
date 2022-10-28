@@ -2,6 +2,9 @@
 {
     public class Profile : BaseEntry
     {
+
+        public int Reasonstatus { get; set; }
+        public int Status { get; set; }
         public string CustomerName { get; set; }
         public string NoAgreement { get; set; }
         public string NationalId { get; set; }
@@ -32,7 +35,6 @@
         public string? SuburbanDir2 { get; set; }
         public string? Provice2 { get; set; }
 
-
         public string? StatusPayMent { get; set; }
 
         public string DPD { get; set; }
@@ -48,8 +50,27 @@
 
         public int CampaignId { get; set; }
 
-        public string Assignee { get; set; }
+        public string? Assignee { get; set; }
 
+        public float TotalFines { get; set; }
+        public float TotalMoneyPaid { get; set; }
+
+        public int Tenure { get; set; }
+        public int NoTenure { get; set; }
+
+        public float TotalPaid { get; set; }
+
+        public float LastPaid { get; set; }
+
+        public DateTime? LastPadDay { get; set; }
+
+        public string NameProduct { get; set; }
+
+        public string? CodeProduct { get; set; }
+
+        public string PriceProduct { get; set; }
+
+        public string NoteFirstTime { get; set; }
         public Profile()
         {
 

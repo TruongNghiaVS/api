@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using VS.core.API.Error.Model;
@@ -78,6 +79,7 @@ namespace vsrolAPI2022.Controllers
                 CompanyId = "-1",
                 DisplayName = employeeAdd.DisplayName,
                 Status = true,
+                GroupStatus = employeeAdd.GroupStatus,
                 SumCount = employeeAdd.SumCount,
                 ProcessingCount = employeeAdd.ProcessingCount,
                 ClosedCount = employeeAdd.ClosedCount,
@@ -110,14 +112,13 @@ namespace vsrolAPI2022.Controllers
 
             accoutUpdate.UpdatedBy = "1";
             accoutUpdate.ShortDes = request.ShortDes;
-            accoutUpdate.SumCount = request.SumCount;
-            accoutUpdate.ProcessingCount = request.ProcessingCount;
-            accoutUpdate.ClosedCount = request.ClosedCount;
-            accoutUpdate.Status = request.Status;
+            accoutUpdate.Status = request.Status == 1;
             accoutUpdate.BeginTime = request.BeginTime;
             accoutUpdate.EndTime = request.EndTime;
             accoutUpdate.Priority = request.Priority;
             accoutUpdate.UpdatedBy = "1";
+            accoutUpdate.GroupStatus = request.GroupStatus;
+
             var result = await _campagnBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }
@@ -167,12 +168,75 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
+        private string ReadvalueStringExcel(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange != null)
+            {
+
+                if (cellRange.Value != null)
+                {
+                    return cellRange.Value.ToString();
+                }
+
+            }
+            return "";
+
+        }
+
+        private float ReadvaluefloatExcel(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange == null)
+            {
+                return 0;
+            }
+
+            if (cellRange.Value == null)
+
+            {
+
+                return 0;
+            }
+            var valueCell = cellRange.Value.ToString();
+
+            float b1 = 0;
+            if (!float.TryParse(valueCell, out b1))
+            {
+
+            }
+            return b1;
+        }
+
+        private int ReadvalueintExcel(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange == null)
+            {
+                return 0;
+            }
+
+            if (cellRange.Value == null)
+
+            {
+
+                return 0;
+            }
+            var valueCell = cellRange.Value.ToString();
+
+            int b1 = 0;
+            if (!int.TryParse(valueCell, out b1))
+            {
+
+            }
+            return b1;
+        }
+
 
         [AllowAnonymous]
         [HttpPost("~/api/campagn/importDataById")]
         public async Task<IResult> ImportData([FromForm] CampanginDataImport request)
         {
-
             var fileRequest = request.FileData;
             if (fileRequest == null || fileRequest.Count == 0)
             {
@@ -183,6 +247,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("No error report");
             }
+            List<ProfileHandler> profileList = new List<ProfileHandler>();
             using (MemoryStream ms = new MemoryStream())
             {
                 await fileHandler.CopyToAsync(ms);
@@ -190,26 +255,133 @@ namespace vsrolAPI2022.Controllers
                 {
                     ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
                     int totalRows = workSheet.Dimension.Rows;
-                    List<ProfileHandler> profileList = new List<ProfileHandler>();
+
                     for (int i = 2; i <= totalRows; i++)
                     {
                         if (i < 7)
                         {
                             continue;
                         }
+
+                        var orginial = ReadvaluefloatExcel(workSheet, i, 24);
                         profileList.Add(new ProfileHandler
                         {
-                            CustomerName = workSheet.Cells[i, 2] != null ? workSheet.Cells[i, 5].Value.ToString() : "",
-                            NoAgreement = workSheet.Cells[i, 3] != null ? workSheet.Cells[i, 5].Value.ToString() : "",
+                            CustomerName = ReadvalueStringExcel(workSheet, i, 2),
+                            NoAgreement = ReadvalueStringExcel(workSheet, i, 3),
                             DayOfBirth = DateTime.Now,
-                            NationalId = workSheet.Cells[i, 5] != null ? workSheet.Cells[i, 5].Value.ToString() : "",
+                            NationalId = ReadvalueStringExcel(workSheet, i, 5),
+                            MobilePhone = ReadvalueStringExcel(workSheet, i, 6),
+                            Phone1 = ReadvalueStringExcel(workSheet, i, 7),
+                            HouseNumber = ReadvalueStringExcel(workSheet, i, 8),
+                            OfficeNumber = ReadvalueStringExcel(workSheet, i, 9),
+                            OtherPhone = ReadvalueStringExcel(workSheet, i, 10),
+                            Email = ReadvalueStringExcel(workSheet, i, 11),
+                            Road = ReadvalueStringExcel(workSheet, i, 12),
+                            SuburbanDir = ReadvalueStringExcel(workSheet, i, 13),
+                            Provice = ReadvalueStringExcel(workSheet, i, 14),
+                            Road1 = ReadvalueStringExcel(workSheet, i, 15),
+                            SuburbanDir1 = ReadvalueStringExcel(workSheet, i, 16),
+                            Provice1 = ReadvalueStringExcel(workSheet, i, 17),
+                            Road2 = ReadvalueStringExcel(workSheet, i, 18),
+                            SuburbanDir2 = ReadvalueStringExcel(workSheet, i, 19),
+                            Provice2 = ReadvalueStringExcel(workSheet, i, 20),
+                            StatusPayMent = ReadvalueStringExcel(workSheet, i, 21),
+                            DPD = ReadvalueStringExcel(workSheet, i, 22),
+                            RegisterDay = DateTime.Now,
+                            DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
+                            AmountLoan = ReadvaluefloatExcel(workSheet, i, 25),
+                            EMI = ReadvaluefloatExcel(workSheet, i, 26),
+                            CampaignId = 1,
+                            Assignee = "-1",
+                            TotalFines = ReadvaluefloatExcel(workSheet, i, 27),
+                            TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 28),
+                            Tenure = ReadvalueintExcel(workSheet, i, 29),
+                            NoTenure = ReadvalueintExcel(workSheet, i, 30),
+                            TotalPaid = ReadvaluefloatExcel(workSheet, i, 31),
+                            LastPaid = ReadvalueintExcel(workSheet, i, 32),
+                            LastPadDay = DateTime.Now,
+                            NameProduct = ReadvalueStringExcel(workSheet, i, 34),
+                            CodeProduct = ReadvalueStringExcel(workSheet, i, 35),
+                            PriceProduct = ReadvalueStringExcel(workSheet, i, 36),
+                            NoteFirstTime = ReadvalueStringExcel(workSheet, i, 37)
 
                         });
                     }
+
+                }
+
+
+
+
+            }
+            var reqeustImport = new CampanginDataImportRequest();
+            reqeustImport.ListData = profileList;
+            reqeustImport.Id = request.Id;
+            await _campagnBusiness.HandleImport(reqeustImport);
+            return Results.Ok();
+
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost("~/api/campagn/assignes")]
+        public async Task<IResult> Assignees(CampanginAssigneeRequest request)
+        {
+            var listData = request.DataRequest;
+            var id = request.CampangId;
+            var campangin = await _campagnBusiness.Getbyid(id);
+            var allCampanginProfile = await _campagnBusiness.GetALLAsiggnee(new GetAllProfileByCampang()
+            {
+                Id = id,
+                Limit = 100,
+                Status = 0
+            });
+            var dataAssignee = allCampanginProfile;
+            foreach (var item in listData)
+            {
+                var numberAssigee = item.SumCounted;
+
+                for (int i = 0; i < item.SumCounted; i++)
+                {
+                    var yz = dataAssignee.First();
+
+                    if (yz != null)
+                    {
+                        yz.Assignee = item.Id;
+                        await _campagnBusiness.UpdateProfile(yz);
+                    }
+
+                    dataAssignee.Remove(yz);
                 }
             }
+
             return Results.Ok();
+
         }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/campagn/getAllCampangeAssigess")]
+        public async Task<IResult> GetAllCampangeAssigess(CampagnSearchInput request)
+        {
+            //var user = GetCurrentUser();
+            var searchRequest = new CampagnRequest()
+            {
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = request.Limit,
+                To = request.To,
+                CampaignId = request.CampaignId,
+                From = request.From
+            };
+
+            var resultSearch = await _campagnBusiness.GetAllAsiggeeByCampagnId(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+
+
+
 
     }
 }

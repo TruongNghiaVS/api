@@ -23,7 +23,7 @@ namespace vsrolAPI2022.Controllers
             _employeeBusiness = employeeBusiness;
         }
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/employee/getById")]
         public async Task<IResult> GetById(InputIdRequest inputRequest)
         {
@@ -32,22 +32,20 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest(_message.CommonError_ErrorRequestInput);
             }
-
             var result = await _employeeBusiness.Getbyid(inputRequest.Id);
             return Results.Ok(result);
-
         }
 
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/employee/getAll")]
         public async Task<IResult> getAll(EmployeeSearchInput request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
 
             var searchRequest = new EmployeeSearchRequest()
             {
-                UserId = "1",
+                UserId = user.Id,
                 Token = request.Token,
                 Status = request.Status,
                 Page = request.Page,
@@ -60,7 +58,7 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/employee/add")]
         public async Task<IResult> Add(EmployeeAdd employeeAdd)
         {
@@ -94,12 +92,13 @@ namespace vsrolAPI2022.Controllers
                 CreateAt = DateTime.Now,
                 UpdateAt = DateTime.Now,
                 FullName = employeeAdd.FullName,
-                CreatedBy = employeeAdd.CreateBy,
+                CreatedBy = user.Id,
                 PhoneNumber = employeeAdd.Phone,
                 Phone = employeeAdd.Phone,
                 Pass = employeeAdd.Pass,
                 Email = employeeAdd.Email,
-                UpdatedBy = employeeAdd.CreateBy,
+                UpdatedBy = user.Id,
+                IsActive = true,
                 UserName = employeeAdd.UserName
             };
             var result = await _employeeBusiness.AddAsync(account);
@@ -107,11 +106,11 @@ namespace vsrolAPI2022.Controllers
         }
 
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/employee/update")]
         public async Task<IResult> Update(EmployeeUpdate request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
             if (string.IsNullOrEmpty(request.Id))
             {
                 return Results.BadRequest("Không có thông tin ID");
@@ -134,15 +133,14 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.FullName = request.FullName;
             accoutUpdate.Phone = request.Phone;
             accoutUpdate.Email = request.Email;
-            accoutUpdate.UpdatedBy = "1";
+            accoutUpdate.IsActive = request.Status == 1;
+            accoutUpdate.UpdatedBy = user.Id;
             var result = await _employeeBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }
 
-        //[Authorize]
-        //[HttpPost("~/employee/delete")]
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/employee/delete")]
         public async Task<IResult> Delete(DeleteModelRequest request)
         {
@@ -170,7 +168,7 @@ namespace vsrolAPI2022.Controllers
         }
 
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/employee/exportData")]
         public async Task<IResult> ExportData(EmployeeSearchInput request)
         {

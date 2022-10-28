@@ -13,7 +13,7 @@
 
         public string? PhoneNumber { get; set; }
 
-        public string? IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public string LineCode { get; set; }
         public string PositionName

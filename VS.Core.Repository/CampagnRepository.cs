@@ -108,6 +108,48 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(CampagnRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CampagnAsiggeeByCampagnIdIndexModel>(_Sql.Campaign_GetAllAsiggeeByCampagnId, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.CampaignId,
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    //if (fistElement != null)
+                    //{
+                    //    totalRecord = fistElement.TotalRecord;
+                    //}
+                    var reponse = new CampagnAsiggeeByCampagnIdReponse()
+                    {
+                        Total = totalRecord,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public async Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request)
         {
 

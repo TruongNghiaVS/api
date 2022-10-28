@@ -56,3 +56,4 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\S
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\AutoMapper.dll

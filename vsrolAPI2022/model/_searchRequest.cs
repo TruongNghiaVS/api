@@ -6,7 +6,7 @@
 
     public partial class MasterDataSearchInput : BaseInputSearch
     {
-
+        public string GroupStatus { get; set; }
 
     }
 
@@ -25,7 +25,7 @@
 
     public partial class CampagnSearchInput : BaseInputSearch
     {
-
+        public string? CampaignId { get; set; }
 
     }
 
@@ -33,7 +33,18 @@
     {
         public string? Id { get; set; }
 
+        public int? Status { get; set; }
+        public CampagnProfileSearchInput()
+        {
+            Status = 0;
+        }
+
     }
+
+
+
+
+
 
 
 

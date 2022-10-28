@@ -16,6 +16,7 @@
     }
     public class EmployeeUpdate
     {
+        public int Status { get; set; }
         public string? UserName { get; set; }
         public string? Id { get; set; }
         //public string? Code { get; set; }

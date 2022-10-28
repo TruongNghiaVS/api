@@ -38,21 +38,22 @@ namespace vsrolAPI2022.Controllers
         }
 
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/masterdata/getAll")]
         public async Task<IResult> getAll(MasterDataSearchInput request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
 
             var searchRequest = new MaterDataRequest()
             {
-                UserId = "1",
+                UserId = user.Id,
                 Token = request.Token,
                 Status = request.Status,
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
-                From = request.From
+                From = request.From,
+                GroupStatus = request.GroupStatus
 
             };
             var resultSearch = await _masterDataBusiness.GetALl(searchRequest);
@@ -70,6 +71,12 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Không có thông tin mã code");
             }
 
+            if (!employeeAdd.GroupId.HasValue)
+            {
+                return Results.BadRequest("Không có thông tin nhóm");
+            }
+
+
             if (string.IsNullOrEmpty(employeeAdd.FullName))
             {
                 return Results.BadRequest("Không có thông tin tên");
@@ -86,8 +93,8 @@ namespace vsrolAPI2022.Controllers
                 Code = employeeAdd.Code,
                 FullName = employeeAdd.FullName,
                 DisplayName = employeeAdd.DisplayName,
-                CreatedBy = "1",
-                UpdatedBy = "1",
+                CreatedBy = user.Id,
+                UpdatedBy = user.Id,
                 Hour = employeeAdd.Hour,
                 Day = employeeAdd.Hour,
                 GroupId = employeeAdd.GroupId
@@ -100,7 +107,7 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/masterdata/update")]
         public async Task<IResult> Update(MasterDataUpdate request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
             if (string.IsNullOrEmpty(request.Id))
             {
                 return Results.BadRequest("Không có thông tin ID");
@@ -119,7 +126,7 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.FullName = request.FullName;
             accoutUpdate.DisplayName = request.DisplayName;
 
-            accoutUpdate.UpdatedBy = "1";
+            accoutUpdate.UpdatedBy = user.Id;
             accoutUpdate.Hour = request.Hour;
             accoutUpdate.Day = request.Day;
 

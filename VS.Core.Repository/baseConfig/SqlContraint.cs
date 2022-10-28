@@ -53,6 +53,7 @@
         public string Campaign_update = "sp_Campaign_update";
 
         public string Campaign_getAll = "sp_campaign_getAll";
+        public string Campaign_GetAllAsiggeeByCampagnId = "sp_campaign_getAll_AssigneebyCampagnId";
 
         public string Campaign_exportData = "sp_Employee_exportData";
 

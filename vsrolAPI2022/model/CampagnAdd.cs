@@ -13,6 +13,8 @@
         public DateTime? EndTime { get; set; }
         public int? Priority { get; set; }
         public string? ShortDes { get; set; }
+
+        public string? GroupStatus { get; set; }
         public CampagnAdd()
         {
             Priority = 1;
@@ -29,7 +31,7 @@
 
         public string? DisplayName { get; set; }
 
-        public bool? Status { get; set; }
+        public int? Status { get; set; }
 
         public int? SumCount { get; set; }
 
@@ -44,6 +46,7 @@
         public int? Priority { get; set; }
 
         public string? ShortDes { get; set; }
+        public string? GroupStatus { get; set; }
 
         public CampagnUpdate()
         {

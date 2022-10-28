@@ -8,5 +8,10 @@ namespace VS.Core.Repository.baseConfig
     {
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
 
+        Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request);
+
+
+
+
     }
 }

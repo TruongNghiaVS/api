@@ -84,7 +84,8 @@ namespace VS.Core.Repository
                         request.To,
                         request.Limit,
                         request.Page,
-                        request.OrderBy
+                        request.OrderBy,
+                        request.GroupStatus
                     }, commandType: CommandType.StoredProcedure);
 
                     var fistElement = result.FirstOrDefault();

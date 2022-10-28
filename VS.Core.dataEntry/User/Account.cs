@@ -14,6 +14,8 @@
         public bool IsActive { get; set; }
         public int OrgId { get; set; }
 
+
+
         public string? Pass { get; set; }
 
         //public bool isHead

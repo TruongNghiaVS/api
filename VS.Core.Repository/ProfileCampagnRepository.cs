@@ -61,7 +61,8 @@ namespace VS.Core.Repository
                         request.To,
                         request.Limit,
                         request.Page,
-                        request.OrderBy
+                        request.OrderBy,
+                        request.UserId
                     }, commandType: CommandType.StoredProcedure);
                     var fistElement = result.FirstOrDefault();
                     var totalRecord = 0;
@@ -105,6 +106,37 @@ namespace VS.Core.Repository
             {
                 return 0;
 
+            }
+        }
+
+
+        public async Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<Profile>(_Sql.CampaignProfile_getAll, new
+                    {
+                        request.Id,
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.Limit,
+                        request.Page,
+
+                        request.OrderBy
+                    }, commandType: CommandType.StoredProcedure);
+
+                    return result.ToList(); ;
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<Profile>();
             }
         }
     }

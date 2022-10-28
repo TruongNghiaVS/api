@@ -23,6 +23,8 @@
 
         public string? ShortDes { get; set; }
 
+        public string? GroupStatus { get; set; }
+
         public Campagn()
         {
             Priority = 1;

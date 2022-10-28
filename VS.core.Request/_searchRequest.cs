@@ -30,6 +30,7 @@
     public class MaterDataRequest : BaseSearchRequest
     {
         public string Msg { get; set; }
+        public string GroupStatus { get; set; }
         public MaterDataRequest()
         {
             this.Page = 1;
@@ -75,7 +76,9 @@
 
     public class CampagnRequest : BaseSearchRequest
     {
-        public string Msg { get; set; }
+        public string? Msg { get; set; }
+
+        public string? CampaignId { get; set; }
         public CampagnRequest()
         {
             this.Page = 1;
@@ -101,6 +104,8 @@
     {
         public string? Id { get; set; }
 
+        public int? Status { get; set; }
+
 
     }
 
@@ -113,5 +118,18 @@
             Total = 0;
         }
     }
+
+    public partial class CampagnAsiggeeByCampagnIdReponse : BaseSearchRepons
+    {
+
+        public CampagnAsiggeeByCampagnIdReponse()
+        {
+
+        }
+
+    }
+
+
+
 
 }

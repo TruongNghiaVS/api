@@ -1,5 +1,7 @@
 ﻿using VS.core.Request;
+using VS.Core.Business.Model;
 using VS.Core.dataEntry.User;
+
 
 namespace VS.Core.Business.Interface
 {
@@ -14,8 +16,13 @@ namespace VS.Core.Business.Interface
         Task<int> AddProfile(Profile entity);
         Task<int> UpdateProfile(Profile entity);
         Task DeleteProfile(Profile entity);
-
         Task<bool> HandleImport(CampanginDataImportRequest request);
+
+        Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request);
+
+        Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(CampagnRequest request);
+
+
 
     }
 }
