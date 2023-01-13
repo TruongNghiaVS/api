@@ -16,6 +16,7 @@ namespace vsrolAPI2022.Controllers
     {
 
         private readonly ICampagnBussiness _campagnBusiness;
+
         public CampagnProfileController(
             ICampagnBussiness campagnBusiness,
             IUserBusiness userBusiness) : base(userBusiness)
@@ -52,7 +53,8 @@ namespace vsrolAPI2022.Controllers
                 To = request.To,
                 Id = request.Id,
                 From = request.From,
-                UserId = user.Id
+                UserId = user.Id,
+                TypegetData = request.TypegetData
 
             };
             var resultSearch = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
@@ -71,6 +73,7 @@ namespace vsrolAPI2022.Controllers
 
             var account = new Profile()
             {
+
 
             };
             var result = await _campagnBusiness.AddProfile(account);
@@ -137,9 +140,33 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.CodeProduct = request.CodeProduct;
             accoutUpdate.PriceProduct = request.PriceProduct;
             accoutUpdate.NoteFirstTime = request.NoteFirstTime;
+
+            accoutUpdate.SkipContent = request.SkipContent;
             var result = await _campagnBusiness.UpdateProfile(accoutUpdate);
             return Results.Ok(result);
         }
+
+
+
+        [HttpPost("~/api/campagnProfile/updateskip")]
+        public async Task<IResult> updateskip(CampagnProfileUpdate request)
+        {
+            var user = GetCurrentUser();
+            if (string.IsNullOrEmpty(request.Id))
+            {
+                return Results.BadRequest("Không có thông tin ID");
+            }
+            var accoutUpdate = await _campagnBusiness.GetProfile(request.Id);
+            if (accoutUpdate == null)
+            {
+                return Results.BadRequest("Không có thông tin profile tương ứng");
+            }
+            accoutUpdate.SkipContent = request.SkipContent;
+            accoutUpdate.UpdatedBy = user.Id;
+            var result = await _campagnBusiness.UpdateProfile(accoutUpdate);
+            return Results.Ok(result);
+        }
+
 
         //[Authorize]
         //[HttpPost("~/employee/delete")]
@@ -187,5 +214,43 @@ namespace vsrolAPI2022.Controllers
         }
 
 
+        [AllowAnonymous]
+        [HttpPost("~/api/campagnProfile/getInfo")]
+        public async Task<IResult> getInfo(InputIdRequest inputRequest)
+        {
+            if (string.IsNullOrEmpty(inputRequest.Id) ||
+                string.IsNullOrEmpty(inputRequest.Id))
+            {
+                return Results.BadRequest(_message.CommonError_ErrorRequestInput);
+            }
+            var result = await _campagnBusiness.GetIno(inputRequest.Id);
+            return Results.Ok(result);
+        }
+
+        [HttpPost("~/api/campagnProfile/Asignee")]
+        public async Task<IResult> AsigneeProfile(AssignedRequest inputRequest)
+        {
+            if (string.IsNullOrEmpty(inputRequest.Id) ||
+                string.IsNullOrEmpty(inputRequest.Id))
+            {
+                return Results.BadRequest(_message.CommonError_ErrorRequestInput);
+            }
+
+            if (string.IsNullOrEmpty(inputRequest.AssignedId) ||
+                string.IsNullOrEmpty(inputRequest.AssignedId))
+            {
+                return Results.BadRequest(_message.CommonError_ErrorRequestInput);
+            }
+            var result = await _campagnBusiness.AssignedTask(inputRequest.Id, inputRequest.AssignedId);
+            return Results.Ok(result);
+        }
+
+
+        [HttpPost("~/api/campagnProfile/handleCase")]
+        public async Task<IResult> HandleCase(CampaignProfile_caseRequest inputRequest)
+        {
+            var result = await _campagnBusiness.HandleCase(inputRequest);
+            return Results.Ok(result);
+        }
     }
 }

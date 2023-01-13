@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.Utilities", "VS.cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.IO", "VS.core.IO\VS.core.IO.csproj", "{A84B60F1-EBF7-4616-8321-0AE8123E6AC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VS.core.Request", "VS.core.Request\VS.core.Request.csproj", "{270E8B0E-7BF7-4F99-ACAF-ACC2803ACDEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.Request", "VS.core.Request\VS.core.Request.csproj", "{270E8B0E-7BF7-4F99-ACAF-ACC2803ACDEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.RMI", "VS.core.RMI\VS.core.RMI.csproj", "{435C1FDF-05E9-4FC5-97C1-1E0F9251A601}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VS.core.Report", "VS.core.Report\VS.core.Report.csproj", "{AFDABC85-72F3-466B-A6CE-441EC645C38D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{270E8B0E-7BF7-4F99-ACAF-ACC2803ACDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{270E8B0E-7BF7-4F99-ACAF-ACC2803ACDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{270E8B0E-7BF7-4F99-ACAF-ACC2803ACDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{435C1FDF-05E9-4FC5-97C1-1E0F9251A601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435C1FDF-05E9-4FC5-97C1-1E0F9251A601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{435C1FDF-05E9-4FC5-97C1-1E0F9251A601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{435C1FDF-05E9-4FC5-97C1-1E0F9251A601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDABC85-72F3-466B-A6CE-441EC645C38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDABC85-72F3-466B-A6CE-441EC645C38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDABC85-72F3-466B-A6CE-441EC645C38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDABC85-72F3-466B-A6CE-441EC645C38D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

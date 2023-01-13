@@ -15,7 +15,6 @@
             }
             return _sqlContraint;
         }
-
         public string Employee_login = "sp_Employee_Login";
 
         public string Employee_insert = "sp_Employee_Insert";
@@ -25,8 +24,6 @@
         public string Employee_getAll = "sp_Employee_getAll";
 
         public string Employee_exportData = "sp_Employee_exportData";
-
-
 
         public string MasterData_reason_insert = "sp_reason_Insert";
 
@@ -44,13 +41,12 @@
         public string Group_reason_getAll = "sp_groupReason_getAll";
 
         public string Group_reason_exportData = "sp_groupReason_exportData";
-
-
-
-
+        public string campaign_UpdateOverview = "sp_campaign_UpdateOverview";
         public string Campaign_insert = "sp_Campaign_Insert";
 
         public string Campaign_update = "sp_Campaign_update";
+
+        public string Campaign_getOverviewbyId = "sp_campaign_getOverviewbyId";
 
         public string Campaign_getAll = "sp_campaign_getAll";
         public string Campaign_GetAllAsiggeeByCampagnId = "sp_campaign_getAll_AssigneebyCampagnId";
@@ -64,10 +60,43 @@
 
         public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
 
+        public string CampaignImpact_insert = "sp_ImpactHistory_Insert";
+
+        public string CampaignImpact_update = "CampaignImpact_update";
+
+        public string CampaignImpact_getAll = "sp_ImpactHistory_getAll";
+        public string CallLog_getAll = "sp_CallLog_getAll";
+        public string CallLog_insert = "sp_CallLog_Insert";
+        public string CampaignProfile_handleCase = "sp_CampaignProfile_case";
+
+        public string MasterData_reasonNew_insert = "sp_MasterData_insert";
+
+        public string MasterData_reasonNew_update = "sp_MasterData_update";
+
+        public string MasterData_reasonNew_getAll = "sp_MasterData_getAll";
+
+        public string GroupEmpl_insert = "sp_GroupEmpl_Insert";
+
+        public string GroupEmpl_update = "sp_GroupEmpl_Update";
+
+        public string GroupEmpl_getAll = "sp_GroupEmpl_getAll";
+        public string GroupEmpl_getAllManager = "sp_GroupEmpl_getAllManager";
+
+        public string LoginReport_insert = "sp_LogHistory_Insert";
+        public string LoginReport_update = "sp_LogHistory_update";
+        public string LoginReport_getAll = "sp_LogHistory_getAll";
 
 
+        public string ReportImpactOverview_GetAll = "ReportImpactOverview_GetAll";
+        public string ReportImpact_GetAll = "ReportImpact_GetAll";
+        public string ReportCampaignProfile = "sp_CampaignProfile_getOverviewDashboard";
 
 
+        public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert";
+
+        public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
+
+        public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
 
     }
 }

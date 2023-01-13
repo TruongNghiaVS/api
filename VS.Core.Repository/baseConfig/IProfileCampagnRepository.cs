@@ -10,8 +10,10 @@ namespace VS.Core.Repository.baseConfig
 
         Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request);
 
+        Task<bool> AssignedTask(string profileId, string userId);
 
-
+        Task<Profile> GetByNoAgreement(string profileId);
+        Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp);
 
     }
 }

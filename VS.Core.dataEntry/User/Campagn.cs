@@ -2,7 +2,7 @@
 {
     public class Profile : BaseEntry
     {
-
+        public bool? Skipp { get; set; }
         public int Reasonstatus { get; set; }
         public int Status { get; set; }
         public string CustomerName { get; set; }
@@ -71,6 +71,8 @@
         public string PriceProduct { get; set; }
 
         public string NoteFirstTime { get; set; }
+
+        public string? SkipContent { get; set; }
         public Profile()
         {
 

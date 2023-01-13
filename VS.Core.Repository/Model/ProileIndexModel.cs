@@ -13,12 +13,13 @@ namespace VS.Core.Repository.Model
 
             get
             {
-                if (Status == 0)
+                if (string.IsNullOrEmpty(Assignee) || Assignee == "-1" || Status < 1)
                 {
                     return "Chưa phân";
                 }
 
-                return "Chưa phân";
+
+                return "Đã phân";
 
             }
         }
@@ -40,9 +41,22 @@ namespace VS.Core.Repository.Model
             }
         }
 
+        public bool? Skipp { get; set; }
 
 
 
+        public string? Id { get; set; }
+
+        public bool Success { get; set; }
+        public DateTime? CreatedTime { get; set; }
+
+        public DateTime? UpdatedTime { get; set; }
+        public string AuthorName { get; set; }
+
+        public string UpdateByName
+        {
+            get; set;
+        }
 
     }
 }

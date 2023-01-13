@@ -42,7 +42,6 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(EmployeeSearchInput request)
         {
             var user = GetCurrentUser();
-
             var searchRequest = new EmployeeSearchRequest()
             {
                 UserId = user.Id,
@@ -79,13 +78,19 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin họ tên");
             }
+
+            if (string.IsNullOrEmpty(employeeAdd.LineCode))
+            {
+                return Results.BadRequest("Không có thông tin mã gọi");
+            }
+
             var resultcheck = await _employeeBusiness.CheckDuplicate(employeeAdd.UserName, employeeAdd.Phone);
             if (resultcheck == true)
             {
                 return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
             }
             employeeAdd.Pass = Utils.getMD5(employeeAdd.Pass);
-            employeeAdd.CreateBy = "1";
+            employeeAdd.CreateBy = user.CreatedBy;
             var account = new Account()
             {
                 RoleId = employeeAdd.RoleId,
@@ -95,6 +100,7 @@ namespace vsrolAPI2022.Controllers
                 CreatedBy = user.Id,
                 PhoneNumber = employeeAdd.Phone,
                 Phone = employeeAdd.Phone,
+                LineCode = employeeAdd.LineCode,
                 Pass = employeeAdd.Pass,
                 Email = employeeAdd.Email,
                 UpdatedBy = user.Id,
@@ -123,6 +129,10 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin họ tên");
             }
+            if (string.IsNullOrEmpty(request.LineCode))
+            {
+                return Results.BadRequest("Không có thông mã gọi");
+            }
 
             var accoutUpdate = await _employeeBusiness.GetByIdAsync(request.Id);
             if (accoutUpdate == null)
@@ -135,6 +145,7 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.Email = request.Email;
             accoutUpdate.IsActive = request.Status == 1;
             accoutUpdate.UpdatedBy = user.Id;
+            accoutUpdate.LineCode = request.LineCode;
             var result = await _employeeBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }

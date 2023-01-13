@@ -17,3 +17,5 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.csproj.CopyComplete
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Request.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Request.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Report.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Report.pdb

@@ -12,4 +12,11 @@
         public string? Id { get; set; }
     }
 
+    public class AssignedRequest
+    {
+        public string? Id { get; set; }
+
+        public string? AssignedId { get; set; }
+    }
+
 }

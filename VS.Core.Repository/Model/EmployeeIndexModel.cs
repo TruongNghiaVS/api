@@ -37,7 +37,7 @@
 
         public EmployeeIndexModel() : base()
         {
-            LineCode = "352";
+
         }
     }
 }

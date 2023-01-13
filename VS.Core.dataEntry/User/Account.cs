@@ -14,6 +14,7 @@
         public bool IsActive { get; set; }
         public int OrgId { get; set; }
 
+        public string? LineCode { get; set; }
 
 
         public string? Pass { get; set; }

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "WVnm97Nj1k/AZuzs4yU3AlKGsjCinqVtRDtCIq+5aJ6kR8bRIDpYIX+1YR+nQcGhpsrvodc7PRO9m9zXku7pVg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.RMI\\VS.core.RMI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
+  ],
+  "logs": []
+}

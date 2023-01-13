@@ -9,6 +9,7 @@
         public string? Email { get; set; }
         public string? FullName { get; set; }
         public string? Phone { get; set; }
+        public string? LineCode { get; set; }
         public string? Pass { get; set; }
         public string? CreateBy { get; set; }
 
@@ -30,7 +31,7 @@
 
         public string? companyId { get; set; }
 
-
+        public string? LineCode { get; set; }
 
     }
 

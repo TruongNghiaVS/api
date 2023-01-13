@@ -17,6 +17,7 @@ namespace VS.Core.Repository
             _configuration = configuration;
             _baseTable = tableName;
         }
+
         public async Task<int> AddAsync(Profile model)
         {
             model.CreateAt = DateTime.Now;
@@ -61,6 +62,7 @@ namespace VS.Core.Repository
                         request.To,
                         request.Limit,
                         request.Page,
+                        request.TypegetData,
                         request.OrderBy,
                         request.UserId
                     }, commandType: CommandType.StoredProcedure);
@@ -108,7 +110,20 @@ namespace VS.Core.Repository
 
             }
         }
+        public async Task<bool> AssignedTask(string profileId, string userId)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "update CampaignProfile set assignee =@assignee  where Id =@id";
+                var result = await con.ExecuteAsync(sql, new { assignee = userId, id = profileId });
 
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
 
         public async Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request)
         {
@@ -139,5 +154,45 @@ namespace VS.Core.Repository
                 return new List<Profile>();
             }
         }
+
+        public async Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp)
+        {
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.CampaignProfile_handleCase, new
+                    {
+                        id,
+                        resetCase,
+                        skipp
+                    }, commandType: CommandType.StoredProcedure);
+                    return result > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+
+            }
+
+        }
+
+
+        public async Task<Profile> GetByNoAgreement(string profileId)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "SELECT * FROM CampaignProfile " + " WHERE NoAgreement = @profileId";
+                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId });
+
+                if (result == null)
+                {
+                    return null;
+                }
+                return result;
+            }
+        }
+
     }
 }

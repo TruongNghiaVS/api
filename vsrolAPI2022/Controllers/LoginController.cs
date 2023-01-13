@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VS.core.API.model;
+using VS.core.Report.Model;
 using VS.core.Utilities;
 using VS.Core.Business.Interface;
 
@@ -11,9 +12,13 @@ namespace vsrolAPI2022.Controllers
     [Route("[controller]")]
     public class LoginController : BaseController
     {
-        public LoginController(IUserBusiness userBusiness) : base(userBusiness)
+        private ILoginReportBussiness _loginReportBussiness;
+        public LoginController(
+            IUserBusiness userBusiness,
+            ILoginReportBussiness loginReportBussiness)
+            : base(userBusiness)
         {
-
+            _loginReportBussiness = loginReportBussiness;
         }
 
         [AllowAnonymous]
@@ -32,6 +37,15 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.Unauthorized();
             }
+            var loginreport = new LoginReport();
+            loginreport.UserName = userInput.UserName;
+            loginreport.Name = userInput.UserName;
+            loginreport.Action = "Login";
+            loginreport.Note = "";
+            loginreport.CreatedBy = loginUser.Id;
+            loginreport.CreateAt = DateTime.Now;
+            await _loginReportBussiness.AddAsync(loginreport);
+
             string token = GetToken(loginUser);
             return Results.Ok(token);
         }
@@ -43,5 +57,23 @@ namespace vsrolAPI2022.Controllers
             var user = GetCurrentUser();
             return Results.Ok(user);
         }
+
+
+        [HttpPost("~/api/user/logout")]
+        public async Task<IResult> Logout()
+        {
+            var user = GetCurrentUser();
+            var loginreport = new LoginReport();
+            loginreport.UserName = user.UserName;
+            loginreport.Name = user.UserName;
+            loginreport.Action = "Logout";
+            loginreport.Note = "";
+            loginreport.CreatedBy = user.Id;
+            loginreport.CreateAt = DateTime.Now;
+            await _loginReportBussiness.AddAsync(loginreport);
+            return Results.Ok("Đăng xuất thành công");
+        }
+
+
     }
 }

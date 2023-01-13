@@ -5,6 +5,7 @@ using VS.core.Request;
 using VS.Core.dataEntry.User;
 using VS.Core.Repository.baseConfig;
 using VS.Core.Repository.Model;
+using static Dapper.SqlMapper;
 
 namespace VS.Core.Repository
 {
@@ -20,6 +21,20 @@ namespace VS.Core.Repository
             _baseTable = tableName;
         }
 
+
+        public async Task<List<Campagn>> GetALlCampang()
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "SELECT * FROM " + _baseTable + "";
+                var result = await con.QueryAsync<Campagn>(sql);
+                if (result != null)
+                {
+                    return result.ToList();
+                }
+                return new List<Campagn>();
+            }
+        }
         public async Task<int> AddAsync(Campagn entity)
         {
             entity.CreateAt = DateTime.Now;
@@ -49,8 +64,6 @@ namespace VS.Core.Repository
 
         }
 
-
-
         public async Task<bool> CheckDuplicate(string code)
         {
             using (var con = GetConnection())
@@ -64,6 +77,28 @@ namespace VS.Core.Repository
                 }
                 return true;
             }
+        }
+
+
+        public async Task<bool> UpdateOverView(string campaignId)
+        {
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.campaign_UpdateOverview, new
+                    {
+                        campaignId
+                    }, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+
+            }
+
         }
 
 
@@ -219,6 +254,31 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<GetOverviewCampaignModelByIdReponse> GetOverviewCampagnById(string campaignId)
+        {
 
+            var reponse = new GetOverviewCampaignModelByIdReponse();
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<GetOverviewCampaignModelById>(_Sql.Campaign_getOverviewbyId,
+                    new
+                    {
+                        campaignId
+                    },
+                    commandType: CommandType.StoredProcedure);
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    reponse.model = fistElement;
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
 }

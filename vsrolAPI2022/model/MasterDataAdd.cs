@@ -29,7 +29,26 @@
 
     }
 
+    public class GroupEmployeeAdd
+    {
+        public string? Code { get; set; }
+        public string? Name { get; set; }
+        public int? ManagerId { get; set; }
+        public int? IsActive { get; set; }
+        public GroupEmployeeAdd()
+        {
+            IsActive = 1;
+        }
+    }
+    public class GroupEmployeeUpdate
+    {
+        public string? Code { get; set; }
+        public string? Name { get; set; }
+        public int? ManagerId { get; set; }
+        public int? IsActive { get; set; }
 
+        public string? Id { get; set; }
+    }
 
 
 }

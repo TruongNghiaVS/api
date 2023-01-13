@@ -16,4 +16,8 @@
     <ProjectReference Include="..\VS.Core.Repository\VS.Core.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

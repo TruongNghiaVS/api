@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VS.Core.Repository.baseConfig;
 using VS.Core.Repository.Interface;
+using VS.Core.Repository.Report;
 
 namespace VS.Core.Repository.Infrastructures
 {
@@ -14,6 +15,13 @@ namespace VS.Core.Repository.Infrastructures
             services.AddScoped<IGroupReasonRepository, GroupReasonRepository>();
             services.AddScoped<ICampagnRepository, CampagnRepository>();
             services.AddScoped<IProfileCampagnRepository, ProfileCampagnRepository>();
+            services.AddScoped<IImpactHistoryRepository, ImpactHistoryRepository>();
+            services.AddScoped<IMasterDataNewRepository, MasterdataNewRepository>();
+            services.AddScoped<IGroupEmployRepository, GroupEmployRepository>();
+            services.AddScoped<IloginReportRepository, LoginReportReposiotry>();
+            services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<ICallLogRepository, CallLogRepository>();
+            services.AddScoped<IReportTalkTimeRepository, ReportTalkTimeRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }

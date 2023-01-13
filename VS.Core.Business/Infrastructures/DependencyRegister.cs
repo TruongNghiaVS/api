@@ -21,6 +21,19 @@ namespace VS.Core.Business.Infrastructures
 
             services.AddScoped<ICampagnBussiness, CampagnBusiness>();
 
+            services.AddScoped<IImpactHistoryBussiness, ImpactHistoryBusiness>();
+
+            services.AddScoped<IMasterDataNewBussiness, MasterDataNewBussiness>();
+
+            services.AddScoped<IGroupEmpBussiness, GroupEmpBussiness>();
+
+            services.AddScoped<ILoginReportBussiness, LoginReportBusiness>();
+
+            services.AddScoped<IReportBussiness, ReportBussiness>();
+
+            services.AddScoped<ICallLogBussiness, CallLogBussiness>();
+            services.AddScoped<IHandleReportBussiness, HandleReportBussiness>();
+
 
         }
     }

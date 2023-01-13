@@ -92,6 +92,7 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(result);
         }
 
+
         [AllowAnonymous]
         [HttpPost("~/api/campagn/update")]
         public async Task<IResult> Update(CampagnUpdate request)
@@ -237,6 +238,10 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/campagn/importDataById")]
         public async Task<IResult> ImportData([FromForm] CampanginDataImport request)
         {
+            var userLogin = new Account()
+            {
+                Id = "1"
+            };
             var fileRequest = request.FileData;
             if (fileRequest == null || fileRequest.Count == 0)
             {
@@ -291,7 +296,7 @@ namespace vsrolAPI2022.Controllers
                             DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
                             AmountLoan = ReadvaluefloatExcel(workSheet, i, 25),
                             EMI = ReadvaluefloatExcel(workSheet, i, 26),
-                            CampaignId = 1,
+                            CampaignId = int.Parse(request.Id),
                             Assignee = "-1",
                             TotalFines = ReadvaluefloatExcel(workSheet, i, 27),
                             TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 28),
@@ -303,7 +308,8 @@ namespace vsrolAPI2022.Controllers
                             NameProduct = ReadvalueStringExcel(workSheet, i, 34),
                             CodeProduct = ReadvalueStringExcel(workSheet, i, 35),
                             PriceProduct = ReadvalueStringExcel(workSheet, i, 36),
-                            NoteFirstTime = ReadvalueStringExcel(workSheet, i, 37)
+                            NoteFirstTime = ReadvalueStringExcel(workSheet, i, 37),
+                            CreatedBy = userLogin.Id
 
                         });
                     }
@@ -317,7 +323,7 @@ namespace vsrolAPI2022.Controllers
             var reqeustImport = new CampanginDataImportRequest();
             reqeustImport.ListData = profileList;
             reqeustImport.Id = request.Id;
-            await _campagnBusiness.HandleImport(reqeustImport);
+            await _campagnBusiness.HandleImport(reqeustImport, userLogin);
             return Results.Ok();
 
         }
@@ -348,6 +354,9 @@ namespace vsrolAPI2022.Controllers
                     if (yz != null)
                     {
                         yz.Assignee = item.Id;
+                        yz.Status = 1;
+                        yz.UpdatedBy = "1";
+
                         await _campagnBusiness.UpdateProfile(yz);
                     }
 
@@ -376,9 +385,20 @@ namespace vsrolAPI2022.Controllers
             };
 
             var resultSearch = await _campagnBusiness.GetAllAsiggeeByCampagnId(searchRequest);
+
+
             return Results.Ok(resultSearch);
         }
 
+
+        [AllowAnonymous]
+        [HttpPost("~/api/campagn/UpdateOverViewAllCampagn")]
+        public async Task<IResult> updateOverViewCampagn(CampagnSearchInput request)
+        {
+
+            var resultSearch = await _campagnBusiness.UpdateOverViewAllCampagn();
+            return Results.Ok(resultSearch);
+        }
 
 
 

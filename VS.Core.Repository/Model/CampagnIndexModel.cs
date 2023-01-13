@@ -24,6 +24,8 @@
         public DateTime? UpdateAt { get; set; }
         public DateTime? CreateAt { get; set; }
 
+        public int NoSkippCase { get; set; }
+
 
     }
 }
