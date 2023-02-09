@@ -79,6 +79,7 @@ namespace VS.Core.Repository.Report
                         request.Token,
                         request.From,
                         request.To,
+                        request.UserName,
                         request.ProfileId,
                         request.Limit,
                         request.Page,

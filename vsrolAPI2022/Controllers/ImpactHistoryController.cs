@@ -83,21 +83,17 @@ namespace vsrolAPI2022.Controllers
                 UpdatedBy = user.Id
 
             };
-
             var campangnProfile = await _campagnBussiness.GetProfile(employeeAdd.ProfileId.Value.ToString());
-
             if (campangnProfile.Status == 16)
             {
 
             }
             else
             {
-
+                campangnProfile.Reasonstatus = int.Parse(employeeAdd.StatusIm);
                 campangnProfile.Status = int.Parse(employeeAdd.StatusIm);
                 await _campagnBussiness.UpdateProfile(campangnProfile);
             }
-
-
             var result = await _impactBusiness.AddAsync(account);
             return Results.Ok(result);
         }
@@ -111,21 +107,15 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin ID");
             }
-
             var accoutUpdate = await _impactBusiness.GetByIdAsync(request.Id);
             if (accoutUpdate == null)
             {
                 return Results.BadRequest("Không có thông tin profile tương ứng");
             }
-
-
             accoutUpdate.UpdatedBy = "1";
-
-
             var result = await _impactBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }
-
 
 
         [AllowAnonymous]

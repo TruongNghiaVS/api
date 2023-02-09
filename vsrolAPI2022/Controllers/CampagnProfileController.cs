@@ -43,7 +43,36 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/campagnProfile/getAll")]
         public async Task<IResult> getAll(CampagnProfileSearchInput request)
         {
+
+
             var user = GetCurrentUser();
+            var dpdMax = -1;
+            var dpdMin = -1;
+
+            if (request.Dpd == 0)
+            {
+                dpdMax = 30;
+                dpdMin = 0;
+            }
+
+            if (request.Dpd == 1)
+            {
+                dpdMax = 60;
+                dpdMin = 31;
+            }
+
+            if (request.Dpd == 2)
+            {
+                dpdMax = 90;
+                dpdMin = 61;
+            }
+
+            if (request.Dpd == 3)
+            {
+                dpdMax = 180;
+                dpdMin = 91;
+            }
+
             var searchRequest = new GetAllProfileByCampang()
             {
                 Token = request.Token,
@@ -51,11 +80,13 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+                DpdMax = dpdMax,
+                DpdMin = dpdMin,
                 Id = request.Id,
                 From = request.From,
                 UserId = user.Id,
+                NoAgreement = request.NoAgree,
                 TypegetData = request.TypegetData
-
             };
             var resultSearch = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
             return Results.Ok(resultSearch);

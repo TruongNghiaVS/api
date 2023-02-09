@@ -60,6 +60,8 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.DpdMax,
+                        request.DpdMin,
                         request.Limit,
                         request.Page,
                         request.TypegetData,

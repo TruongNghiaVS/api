@@ -67,6 +67,9 @@
         public string CampaignImpact_getAll = "sp_ImpactHistory_getAll";
         public string CallLog_getAll = "sp_CallLog_getAll";
         public string CallLog_insert = "sp_CallLog_Insert";
+        public string ReportTalkTimeGroupByDay_insert = "sp_reportTalkTimeGroupByDay_insert";
+        public string ReportTalkTimeGroupByDay_update = "sp_reportTalkTimeGroupByDay_update";
+
         public string CampaignProfile_handleCase = "sp_CampaignProfile_case";
 
         public string MasterData_reasonNew_insert = "sp_MasterData_insert";
@@ -89,14 +92,23 @@
 
         public string ReportImpactOverview_GetAll = "ReportImpactOverview_GetAll";
         public string ReportImpact_GetAll = "ReportImpact_GetAll";
+
+        public string ReportImpact_GetAllRecordingFile = "ReportImpact_GetAllRecordingFile";
         public string ReportCampaignProfile = "sp_CampaignProfile_getOverviewDashboard";
 
 
         public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert";
-
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
-
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
+        public string RecordingFile_getAll = "sp_RecordingFile_getAll";
+
+        public string GetAllRecordGroupByLineCode_getAll = "sp_GetAllRecordGroupByLineCode_getAll";
+
+        public string GetGetOverViewDashBoard_getAll = "sp_GetGetOverViewDashBoard_getAll";
+
+
+
+
 
     }
 }

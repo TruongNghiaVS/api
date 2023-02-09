@@ -22,6 +22,7 @@ namespace VS.Core.Repository.Infrastructures
             services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<ICallLogRepository, CallLogRepository>();
             services.AddScoped<IReportTalkTimeRepository, ReportTalkTimeRepository>();
+            services.AddScoped<IReportTalkTimeGroupByDay, ReportTalkTimeGroupByDayRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }

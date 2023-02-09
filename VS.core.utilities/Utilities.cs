@@ -1,4 +1,7 @@
-﻿namespace VS.core.Utilities
+﻿using NAudio.Wave;
+using System.Net;
+
+namespace VS.core.Utilities
 {
 
     public static class Utils
@@ -121,6 +124,48 @@
             if (!item.HasValue)
                 return new DateTime?();
             return new DateTime?(new DateTime(item.Value.Year, item.Value.Month, item.Value.Day, 23, 59, 59));
+        }
+
+
+        public static double? GetDurationAudio(this string? filePath)
+        {
+
+            string path = @"http://192.168.1.12:3002/api/getFileAudio?filePath=";
+            path = path + "" + filePath;
+
+            try
+            {
+                var webRequest = WebRequest.Create(path);
+                var webClient = new WebClient();
+                var bytes = webClient.DownloadData(path);
+                var stream = new MemoryStream(bytes);
+                WaveFileReader wr = new WaveFileReader(stream);
+                TimeSpan span = wr.TotalTime;
+                return span.TotalSeconds;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+
+        }
+
+        public static string GetFileRecordingFile(string fileAudio = "out-0383338840-9005-20230119-081349-1674116029.387926.wav", DateTime? callDate = null)
+        {
+            if (string.IsNullOrEmpty(fileAudio))
+            {
+                return "";
+            }
+            if (callDate == null)
+            {
+                return "";
+            }
+            var path = "/var/spool/asterisk/monitor/";
+            path = path + "" + callDate.Value.Year + "/";
+            path = path + "" + callDate.Value.Month.ToString("00") + "/";
+            path = path + "" + callDate.Value.Day.ToString("00") + "/";
+            path = path + fileAudio;
+            return path;
         }
     }
 }

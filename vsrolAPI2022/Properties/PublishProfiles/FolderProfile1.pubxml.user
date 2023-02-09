@@ -3,4 +3,9 @@
 https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Vietstargroup\Desktop\vsrol</_PublishTargetUrl>
+    <History>True|2023-02-07T02:53:36.0536280Z;True|2023-02-07T09:50:08.1175960+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
 </Project>

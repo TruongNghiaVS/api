@@ -33,6 +33,9 @@
               },
               "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.Core.Repository\\VS.Core.Repository.csproj": {
                 "projectPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.Core.Repository\\VS.Core.Repository.csproj"
+              },
+              "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj"
               }
             }
           }
@@ -371,6 +374,18 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "NAudio": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "WMPLib": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

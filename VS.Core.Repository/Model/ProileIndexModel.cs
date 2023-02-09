@@ -29,16 +29,7 @@ namespace VS.Core.Repository.Model
         public string ReasonstatusText
         {
 
-            get
-            {
-                if (Reasonstatus == 0)
-                {
-                    return "NKP - Has signal but...";
-                }
-
-                return "Chưa rõ tình trạng";
-
-            }
+            get; set;
         }
 
         public bool? Skipp { get; set; }

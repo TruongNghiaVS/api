@@ -141,7 +141,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetMysqlConnection2())
                 {
-                    var sqlQuerry = "SELECT d.src AS 'LineCode', d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate  FROM cdr d WHERE d.src = 9005  AND d.lastapp = 'Dial'";
+                    var sqlQuerry = "SELECT d.src AS 'LineCode', d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE d.src = 9000  AND d.lastapp = 'Dial'";
                     var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
                     {
                         request.Token,
@@ -152,8 +152,6 @@ namespace VS.Core.Repository
                         request.Page,
                         request.OrderBy
                     });
-
-
                     return result;
                 }
             }

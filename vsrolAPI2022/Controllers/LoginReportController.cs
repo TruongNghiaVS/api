@@ -47,7 +47,8 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/loginReport/getAll")]
         public async Task<IResult> GetAll(LoginReportSerarchRequest request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
+
             var searchRequest = new LoginReportSerarchRequest()
             {
                 Token = request.Token,
@@ -55,8 +56,14 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+
                 From = request.From
             };
+
+            if (user.RoleId != "2")
+            {
+                searchRequest.UserName = user.UserName;
+            }
             var resultSearch = await _impactBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
         }

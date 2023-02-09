@@ -17,3 +17,7 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Release\ne
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Release\net6.0\ref\VS.Core.Business.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Release\net6.0\VS.core.Request.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Release\net6.0\VS.core.Request.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Release\net6.0\VS.core.Report.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Release\net6.0\VS.core.Report.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Release\net6.0\VS.core.Utilities.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Release\net6.0\VS.core.Utilities.pdb

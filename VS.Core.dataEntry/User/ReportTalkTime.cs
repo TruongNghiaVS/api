@@ -19,6 +19,15 @@
 
         public DateTime? EventTime { get; set; }
 
+        public string? Linkedid { get; set; }
+
+        public string? Disposition { get; set; }
+
+        public double? DurationReal { get; set; }
+
+
+        public int DurationBill { get; set; }
+
         public ReportTalkTime()
         {
 

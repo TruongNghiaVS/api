@@ -41,6 +41,9 @@
 
         public int? Status { get; set; }
 
+        public int? Dpd { get; set; }
+
+        public string? NoAgree { get; set; }
         public string? TypegetData { get; set; }
         public CampagnProfileSearchInput()
         {

@@ -17,53 +17,38 @@ namespace VS.Core.Business
         {
             return _unitOfWork1.ReportRe.GetAllReportImapact(request);
         }
-
-        public Task<ImpactDashboardOverviewReponse> ReportImpactDashboardOverview()
+        public Task<ImpactDashboardOverviewReponse> ReportImpactDashboardOverview(ReportImpactRequest request)
         {
-            return _unitOfWork1.ReportRe.GetALlOverView();
+            return _unitOfWork1.ReportRe.GetALlOverView(request);
         }
-
-
-
         public Task<ReportCDRReponse> GetAllReportCDR(ReportCDRequest request)
         {
             return _unitOfWork1.ReportRe.GetAllReportCDR(request);
         }
-
+        public Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request)
+        {
+            return _unitOfWork1.ReportRe.GetAllRecordingFile(request);
+        }
         public Task<ReportCDRReponse> GetAllReportRecordingFile(ReportCDRequest request)
         {
             return _unitOfWork1.ReportRe.GetAllReportRecordingFile(request);
         }
-
-
-
-
-        public Task<int> GetReportOverviewAgrree()
+        public Task<int> GetReportOverviewAgrree(GetReportOverviewAgrreeRequest request)
         {
-            return _unitOfWork1.ReportRe.GetReportOverviewAgrree();
+            return _unitOfWork1.ReportRe.GetReportOverviewAgrree(request);
         }
-
         public Task<GetOverViewInfoReponse> GetOverViewInfo(GetOverViewInfoRequest request)
         {
             return _unitOfWork1.ReportRe.GetOverViewInfo(request);
         }
-
         public Task<GetOverViewTalkingItemReponse> GetOverViewTimeTalking(GetOverViewInfoRequest request)
         {
             return _unitOfWork1.ReportRe.GetOverViewTimeTalking(request);
         }
-
         public async Task<int> CalTalkingTime()
+
         {
-
-            // return 
-
             return await Task.FromResult(0);
-
-
         }
-
-
-
     }
 }

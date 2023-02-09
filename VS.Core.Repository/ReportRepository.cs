@@ -12,7 +12,7 @@ namespace VS.Core.Repository
     public class ReportRepository : IReportRepository
     {
         private readonly IConfiguration _configuration;
-
+        protected int offset;
 
 
         public ReportRepository(IConfiguration configuration)
@@ -35,7 +35,7 @@ namespace VS.Core.Repository
             return con;
         }
 
-        public async Task<ImpactDashboardOverviewReponse> GetALlOverView(int user_id = 0)
+        public async Task<ImpactDashboardOverviewReponse> GetALlOverView(ReportImpactRequest request)
         {
             try
             {
@@ -43,6 +43,8 @@ namespace VS.Core.Repository
                 {
                     var result = await con.QueryAsync<ImpactDashboardOverviewReponseItem>(SqlContraint.GetVariable().ReportImpactOverview_GetAll, new
                     {
+                        request.UserId,
+                        request.LineCode
                     }, commandType: CommandType.StoredProcedure);
 
                     var fistElement = result.FirstOrDefault();
@@ -68,6 +70,9 @@ namespace VS.Core.Repository
                 {
                     var result = await con.QueryAsync<ReportImpactItem>(SqlContraint.GetVariable().ReportImpact_GetAll, new
                     {
+                        request.UserId,
+                        request.LineCode
+
                     }, commandType: CommandType.StoredProcedure);
 
                     var fistElement = result.FirstOrDefault();
@@ -85,18 +90,124 @@ namespace VS.Core.Repository
             }
         }
 
+        //public async Task<ReportImpactReponse> GetAllRecordingFile(ReportImpactRequest request)
+        //{
+        //    try
+        //    {
+        //        using (var con = GetConnection())
+        //        {
+        //            var result = await con.QueryAsync<ReportImpactItem>(SqlContraint.GetVariable().ReportImpact_GetAll, new
+        //            {
+        //            }, commandType: CommandType.StoredProcedure);
 
+        //            var fistElement = result.FirstOrDefault();
+
+        //            var reponse = new ReportImpactReponse()
+        //            {
+        //                Data = result?.ToList()
+        //            };
+        //            return reponse;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        protected void ProcessInputPaging(ref int page, ref int limit, out int offset)
+        {
+            page = page <= 0 ? 1 : page;
+            if (limit <= 0)
+                limit = 20;
+            if (limit > 1000)
+                limit = 100;
+            offset = (page - 1) * limit;
+        }
         public async Task<ReportCDRReponse> GetAllReportCDR(ReportCDRequest request)
         {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
             try
             {
-                using (var con = GetMysqlConnection())
+                using (var con = GetConnection())
                 {
-                    var sql = "SELECT d.src, d.calldate, d.dst, d.disposition, d.lastapp, d.billsec, d.duration, d.recordingfile FROM `cdr` d WHERE d.src = 9005  And d.lastapp ='Dial' order by d.calldate desc ";
-                    var result = await con.QueryAsync<ReportCDRItem>(sql, new { Code = "" });
+                    var sqlName = SqlContraint.GetVariable().ReportTalkTime_getAll;
+                    request.OrderBy = " d.calldate desc ";
+                    var result = await con.QueryAsync<ReportCDRItem>(sqlName,
+                        new
+                        {
+                            request.Disposition,
+                            request.PhoneLog,
+                            request.LineCode,
+                            request.Token,
+                            request.From,
+                            request.To,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy,
+                            request.UserId
+                        }, commandType: CommandType.StoredProcedure);
+
+                    var dataFirst = result.FirstOrDefault();
+                    var total = 0;
+                    if (dataFirst != null)
+                    {
+                        total = dataFirst.TotalRecord;
+                    }
                     var reponse = new ReportCDRReponse()
                     {
-                        Data = result?.ToList()
+                        Data = result?.ToList(),
+                        Total = total
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        //GetAllRecordingFile
+        public async Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var sqlName = SqlContraint.GetVariable().RecordingFile_getAll;
+                    request.OrderBy = " d.calldate desc ";
+                    var result = await con.QueryAsync<ReportCDRItem>(sqlName,
+                        new
+                        {
+                            request.Disposition,
+                            request.PhoneLog,
+                            request.LineCode,
+                            request.Token,
+                            request.From,
+                            request.To,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy,
+                            request.UserId
+                        }, commandType: CommandType.StoredProcedure);
+
+                    var dataFirst = result.FirstOrDefault();
+                    var total = 0;
+                    if (dataFirst != null)
+                    {
+                        total = dataFirst.TotalRecord;
+                    }
+                    var reponse = new ReportCDRReponse()
+                    {
+                        Data = result?.ToList(),
+                        Total = total
                     };
                     return reponse;
                 }
@@ -110,10 +221,10 @@ namespace VS.Core.Repository
         {
             try
             {
-                using (var con = GetMysqlConnection())
+                using (var con = GetConnection())
                 {
-                    var sql = " select COUNT(d.calldate) as Total, d.disposition as Type from cdr d where d.src = '9005' and d.lastapp = 'Dial' group by d.disposition ";
-                    var result = await con.QueryAsync<GetOverViewInfoReponseItem>(sql, new { Code = "" });
+                    var sql = " select count(d.calldate) as 'Total',d.disposition as type  from ReportTalkTime d where d.linecode = @LineCode group by d.disposition ";
+                    var result = await con.QueryAsync<GetOverViewInfoReponseItem>(sql, new { Code = "", LineCode = request.LineCode });
                     var reponse = new GetOverViewInfoReponse()
                     {
                         Data = result.ToList()
@@ -132,10 +243,10 @@ namespace VS.Core.Repository
         {
             try
             {
-                using (var con = GetMysqlConnection())
+                using (var con = GetConnection())
                 {
-                    var sql = " SELECT sum(d.duration) as 'Duration',  sum(d.billsec) as 'billsec', d.disposition from cdr d where d.src = 9005 and d.lastapp =\"Dial\" group by d.disposition";
-                    var result = await con.QueryAsync<GetOverViewTalkingItem>(sql, new { Code = "" });
+                    var sql = " SELECT sum(cast(d.DurationReal as decimal)) as 'Duration',sum(cast(d.DurationBill as decimal)) as 'billsec', d.disposition from ReportTalkTime d where d.lineCode = @linecode  group by d.disposition";
+                    var result = await con.QueryAsync<GetOverViewTalkingItem>(sql, new { Code = "", linecode = request.LineCode });
                     var reponse = new GetOverViewTalkingItemReponse()
                     {
                         Data = result.ToList()
@@ -156,7 +267,7 @@ namespace VS.Core.Repository
                 using (var con = GetMysqlConnection())
                 {
                     var sql = " SELECT d.src, d.calldate, d.dst, d.disposition, d.lastapp, d.billsec, d.duration, d.recordingfile FROM `cdr` d" +
-                        " WHERE d.src = 9005  And d.lastapp ='Dial' and d.disposition = 'ANSWERED' order by d.calldate desc ";
+                        " WHERE d.src = 9000  And d.lastapp ='Dial' and d.disposition = 'ANSWERED' order by d.calldate desc ";
                     var result = await con.QueryAsync<ReportCDRItem>(sql, new { Code = "" });
                     var reponse = new ReportCDRReponse()
                     {
@@ -171,7 +282,7 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<int> GetReportOverviewAgrree()
+        public async Task<int> GetReportOverviewAgrree(GetReportOverviewAgrreeRequest request)
         {
             try
             {
@@ -179,6 +290,8 @@ namespace VS.Core.Repository
                 {
                     var result = await con.QueryAsync<ReportNoAgreeRequest>(SqlContraint.GetVariable().ReportCampaignProfile, new
                     {
+                        request.LineCode,
+                        request.UserId
                     }, commandType: CommandType.StoredProcedure);
 
                     var fistElement = result.FirstOrDefault();

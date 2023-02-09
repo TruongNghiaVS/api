@@ -1,4 +1,5 @@
-﻿using VS.Core.Business.Interface;
+﻿using VS.core.Utilities;
+using VS.Core.Business.Interface;
 using VS.Core.dataEntry.User;
 using VS.Core.Repository.baseConfig;
 
@@ -16,14 +17,14 @@ namespace VS.Core.Business
 
         public async Task<int> CalTalkingTime()
         {
-            //get all cdr having answere
 
             var allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
-            new core.Request.HandlelFileRecordingRequest()
-            {
+                new core.Request.HandlelFileRecordingRequest()
+                {
 
-            }
+                }
             );
+
             var data = allcdrHaving;
 
             if (data == null)
@@ -33,41 +34,26 @@ namespace VS.Core.Business
 
             foreach (var item in data)
             {
-
-                var processingInfo = await _unitOfWork1.ReportTalkTimeRepository.GetInfomationRecording(item.Linkedid);
-
-
                 var reportTalkTime = new ReportTalkTime()
                 {
                     CallDate = item.CallDate,
                     LineCode = item.LineCode,
                     PhoneLog = item.PhoneLog,
-
-
+                    Linkedid = item.Linkedid,
+                    Disposition = item.Disposition,
+                    DurationBill = item.DurationBill
                 };
-                if (processingInfo != null)
+                reportTalkTime.Duration = item.Duration;
+                if (item.Disposition == "ANSWERED" && !string.IsNullOrWhiteSpace(item.FileRecording))
                 {
-                    reportTalkTime.Duration = processingInfo.Duration;
-                    reportTalkTime.FileRecording = processingInfo.File;
-
+                    reportTalkTime.FileRecording = Utils.GetFileRecordingFile(item.FileRecording, item.CallDate);
+                    reportTalkTime.DurationReal = reportTalkTime.FileRecording.GetDurationAudio();
                 }
-                else
-                {
-
-                    reportTalkTime.Duration = 0;
-                    reportTalkTime.FileRecording = "";
-                }
-
                 await _unitOfWork1.ReportTalkTimeRepository.AddAsync(reportTalkTime);
             }
-
-
             return await Task.FromResult(0);
 
 
         }
-
-
-
     }
 }

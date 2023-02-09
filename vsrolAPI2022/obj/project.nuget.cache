@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZcvJ+XNzTpDUWtMpuCskZ4Kdo9Qu/bErDGdkycFdx/3J/ZFHKzTdfyzXB5SpNT4X/aM1lVzKiqUM8uRhzH61Jg==",
+  "dgSpecHash": "qON1ZXlEfP+8KZvaVF+HGcUoBPdNUZ3mx9NNN3Su/LSVsF784dY86GsQr6NzJqNM/3bGGxEDUOxHZkdHXPo0jg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\vsrolAPI2022\\VS.core.API.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,12 @@
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\mysql.data\\8.0.31\\mysql.data.8.0.31.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio\\2.1.0\\naudio.2.1.0.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.asio\\2.1.0\\naudio.asio.2.1.0.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.core\\2.1.0\\naudio.core.2.1.0.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.midi\\2.1.0\\naudio.midi.2.1.0.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.wasapi\\2.1.0\\naudio.wasapi.2.1.0.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.winmm\\2.1.0\\naudio.winmm.2.1.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",

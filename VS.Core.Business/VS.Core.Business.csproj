@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VS.Core.dataEntry\VS.Core.dataEntry.csproj" />
     <ProjectReference Include="..\VS.Core.Repository\VS.Core.Repository.csproj" />
+    <ProjectReference Include="..\VS.core.utilities\VS.core.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

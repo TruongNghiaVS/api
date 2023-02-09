@@ -89,7 +89,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
             }
-            employeeAdd.Pass = Utils.getMD5(employeeAdd.Pass);
+            var passNew = Utils.getMD5(employeeAdd.Pass);
             employeeAdd.CreateBy = user.CreatedBy;
             var account = new Account()
             {
@@ -101,7 +101,7 @@ namespace vsrolAPI2022.Controllers
                 PhoneNumber = employeeAdd.Phone,
                 Phone = employeeAdd.Phone,
                 LineCode = employeeAdd.LineCode,
-                Pass = employeeAdd.Pass,
+                Pass = passNew,
                 Email = employeeAdd.Email,
                 UpdatedBy = user.Id,
                 IsActive = true,

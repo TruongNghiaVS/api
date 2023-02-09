@@ -108,6 +108,11 @@ namespace VS.core.Request
         public int? Status { get; set; }
         public string? TypegetData { get; set; }
 
+        public int? DpdMax { get; set; }
+        public int? DpdMin { get; set; }
+
+        public string? NoAgreement { get; set; }
+
 
     }
 
@@ -259,6 +264,8 @@ namespace VS.core.Request
         public string? Msg { get; set; }
 
         public string? ProfileId { get; set; }
+
+        public string? UserName { get; set; }
         public LoginReportSerarchRequest()
         {
             this.Page = 1;
@@ -297,13 +304,28 @@ namespace VS.core.Request
     }
     public class ReportImpactRequest : BaseSearchRequest
     {
+        public string? UserId { get; set; }
 
+        public string? LineCode { get; set; }
         public ReportImpactRequest()
         {
             this.Page = 1;
             this.Limit = 10;
             this.From = new DateTime(2022, 09, 20);
             this.To = new DateTime(2022, 10, 01);
+        }
+    }
+
+
+    public class MakeCallRequest
+    {
+        public string? PhoneNumber { get; set; }
+
+        public string? NoAgree { get; set; }
+
+        public MakeCallRequest()
+        {
+
         }
     }
 
@@ -321,7 +343,31 @@ namespace VS.core.Request
     public class ReportCDRequest : BaseSearchRequest
     {
 
+        public string? LineCode { get; set; }
+        public string? Disposition { get; set; }
+
+        public string? PhoneLog { get; set; }
         public ReportCDRequest()
+        {
+
+        }
+    }
+
+
+    public class GetAllRecordGroupByLineCodeReponse : BaseSearchRepons
+
+    {
+        public GetAllRecordGroupByLineCodeReponse()
+        {
+            Total = 0;
+        }
+    }
+
+
+    public class GetAllRecordGroupByLineCodeRequest : BaseSearchRequest
+    {
+        public string? LineCode { get; set; }
+        public GetAllRecordGroupByLineCodeRequest()
         {
 
         }
@@ -344,6 +390,9 @@ namespace VS.core.Request
 
     public class ReportImpactItem
     {
+
+        public int TotalRecord { get; set; }
+
         public string? CustomerName { get; set; }
         public string? NoAgreement { get; set; }
         public string? Phone1 { get; set; }
@@ -363,6 +412,7 @@ namespace VS.core.Request
 
     public class ReportCDRItem
     {
+        public int TotalRecord { get; set; }
         public string? Calldate { get; set; }
         public string? Dst { get; set; }
         public string? Src { get; set; }
@@ -371,7 +421,8 @@ namespace VS.core.Request
         public string? Billsec { get; set; }
         public string? Duration { get; set; }
         public string? Recordingfile { get; set; }
-
+        public int DurationBill { get; set; }
+        public double DurationReal { get; set; }
         public bool IsShow
         {
             get
@@ -508,12 +559,23 @@ namespace VS.core.Request
     public class GetOverViewInfoRequest : BaseSearchRepons
 
     {
+
+        public string? LineCode { get; set; }
         public GetOverViewInfoRequest()
         {
             Total = 0;
         }
     }
 
+
+    public class GetReportOverviewAgrreeRequest
+    {
+
+        public string? LineCode { get; set; }
+
+        public string? UserId { get; set; }
+
+    }
 
 
     public class CallLogReponse : BaseSearchRepons
@@ -539,8 +601,16 @@ namespace VS.core.Request
 
         }
     }
+    public class ReportTalkTimeGroupByDaySerarchRequest : BaseSearchRequest
+    {
 
+        public ReportTalkTimeGroupByDaySerarchRequest()
+        {
+            this.Page = 1;
+            this.Limit = 10;
 
+        }
+    }
     public class ReportTalkTimeRequest : BaseSearchRequest
     {
 
@@ -571,6 +641,30 @@ namespace VS.core.Request
 
         }
     }
+
+
+
+    public class GetOverViewDashboard : BaseSearchRequest
+    {
+
+        public string? LineCode { get; set; }
+
+        public string? UserName { get; set; }
+
+
+    }
+
+
+    public class GetOverViewDashboardReponse : BaseSearchRepons
+
+    {
+
+        public GetOverViewDashboardReponse()
+        {
+            Total = 0;
+        }
+    }
+
 
 
 }
