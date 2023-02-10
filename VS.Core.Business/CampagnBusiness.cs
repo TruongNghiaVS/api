@@ -112,7 +112,7 @@ namespace VS.Core.Business
                 {
                     CustomerName = item.CustomerName,
                     NoAgreement = item.NoAgreement,
-                    DayOfBirth = DateTime.Now,
+                    DayOfBirth = item.DayOfBirth,
                     NationalId = item.NationalId,
                     MobilePhone = item.MobilePhone,
                     Phone1 = item.Phone1,
@@ -215,6 +215,7 @@ namespace VS.Core.Business
 
 
             }
+
 
             var campaign = await _unitOfWork.CampagnRe.GetByIdAsync(request.Id);
             campaign.SumCount = listData.Count;

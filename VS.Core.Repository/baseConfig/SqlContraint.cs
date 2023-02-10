@@ -104,6 +104,8 @@
 
         public string GetAllRecordGroupByLineCode_getAll = "sp_GetAllRecordGroupByLineCode_getAll";
 
+        public string Sp_ProcessingCalTimeIndexModel_getAll = "sp_ProcessingCalTimeIndexModel_getAll";
+
         public string GetGetOverViewDashBoard_getAll = "sp_GetGetOverViewDashBoard_getAll";
 
 

@@ -18,6 +18,7 @@ namespace VS.Core.Business
         public async Task<int> CalTalkingTime()
         {
 
+            await _unitOfWork1.ReportTalkTimeRepository.DeleteAll();
             var allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
                 new core.Request.HandlelFileRecordingRequest()
                 {

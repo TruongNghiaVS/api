@@ -64,6 +64,17 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<int> DeleteAll()
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "delete from  " + _baseTable + " WHERE 1 =1";
+                var result = await con.QuerySingleOrDefaultAsync(sql);
+
+                return 1;
+            }
+        }
+
         public async Task<ReportTalkTimeReponse> GetALl(ReportTalkTimeRequest request)
         {
             int page = request.Page;
@@ -141,7 +152,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetMysqlConnection2())
                 {
-                    var sqlQuerry = "SELECT d.src AS 'LineCode', d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE d.src = 9000  AND d.lastapp = 'Dial'";
+                    var sqlQuerry = "SELECT d.src AS 'LineCode', d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE  d.lastapp = 'Dial'";
                     var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
                     {
                         request.Token,

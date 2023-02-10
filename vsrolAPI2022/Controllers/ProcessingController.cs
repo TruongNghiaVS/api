@@ -60,10 +60,8 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/dashboard/Calculating")]
         public async Task<IResult> Calculating()
         {
-            //var userLogin = GetCurrentUser();
+
             var request = new GetReportOverviewAgrreeRequest();
-            //request.LineCode = userLogin.LineCode;
-            //request.UserId = userLogin.Id;
 
             await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
             {

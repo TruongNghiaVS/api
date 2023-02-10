@@ -75,7 +75,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<ProcessingCalTimeIndexModel>(_Sql.GetAllRecordGroupByLineCode_getAll, new
+                    var result = await con.QueryAsync<ProcessingCalTimeIndexModel>(_Sql.Sp_ProcessingCalTimeIndexModel_getAll, new
                     {
                         request.Token,
                         request.From,

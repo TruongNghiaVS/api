@@ -148,7 +148,7 @@ namespace VS.Core.Repository
                         request.OrderBy
                     }, commandType: CommandType.StoredProcedure);
 
-                    return result.ToList(); ;
+                    return result.ToList();
                 }
             }
             catch (Exception e)

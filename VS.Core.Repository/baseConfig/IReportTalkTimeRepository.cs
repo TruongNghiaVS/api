@@ -8,6 +8,8 @@ namespace VS.Core.Repository.baseConfig
     {
         Task<ReportTalkTimeReponse> GetALl(ReportTalkTimeRequest request);
 
+        Task<int> DeleteAll();
+
         Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecording(HandlelFileRecordingRequest request);
 
         Task<ReportQuerryRecordingFileIndex> GetInfomationRecording(string likiedId);
