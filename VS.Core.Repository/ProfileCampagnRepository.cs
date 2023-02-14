@@ -144,7 +144,7 @@ namespace VS.Core.Repository
                         request.To,
                         request.Limit,
                         request.Page,
-
+                        request.TypegetData,
                         request.OrderBy
                     }, commandType: CommandType.StoredProcedure);
 

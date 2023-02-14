@@ -43,12 +43,9 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/campagnProfile/getAll")]
         public async Task<IResult> getAll(CampagnProfileSearchInput request)
         {
-
-
             var user = GetCurrentUser();
             var dpdMax = -1;
             var dpdMin = -1;
-
             if (request.Dpd == 0)
             {
                 dpdMax = 30;

@@ -26,19 +26,32 @@ namespace vsrolAPI2022.Controllers
             _handleReportBussiness = handleReportBussiness;
         }
 
+
+
+        [HttpGet("~/api/job/RunAllJob")]
+        public async Task<ActionResult> RunAllJob()
+        {
+
+            var resultSearch = await _handleReportBussiness.CalTalkingTime();
+            Task.WaitAll();
+            await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+            {
+
+            });
+            Task.WaitAll();
+            return Ok(true);
+
+        }
+
         [HttpPost("~/api/job/runAll")]
         public async Task<ActionResult> RunAll()
         {
-            // run job  create job campangin 
-
-            // run job create report time
 
             var t = new System.Timers.Timer();
             t.Interval = 60000;
             t.Elapsed += OnTimedEvent;
             t.AutoReset = true;
 
-            // Start the timer
             t.Enabled = true;
 
 

@@ -107,7 +107,6 @@ namespace VS.Core.Business
             var listData = request.ListData;
             foreach (var item in listData)
             {
-
                 var itemInsert = new Profile
                 {
                     CustomerName = item.CustomerName,
@@ -204,11 +203,13 @@ namespace VS.Core.Business
                     result.UpdateAt = item.UpdateAt;
                     result.UpdatedBy = item.UpdatedBy;
                     result.UpdatedBy = userLogin.Id;
+                    itemInsert.Status = 10;
                     await _unitOfWork.CampagnProfileRe.UpdateAsyn(result);
                 }
                 else
                 {
                     itemInsert.CreatedBy = userLogin.Id;
+                    itemInsert.Status = 10;
                     await _unitOfWork.CampagnProfileRe.AddAsync(itemInsert);
                 }
 

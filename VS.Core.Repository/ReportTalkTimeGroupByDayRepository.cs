@@ -24,6 +24,10 @@ namespace VS.Core.Repository
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
+            if (entity.PerPercent > 0)
+            {
+                entity.PerPercent = Math.Round(entity.PerPercent.Value, 2);
+            }
             var par = GetParams(entity, new string[] {
                 nameof(entity.UpdatedBy),
                 nameof(entity.UpdateAt),

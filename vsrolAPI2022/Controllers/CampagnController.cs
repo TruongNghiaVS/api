@@ -483,7 +483,8 @@ namespace vsrolAPI2022.Controllers
                 {
                     Id = id,
                     Limit = 100,
-                    Status = 0
+                    Status = 10,
+                    TypegetData = "10"
                 });
 
                 if (allCampanginProfile.Count < 1)
@@ -518,7 +519,7 @@ namespace vsrolAPI2022.Controllers
                         if (yz != null)
                         {
                             yz.Assignee = item.Id;
-                            yz.Status = 1;
+                            yz.Status = 0;
                             yz.Skipp = false;
                             yz.UpdatedBy = "1";
                             await _campagnBusiness.UpdateProfile(yz);
