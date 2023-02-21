@@ -132,21 +132,47 @@ namespace VS.core.Utilities
 
             string path = @"http://192.168.1.12:3002/api/getFileAudio?filePath=";
             path = path + "" + filePath;
+            Byte[] bytes = null;
+            using (var webClient = new WebClient())
+            {
 
-            try
-            {
-                var webRequest = WebRequest.Create(path);
-                var webClient = new WebClient();
-                var bytes = webClient.DownloadData(path);
-                var stream = new MemoryStream(bytes);
-                WaveFileReader wr = new WaveFileReader(stream);
-                TimeSpan span = wr.TotalTime;
-                return span.TotalSeconds;
-            }
-            catch (Exception e)
-            {
+
+                try
+                {
+                    bytes = webClient.DownloadData(path);
+                }
+                catch (Exception e)
+                {
+                    string path2 = @"http://192.168.1.9:3002/api/getFileAudio?filePath=";
+                    path2 = path2 + "" + filePath;
+                    try
+                    {
+                        bytes = webClient.DownloadData(path2);
+                    }
+                    catch (Exception)
+                    {
+
+                        return 0;
+                    }
+
+                }
+                if (bytes == null)
+                {
+                    return 0;
+                }
+                if (bytes.Length > 0)
+                {
+                    var stream = new MemoryStream(bytes);
+                    WaveFileReader wr = new WaveFileReader(stream);
+                    TimeSpan span = wr.TotalTime;
+
+                    return span.TotalSeconds;
+                }
                 return 0;
             }
+
+
+
 
         }
 

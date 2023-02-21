@@ -69,6 +69,26 @@ namespace VS.Core.Repository
             }
         }
 
+
+        public async Task<bool> UpdatePass(string userId, string pass)
+        {
+            using (var con = GetConnection())
+            {
+
+                var result = await con.QuerySingleOrDefaultAsync<Account>("sp_Employee_changePass",
+                    new
+                    {
+
+                        pass = pass,
+                        id = userId
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                return true;
+            }
+        }
+
+
         public async Task<EmployeeSearchReponse> GetALl(EmployeeSearchRequest request)
         {
 

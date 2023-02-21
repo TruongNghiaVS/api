@@ -9,6 +9,8 @@ namespace VS.Core.Business.Interface
         Task<Account> Getbyid(string Id);
 
         Task<bool> CheckDuplicate(string userName, string phone);
+
+        Task<bool> UpdatePass(string userName, string pass);
         Task<EmployeeSearchReponse> GetALl(EmployeeSearchRequest request);
 
         Task<EmployeeSearchReponse> GetDataForExport(EmployeeSearchRequest request);

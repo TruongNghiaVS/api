@@ -13,7 +13,10 @@ namespace VS.Core.Repository.baseConfig
         Task<bool> AssignedTask(string profileId, string userId);
 
         Task<Profile> GetByNoAgreement(string profileId);
+        Task<Profile> GetProfileByNoCMND(string noNational);
         Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp);
+
+        Task<int> ResetCase(Profile entity);
 
     }
 }

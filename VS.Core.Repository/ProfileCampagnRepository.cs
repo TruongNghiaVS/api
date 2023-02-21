@@ -88,6 +88,31 @@ namespace VS.Core.Repository
                 return null;
             }
         }
+
+        public async Task<int> ResetCase(Profile entity)
+        {
+            entity.CreateAt = DateTime.Now;
+            entity.UpdateAt = DateTime.Now;
+            var par = GetParams(entity, new string[] {
+                nameof(entity.UpdateAt),
+                nameof(entity.CreateAt),
+                nameof(entity.Deleted),
+                nameof(entity.CreatedBy)
+            });
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.Sp_CampaignProfile_resetCase, par, commandType: CommandType.StoredProcedure);
+                    return 1;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+
+            }
+        }
         public async Task<int> UpdateAsyn(Profile entity)
         {
             entity.CreateAt = DateTime.Now;
@@ -195,6 +220,24 @@ namespace VS.Core.Repository
                 return result;
             }
         }
+
+
+        public async Task<Profile> GetProfileByNoCMND(string noNational)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "SELECT * FROM CampaignProfile " + " WHERE NationalId  = @profileId or MobilePhone = @profileId";
+                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = noNational });
+
+                if (result == null)
+                {
+                    return null;
+                }
+                return result;
+            }
+        }
+
+
 
     }
 }

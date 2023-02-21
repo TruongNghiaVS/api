@@ -13,6 +13,8 @@ namespace VS.Core.Business.Interface
         Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request);
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
         Task<Profile> GetProfile(string id);
+        Task<Profile> GetProfileByNoAgree(string noAgree);
+        Task<Profile> GetProfileByNoCMND(string noNational);
         Task<int> AddProfile(Profile entity);
         Task<int> UpdateProfile(Profile entity);
         Task DeleteProfile(Profile entity);
@@ -29,6 +31,8 @@ namespace VS.Core.Business.Interface
         Task<bool> UpdateOverViewAllCampagn();
 
 
+
+        Task<bool> ResetCase(string campagnCase = "11");
 
     }
 }

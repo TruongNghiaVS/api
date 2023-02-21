@@ -14,7 +14,7 @@ namespace VS.Core.Repository.baseConfig
         Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(CampagnRequest request);
         Task<GetOverviewCampaignModelByIdReponse> GetOverviewCampagnById(string campaignId);
         Task<bool> UpdateOverView(string campagnId);
-
+        Task<OverViewCampangnReponse> GetAllOverViewRe();
 
     }
 

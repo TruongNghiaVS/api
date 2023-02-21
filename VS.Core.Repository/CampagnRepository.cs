@@ -100,6 +100,35 @@ namespace VS.Core.Repository
             }
 
         }
+        public async Task<OverViewCampangnReponse> GetAllOverViewRe()
+        {
+
+            try
+            {
+                using (var con = GetConnection())
+
+                {
+                    var sqlText = "select * from OverViewCampangn";
+                    var result = await con.QueryAsync<CampangnOverViewReModel>(sqlText, new
+                    {
+
+                    }, commandType: CommandType.Text);
+
+                    var fistElement = result.FirstOrDefault();
+
+
+                    var reponse = new OverViewCampangnReponse()
+                    {
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
 
         public async Task<CampagnRequestReponse> GetALl(CampagnRequest request)

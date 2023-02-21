@@ -111,6 +111,70 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(result);
         }
 
+        [HttpPost("~/api/employee/changePassword")]
+        public async Task<IResult> ChangePassword(EmployeeChangePassword request)
+        {
+            var user = GetCurrentUser();
+            if (string.IsNullOrEmpty(request.PaswordNew))
+            {
+                return Results.BadRequest("Không có thông tin mật khẩu mới");
+            }
+            if (string.IsNullOrEmpty(request.RepeatPassword))
+            {
+                return Results.BadRequest("Nhập lại mật khẩu mới");
+            }
+            if (request.PaswordNew != request.RepeatPassword)
+            {
+                return Results.BadRequest("Hai mật khẩu không trùng khớp nhau");
+            }
+
+            var accoutUpdate = await _employeeBusiness.GetByIdAsync(user.Id.ToString());
+            if (accoutUpdate == null)
+            {
+                return Results.BadRequest("Không có thông tin profile tương ứng");
+            }
+            var passwordNew = Utils.getMD5(request.PaswordNew);
+
+            accoutUpdate.Pass = passwordNew;
+
+            var ressultPass = await _employeeBusiness.UpdatePass(user.Id, passwordNew);
+
+            return Results.Ok(ressultPass);
+        }
+
+        [HttpPost("~/api/employee/ResetPassword")]
+        public async Task<IResult> ResetPassword(EmployeeChangePassword request)
+        {
+            if (string.IsNullOrEmpty(request.UserId))
+            {
+                return Results.BadRequest("Không có thông tin người dùng");
+            }
+            if (string.IsNullOrEmpty(request.PaswordNew))
+            {
+                return Results.BadRequest("Không có thông tin mật khẩu mới");
+            }
+            if (string.IsNullOrEmpty(request.RepeatPassword))
+            {
+                return Results.BadRequest("Nhập lại mật khẩu mới");
+            }
+            if (request.PaswordNew != request.RepeatPassword)
+            {
+                return Results.BadRequest("Hai mật khẩu không trùng khớp nhau");
+            }
+
+            var accoutUpdate = await _employeeBusiness.GetByIdAsync(request.UserId);
+            if (accoutUpdate == null)
+            {
+                return Results.BadRequest("Không có thông tin profile tương ứng");
+            }
+            var passwordNew = Utils.getMD5(request.PaswordNew);
+
+            accoutUpdate.Pass = passwordNew;
+
+            var ressultPass = await _employeeBusiness.UpdatePass(request.UserId, passwordNew);
+
+            return Results.Ok(ressultPass);
+        }
 
 
         [HttpPost("~/api/employee/update")]
@@ -198,6 +262,8 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _employeeBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
         }
+
+
 
 
 

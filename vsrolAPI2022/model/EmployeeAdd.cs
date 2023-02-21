@@ -43,5 +43,16 @@
     }
 
 
+    public class EmployeeChangePassword
+    {
+        public string? PaswordNew { get; set; }
+        public string? RepeatPassword { get; set; }
+
+        public string? UserId { get; set; }
+
+
+    }
+
+
 
 }

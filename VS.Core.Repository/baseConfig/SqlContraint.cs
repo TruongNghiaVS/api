@@ -57,7 +57,7 @@
         public string CampaignProfile_insert = "sp_CampaignProfile_Insert";
 
         public string CampaignProfile_update = "sp_CampaignProfile_update";
-
+        public string Sp_CampaignProfile_resetCase = "sp_CampaignProfile_resetCase";
         public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
 
         public string CampaignImpact_insert = "sp_ImpactHistory_Insert";

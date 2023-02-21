@@ -275,6 +275,8 @@ namespace vsrolAPI2022.Controllers
                 request.UserId = userLogin.Id;
             }
             var infomationTalKTime = await _reportTalkTimeGroupByDayBussiness.GetOverViewDashBoard(request);
+
+
             return Results.Ok(infomationTalKTime);
         }
 

@@ -70,6 +70,23 @@ namespace vsrolAPI2022.Controllers
                 dpdMin = 91;
             }
 
+            if (request.Dpd == 4)
+            {
+                dpdMax = 360;
+                dpdMin = 181;
+            }
+
+
+            if (request.Dpd == 5)
+            {
+                dpdMax = 361;
+                dpdMin = 1000;
+            }
+            if (request.Dpd == 6)
+            {
+                dpdMax = 10000;
+                dpdMin = 1001;
+            }
             var searchRequest = new GetAllProfileByCampang()
             {
                 Token = request.Token,

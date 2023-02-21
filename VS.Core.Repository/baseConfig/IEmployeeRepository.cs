@@ -11,6 +11,9 @@ namespace VS.Core.Repository.baseConfig
 
         Task<bool> CheckDuplicate(string userName, string phone);
 
+        Task<bool> UpdatePass(string userName, string pass);
+
+
     }
 
 

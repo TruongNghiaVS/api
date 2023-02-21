@@ -79,11 +79,13 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
+                    var timeSelect = request.TimeSelect;
                     var result = await con.QueryAsync<ProcessingCalTimeIndexModel>(_Sql.Sp_ProcessingCalTimeIndexModel_getAll, new
                     {
                         request.Token,
                         request.From,
                         request.To,
+                        request.TimeSelect,
                         request.Limit,
                         request.Page,
                         request.OrderBy
@@ -115,9 +117,9 @@ namespace VS.Core.Repository
                         decimal? DurationBill = 0;
                         decimal? Duration = 0;
                         decimal? Billsec = 0;
-                        int yearR = DateTime.Now.Year;
-                        int monthR = DateTime.Now.Month;
-                        int dayR = DateTime.Now.Day;
+                        int yearR = timeSelect.Value.Year;
+                        int monthR = timeSelect.Value.Month;
+                        int dayR = timeSelect.Value.Day;
                         foreach (var itemchild in values)
                         {
                             if (itemchild.Disposition == "ANSWERED")

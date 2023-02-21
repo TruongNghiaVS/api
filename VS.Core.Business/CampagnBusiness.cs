@@ -96,6 +96,9 @@ namespace VS.Core.Business
         {
             return _unitOfWork.CampagnProfileRe.GetByIdAsync(id);
         }
+
+
+
         public Task DeleteProfile(Profile entity)
         {
             return _unitOfWork.CampagnProfileRe.Delete(entity);
@@ -117,7 +120,7 @@ namespace VS.Core.Business
                     Phone1 = item.Phone1,
                     AmountLoan = item.AmountLoan,
                     Assignee = item.Assignee,
-                    CampaignId = item.CampaignId,
+                    CampaignId = int.Parse(id),
                     CodeProduct = item.CodeProduct,
                     CreateAt = item.CreateAt,
                     CreatedBy = item.CreatedBy,
@@ -294,6 +297,17 @@ namespace VS.Core.Business
 
 
         }
+        //public async Task<bool> UpdateOverViewAllCampagn()
+        //{
+        //    var allCampangnReport = await _unitOfWork.CampagnRe.GetAllOverViewRe();
+        //    var dataCampangn = allCampangnReport.Data.grou
+        //    foreach (var item in allCampangnReport.da)
+        //    {
+        //        await _unitOfWork.CampagnRe.UpdateOverView(item.Id);
+        //    }
+        //    return true;
+        //}
+
         public async Task<bool> UpdateOverViewAllCampagn()
         {
             var allCampang = await _unitOfWork.CampagnRe.GetALlCampang();
@@ -303,6 +317,39 @@ namespace VS.Core.Business
             }
             return true;
         }
+        public async Task<bool> ResetCase(string campagnCase = "11")
+        {
+            var allCampang = await _unitOfWork.CampagnProfileRe.GetALLAsiggnee(new GetAllProfileByCampang()
+            {
+                Id = campagnCase,
+                Skipp = 0,
+                Limit = 20000
+
+            });
+            foreach (var item in allCampang)
+            {
+                item.Status = 20;
+                if (item.Skipp == true)
+                {
+                    continue;
+                }
+                item.UpdateAt = DateTime.Now;
+                item.Assignee = null;
+
+                await _unitOfWork.CampagnProfileRe.UpdateAsyn(item);
+
+            }
+            return true;
+        }
+        public async Task<Profile> GetProfileByNoAgree(string noAgree)
+        {
+            return await _unitOfWork.CampagnProfileRe.GetByNoAgreement(noAgree);
+        }
+        public async Task<Profile> GetProfileByNoCMND(string noNational)
+        {
+            return await _unitOfWork.CampagnProfileRe.GetProfileByNoCMND(noNational);
+        }
+
 
     }
 }

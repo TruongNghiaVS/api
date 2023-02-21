@@ -37,7 +37,8 @@ namespace vsrolAPI2022.Controllers
             }
             if (linecode == "122")
             {
-                linecode = "9000";
+                return Results.BadRequest("không gọi được");
+
 
             }
 
@@ -51,11 +52,17 @@ namespace vsrolAPI2022.Controllers
                 phoneNumber = _input.PhoneNumber,
                 lineCode = linecode
             }));
-            data.Headers.ContentType = new MediaTypeHeaderValue("application/json"); // <--
+            data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
+            var linkUrl = "http://192.168.1.12:3002";
+
+            if (linecode.StartsWith('7'))
+            {
+                linkUrl = "http://192.168.1.9:3002";
+            }
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://192.168.1.12:3002");
+                client.BaseAddress = new Uri(linkUrl);
                 var reponse = await client.PostAsync("api/client/makeCall", data);
                 var result = await reponse.Content.ReadAsStringAsync();
                 return Results.Ok(result);

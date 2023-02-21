@@ -41,6 +41,11 @@ namespace VS.Core.Business
             return await _unitOfWork.Employees.CheckDuplicate(userName, phone);
         }
 
+        public async Task<bool> UpdatePass(string userName, string pass)
+        {
+            return await _unitOfWork.Employees.UpdatePass(userName, pass);
+        }
+
 
 
         public async Task<EmployeeSearchReponse> GetALl(EmployeeSearchRequest request)

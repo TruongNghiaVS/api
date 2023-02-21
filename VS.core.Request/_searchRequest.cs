@@ -100,6 +100,17 @@ namespace VS.core.Request
 
 
 
+    public class OverViewCampangnReponse : BaseSearchRepons
+
+    {
+        public OverViewCampangnReponse()
+        {
+            Total = 0;
+        }
+    }
+
+
+
 
     public class GetAllProfileByCampang : BaseSearchRequest
     {
@@ -112,6 +123,9 @@ namespace VS.core.Request
         public int? DpdMin { get; set; }
 
         public string? NoAgreement { get; set; }
+
+        public int? Skipp { get; set; }
+
 
 
     }
@@ -367,6 +381,7 @@ namespace VS.core.Request
     public class GetAllRecordGroupByLineCodeRequest : BaseSearchRequest
     {
         public string? LineCode { get; set; }
+        public DateTime? TimeSelect { get; set; }
         public GetAllRecordGroupByLineCodeRequest()
         {
 
@@ -413,7 +428,7 @@ namespace VS.core.Request
     public class ReportCDRItem
     {
         public int TotalRecord { get; set; }
-        public string? Calldate { get; set; }
+        public DateTime? Calldate { get; set; }
         public string? Dst { get; set; }
         public string? Src { get; set; }
         public string? Disposition { get; set; }
@@ -630,7 +645,7 @@ namespace VS.core.Request
 
     public class HandlelFileRecordingRequest : BaseSearchRequest
     {
-
+        public DateTime? TimeSelect { get; set; }
     }
 
     public class HandlelFileRecordingReponse : BaseSearchRepons

@@ -172,6 +172,38 @@ namespace VS.Core.Repository
             }
         }
 
+
+
+        public async Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecordingServe2(HandlelFileRecordingRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetMysqlConnection3())
+                {
+                    var sqlQuerry = "SELECT d.src AS 'LineCode', d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE  d.lastapp = 'Dial'";
+                    var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    });
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public async Task<ReportQuerryRecordingFileIndex> GetInfomationRecording(string likiedId)
         {
 
@@ -207,12 +239,14 @@ namespace VS.Core.Repository
             return con;
         }
 
+
         protected IDbConnection GetMysqlConnection3()
         {
-            var con = new MySqlConnection(_configuration.GetConnectionString("mysqlStringConnect2"));
+            var con = new MySqlConnection(_configuration.GetConnectionString("mysqlStringConnect3"));
             con.Open();
             return con;
         }
+
 
 
 

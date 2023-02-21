@@ -2,7 +2,7 @@
 {
     public interface IHandleReportBussiness
     {
-        Task<int> CalTalkingTime();
+        Task<int> CalTalkingTime(DateTime? dateGet = null);
 
     }
 }

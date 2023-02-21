@@ -26,22 +26,63 @@ namespace vsrolAPI2022.Controllers
             _handleReportBussiness = handleReportBussiness;
         }
 
-
-
         [HttpGet("~/api/job/RunAllJob")]
         public async Task<ActionResult> RunAllJob()
         {
 
             var resultSearch = await _handleReportBussiness.CalTalkingTime();
             Task.WaitAll();
+            var timeSelect = DateTime.UtcNow;
             await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
             {
-
+                TimeSelect = timeSelect
             });
+            Task.WaitAll();
+
+            return Ok(true);
+
+        }
+
+
+        [HttpGet("~/api/job/rebuildBegin")]
+        public async Task<ActionResult> RebuildBegin()
+        {
+            var dtFrom = DateTime.Now.AddDays(-10);
+            var dtTo = DateTime.Now.AddDays(1);
+
+            var resultSearch = await _handleReportBussiness.CalTalkingTime();
+            Task.WaitAll();
+            while (dtFrom < dtTo)
+            {
+
+                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+                {
+                    TimeSelect = dtFrom
+
+                });
+                Task.WaitAll();
+                dtFrom = dtFrom.AddDays(1);
+            }
+
             Task.WaitAll();
             return Ok(true);
 
         }
+
+
+
+
+        [HttpGet("~/api/job/RunSumCampagnOverview")]
+        public async Task<ActionResult> RunSumCampagnOverview()
+        {
+            await _campagnBusiness.UpdateOverViewAllCampagn();
+
+            return Ok(true);
+
+        }
+
+
+
 
         [HttpPost("~/api/job/runAll")]
         public async Task<ActionResult> RunAll()
