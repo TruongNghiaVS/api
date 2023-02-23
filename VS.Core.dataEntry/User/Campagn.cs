@@ -73,6 +73,8 @@
         public string NoteFirstTime { get; set; }
 
         public string? SkipContent { get; set; }
+
+        public int? VendorId { get; set; }
         public Profile()
         {
 

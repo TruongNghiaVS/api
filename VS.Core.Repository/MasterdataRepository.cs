@@ -51,12 +51,16 @@ namespace VS.Core.Repository
 
 
 
-        public async Task<bool> CheckDuplicate(string code)
+        public async Task<bool> CheckDuplicate(string code, string vendorId = null)
         {
             using (var con = GetConnection())
             {
                 var sql = "SELECT * FROM " + _baseTable + " WHERE code = @Code";
-                var result = await con.QuerySingleOrDefaultAsync<Account>(sql, new { Code = code });
+                if (!string.IsNullOrEmpty(vendorId))
+                {
+                    sql = "SELECT * FROM " + _baseTable + " WHERE code = @Code and VendorId = @VendorId ";
+                }
+                var result = await con.QuerySingleOrDefaultAsync<Account>(sql, new { Code = code, VendorId = vendorId });
 
                 if (result == null)
                 {

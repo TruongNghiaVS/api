@@ -51,6 +51,7 @@ namespace VS.Core.Repository
             int limit = request.Limit;
             ProcessInputPaging(ref page, ref limit, out offset);
             try
+
             {
                 using (var con = GetConnection())
                 {
@@ -66,6 +67,7 @@ namespace VS.Core.Repository
                         request.Page,
                         request.TypegetData,
                         request.OrderBy,
+                        request.VendorId,
                         request.UserId
                     }, commandType: CommandType.StoredProcedure);
                     var fistElement = result.FirstOrDefault();
@@ -206,13 +208,18 @@ namespace VS.Core.Repository
         }
 
 
-        public async Task<Profile> GetByNoAgreement(string profileId)
+        public async Task<Profile> GetByNoAgreement(string profileId, string campanId = null)
         {
             using (var con = GetConnection())
             {
-                var sql = "SELECT * FROM CampaignProfile " + " WHERE NoAgreement = @profileId";
-                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId });
 
+                var sql = "SELECT * FROM CampaignProfile " + " WHERE NoAgreement = @profileId ";
+
+                if (!string.IsNullOrEmpty(campanId))
+                {
+                    sql = "SELECT * FROM CampaignProfile " + " WHERE NoAgreement = @profileId and campaignId = @campanId";
+                }
+                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId, campanId = campanId });
                 if (result == null)
                 {
                     return null;

@@ -53,7 +53,6 @@ namespace VS.Core.Repository
         }
 
         public async Task<ReportTalkTimeGroupByDay> GetLineGroupBydate(string lineCode,
-
             int day, int month, int year)
         {
             using (var con = GetConnection())
@@ -66,6 +65,16 @@ namespace VS.Core.Repository
                     yearR = year,
                     lineCode = @lineCode
                 });
+                return result;
+            }
+        }
+
+        public async Task<Account> GetByLineCode(string lineCode)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "select  * from Employees d where d.LineCode = @LineCode";
+                var result = await con.QuerySingleOrDefaultAsync<Account>(sql, new { LineCode = lineCode });
                 return result;
             }
         }
@@ -173,10 +182,14 @@ namespace VS.Core.Repository
                             UpdateAt = DateTime.Now
 
                         };
-
                         var groupItemgroupByLineCode = await GetLineGroupBydate(lineCode, dayR, monthR, yearR);
+                        var usergetByLinecode = await this.GetByLineCode(lineCode);
                         if (groupItemgroupByLineCode == null)
                         {
+                            if (usergetByLinecode != null)
+                            {
+                                groupItem.VendorId = usergetByLinecode.VendorId;
+                            }
                             await AddAsync(groupItem);
                         }
                         else
@@ -193,6 +206,14 @@ namespace VS.Core.Repository
                             groupItemgroupByLineCode.Timcall = Billsec;
                             groupItemgroupByLineCode.TimeTalking = Duration;
                             groupItemgroupByLineCode.TimeWaiting = Billsec - Duration;
+                            if (usergetByLinecode != null)
+                            {
+                                groupItemgroupByLineCode.VendorId = usergetByLinecode.VendorId;
+                            }
+                            else
+                            {
+
+                            }
                             await UpdateAsyn(groupItemgroupByLineCode);
                         }
                     }
@@ -223,6 +244,7 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.VendorId,
                         request.LineCode,
                         request.Limit,
                         request.Page,
@@ -263,6 +285,7 @@ namespace VS.Core.Repository
                         request.From,
                         request.To,
                         request.LineCode,
+                        request.VendorId,
                         request.UserId,
                         request.Limit,
                         request.Page,

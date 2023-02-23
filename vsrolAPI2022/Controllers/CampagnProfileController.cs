@@ -43,7 +43,13 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/campagnProfile/getAll")]
         public async Task<IResult> getAll(CampagnProfileSearchInput request)
         {
+
             var user = GetCurrentUser();
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
             var dpdMax = -1;
             var dpdMin = -1;
             if (request.Dpd == 0)
@@ -99,6 +105,7 @@ namespace vsrolAPI2022.Controllers
                 Id = request.Id,
                 From = request.From,
                 UserId = user.Id,
+                VendorId = VendorId,
                 NoAgreement = request.NoAgree,
                 TypegetData = request.TypegetData
             };

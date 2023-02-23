@@ -19,7 +19,7 @@ namespace VS.Core.Repository
         public IloginReportRepository LoginRe { get; set; }
         public IReportRepository ReportRe { get; }
         public ICallLogRepository CallRe { get; set; }
-
+        public ILineRepository LineRe { get; set; }
         public IReportTalkTimeGroupByDay ReportTalkTimeGroupByDay { get; set; }
 
 
@@ -38,7 +38,8 @@ namespace VS.Core.Repository
               IReportRepository _reportRe,
               ICallLogRepository _callLogRepository,
             IReportTalkTimeRepository _reportTalkTimeRe,
-            IReportTalkTimeGroupByDay _reportTalkTimeGroupByDay
+            IReportTalkTimeGroupByDay _reportTalkTimeGroupByDay,
+            ILineRepository _lineRe
 
             )
         {
@@ -56,6 +57,7 @@ namespace VS.Core.Repository
             CallRe = _callLogRepository;
             ReportTalkTimeRepository = _reportTalkTimeRe;
             ReportTalkTimeGroupByDay = _reportTalkTimeGroupByDay;
+            LineRe = _lineRe;
         }
 
     }

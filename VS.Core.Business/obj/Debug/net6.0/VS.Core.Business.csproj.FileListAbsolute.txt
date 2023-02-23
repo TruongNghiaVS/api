@@ -5,8 +5,10 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Report.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.Core.Repository.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Request.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Utilities.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.Core.dataEntry.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.Core.Repository.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Utilities.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Report.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Request.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.csproj.AssemblyReference.cache
@@ -19,5 +21,3 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\refint\VS.Core.Business.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\ref\VS.Core.Business.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Utilities.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Utilities.pdb

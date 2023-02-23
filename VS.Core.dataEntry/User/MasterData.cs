@@ -8,6 +8,8 @@
         public int? Hour { get; set; }
         public int? Day { get; set; }
         public int? GroupId { get; set; }
+
+        public int? VendorId { get; set; }
     }
 
     public class Reason : MasterData

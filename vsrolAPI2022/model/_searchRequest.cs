@@ -2,6 +2,7 @@
 {
     public partial class EmployeeSearchInput : BaseInputSearch
     {
+        public int? VendorId { get; set; }
     }
 
     public partial class MasterDataSearchInput : BaseInputSearch
@@ -34,6 +35,13 @@
         public string? CampaignId { get; set; }
 
     }
+
+    public partial class LineSearchInput : BaseInputSearch
+    {
+
+
+    }
+
 
     public partial class CampagnProfileSearchInput : BaseInputSearch
     {

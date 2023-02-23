@@ -108,8 +108,12 @@ namespace VS.Core.Business
         {
             var id = request.Id;
             var listData = request.ListData;
+            var _campagnImport = await _unitOfWork.CampagnRe.GetByIdAsync(id);
+            var vendorId = _campagnImport.VendorId;
             foreach (var item in listData)
             {
+
+
                 var itemInsert = new Profile
                 {
                     CustomerName = item.CustomerName,
@@ -119,7 +123,7 @@ namespace VS.Core.Business
                     MobilePhone = item.MobilePhone,
                     Phone1 = item.Phone1,
                     AmountLoan = item.AmountLoan,
-                    Assignee = item.Assignee,
+
                     CampaignId = int.Parse(id),
                     CodeProduct = item.CodeProduct,
                     CreateAt = item.CreateAt,
@@ -155,12 +159,24 @@ namespace VS.Core.Business
                     TotalMoneyPaid = item.TotalMoneyPaid,
                     TotalPaid = item.TotalPaid,
                     UpdateAt = item.UpdateAt,
+
                     UpdatedBy = item.UpdatedBy
 
                 };
-                var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(item.NoAgreement);
+                var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(item.NoAgreement, request.Id);
                 if (result != null)
                 {
+
+
+                    string? assignedId = null;
+                    if (string.IsNullOrEmpty(item.AssignedId))
+                    {
+                        assignedId = result.Assignee;
+                    }
+                    else
+                    {
+                        assignedId = item.AssignedId;
+                    }
                     result.CustomerName = item.CustomerName;
                     result.NoAgreement = item.NoAgreement;
                     result.DayOfBirth = DateTime.Now;
@@ -168,7 +184,7 @@ namespace VS.Core.Business
                     result.MobilePhone = item.MobilePhone;
                     result.Phone1 = item.Phone1;
                     result.AmountLoan = item.AmountLoan;
-                    result.Assignee = item.Assignee;
+                    result.Assignee = assignedId;
                     result.CampaignId = item.CampaignId;
                     result.CodeProduct = item.CodeProduct;
                     result.CreateAt = item.CreateAt;
@@ -179,7 +195,6 @@ namespace VS.Core.Business
                     result.Email = item.Email;
                     result.EMI = item.EMI;
                     result.HouseNumber = item.HouseNumber;
-
                     result.LastPadDay = item.LastPadDay;
                     result.LastPaid = item.LastPaid;
                     result.NameProduct = item.NameProduct;
@@ -206,13 +221,30 @@ namespace VS.Core.Business
                     result.UpdateAt = item.UpdateAt;
                     result.UpdatedBy = item.UpdatedBy;
                     result.UpdatedBy = userLogin.Id;
+                    result.VendorId = vendorId;
                     itemInsert.Status = 10;
                     await _unitOfWork.CampagnProfileRe.UpdateAsyn(result);
                 }
                 else
                 {
+
+                    string? assignedId = null;
+                    if (!string.IsNullOrEmpty(item.AssignedId))
+                    {
+
+                        assignedId = item.AssignedId;
+                        itemInsert.Status = 0;
+                    }
+                    else
+                    {
+
+                        itemInsert.Status = 10;
+                    }
+
                     itemInsert.CreatedBy = userLogin.Id;
-                    itemInsert.Status = 10;
+
+                    itemInsert.Assignee = assignedId;
+                    itemInsert.VendorId = vendorId;
                     await _unitOfWork.CampagnProfileRe.AddAsync(itemInsert);
                 }
 
@@ -256,7 +288,8 @@ namespace VS.Core.Business
 
             var listReason = await _unitOfWork.MasterRe.GetALl(new MaterDataRequest()
             {
-                GroupStatus = "6"
+                GroupStatus = reponse.campagn.GroupStatus
+
             });
 
             var listUser = await _unitOfWork.Employees.GetALl(new EmployeeSearchRequest()
@@ -297,16 +330,7 @@ namespace VS.Core.Business
 
 
         }
-        //public async Task<bool> UpdateOverViewAllCampagn()
-        //{
-        //    var allCampangnReport = await _unitOfWork.CampagnRe.GetAllOverViewRe();
-        //    var dataCampangn = allCampangnReport.Data.grou
-        //    foreach (var item in allCampangnReport.da)
-        //    {
-        //        await _unitOfWork.CampagnRe.UpdateOverView(item.Id);
-        //    }
-        //    return true;
-        //}
+
 
         public async Task<bool> UpdateOverViewAllCampagn()
         {

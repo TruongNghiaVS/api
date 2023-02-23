@@ -84,6 +84,7 @@ namespace VS.Core.Repository
                         request.From,
                         request.To,
                         request.Limit,
+                        request.VendorId,
                         request.Page,
                         request.OrderBy
                     }, commandType: CommandType.StoredProcedure);

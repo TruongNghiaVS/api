@@ -58,6 +58,11 @@ namespace VS.Core.Business
             return await _unitOfWork.Employees.GetDataForExport(request);
         }
 
+        public async Task<Account> GetByLineCode(string lineCode)
+        {
+            return await _unitOfWork.Employees.GetByLineCode(lineCode);
+        }
+
 
     }
 }

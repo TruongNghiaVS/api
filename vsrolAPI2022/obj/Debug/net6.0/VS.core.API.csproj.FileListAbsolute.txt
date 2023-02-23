@@ -22,6 +22,12 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\M
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\MySql.Data.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\ZstdNet.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Asio.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Core.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Midi.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Wasapi.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.WinMM.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
@@ -72,9 +78,3 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Debug\net6.0\r
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Debug\net6.0\VS.core.API.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Debug\net6.0\VS.core.API.genruntimeconfig.cache
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Debug\net6.0\ref\VS.core.API.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Asio.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Core.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Midi.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.Wasapi.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Debug\net6.0\NAudio.WinMM.dll

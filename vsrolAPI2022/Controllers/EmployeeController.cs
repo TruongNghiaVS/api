@@ -42,6 +42,14 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(EmployeeSearchInput request)
         {
             var user = GetCurrentUser();
+
+            int? VendorId = null;
+
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+
             var searchRequest = new EmployeeSearchRequest()
             {
                 UserId = user.Id,
@@ -50,6 +58,7 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+                VendorId = VendorId,
                 From = request.From
 
             };
@@ -91,6 +100,15 @@ namespace vsrolAPI2022.Controllers
             }
             var passNew = Utils.getMD5(employeeAdd.Pass);
             employeeAdd.CreateBy = user.CreatedBy;
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                if (employeeAdd.RoleId == "1")
+                {
+                    vendorId = int.Parse(user.Id);
+                }
+            }
+
             var account = new Account()
             {
                 RoleId = employeeAdd.RoleId,
@@ -105,8 +123,10 @@ namespace vsrolAPI2022.Controllers
                 Email = employeeAdd.Email,
                 UpdatedBy = user.Id,
                 IsActive = true,
+                VendorId = vendorId,
                 UserName = employeeAdd.UserName
             };
+
             var result = await _employeeBusiness.AddAsync(account);
             return Results.Ok(result);
         }
@@ -202,6 +222,10 @@ namespace vsrolAPI2022.Controllers
             if (accoutUpdate == null)
             {
                 return Results.BadRequest("Không có thông tin profile tương ứng");
+            }
+            if (request.RoleId == "4")
+            {
+                accoutUpdate.VendorId = int.Parse(accoutUpdate.Id);
             }
             accoutUpdate.RoleId = request.RoleId;
             accoutUpdate.FullName = request.FullName;

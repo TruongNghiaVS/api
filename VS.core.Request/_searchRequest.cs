@@ -5,6 +5,7 @@ namespace VS.core.Request
     public class EmployeeSearchRequest : BaseSearchRequest
     {
 
+        public int? VendorId { get; set; }
 
 
 
@@ -31,7 +32,10 @@ namespace VS.core.Request
     public class MaterDataRequest : BaseSearchRequest
     {
         public string Msg { get; set; }
+        public string? CampagnId { get; set; }
         public string GroupStatus { get; set; }
+
+        public int? VendorId { get; set; }
         public MaterDataRequest()
         {
             this.Page = 1;
@@ -55,13 +59,35 @@ namespace VS.core.Request
     public class GroupReasonRequest : BaseSearchRequest
     {
         public string Msg { get; set; }
-
+        public int? VendorId { get; set; }
         public GroupReasonRequest()
         {
             this.Page = 1;
             this.Limit = 10;
             this.From = new DateTime(2022, 09, 20);
             this.To = new DateTime(2022, 10, 01);
+        }
+    }
+
+    public class LineManagementRequest : BaseSearchRequest
+    {
+        public string Msg { get; set; }
+
+        public LineManagementRequest()
+        {
+            this.Page = 1;
+            this.Limit = 10;
+            this.From = new DateTime(2022, 09, 20);
+            this.To = new DateTime(2022, 10, 01);
+        }
+    }
+
+    public class LineManagementReponse : BaseSearchRepons
+
+    {
+        public LineManagementReponse()
+        {
+            Total = 0;
         }
     }
 
@@ -78,7 +104,7 @@ namespace VS.core.Request
     public class CampagnRequest : BaseSearchRequest
     {
         public string? Msg { get; set; }
-
+        public int? VendorId { get; set; }
         public string? CampaignId { get; set; }
         public CampagnRequest()
         {
@@ -121,6 +147,8 @@ namespace VS.core.Request
 
         public int? DpdMax { get; set; }
         public int? DpdMin { get; set; }
+
+        public int? VendorId { get; set; }
 
         public string? NoAgreement { get; set; }
 
@@ -361,6 +389,8 @@ namespace VS.core.Request
         public string? Disposition { get; set; }
 
         public string? PhoneLog { get; set; }
+
+        public int? VendorId { get; set; }
         public ReportCDRequest()
         {
 
@@ -382,6 +412,9 @@ namespace VS.core.Request
     {
         public string? LineCode { get; set; }
         public DateTime? TimeSelect { get; set; }
+
+        public int? VendorId { get; set; }
+
         public GetAllRecordGroupByLineCodeRequest()
         {
 
@@ -662,6 +695,7 @@ namespace VS.core.Request
     public class GetOverViewDashboard : BaseSearchRequest
     {
 
+        public int? VendorId { get; set; }
         public string? LineCode { get; set; }
 
         public string? UserName { get; set; }

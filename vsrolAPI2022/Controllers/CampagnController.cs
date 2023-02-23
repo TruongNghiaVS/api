@@ -25,7 +25,7 @@ namespace vsrolAPI2022.Controllers
             _campagnBusiness = campagnBusiness;
         }
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/campagn/getById")]
         public async Task<IResult> GetById(InputIdRequest inputRequest)
         {
@@ -40,11 +40,16 @@ namespace vsrolAPI2022.Controllers
         }
 
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/campagn/getAll")]
         public async Task<IResult> getAll(CampagnSearchInput request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
             var searchRequest = new CampagnRequest()
             {
                 Token = request.Token,
@@ -52,17 +57,23 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+                VendorId = VendorId,
                 From = request.From
             };
             var resultSearch = await _campagnBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
         }
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/campagn/add")]
         public async Task<IResult> Add(CampagnAdd employeeAdd)
         {
             var user = GetCurrentUser();
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+            }
             if (string.IsNullOrEmpty(employeeAdd.Code))
             {
                 return Results.BadRequest("Không có thông tin mã code");
@@ -86,14 +97,15 @@ namespace vsrolAPI2022.Controllers
                 BeginTime = employeeAdd.BeginTime,
                 EndTime = employeeAdd.EndTime,
                 Priority = employeeAdd.Priority,
-                ShortDes = employeeAdd.ShortDes
+                ShortDes = employeeAdd.ShortDes,
+                VendorId = vendorId
+
             };
             var result = await _campagnBusiness.AddAsync(account);
             return Results.Ok(result);
         }
 
 
-        [AllowAnonymous]
         [HttpPost("~/api/campagn/update")]
         public async Task<IResult> Update(CampagnUpdate request)
         {
@@ -102,15 +114,12 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin ID");
             }
-
             var accoutUpdate = await _campagnBusiness.GetByIdAsync(request.Id);
             if (accoutUpdate == null)
             {
                 return Results.BadRequest("Không có thông tin profile tương ứng");
             }
-
             accoutUpdate.DisplayName = request.DisplayName;
-
             accoutUpdate.UpdatedBy = "1";
             accoutUpdate.ShortDes = request.ShortDes;
             accoutUpdate.Status = request.Status == 1;
@@ -119,15 +128,12 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.Priority = request.Priority;
             accoutUpdate.UpdatedBy = "1";
             accoutUpdate.GroupStatus = request.GroupStatus;
-
             var result = await _campagnBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }
 
-        //[Authorize]
-        //[HttpPost("~/employee/delete")]
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/campagn/delete")]
         public async Task<IResult> Delete(DeleteModelRequest request)
         {
@@ -151,7 +157,7 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(result);
         }
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/campagn/exportData")]
         public async Task<IResult> ExportData(CampagnSearchInput request)
         {
@@ -202,6 +208,15 @@ namespace vsrolAPI2022.Controllers
                     }
                     catch (Exception)
                     {
+                        try
+                        {
+                            return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+                        }
+                        catch (Exception)
+                        {
+
+                            return null;
+                        }
 
                         return null;
                     }
@@ -262,6 +277,26 @@ namespace vsrolAPI2022.Controllers
             return b1;
         }
 
+        private string? ReadvaluestringExcelWidthNull(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange == null)
+            {
+                return null;
+            }
+
+            if (cellRange.Value == null)
+
+            {
+
+                return null;
+            }
+            var valueCell = cellRange.Value.ToString();
+
+
+            return valueCell;
+        }
+
 
         [AllowAnonymous]
         [HttpPost("~/api/campagn/importDataById")]
@@ -296,11 +331,12 @@ namespace vsrolAPI2022.Controllers
                         {
                             continue;
                         }
-
-                        //var orginial = ReadvaluefloatExcel(workSheet, i, 24);
                         var lastDayPad = ReadvalueDateExcel(workSheet, i, 22);
                         var registerDate = ReadvalueDateExcel(workSheet, i, 5);
                         var doB = ReadvalueDateExcel(workSheet, i, 3);
+                        string? assigneeId = null;
+
+                        assigneeId = ReadvaluestringExcelWidthNull(workSheet, i, 40);
                         profileList.Add(new ProfileHandler
                         {
                             CustomerName = ReadvalueStringExcel(workSheet, i, 2),
@@ -346,7 +382,8 @@ namespace vsrolAPI2022.Controllers
                             CodeProduct = ReadvalueStringExcel(workSheet, i, 6),
                             PriceProduct = ReadvalueStringExcel(workSheet, i, 10),
                             NoteFirstTime = ReadvalueStringExcel(workSheet, i, 38),
-                            CreatedBy = userLogin.Id
+                            CreatedBy = userLogin.Id,
+                            AssignedId = assigneeId
 
                         }); ;
                     }

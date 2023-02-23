@@ -15,5 +15,6 @@ namespace VS.Core.Business.Interface
 
         Task<EmployeeSearchReponse> GetDataForExport(EmployeeSearchRequest request);
 
+        Task<Account> GetByLineCode(string lineCode);
     }
 }

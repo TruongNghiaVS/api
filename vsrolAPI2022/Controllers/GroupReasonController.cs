@@ -39,7 +39,12 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/groupReason/getAll")]
         public async Task<IResult> getAll(GroupReasonSearchInput request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+            }
 
             var searchRequest = new GroupReasonRequest()
             {
@@ -49,6 +54,7 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+                VendorId = vendorId,
                 From = request.From
 
             };
@@ -61,6 +67,11 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> Add(GroupReasonAdd employeeAdd)
         {
             var user = GetCurrentUser();
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+            }
 
             if (string.IsNullOrEmpty(employeeAdd.Code))
             {
@@ -84,6 +95,7 @@ namespace vsrolAPI2022.Controllers
                 FullName = employeeAdd.FullName,
                 Status = employeeAdd.Status,
                 Folder = employeeAdd.Folder,
+                VendorId = vendorId,
                 Description = employeeAdd.Description,
                 CreatedBy = "1"
             };

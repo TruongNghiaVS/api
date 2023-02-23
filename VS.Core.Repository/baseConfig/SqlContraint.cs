@@ -34,6 +34,11 @@
         public string MasterData_reason_exportData = "sp_Employee_exportData";
 
 
+        public string Line_Insert = "sp_line_Insert";
+        public string Line_Update = "sp_line_Update";
+        public string Line_getAll = "sp_line_getAll";
+
+
         public string Group_reason_insert = "sp_groupReason_Insert";
 
         public string Group_reason_update = "sp_groupReason_Update";

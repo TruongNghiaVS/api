@@ -27,5 +27,7 @@ namespace VS.Core.Repository.baseConfig
 
         IReportTalkTimeGroupByDay ReportTalkTimeGroupByDay { get; }
 
+        ILineRepository LineRe { get; }
+
     }
 }

@@ -18,9 +18,9 @@ namespace VS.Core.Business
             return _unitOfWork.MasterRe.AddAsync(entity);
         }
 
-        public Task<bool> CheckDuplicate(string code)
+        public Task<bool> CheckDuplicate(string code, string vendorId = null)
         {
-            return _unitOfWork.MasterRe.CheckDuplicate(code);
+            return _unitOfWork.MasterRe.CheckDuplicate(code, vendorId);
         }
 
         public Task Delete(MasterData entity)

@@ -56,10 +56,17 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAllReportCDR(ReportCDRequest _input)
         {
             var user = GetCurrentUser();
-            if (user.RoleId != "2")
+            if (user.RoleId != "2" && user.RoleId != "4")
             {
                 _input.LineCode = user.LineCode;
             }
+
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            _input.VendorId = VendorId;
 
             var resultSearch = await _impactBusiness.GetAllReportCDR(_input);
             return Results.Ok(resultSearch);
@@ -69,10 +76,18 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAllRecordingFile(ReportCDRequest _input)
         {
             var user = GetCurrentUser();
-            if (user.RoleId != "2")
+            if (user.RoleId == "2")
             {
                 _input.LineCode = user.LineCode;
+
             }
+
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            _input.VendorId = VendorId;
             var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
             return Results.Ok(resultSearch);
         }

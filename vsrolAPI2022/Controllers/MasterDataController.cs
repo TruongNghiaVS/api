@@ -42,8 +42,13 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/masterdata/getAll")]
         public async Task<IResult> getAll(MasterDataSearchInput request)
         {
-            var user = GetCurrentUser();
 
+            var user = GetCurrentUser();
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+            }
             var searchRequest = new MaterDataRequest()
             {
                 UserId = user.Id,
@@ -54,7 +59,6 @@ namespace vsrolAPI2022.Controllers
                 To = request.To,
                 From = request.From,
                 GroupStatus = request.GroupStatus
-
             };
             var resultSearch = await _masterDataBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
@@ -65,6 +69,8 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> Add(MasterDataAdd employeeAdd)
         {
             var user = GetCurrentUser();
+
+
 
             if (string.IsNullOrEmpty(employeeAdd.Code))
             {
@@ -81,12 +87,19 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin tên");
             }
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id.ToString());
+            }
+            var resultcheck = await _masterDataBusiness.CheckDuplicate(employeeAdd.Code, vendorId != null ? vendorId.ToString() : null);
 
-            var resultcheck = await _masterDataBusiness.CheckDuplicate(employeeAdd.Code);
             if (resultcheck == true)
             {
                 return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
             }
+
+
 
             var account = new MasterData()
             {
@@ -97,7 +110,8 @@ namespace vsrolAPI2022.Controllers
                 UpdatedBy = user.Id,
                 Hour = employeeAdd.Hour,
                 Day = employeeAdd.Hour,
-                GroupId = employeeAdd.GroupId
+                GroupId = employeeAdd.GroupId,
+                VendorId = vendorId
             };
             var result = await _masterDataBusiness.AddAsync(account);
             return Results.Ok(result);

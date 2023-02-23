@@ -13,7 +13,7 @@ namespace VS.Core.Repository.baseConfig
 
         Task<bool> UpdatePass(string userName, string pass);
 
-
+        Task<Account> GetByLineCode(string lineCode);
     }
 
 

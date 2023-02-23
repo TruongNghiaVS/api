@@ -8,7 +8,7 @@
         public string? PhoneLog { get; set; }
 
         public string? FileRecording { get; set; }
-
+        public int? VendorId { get; set; }
         public int? Duration { get; set; }
 
         public int? CompanyId { get; set; }

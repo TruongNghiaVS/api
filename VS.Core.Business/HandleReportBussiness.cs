@@ -33,19 +33,19 @@ namespace VS.Core.Business
                 if (i == 0)
                 {
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
-                    new core.Request.HandlelFileRecordingRequest()
-                    {
-                        TimeSelect = dateGet
-                    }
+                        new core.Request.HandlelFileRecordingRequest()
+                        {
+                            TimeSelect = dateGet
+                        }
                     );
                 }
                 else
                 {
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe2(
-                    new core.Request.HandlelFileRecordingRequest()
-                    {
-                        TimeSelect = dateGet
-                    }
+                        new core.Request.HandlelFileRecordingRequest()
+                        {
+                            TimeSelect = dateGet
+                        }
                     );
                 }
                 i++;
@@ -57,6 +57,7 @@ namespace VS.Core.Business
                 }
                 foreach (var item in data)
                 {
+                    var usergetByLinecode = await _unitOfWork1.Employees.GetByLineCode(item.LineCode);
                     var reportTalkTime = new ReportTalkTime()
                     {
                         CallDate = item.CallDate,
@@ -71,6 +72,12 @@ namespace VS.Core.Business
                     {
                         reportTalkTime.FileRecording = Utils.GetFileRecordingFile(item.FileRecording, item.CallDate);
                         reportTalkTime.DurationReal = reportTalkTime.FileRecording.GetDurationAudio();
+
+                    }
+                    if (usergetByLinecode != null)
+                    {
+
+                        reportTalkTime.VendorId = usergetByLinecode.VendorId;
                     }
                     await _unitOfWork1.ReportTalkTimeRepository.AddAsync(reportTalkTime);
                 }

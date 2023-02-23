@@ -53,6 +53,16 @@ namespace VS.Core.Repository
         }
 
 
+        public async Task<Account> GetByLineCode(string lineCode)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "select top 1  * from Employees d where d.LineCode = @LineCode";
+                var result = await con.QuerySingleOrDefaultAsync<Account>(sql, new { LineCode = lineCode });
+                return result;
+            }
+        }
+
 
         public async Task<bool> CheckDuplicate(string userName, string phone)
         {
@@ -105,6 +115,7 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.VendorId,
                         request.Limit,
                         request.Page,
                         request.OrderBy

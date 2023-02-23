@@ -79,98 +79,6 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(informationDashboard);
         }
 
-
-
-        //[HttpPost("~/api/dashboard/getOverViewByCall")]
-        //public async Task<IResult> GetDetailOverview()
-        //{
-
-        //    var userLogin = GetCurrentUser();
-        //    var request = new GetReportOverviewAgrreeRequest();
-        //    request.LineCode = userLogin.LineCode;
-        //    request.UserId = userLogin.Id;
-        //    var requestOverviewInfo = new GetOverViewInfoRequest()
-        //    {
-        //        LineCode = request.LineCode,
-
-        //    };
-        //    var totalRecord = await _impactBusiness.GetReportOverviewAgrree(request);
-        //    var dataInfo = await _impactBusiness.GetOverViewInfo(requestOverviewInfo);
-        //    var dataTimeTalking = await _impactBusiness.GetOverViewTimeTalking(requestOverviewInfo);
-        //    var totalSum = 0;
-        //    var percentConnection = 0.0;
-        //    var totalSumAnswer = 0;
-        //    var totalTalking = 0;
-        //    var totalCallBusy = 0;
-        //    var totalCallFailed = 0;
-        //    var totalCallNoAswer = 0;
-        //    var sumTimeCall = 0;
-        //    var sumTimeWaiting = 0;
-        //    foreach (var item in dataInfo.Data)
-        //    {
-        //        if (item.Type == "ANSWERED")
-        //        {
-        //            totalSumAnswer = item.Total;
-        //        }
-        //        else if (item.Type == "BUSY")
-        //        {
-        //            totalCallBusy = item.Total;
-        //        }
-        //        else if (item.Type == "FAILED")
-        //        {
-        //            totalCallFailed = item.Total;
-        //        }
-        //        else if (item.Type == "NO ANSWER")
-        //        {
-        //            totalCallNoAswer = item.Total;
-        //        }
-        //        totalSum += item.Total;
-
-        //    }
-        //    if (dataInfo != null)
-        //    {
-        //        if (totalSum > 0)
-        //        {
-        //            percentConnection = (double)totalSumAnswer / (double)totalSum * 100;
-        //        }
-        //    }
-
-        //    foreach (var item in dataTimeTalking.Data)
-        //    {
-        //        if (item.Disposition == "ANSWERED")
-        //        {
-        //            totalTalking = item.Duration;
-
-        //        }
-        //        sumTimeCall += item.Billsec;
-        //        sumTimeWaiting += item.Duration;
-        //    }
-
-        //    var listResult = new List<DashboardDetailItem>();
-        //    listResult.Add(
-        //        new DashboardDetailItem()
-        //        {
-        //            Author = "",
-        //            SumTimeWaiting = 0,
-        //            SumTimeCall = sumTimeCall,
-        //            PercentConnection = Math.Round(percentConnection, 1),
-        //            SumAgree = totalRecord,
-        //            SumCallCancel = totalCallFailed,
-        //            SumCallBusy = totalCallBusy,
-        //            SumAnswered = totalSumAnswer,
-        //            SumCallChanelError = 0,
-        //            SumCallErrorServer = 0,
-        //            SumCallNoAswer = totalCallNoAswer,
-        //            SumNotCall = 0,
-        //            SumTimeTalking = totalTalking,
-        //            Sum = totalSum
-        //        }
-
-        //    );
-        //    return Results.Ok(listResult);
-        //}
-
-
         [HttpPost("~/api/dashboard/getOverViewByCall2")]
         public async Task<IResult> GetDetailOverview()
         {
@@ -261,19 +169,26 @@ namespace vsrolAPI2022.Controllers
         }
 
 
-
-
-
         [HttpPost("~/api/dashboard/getOverView")]
         public async Task<IResult> getOverView(GetOverViewDashboard request)
         {
             var userLogin = GetCurrentUser();
 
-            if (userLogin.RoleId != "2")
+            if (userLogin.RoleId == "2")
             {
                 request.LineCode = userLogin.LineCode;
                 request.UserId = userLogin.Id;
             }
+
+            int? VendorId = null;
+
+            if (userLogin.RoleId == "4")
+            {
+                VendorId = int.Parse(userLogin.Id);
+            }
+
+            request.VendorId = VendorId;
+
             var infomationTalKTime = await _reportTalkTimeGroupByDayBussiness.GetOverViewDashBoard(request);
 
 
@@ -285,14 +200,22 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(GetAllRecordGroupByLineCodeRequest _input)
         {
             var currentUser = GetCurrentUser();
+
+
             if (currentUser.RoleId == "2")
             {
-
-            }
-            else
-            {
                 _input.LineCode = currentUser.LineCode;
+                _input.UserId = currentUser.Id;
             }
+
+            int? VendorId = null;
+
+            if (currentUser.RoleId == "4")
+            {
+                VendorId = int.Parse(currentUser.Id);
+            }
+
+            _input.VendorId = VendorId;
             var resultSearch = await _reportTalkTimeGroupByDayBussiness.GetAll(_input);
             return Results.Ok(resultSearch);
         }

@@ -11,7 +11,7 @@
         public double? PerPercent { get; set; }
 
         public int? SumAn { get; set; }
-
+        public int? VendorId { get; set; }
         public int? SumNoBussy { get; set; }
         public int? SumNOCancel { get; set; }
         public int? SumNOAswer { get; set; }
