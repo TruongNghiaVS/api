@@ -5,6 +5,7 @@
 
         public string? UserName { get; set; }
 
+        public int? VendorId { get; set; }
         public string? RoleId { get; set; }
 
         public string? Email { get; set; }
@@ -18,6 +19,7 @@
         public string LineCode { get; set; }
         public string PositionName
         {
+
             get
             {
                 return "Collection";
@@ -31,7 +33,15 @@
 
             get
             {
-                return "ACS";
+                if (VendorId == 62)
+                {
+                    return "Mirae";
+                }
+                if (VendorId == 96)
+                {
+                    return "Jaccs";
+                }
+                return "";
             }
         }
 

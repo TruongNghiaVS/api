@@ -17,6 +17,14 @@ namespace VS.Core.Business
         {
             return _unitOfWork1.ReportRe.GetAllReportImapact(request);
         }
+
+        public Task<ReportImpactReponse> ExportImpactData(ReportImpactRequest request)
+        {
+            return _unitOfWork1.ReportRe.ExportImpactData(request);
+        }
+
+
+
         public Task<ImpactDashboardOverviewReponse> ReportImpactDashboardOverview(ReportImpactRequest request)
         {
             return _unitOfWork1.ReportRe.GetALlOverView(request);
@@ -29,6 +37,14 @@ namespace VS.Core.Business
         {
             return _unitOfWork1.ReportRe.GetAllRecordingFile(request);
         }
+
+        public Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request)
+        {
+            return _unitOfWork1.ReportRe.ExportRecordingFile(request);
+        }
+
+
+
         public Task<ReportCDRReponse> GetAllReportRecordingFile(ReportCDRequest request)
         {
             return _unitOfWork1.ReportRe.GetAllReportRecordingFile(request);

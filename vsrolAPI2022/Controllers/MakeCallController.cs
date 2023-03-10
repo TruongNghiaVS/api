@@ -38,8 +38,6 @@ namespace vsrolAPI2022.Controllers
             if (linecode == "122")
             {
                 return Results.BadRequest("không gọi được");
-
-
             }
 
             if (string.IsNullOrEmpty(_input.PhoneNumber))
@@ -56,7 +54,7 @@ namespace vsrolAPI2022.Controllers
 
             var linkUrl = "http://192.168.1.12:3002";
 
-            if (linecode.StartsWith('7'))
+            if (linecode.StartsWith('1'))
             {
                 linkUrl = "http://192.168.1.9:3002";
             }

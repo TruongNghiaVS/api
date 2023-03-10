@@ -229,6 +229,43 @@ namespace vsrolAPI2022.Controllers
         }
 
 
+
+        private DateTime? ReadvalueDateExcel2(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange != null)
+            {
+
+                if (cellRange.Text != null)
+                {
+                    try
+                    {
+
+                        return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
+
+                    }
+                    catch (Exception)
+                    {
+                        try
+                        {
+                            return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+                        }
+                        catch (Exception)
+                        {
+
+                            return null;
+                        }
+
+                        return null;
+                    }
+
+                }
+
+            }
+            return null;
+
+        }
+
         private float ReadvaluefloatExcel(ExcelWorksheet excelworksheet, int row, int col)
         {
             var cellRange = excelworksheet.Cells[row, col];
@@ -331,7 +368,11 @@ namespace vsrolAPI2022.Controllers
                         {
                             continue;
                         }
-                        var lastDayPad = ReadvalueDateExcel(workSheet, i, 22);
+                        var lastDayPad = ReadvalueDateExcel2(workSheet, i, 22);
+                        if (lastDayPad == null)
+                        {
+                            lastDayPad = DateTime.Now;
+                        }
                         var registerDate = ReadvalueDateExcel(workSheet, i, 5);
                         var doB = ReadvalueDateExcel(workSheet, i, 3);
                         string? assigneeId = null;
@@ -382,6 +423,7 @@ namespace vsrolAPI2022.Controllers
                             CodeProduct = ReadvalueStringExcel(workSheet, i, 6),
                             PriceProduct = ReadvalueStringExcel(workSheet, i, 10),
                             NoteFirstTime = ReadvalueStringExcel(workSheet, i, 38),
+                            NoteRel = ReadvalueStringExcel(workSheet, i, 39),
                             CreatedBy = userLogin.Id,
                             AssignedId = assigneeId
 
@@ -431,12 +473,13 @@ namespace vsrolAPI2022.Controllers
                     int totalRows = workSheet.Dimension.Rows;
                     for (int i = 2; i <= totalRows; i++)
                     {
+                        var noAgree = ReadvalueStringExcel(workSheet, i, 1);
                         var fullName = ReadvalueStringExcel(workSheet, i, 2);
                         var noPhoneCustomer = ReadvalueStringExcel(workSheet, i, 5);
                         var noNationalId = ReadvalueStringExcel(workSheet, i, 3);
 
 
-                        if (string.IsNullOrEmpty(noNationalId))
+                        if (string.IsNullOrEmpty(noAgree) || string.IsNullOrEmpty(noNationalId))
                         {
                             continue;
                         }
@@ -477,7 +520,7 @@ namespace vsrolAPI2022.Controllers
                         }
 
 
-                        var profile = await _campagnBusiness.GetProfileByNoCMND(noNationalId);
+                        var profile = await _campagnBusiness.GetProfileByNoCMND(noAgree);
                         if (profile == null)
                         {
                             continue;
@@ -585,21 +628,28 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/campagn/getAllCampangeAssigess")]
         public async Task<IResult> GetAllCampangeAssigess(CampagnSearchInput request)
         {
+            var userLogin = GetCurrentUser();
+
+            int? VendorId = null;
+
+            if (userLogin.RoleId == "4")
+            {
+                VendorId = int.Parse(userLogin.Id);
+            }
             //var user = GetCurrentUser();
             var searchRequest = new CampagnRequest()
             {
                 Token = request.Token,
                 Status = request.Status,
                 Page = request.Page,
-                Limit = request.Limit,
+                Limit = 100,
                 To = request.To,
+                VendorId = VendorId,
                 CampaignId = request.CampaignId,
                 From = request.From
             };
 
             var resultSearch = await _campagnBusiness.GetAllAsiggeeByCampagnId(searchRequest);
-
-
             return Results.Ok(resultSearch);
         }
 

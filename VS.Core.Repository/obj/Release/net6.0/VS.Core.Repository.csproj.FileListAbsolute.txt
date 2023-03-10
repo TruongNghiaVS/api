@@ -2,7 +2,11 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.Core.Repository.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.Core.Repository.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.Core.dataEntry.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Report.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Request.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.Core.dataEntry.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Report.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Request.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Release\net6.0\VS.Core.Repository.csproj.AssemblyReference.cache
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Release\net6.0\VS.Core.Repository.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Release\net6.0\VS.Core.Repository.AssemblyInfoInputs.cache
@@ -13,7 +17,3 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Release\
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Release\net6.0\refint\VS.Core.Repository.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Release\net6.0\VS.Core.Repository.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\obj\Release\net6.0\ref\VS.Core.Repository.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Request.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Request.pdb
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Report.dll
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Repository\bin\Release\net6.0\VS.core.Report.pdb

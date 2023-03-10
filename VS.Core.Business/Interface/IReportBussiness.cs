@@ -10,9 +10,13 @@ namespace VS.Core.Business.Interface
         Task<GetOverViewInfoReponse> GetOverViewInfo(GetOverViewInfoRequest request);
 
         Task<ReportImpactReponse> GetAllReportImapact(ReportImpactRequest request);
+        Task<ReportImpactReponse> ExportImpactData(ReportImpactRequest request);
+
+
         //Task<LoginReportReponse> GetALl(LoginReportSerarchRequest request);
         Task<ReportCDRReponse> GetAllReportCDR(ReportCDRequest request);
         Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request);
+        Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request);
 
 
         Task<GetOverViewTalkingItemReponse> GetOverViewTimeTalking(GetOverViewInfoRequest request);

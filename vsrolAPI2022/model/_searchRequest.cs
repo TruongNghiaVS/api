@@ -52,6 +52,10 @@
         public int? Dpd { get; set; }
 
         public string? NoAgree { get; set; }
+
+        public string? LineCode { get; set; }
+
+        public string? PhoneSerach { get; set; }
         public string? TypegetData { get; set; }
         public CampagnProfileSearchInput()
         {

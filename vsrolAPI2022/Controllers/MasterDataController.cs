@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using VS.core.API.Error.Model;
 using VS.core.API.model;
 using VS.core.Request;
 using VS.Core.Business.Interface;
+using VS.Core.Business.Model;
 using VS.Core.dataEntry.User;
 
 
@@ -199,6 +201,132 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
+
+
+
+        private float ReadvaluefloatExcel(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange == null)
+            {
+                return 0;
+            }
+
+            if (cellRange.Value == null)
+
+            {
+
+                return 0;
+            }
+            var valueCell = cellRange.Value.ToString();
+
+            float b1 = 0;
+            if (!float.TryParse(valueCell, out b1))
+            {
+
+            }
+            return b1;
+        }
+
+        private int ReadvalueintExcel(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange == null)
+            {
+                return 0;
+            }
+
+            if (cellRange.Value == null)
+
+            {
+
+                return 0;
+            }
+            var valueCell = cellRange.Value.ToString();
+
+            int b1 = 0;
+            if (!int.TryParse(valueCell, out b1))
+            {
+
+            }
+            return b1;
+        }
+
+        private string? ReadvaluestringExcelWidthNull(ExcelWorksheet excelworksheet, int row, int col)
+        {
+            var cellRange = excelworksheet.Cells[row, col];
+            if (cellRange == null)
+            {
+                return null;
+            }
+
+            if (cellRange.Value == null)
+
+            {
+
+                return null;
+            }
+            var valueCell = cellRange.Value.ToString();
+            return valueCell;
+
+
+        }
+
+
+
+        [HttpPost("~/api/masterdata/importData")]
+        public async Task<IResult> ImportData([FromForm] CampanginDataImport request)
+        {
+            var userLogin = GetCurrentUser();
+
+            string? vendorId = null;
+            if (userLogin.RoleId == "4")
+            {
+                vendorId = userLogin.Id;
+            }
+            var fileRequest = request.FileData;
+            if (fileRequest == null || fileRequest.Count == 0)
+            {
+                return Results.BadRequest("No error report");
+            }
+            var fileHandler = fileRequest.FirstOrDefault();
+            if (fileHandler == null)
+            {
+                return Results.BadRequest("No error report");
+            }
+            List<ReasonHandler> profileList = new List<ReasonHandler>();
+            await using (MemoryStream ms = new MemoryStream())
+            {
+                await fileHandler.CopyToAsync(ms);
+                using (ExcelPackage package = new ExcelPackage(ms))
+                {
+                    ExcelWorksheet workSheet = package.Workbook.Worksheets["jaccs"];
+                    int totalRows = workSheet.Dimension.Rows;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        if (i < 1)
+                        {
+                            continue;
+                        }
+                        profileList.Add(new ReasonHandler
+                        {
+                            Code = ReadvaluestringExcelWidthNull(workSheet, i, 2),
+                            FullName = ReadvaluestringExcelWidthNull(workSheet, i, 3),
+                            DisplayName = ReadvaluestringExcelWidthNull(workSheet, i, 3)
+
+                        });
+                    }
+
+                }
+            }
+            var reqeustImport = new MasterDataImportRequest();
+            reqeustImport.ListData = profileList;
+            reqeustImport.Id = "2";
+            await _masterDataBusiness.HandleImport(reqeustImport, userLogin);
+            return Results.Ok();
+
+        }
 
     }
 }

@@ -73,7 +73,7 @@ namespace VS.Core.Repository
         {
             using (var con = GetConnection())
             {
-                var sql = "select  * from Employees d where d.LineCode = @LineCode";
+                var sql = "select  top 1 * from Employees d where d.LineCode = @LineCode";
                 var result = await con.QuerySingleOrDefaultAsync<Account>(sql, new { LineCode = lineCode });
                 return result;
             }
@@ -161,6 +161,7 @@ namespace VS.Core.Repository
                         var groupItem = new ReportTalkTimeGroupByDay()
                         {
                             LineCode = lineCode,
+                            BusinessTime = new DateTime(yearR, monthR, dayR),
                             CreateAt = DateTime.Now,
                             DayR = dayR,
                             MonthR = monthR,
@@ -194,6 +195,7 @@ namespace VS.Core.Repository
                         }
                         else
                         {
+                            groupItemgroupByLineCode.BusinessTime = new DateTime(yearR, monthR, dayR);
                             groupItemgroupByLineCode.SumAn = sumAn;
                             groupItemgroupByLineCode.SumCall = sumCall;
                             groupItemgroupByLineCode.SumNOAswer = sumNOAswer;
@@ -228,7 +230,49 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<GetAllRecordGroupByLineCodeExportReponse> Export(GetAllRecordGroupByLineCodeExportRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
 
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<GetAllRecordGroupByLineCodeExportIndexModel>(_Sql.GetAllRecordGroupByLineCodeExport_getAll, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.VendorId,
+                        request.LineCode,
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    if (fistElement != null)
+                    {
+                        totalRecord = fistElement.TotalRecord;
+                    }
+                    var reponse = new GetAllRecordGroupByLineCodeExportReponse()
+                    {
+                        Total = totalRecord,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+        }
         public async Task<GetAllRecordGroupByLineCodeReponse> GetAll(GetAllRecordGroupByLineCodeRequest request)
         {
             int page = request.Page;

@@ -7,6 +7,8 @@ namespace VS.Core.Repository.baseConfig
     {
         Task<GetAllRecordGroupByLineCodeReponse> ProcessingReportGroupByDay(GetAllRecordGroupByLineCodeRequest entity);
         Task<GetAllRecordGroupByLineCodeReponse> GetAll(GetAllRecordGroupByLineCodeRequest entity);
+        Task<GetAllRecordGroupByLineCodeExportReponse> Export(GetAllRecordGroupByLineCodeExportRequest entity);
+
 
         Task<GetOverViewDashboardReponse> GetOverViewDashBoard(GetOverViewDashboard entity);
 

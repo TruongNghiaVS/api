@@ -9,7 +9,16 @@ namespace VS.Core.Repository.baseConfig
 
         Task<ReportImpactReponse> GetAllReportImapact(ReportImpactRequest request);
 
+        Task<ReportImpactReponse> ExportImpactData(ReportImpactRequest request);
+
+
         Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request);
+
+
+        Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request);
+
+
+
         Task<ReportCDRReponse> GetAllReportCDR(ReportCDRequest request);
 
         Task<ReportCDRReponse> GetAllReportRecordingFile(ReportCDRequest request);

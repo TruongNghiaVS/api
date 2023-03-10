@@ -106,6 +106,8 @@ namespace VS.core.Request
         public string? Msg { get; set; }
         public int? VendorId { get; set; }
         public string? CampaignId { get; set; }
+
+
         public CampagnRequest()
         {
             this.Page = 1;
@@ -152,6 +154,8 @@ namespace VS.core.Request
 
         public string? NoAgreement { get; set; }
 
+        public string? PhoneSerach { get; set; }
+        public string? LineCode { get; set; }
         public int? Skipp { get; set; }
 
 
@@ -343,18 +347,21 @@ namespace VS.core.Request
         public float Percent { get; set; }
 
 
+
     }
     public class ReportImpactRequest : BaseSearchRequest
     {
         public string? UserId { get; set; }
 
+        public int? VendorId { get; set; }
+        public int? StatusSearch { get; set; }
         public string? LineCode { get; set; }
+
+
         public ReportImpactRequest()
         {
             this.Page = 1;
             this.Limit = 10;
-            this.From = new DateTime(2022, 09, 20);
-            this.To = new DateTime(2022, 10, 01);
         }
     }
 
@@ -455,7 +462,65 @@ namespace VS.core.Request
         public DateTime? UpdateAt { get; set; }
 
     }
+    public class ReportImpactItemEx
+    {
 
+        public string? NoAgreement { get; set; }
+        public string? CustomerName { get; set; }
+        public DateTime? Dob { get; set; }
+        public string? NationalId { get; set; }
+        public DateTime? RegisterDay { get; set; }
+
+        public string? CodeProduct { get; set; }
+
+        public string? NameProduct { get; set; }
+
+        public string? PriceProduct { get; set; }
+
+        public string? TotalFines { get; set; }
+
+        public string? TotalMoneyPaid { get; set; }
+        public string? Tenure { get; set; }
+        public string? EMI { get; set; }
+
+        public DateTime LastPadDay { get; set; }
+
+        public string? NoTenure { get; set; }
+
+        public string? DebitOriginal { get; set; }
+
+
+        public string? DPD { get; set; }
+
+        public string? MobilePhone { get; set; }
+
+        public string? OtherPhone { get; set; }
+        public string? NoteFirstTime { get; set; }
+
+        public string? Road { get; set; }
+        public string? SuburbanDir { get; set; }
+        public string? Provice { get; set; }
+
+        public string? Road1 { get; set; }
+        public string? SuburbanDir1 { get; set; }
+        public string? Provice1 { get; set; }
+
+        public string? Road2 { get; set; }
+        public string? SuburbanDir2 { get; set; }
+        public string? Provice2 { get; set; }
+
+        public string StatusName { get; set; }
+
+        public string status { get; set; }
+
+        public string EmployeeName { get; set; }
+
+        public string LastNote { get; set; }
+
+        public DateTime? CreateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
+
+    }
 
 
     public class ReportCDRItem
@@ -482,6 +547,16 @@ namespace VS.core.Request
                 return false;
             }
         }
+
+
+    }
+
+
+    public class ReportCDRItemExport : ReportCDRItem
+    {
+        public string? UserName { get; set; }
+
+        public string? FullName { get; set; }
 
 
     }
@@ -711,6 +786,35 @@ namespace VS.core.Request
         public GetOverViewDashboardReponse()
         {
             Total = 0;
+        }
+    }
+
+
+
+
+
+
+
+    public class GetAllRecordGroupByLineCodeExportReponse : BaseSearchRepons
+
+    {
+        public GetAllRecordGroupByLineCodeExportReponse()
+        {
+            Total = 0;
+        }
+    }
+
+
+    public class GetAllRecordGroupByLineCodeExportRequest : BaseSearchRequest
+    {
+        public string? LineCode { get; set; }
+        public DateTime? TimeSelect { get; set; }
+
+        public int? VendorId { get; set; }
+
+        public GetAllRecordGroupByLineCodeExportRequest()
+        {
+
         }
     }
 

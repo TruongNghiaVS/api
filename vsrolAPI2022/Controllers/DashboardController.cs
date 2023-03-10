@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VS.core.Request;
+using VS.core.Utilities;
 using VS.Core.Business.Interface;
 
 
@@ -174,7 +175,7 @@ namespace vsrolAPI2022.Controllers
         {
             var userLogin = GetCurrentUser();
 
-            if (userLogin.RoleId == "2")
+            if (userLogin.RoleId == "1")
             {
                 request.LineCode = userLogin.LineCode;
                 request.UserId = userLogin.Id;
@@ -188,7 +189,10 @@ namespace vsrolAPI2022.Controllers
             }
 
             request.VendorId = VendorId;
-
+            if (request.To.HasValue)
+            {
+                request.To = request.To.ToEndDateTime();
+            }
             var infomationTalKTime = await _reportTalkTimeGroupByDayBussiness.GetOverViewDashBoard(request);
 
 
@@ -200,9 +204,12 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(GetAllRecordGroupByLineCodeRequest _input)
         {
             var currentUser = GetCurrentUser();
+            if (_input.To.HasValue)
+            {
+                _input.To = _input.To.EndDateTime();
+            }
 
-
-            if (currentUser.RoleId == "2")
+            if (currentUser.RoleId == "1")
             {
                 _input.LineCode = currentUser.LineCode;
                 _input.UserId = currentUser.Id;
@@ -216,6 +223,7 @@ namespace vsrolAPI2022.Controllers
             }
 
             _input.VendorId = VendorId;
+
             var resultSearch = await _reportTalkTimeGroupByDayBussiness.GetAll(_input);
             return Results.Ok(resultSearch);
         }

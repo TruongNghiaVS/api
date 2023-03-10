@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using VS.core.API.Error.Model;
 using VS.core.API.model;
 using VS.core.Request;
+using VS.core.Utilities;
 using VS.Core.Business.Interface;
 using VS.Core.dataEntry.User;
 
@@ -106,9 +107,15 @@ namespace vsrolAPI2022.Controllers
                 From = request.From,
                 UserId = user.Id,
                 VendorId = VendorId,
+                PhoneSerach = request.PhoneSerach,
+                LineCode = request.LineCode,
                 NoAgreement = request.NoAgree,
                 TypegetData = request.TypegetData
             };
+            if (searchRequest.To.HasValue)
+            {
+                searchRequest.To = searchRequest.To.ToEndDateTime();
+            }
             var resultSearch = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
             return Results.Ok(resultSearch);
         }
@@ -192,7 +199,7 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.CodeProduct = request.CodeProduct;
             accoutUpdate.PriceProduct = request.PriceProduct;
             accoutUpdate.NoteFirstTime = request.NoteFirstTime;
-
+            accoutUpdate.NoteRel = request.NoteRel;
             accoutUpdate.SkipContent = request.SkipContent;
             var result = await _campagnBusiness.UpdateProfile(accoutUpdate);
             return Results.Ok(result);

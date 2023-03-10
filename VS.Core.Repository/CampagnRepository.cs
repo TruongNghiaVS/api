@@ -188,6 +188,7 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.VendorId,
                         request.CampaignId,
                         request.Limit,
                         request.Page,

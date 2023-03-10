@@ -98,6 +98,8 @@
         public string ReportImpactOverview_GetAll = "ReportImpactOverview_GetAll";
         public string ReportImpact_GetAll = "ReportImpact_GetAll";
 
+        public string ExportImpactData_GetAll = "ExportImpactData_GetAll";
+
         public string ReportImpact_GetAllRecordingFile = "ReportImpact_GetAllRecordingFile";
         public string ReportCampaignProfile = "sp_CampaignProfile_getOverviewDashboard";
 
@@ -106,15 +108,15 @@
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
         public string RecordingFile_getAll = "sp_RecordingFile_getAll";
+        public string RecordingFileExport_getAll = "sp_RecordingFileExport_getAll";
 
         public string GetAllRecordGroupByLineCode_getAll = "sp_GetAllRecordGroupByLineCode_getAll";
+
+        public string GetAllRecordGroupByLineCodeExport_getAll = "sp_GetAllRecordGroupByLineCodeExport_getAll";
 
         public string Sp_ProcessingCalTimeIndexModel_getAll = "sp_ProcessingCalTimeIndexModel_getAll";
 
         public string GetGetOverViewDashBoard_getAll = "sp_GetGetOverViewDashBoard_getAll";
-
-
-
 
 
     }

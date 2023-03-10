@@ -86,7 +86,7 @@ namespace vsrolAPI2022.Controllers
             var resultcheck = await _groupReasonBusiness.CheckDuplicate(employeeAdd.Code);
             if (resultcheck == true)
             {
-                return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
+                return Results.BadRequest("Duplicate");
             }
 
             var account = new GroupReason()

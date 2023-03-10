@@ -13,6 +13,8 @@
 
         public int? ProcessingCount { get; set; }
 
+        public string? NoteRel { get; set; }
+
         public int? ClosedCount { get; set; }
 
         public DateTime? BeginTime { get; set; }

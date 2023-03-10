@@ -36,7 +36,7 @@ namespace vsrolAPI2022.Controllers
             var idRequest = request.Id;
             var roleId = request.RoleId;
             var fullName = request.FullName;
-            var lineCode = request.LineCode;
+            var lineCode = request.LineCode != null ? request.LineCode : "";
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

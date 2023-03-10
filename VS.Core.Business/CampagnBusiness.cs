@@ -139,6 +139,7 @@ namespace VS.Core.Business
                     LastPaid = item.LastPaid,
                     NameProduct = item.NameProduct,
                     NoteFirstTime = item.NoteFirstTime,
+                    NoteRel = item.NoteRel,
                     NoTenure = item.NoTenure,
                     OfficeNumber = item.OfficeNumber,
                     OtherPhone = item.OtherPhone,
@@ -199,6 +200,7 @@ namespace VS.Core.Business
                     result.LastPaid = item.LastPaid;
                     result.NameProduct = item.NameProduct;
                     result.NoteFirstTime = item.NoteFirstTime;
+                    result.NoteRel = item.NoteRel;
                     result.NoTenure = item.NoTenure;
                     result.OfficeNumber = item.OfficeNumber;
                     result.OtherPhone = item.OtherPhone;

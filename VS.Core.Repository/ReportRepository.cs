@@ -41,10 +41,19 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
+                    //if(request.To.HasValue)
+                    //{
+                    //    request.To = request.To.Value.
+                    //}    
                     var result = await con.QueryAsync<ImpactDashboardOverviewReponseItem>(SqlContraint.GetVariable().ReportImpactOverview_GetAll, new
                     {
+                        request.From,
+                        request.To,
                         request.UserId,
-                        request.LineCode
+                        request.StatusSearch,
+
+                        request.LineCode,
+                        request.VendorId
                     }, commandType: CommandType.StoredProcedure);
 
                     var fistElement = result.FirstOrDefault();
@@ -68,12 +77,19 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<ReportImpactItem>(SqlContraint.GetVariable().ReportImpact_GetAll, new
-                    {
-                        request.UserId,
-                        request.LineCode
-
-                    }, commandType: CommandType.StoredProcedure);
+                    var result = await con.QueryAsync<ReportImpactItem>(
+                    SqlContraint.GetVariable().ReportImpact_GetAll,
+                   new
+                   {
+                       request.UserId,
+                       request.LineCode,
+                       request.VendorId,
+                       request.StatusSearch,
+                       request.From,
+                       request.To
+                   },
+                    commandType: CommandType.StoredProcedure
+                   );
 
                     var fistElement = result.FirstOrDefault();
 
@@ -90,30 +106,41 @@ namespace VS.Core.Repository
             }
         }
 
-        //public async Task<ReportImpactReponse> GetAllRecordingFile(ReportImpactRequest request)
-        //{
-        //    try
-        //    {
-        //        using (var con = GetConnection())
-        //        {
-        //            var result = await con.QueryAsync<ReportImpactItem>(SqlContraint.GetVariable().ReportImpact_GetAll, new
-        //            {
-        //            }, commandType: CommandType.StoredProcedure);
 
-        //            var fistElement = result.FirstOrDefault();
+        public async Task<ReportImpactReponse> ExportImpactData(ReportImpactRequest request)
+        {
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ReportImpactItemEx>(
+                    SqlContraint.GetVariable().ExportImpactData_GetAll,
+                   new
+                   {
+                       request.UserId,
+                       request.LineCode,
+                       request.StatusSearch,
+                       request.VendorId,
+                       request.From,
+                       request.To
+                   },
+                   commandType: CommandType.StoredProcedure
+                   );
 
-        //            var reponse = new ReportImpactReponse()
-        //            {
-        //                Data = result?.ToList()
-        //            };
-        //            return reponse;
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return null;
-        //    }
-        //}
+                    var fistElement = result.FirstOrDefault();
+
+                    var reponse = new ReportImpactReponse()
+                    {
+                        Data = result?.ToList()
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
         protected void ProcessInputPaging(ref int page, ref int limit, out int offset)
         {
@@ -172,6 +199,62 @@ namespace VS.Core.Repository
             }
         }
         //GetAllRecordingFile
+
+
+
+
+
+
+        public async Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var sqlName = SqlContraint.GetVariable().RecordingFileExport_getAll;
+                    request.OrderBy = " d.calldate desc ";
+                    var result = await con.QueryAsync<ReportCDRItemExport>(sqlName,
+                        new
+                        {
+                            request.Disposition,
+                            request.PhoneLog,
+                            request.LineCode,
+                            request.Token,
+                            request.VendorId,
+                            request.From,
+                            request.To,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy,
+                            request.UserId
+                        }, commandType: CommandType.StoredProcedure);
+
+                    var dataFirst = result.FirstOrDefault();
+                    var total = 0;
+                    if (dataFirst != null)
+                    {
+                        total = dataFirst.TotalRecord;
+                    }
+                    var reponse = new ReportCDRReponse()
+                    {
+                        Data = result?.ToList(),
+                        Total = total
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+
         public async Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request)
         {
             int page = request.Page;
@@ -261,6 +344,9 @@ namespace VS.Core.Repository
                 return null;
             }
         }
+
+
+
 
         public async Task<ReportCDRReponse> GetAllReportRecordingFile(ReportCDRequest request)
         {

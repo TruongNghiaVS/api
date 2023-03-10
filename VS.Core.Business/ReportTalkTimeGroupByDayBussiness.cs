@@ -39,6 +39,14 @@ namespace VS.Core.Business
         {
             return _unitOfWork.ReportTalkTimeGroupByDay.GetAll(entity);
         }
+
+
+        public Task<GetAllRecordGroupByLineCodeExportReponse> Export(GetAllRecordGroupByLineCodeExportRequest request)
+        {
+            return _unitOfWork.ReportTalkTimeGroupByDay.Export(request);
+        }
+
+
         public Task<GetOverViewDashboardReponse> GetOverViewDashBoard(GetOverViewDashboard entity)
         {
             return _unitOfWork.ReportTalkTimeGroupByDay.GetOverViewDashBoard(entity);

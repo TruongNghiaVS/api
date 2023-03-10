@@ -72,6 +72,7 @@
 
         public string NoteFirstTime { get; set; }
 
+        public string NoteRel { get; set; }
         public string? SkipContent { get; set; }
 
         public int? VendorId { get; set; }

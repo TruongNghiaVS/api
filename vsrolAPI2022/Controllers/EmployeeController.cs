@@ -75,10 +75,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin tên đăng nhập");
             }
-            if (string.IsNullOrEmpty(employeeAdd.Phone))
-            {
-                return Results.BadRequest("Không có thông tin số điện thoại");
-            }
+
             if (string.IsNullOrEmpty(employeeAdd.Pass))
             {
                 return Results.BadRequest("Không có thông tin mật khẩu");
@@ -88,12 +85,7 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Không có thông tin họ tên");
             }
 
-            if (string.IsNullOrEmpty(employeeAdd.LineCode))
-            {
-                return Results.BadRequest("Không có thông tin mã gọi");
-            }
-
-            var resultcheck = await _employeeBusiness.CheckDuplicate(employeeAdd.UserName, employeeAdd.Phone);
+            var resultcheck = await _employeeBusiness.CheckDuplicate(employeeAdd.UserName, "");
             if (resultcheck == true)
             {
                 return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
@@ -213,10 +205,10 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin họ tên");
             }
-            if (string.IsNullOrEmpty(request.LineCode))
-            {
-                return Results.BadRequest("Không có thông mã gọi");
-            }
+            //if (string.IsNullOrEmpty(request.LineCode))
+            //{
+            //    return Results.BadRequest("Không có thông mã gọi");
+            //}
 
             var accoutUpdate = await _employeeBusiness.GetByIdAsync(request.Id);
             if (accoutUpdate == null)
@@ -233,7 +225,11 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.Email = request.Email;
             accoutUpdate.IsActive = request.Status == 1;
             accoutUpdate.UpdatedBy = user.Id;
-            accoutUpdate.LineCode = request.LineCode;
+            if (!string.IsNullOrEmpty(request.LineCode))
+            {
+                accoutUpdate.LineCode = request.LineCode;
+            }
+
             var result = await _employeeBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }

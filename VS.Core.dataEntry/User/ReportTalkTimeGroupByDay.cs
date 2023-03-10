@@ -8,6 +8,8 @@
 
         public int? SumNoAgree { get; set; }
 
+        public DateTime? BusinessTime { get; set; }
+
         public double? PerPercent { get; set; }
 
         public int? SumAn { get; set; }

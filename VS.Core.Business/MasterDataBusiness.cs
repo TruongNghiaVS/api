@@ -1,5 +1,6 @@
 ﻿using VS.core.Request;
 using VS.Core.Business.Interface;
+using VS.Core.Business.Model;
 using VS.Core.dataEntry.User;
 using VS.Core.Repository.baseConfig;
 
@@ -22,6 +23,12 @@ namespace VS.Core.Business
         {
             return _unitOfWork.MasterRe.CheckDuplicate(code, vendorId);
         }
+
+        public Task<MasterData> GetbyCode(string code, string vendorId = null)
+        {
+            return _unitOfWork.MasterRe.GetbyCode(code, vendorId);
+        }
+
 
         public Task Delete(MasterData entity)
         {
@@ -47,6 +54,55 @@ namespace VS.Core.Business
         {
             return _unitOfWork.MasterRe.GetDataForExport(request);
         }
+
+
+        public async Task<bool> HandleImport(MasterDataImportRequest request, Account userLogin)
+        {
+            var id = request.Id;
+            var listData = request.ListData;
+            var _campagnImport = await _unitOfWork.GroupRe.GetByIdAsync(request.Id);
+            var vendorId = _campagnImport.VendorId;
+            foreach (var item in listData)
+            {
+
+
+                var itemInsert = new MasterData
+                {
+                    Code = item.Code,
+                    FullName = item.FullName,
+                    DisplayName = item.DisplayName,
+                    GroupId = int.Parse(id),
+                    VendorId = vendorId
+
+                };
+
+                var result = await _unitOfWork.MasterRe.GetbyCode(itemInsert.Code, vendorId != null ? vendorId.ToString() : null);
+                if (result != null)
+                {
+
+
+
+                    result.FullName = result.DisplayName = itemInsert.FullName;
+                    result.UpdatedBy = userLogin.Id;
+
+                    await _unitOfWork.MasterRe.UpdateAsyn(result);
+                }
+                else
+                {
+
+                    itemInsert.CreatedBy = userLogin.Id;
+                    itemInsert.VendorId = vendorId;
+                    itemInsert.GroupId = id != null ? int.Parse(id) : null;
+                    await _unitOfWork.MasterRe.AddAsync(itemInsert);
+                }
+
+
+
+            }
+
+            return true;
+        }
+
 
         public Task<int> UpdateAsyn(MasterData entity)
         {

@@ -40,4 +40,25 @@
     }
 
 
+    public class GetAllRecordGroupByLineCodeExportIndexModel : GetAllRecordGroupByLineCodeIndexModel
+
+    {
+
+        public GetAllRecordGroupByLineCodeExportIndexModel()
+        {
+
+        }
+        public string UserName { get; set; }
+
+        public DateTime? CreateAt { get; set; }
+
+        public DateTime? UpdateAt { get; set; }
+
+        public DateTime? BusinessTime { get; set; }
+
+
+
+
+    }
+
 }

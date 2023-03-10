@@ -70,6 +70,21 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<MasterData> GetbyCode(string code, string vendorId = null)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "SELECT * FROM " + _baseTable + " WHERE code = @Code";
+                if (!string.IsNullOrEmpty(vendorId))
+                {
+                    sql = "SELECT * FROM " + _baseTable + " WHERE code = @Code and VendorId = @VendorId ";
+                }
+                var result = await con.QuerySingleOrDefaultAsync<MasterData>(sql, new { Code = code, VendorId = vendorId });
+                return result;
+            }
+        }
+
+
 
         public async Task<MasterDataReponse> GetALl(MaterDataRequest request)
         {

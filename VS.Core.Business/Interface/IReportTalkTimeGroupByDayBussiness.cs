@@ -11,6 +11,8 @@ namespace VS.Core.Business.Interface
 
         Task<GetAllRecordGroupByLineCodeReponse> GetAll(GetAllRecordGroupByLineCodeRequest request);
 
+        Task<GetAllRecordGroupByLineCodeExportReponse> Export(GetAllRecordGroupByLineCodeExportRequest request);
+
         Task<GetOverViewDashboardReponse> GetOverViewDashBoard(GetOverViewDashboard request);
 
     }

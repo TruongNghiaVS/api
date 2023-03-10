@@ -63,8 +63,11 @@ namespace VS.Core.Repository
                         request.To,
                         request.DpdMax,
                         request.DpdMin,
+                        request.LineCode,
                         request.Limit,
+                        request.NoAgreement,
                         request.Page,
+                        request.PhoneSerach,
                         request.TypegetData,
                         request.OrderBy,
                         request.VendorId,
@@ -233,7 +236,7 @@ namespace VS.Core.Repository
         {
             using (var con = GetConnection())
             {
-                var sql = "SELECT * FROM CampaignProfile " + " WHERE NationalId  = @profileId or MobilePhone = @profileId";
+                var sql = "SELECT top 1 * FROM CampaignProfile " + " WHERE NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId";
                 var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = noNational });
 
                 if (result == null)
