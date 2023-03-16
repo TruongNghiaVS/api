@@ -16,12 +16,15 @@ namespace vsrolAPI2022.Controllers
 
         private readonly IReportBussiness _impactBusiness;
 
+        private readonly ICallLogBussiness callLogBussiness;
         private IHandleReportBussiness _handleReportBussiness;
         public MakeCallController(IReportBussiness campagnBusiness,
             IUserBusiness userBusiness,
+            ICallLogBussiness _callLogBussiness,
             IHandleReportBussiness handleReportBussiness) : base(userBusiness)
         {
             _impactBusiness = campagnBusiness;
+            callLogBussiness = _callLogBussiness;
             _handleReportBussiness = handleReportBussiness;
         }
         [HttpPost("~/api/MakeCall/TriggerCall")]
@@ -61,8 +64,26 @@ namespace vsrolAPI2022.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(linkUrl);
+
+
+
+
                 var reponse = await client.PostAsync("api/client/makeCall", data);
                 var result = await reponse.Content.ReadAsStringAsync();
+                await callLogBussiness.AddAsync(new VS.Core.dataEntry.User.LogCall()
+                {
+                    Phone = _input.PhoneNumber,
+                    CreateAt = DateTime.Now,
+                    LineCode = linecode,
+                    ProfileId = _input.ProfileId,
+                    NoAgree = _input.NoAgree,
+                    TimeBuisiness = DateTime.Now,
+                    VendorId = _userCurrent.VendorId,
+                    CreatedBy = _userCurrent.Id,
+                    UserId = _userCurrent.Id
+
+                });
+
                 return Results.Ok(result);
             }
         }

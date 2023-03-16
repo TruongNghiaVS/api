@@ -67,7 +67,14 @@ namespace vsrolAPI2022.Controllers
         {
             var user = GetCurrentUser();
 
-            var account = new ImpactHistory()
+            var lineCode = "";
+            if (user != null)
+            {
+                lineCode = user.LineCode;
+            }
+            var campangnProfile = await _campagnBussiness.GetProfile(employeeAdd.ProfileId.Value.ToString());
+
+            var itemInsert = new ImpactHistory()
             {
                 NoteIm = employeeAdd.NoteIm,
                 MoneyPromise = employeeAdd.MoneyPromise,
@@ -80,10 +87,12 @@ namespace vsrolAPI2022.Controllers
                 StatusIm = employeeAdd.StatusIm,
                 ShortDescription = employeeAdd.NoteIm,
                 DaysuggestTime = employeeAdd.DaysuggestTime,
-                UpdatedBy = user.Id
+                UpdatedBy = user.Id,
+                AssigeeId = campangnProfile.Assignee,
+                LineCode = lineCode
 
             };
-            var campangnProfile = await _campagnBussiness.GetProfile(employeeAdd.ProfileId.Value.ToString());
+
             if (campangnProfile.Status == 16)
             {
 
@@ -94,7 +103,7 @@ namespace vsrolAPI2022.Controllers
                 campangnProfile.Status = int.Parse(employeeAdd.StatusIm);
                 await _campagnBussiness.UpdateProfile(campangnProfile);
             }
-            var result = await _impactBusiness.AddAsync(account);
+            var result = await _impactBusiness.AddAsync(itemInsert);
             return Results.Ok(result);
         }
 

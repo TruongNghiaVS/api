@@ -197,10 +197,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin ID");
             }
-            if (string.IsNullOrEmpty(request.Phone))
-            {
-                return Results.BadRequest("Không có thông tin số điện thoại");
-            }
+
             if (string.IsNullOrEmpty(request.FullName))
             {
                 return Results.BadRequest("Không có thông tin họ tên");

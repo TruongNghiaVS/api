@@ -1,3 +1,10 @@
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.csproj.AssemblyReference.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.AssemblyInfoInputs.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.AssemblyInfo.cs
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.csproj.CoreCompileInputs.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\appsettings.Development.json
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\appsettings.json
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\VS.core.API.exe
@@ -62,13 +69,6 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\VS.core.Report.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\VS.Core.Repository.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\VS.core.Request.pdb
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.csproj.AssemblyReference.cache
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.AssemblyInfoInputs.cache
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.AssemblyInfo.cs
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.csproj.CoreCompileInputs.cache
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\staticwebassets.build.json
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\staticwebassets.development.json
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\scopedcss\bundle\VS.core.API.styles.css

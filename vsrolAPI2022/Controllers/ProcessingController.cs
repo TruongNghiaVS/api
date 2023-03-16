@@ -45,10 +45,10 @@ namespace vsrolAPI2022.Controllers
                 LineCode = userCall.LineCode,
                 UpdatedBy = userCall.Id
             };
-            var ressult = await _callLogBussiness.AddAsync(callLogInsert);
+            //var ressult = await _callLogBussiness.AddAsync(callLogInsert);
             var ressultReponse = new
             {
-                success = ressult > 0
+                success = true
 
             };
             return Results.Ok(ressultReponse);

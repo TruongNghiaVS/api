@@ -2,7 +2,7 @@
 {
     public class BaseInputSearch
     {
-        public string Token { get; set; }
+        public string? Token { get; set; }
         public int Page { get; set; }
         public int Limit { get; set; }
 

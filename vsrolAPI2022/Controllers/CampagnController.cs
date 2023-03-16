@@ -445,6 +445,69 @@ namespace vsrolAPI2022.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost("~/api/campagn/importHistory")]
+        public async Task<IResult> ImportHistory([FromForm] CampanginDataImport request)
+        {
+            var userLogin = new Account()
+            {
+                Id = "1"
+            };
+            var fileRequest = request.FileData;
+            if (fileRequest == null || fileRequest.Count == 0)
+            {
+                return Results.BadRequest("No error report");
+            }
+            var fileHandler = fileRequest.FirstOrDefault();
+            if (fileHandler == null)
+            {
+                return Results.BadRequest("No error report");
+            }
+
+
+
+            List<ProfileHandler> profileList = new List<ProfileHandler>();
+            await using (MemoryStream ms = new MemoryStream())
+            {
+                await fileHandler.CopyToAsync(ms);
+                using (ExcelPackage package = new ExcelPackage(ms))
+                {
+                    ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
+                    int totalRows = workSheet.Dimension.Rows;
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        if (i < 1)
+                        {
+                            continue;
+                        }
+                        var campangnId = "4";
+                        var reasonName = ReadvalueStringExcel(workSheet, i, 40);
+                        var assigneName = ReadvalueStringExcel(workSheet, i, 42);
+                        var ShortDescription = ReadvalueStringExcel(workSheet, i, 43);
+                        var promiseday = ReadvalueDateExcel(workSheet, i, 44);
+                        var moneyPromise = ReadvalueStringExcel(workSheet, i, 45);
+                        var relationship = ReadvalueStringExcel(workSheet, i, 47);
+                        var noAgree = ReadvalueStringExcel(workSheet, i, 1);
+                        var reasonCode = reasonName.Split('-');
+
+
+                    }
+
+                }
+
+
+
+
+            }
+            var reqeustImport = new CampanginDataImportRequest();
+            reqeustImport.ListData = profileList;
+            reqeustImport.Id = request.Id;
+            await _campagnBusiness.HandleImport(reqeustImport, userLogin);
+            return Results.Ok();
+
+        }
+
+
+        [AllowAnonymous]
         [HttpPost("~/api/campagn/skipInfo")]
         public async Task<IResult> SkipInfo([FromForm] CampanginDataImport request)
         {

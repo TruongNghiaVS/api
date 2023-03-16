@@ -322,7 +322,7 @@ namespace vsrolAPI2022.Controllers
             }
             var reqeustImport = new MasterDataImportRequest();
             reqeustImport.ListData = profileList;
-            reqeustImport.Id = "2";
+            reqeustImport.Id = request.Id;
             await _masterDataBusiness.HandleImport(reqeustImport, userLogin);
             return Results.Ok();
 
