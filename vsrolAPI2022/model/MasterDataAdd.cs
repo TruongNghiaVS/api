@@ -40,6 +40,13 @@
             IsActive = 1;
         }
     }
+
+    public class AddMemberGroupRequest
+    {
+        public int? Groupid { get; set; }
+        public int? Memberid { get; set; }
+
+    }
     public class GroupEmployeeUpdate
     {
         public string? Code { get; set; }

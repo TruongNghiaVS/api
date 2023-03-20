@@ -9,6 +9,8 @@ namespace VS.Core.Repository.baseConfig
         Task<ReportTalkTimeReponse> GetALl(ReportTalkTimeRequest request);
 
         Task<int> DeleteAll();
+        Task<int> DeleteAllRangeFromTo(DateTime from, DateTime to);
+        Task<DateTime?> GetMaxLinked(string type);
 
         Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecording(HandlelFileRecordingRequest request);
 

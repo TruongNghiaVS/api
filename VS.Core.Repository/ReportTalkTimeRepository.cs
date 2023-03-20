@@ -38,7 +38,6 @@ namespace VS.Core.Repository
                 using (var _con = GetConnection())
                 {
                     var result = await _con.ExecuteAsync(_Sql.ReportTalkTime_insert, par, commandType: CommandType.StoredProcedure);
-
                     return 1;
                 }
             }
@@ -72,6 +71,35 @@ namespace VS.Core.Repository
                 var result = await con.QuerySingleOrDefaultAsync(sql);
 
                 return 1;
+            }
+        }
+
+        public async Task<int> DeleteAllRangeFromTo(DateTime from, DateTime to)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "delete from  " + _baseTable + " WHERE CallDate >= @from and CallDate <= @to  ";
+                var result = await con.QuerySingleOrDefaultAsync(sql, new
+                {
+                    from,
+                    to
+                });
+
+                return 1;
+            }
+        }
+
+        public async Task<DateTime?> GetMaxLinked(string type)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "select max(CallDate) from  " + _baseTable + " WHERE 1 =1 and sourceCall = " + type + "";
+                var result = await con.QueryFirstAsync<DateTime?>(sql);
+                if (result == null)
+                {
+                    return null;
+                }
+                return result;
             }
         }
 
@@ -152,12 +180,15 @@ namespace VS.Core.Repository
             {
                 using (var con = GetMysqlConnection2())
                 {
-                    var sqlQuerry = "SELECT d.src AS 'LineCode', d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE  d.lastapp = 'Dial'";
+                    var sqlQuerry = "SELECT d.src AS 'LineCode', '1' as SourceCall ,  d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  \r\n\r\nFROM cdr d WHERE  d.lastapp = 'Dial'\r\n\r\n  AND d.calldate >= @timeFrom and d.calldate <= @timeTo and d.lastapp = 'Dial' ";
                     var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
                     {
                         request.Token,
                         request.From,
                         request.To,
+                        request.TimeFrom,
+                        request.TimeTo,
+                        request.Linked,
 
                         request.Limit,
                         request.Page,
@@ -184,13 +215,23 @@ namespace VS.Core.Repository
             {
                 using (var con = GetMysqlConnection3())
                 {
-                    var sqlQuerry = "SELECT d.src AS 'LineCode', d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE  d.lastapp = 'Dial'";
+                    if (request.Linked.HasValue)
+                    {
+
+                    }
+                    else
+                    {
+                        request.Linked = DateTime.UtcNow.AddDays(-5);
+                    }
+                    var sqlQuerry = "SELECT d.src AS 'LineCode', '2' as SourceCall,  d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE   d.calldate >= @timeFrom and d.calldate <= @timeTo and d.lastapp = 'Dial'";
                     var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
                     {
                         request.Token,
                         request.From,
                         request.To,
-
+                        request.TimeFrom,
+                        request.TimeTo,
+                        request.Linked,
                         request.Limit,
                         request.Page,
                         request.OrderBy

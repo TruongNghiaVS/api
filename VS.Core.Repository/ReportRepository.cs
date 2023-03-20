@@ -84,6 +84,7 @@ namespace VS.Core.Repository
                        request.UserId,
                        request.LineCode,
                        request.VendorId,
+
                        request.StatusSearch,
                        request.From,
                        request.To

@@ -1,5 +1,11 @@
 ﻿namespace VS.Core.Repository.Model
 {
+
+    public class GroupEmployeeViewIndexModel : EmployeeIndexModel
+    {
+
+        public string? ManagementName { get; set; }
+    }
     public class EmployeeIndexModel : BaseIndexModel
     {
 
@@ -44,6 +50,8 @@
                 return "";
             }
         }
+
+
 
         public EmployeeIndexModel() : base()
         {

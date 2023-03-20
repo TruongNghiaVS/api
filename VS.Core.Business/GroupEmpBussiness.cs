@@ -19,6 +19,17 @@ namespace VS.Core.Business
             return _unitOfWork.GroupEmployRe.AddAsync(entity);
         }
 
+        public Task<int> AddMemberGroup(GroupMember entity)
+        {
+            return _unitOfWork.GroupEmployRe.AddMemberGroup(entity);
+        }
+
+        public Task<int> Deletemember(int id)
+        {
+            return _unitOfWork.GroupEmployRe.Deletemember(id);
+        }
+
+
         public Task<bool> CheckDuplicate(string code)
         {
             return _unitOfWork.GroupEmployRe.CheckDuplicate(code);
@@ -33,6 +44,15 @@ namespace VS.Core.Business
         {
             return _unitOfWork.GroupEmployRe.GetALl(request);
         }
+        public Task<EmployeeSearchReponse> getMemberByGroup(MemberGroupByIdRequest request)
+        {
+            return _unitOfWork.GroupEmployRe.getMemberByGroup(request);
+        }
+        public Task<GroupEmployeeHaveNotInGroupRequestReponse> GetAllMeberHaveNotGroup(GroupEmployeeHaveNotInGroupRequest request)
+        {
+            return _unitOfWork.GroupEmployRe.GetAllMeberHaveNotGroup(request);
+        }
+
         public Task<List<SelectIndexModel>> GetAllManager(GroupEmployeeRequest? request)
         {
             return _unitOfWork.GroupEmployRe.GetAllManager(request);

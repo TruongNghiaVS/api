@@ -94,6 +94,7 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+
                         request.TimeSelect,
                         request.Limit,
                         request.Page,
@@ -245,6 +246,7 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.UserId,
                         request.VendorId,
                         request.LineCode,
                         request.Limit,
@@ -252,15 +254,15 @@ namespace VS.Core.Repository
                         request.OrderBy
                     }, commandType: CommandType.StoredProcedure);
 
-                    var fistElement = result.FirstOrDefault();
-                    var totalRecord = 0;
-                    if (fistElement != null)
-                    {
-                        totalRecord = fistElement.TotalRecord;
-                    }
+                    //var fistElement = result.FirstOrDefault();
+                    //var totalRecord = 0;
+                    //if (fistElement != null)
+                    //{
+                    //    totalRecord = fistElement.TotalRecord;
+                    //}
                     var reponse = new GetAllRecordGroupByLineCodeExportReponse()
                     {
-                        Total = totalRecord,
+                        Total = 0,
 
                         Data = result
                     };
@@ -291,6 +293,7 @@ namespace VS.Core.Repository
                         request.VendorId,
                         request.LineCode,
                         request.Limit,
+                        request.UserId,
                         request.Page,
                         request.OrderBy
                     }, commandType: CommandType.StoredProcedure);

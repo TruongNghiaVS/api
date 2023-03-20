@@ -23,8 +23,11 @@
 
         public string Disposition { get; set; }
 
+        public int? SourceCall { get; set; }
+
         public int DurationBill { get; set; }
         public double DurationReal { get; set; }
+
     }
 
 

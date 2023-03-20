@@ -28,6 +28,8 @@
 
         public int DurationBill { get; set; }
 
+        public int? Sourcecall { get; set; }
+
         public ReportTalkTime()
         {
 

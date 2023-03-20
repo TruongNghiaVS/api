@@ -9,6 +9,7 @@
         public bool IsActive { get; set; }
 
         public string Status { get; set; }
+        public int? VendorId { get; set; }
 
         public int? ManagerId
         {
@@ -17,6 +18,22 @@
 
 
         }
+
+
+    }
+
+    public class GroupMember : BaseEntry
+    {
+        public int? Groupid { get; set; }
+
+        public int? Memberid { get; set; }
+
+
+
+        public string? Status { get; set; }
+        public int? VendorId { get; set; }
+
+
 
 
     }

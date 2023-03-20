@@ -180,7 +180,7 @@ namespace VS.Core.Business
                     }
                     result.CustomerName = item.CustomerName;
                     result.NoAgreement = item.NoAgreement;
-                    result.DayOfBirth = DateTime.Now;
+                    result.DayOfBirth = item.DayOfBirth;
                     result.NationalId = item.NationalId;
                     result.MobilePhone = item.MobilePhone;
                     result.Phone1 = item.Phone1;
@@ -223,8 +223,7 @@ namespace VS.Core.Business
                     result.UpdateAt = item.UpdateAt;
                     result.UpdatedBy = item.UpdatedBy;
                     result.UpdatedBy = userLogin.Id;
-                    result.VendorId = vendorId;
-                    itemInsert.Status = 10;
+
                     await _unitOfWork.CampagnProfileRe.UpdateAsyn(result);
                 }
                 else

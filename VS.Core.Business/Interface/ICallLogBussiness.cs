@@ -1,12 +1,11 @@
-﻿using VS.core.Request;
-using VS.Core.dataEntry.User;
+﻿using VS.Core.dataEntry.User;
 
 
 namespace VS.Core.Business.Interface
 {
-    public interface ICallLogBussiness : IGenericBussine<CallLog>
+    public interface ICallLogBussiness : IGenericBussine<LogCall>
     {
-        Task<CallLogReponse> GetALl(CallLogSerarchRequest request);
+
 
     }
 }

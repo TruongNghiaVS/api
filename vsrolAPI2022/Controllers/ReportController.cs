@@ -136,6 +136,7 @@ namespace vsrolAPI2022.Controllers
                 VendorId = int.Parse(user.Id);
             }
             _input.VendorId = VendorId;
+            _input.UserId = user.Id;
             var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
             return Results.Ok(resultSearch);
         }
@@ -155,7 +156,8 @@ namespace vsrolAPI2022.Controllers
                 VendorId = int.Parse(user.Id);
             }
             _input.VendorId = VendorId;
-            var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
+            _input.UserId = user.Id;
+            var resultSearch = await _impactBusiness.ExportRecordingFile(_input);
             return Results.Ok(resultSearch);
         }
 

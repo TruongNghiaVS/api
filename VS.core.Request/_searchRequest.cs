@@ -224,6 +224,7 @@ namespace VS.core.Request
     public class GroupEmployeeRequest : BaseSearchRequest
     {
         public int Type { get; set; }
+        public int? VendorId { get; set; }
         public GroupEmployeeRequest()
         {
             this.Page = 1;
@@ -233,6 +234,27 @@ namespace VS.core.Request
         }
     }
 
+
+    public class GroupEmployeeHaveNotInGroupRequest : BaseSearchRequest
+    {
+        public int GroupId { get; set; }
+        public int? VendorId { get; set; }
+        public GroupEmployeeHaveNotInGroupRequest()
+        {
+
+        }
+    }
+
+
+    public class MemberGroupByIdRequest : BaseSearchRequest
+    {
+        public int? GroupId { get; set; }
+        public int? VendorId { get; set; }
+        public MemberGroupByIdRequest()
+        {
+
+        }
+    }
     public class MaterDataNewRequest : BaseSearchRequest
     {
         public int Type { get; set; }
@@ -249,6 +271,17 @@ namespace VS.core.Request
 
     {
         public MasterDataNewReponse()
+        {
+            Total = 0;
+        }
+    }
+
+
+
+    public class GroupEmployeeHaveNotInGroupRequestReponse : BaseSearchRepons
+
+    {
+        public GroupEmployeeHaveNotInGroupRequestReponse()
         {
             Total = 0;
         }
@@ -372,6 +405,7 @@ namespace VS.core.Request
 
         public string? NoAgree { get; set; }
 
+        public int? ProfileId { get; set; }
         public MakeCallRequest()
         {
 
@@ -466,6 +500,8 @@ namespace VS.core.Request
     {
 
         public string? NoAgreement { get; set; }
+
+
         public string? CustomerName { get; set; }
         public DateTime? Dob { get; set; }
         public string? NationalId { get; set; }
@@ -515,7 +551,13 @@ namespace VS.core.Request
 
         public string EmployeeName { get; set; }
 
-        public string LastNote { get; set; }
+        public string? NoteIm { get; set; }
+        public string? LastNote { get; set; }
+
+
+        public DateTime? Promiseday { get; set; }
+        public string MoneyPromise { get; set; }
+        public DateTime? DaysuggestTime { get; set; }
 
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
@@ -754,6 +796,11 @@ namespace VS.core.Request
     public class HandlelFileRecordingRequest : BaseSearchRequest
     {
         public DateTime? TimeSelect { get; set; }
+
+        public DateTime? TimeFrom { get; set; }
+        public DateTime? TimeTo { get; set; }
+
+        public DateTime? Linked { get; set; }
     }
 
     public class HandlelFileRecordingReponse : BaseSearchRepons

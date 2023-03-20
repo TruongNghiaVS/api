@@ -193,6 +193,8 @@ namespace vsrolAPI2022.Controllers
             {
                 request.To = request.To.ToEndDateTime();
             }
+
+            request.UserId = userLogin.Id;
             var infomationTalKTime = await _reportTalkTimeGroupByDayBussiness.GetOverViewDashBoard(request);
 
 
@@ -223,7 +225,7 @@ namespace vsrolAPI2022.Controllers
             }
 
             _input.VendorId = VendorId;
-
+            _input.UserId = currentUser.Id;
             var resultSearch = await _reportTalkTimeGroupByDayBussiness.GetAll(_input);
             return Results.Ok(resultSearch);
         }

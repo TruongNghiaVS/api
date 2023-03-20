@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VS.core.Request;
+using VS.core.Utilities;
 using VS.Core.Business.Interface;
 
 
@@ -31,7 +32,7 @@ namespace vsrolAPI2022.Controllers
         public async Task<ActionResult> RunAllJob()
         {
             var resultSearch = await _handleReportBussiness.CalTalkingTime();
-
+            return Ok(true);
             Task.WaitAll();
             var timeSelect = DateTime.UtcNow;
             await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
@@ -39,19 +40,62 @@ namespace vsrolAPI2022.Controllers
                 TimeSelect = timeSelect
             });
             Task.WaitAll();
+            return Ok(true);
+
+        }
+
+        [HttpGet("~/api/job/CalculatingTalktime")]
+        public async Task<ActionResult> CalculatingTalktime()
+        {
+            var resultSearch = await _handleReportBussiness.CalTalkingTime();
+            Task.WaitAll();
+
+
+            var timerun = DateTime.UtcNow;
+            timerun = timerun.AddHours(-1);
+            var startTime = timerun;
+            var endTime = DateTime.UtcNow.AddDays(1).EndDateTime();
+
+
+            while (startTime < endTime)
+            {
+                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+                {
+                    TimeSelect = startTime
+
+                });
+                Task.WaitAll();
+                startTime = startTime.AddDays(1);
+            }
+
+            Task.WaitAll();
 
             return Ok(true);
 
         }
 
+        [HttpGet("~/api/job/GroupByDate")]
+        public async Task<ActionResult> GroupByDate()
+        {
 
-        [HttpGet("~/api/job/rebuildBegin")]
+            var timeSelect = DateTime.UtcNow;
+            await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+            {
+                TimeSelect = timeSelect
+            });
+            Task.WaitAll();
+            return Ok(true);
+
+        }
+
+
+        [HttpGet("~/api/job/rebuildBeginAll")]
         public async Task<ActionResult> RebuildBegin()
         {
-            var dtFrom = DateTime.Now.AddDays(-10);
+            var dtFrom = DateTime.Now.AddDays(-5);
             var dtTo = DateTime.Now.AddDays(1);
 
-            var resultSearch = await _handleReportBussiness.CalTalkingTime();
+            var resultSearch = await _handleReportBussiness.CalTalkingTimeAll(dtFrom);
             Task.WaitAll();
             while (dtFrom < dtTo)
             {

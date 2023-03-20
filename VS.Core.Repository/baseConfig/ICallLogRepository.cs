@@ -1,12 +1,9 @@
-﻿using VS.core.Request;
-using VS.Core.dataEntry.User;
+﻿using VS.Core.dataEntry.User;
 
 namespace VS.Core.Repository.baseConfig
 {
-    public interface ICallLogRepository : IGenericRepository<CallLog>
+    public interface ICallLogRepository : IGenericRepository<LogCall>
     {
-
-        Task<CallLogReponse> GetALl(CallLogSerarchRequest request);
 
 
     }

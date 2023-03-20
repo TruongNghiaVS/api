@@ -7,11 +7,24 @@
 
         public string? ManagerId { get; set; }
 
-        public string? ManagerName { get; set; }
 
+        public string? ManagementName { get; set; }
         public string Code { get; set; }
 
         public bool? IsActive { get; set; }
+
+
+    }
+
+    public class GroupEmployeeNotInGroupIndexModel
+    {
+
+        public string? FullName { get; set; }
+
+        public string? UserName { get; set; }
+
+        public int? Id { get; set; }
+
 
 
     }

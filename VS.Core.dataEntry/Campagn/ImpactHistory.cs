@@ -21,5 +21,10 @@
 
         public int? Priority { get; set; }
 
+        public int? VendorId { get; set; }
+
+        public string? AssigeeId { get; set; }
+
+        public string? LineCode { get; set; }
     }
 }

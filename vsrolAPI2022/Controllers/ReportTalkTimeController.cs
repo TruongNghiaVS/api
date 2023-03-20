@@ -33,6 +33,7 @@ namespace vsrolAPI2022.Controllers
             if (currentUser.RoleId == "2" || currentUser.RoleId == "4")
             {
 
+
             }
             else
             {
@@ -45,9 +46,12 @@ namespace vsrolAPI2022.Controllers
                 VendorId = int.Parse(currentUser.Id);
             }
             _input.VendorId = VendorId;
+            _input.UserId = currentUser.Id;
+
             var resultSearch = await _reportTalkTimeGroupByDayBussiness.GetAll(_input);
             return Results.Ok(resultSearch);
         }
+
 
 
 
@@ -70,12 +74,12 @@ namespace vsrolAPI2022.Controllers
                 VendorId = int.Parse(currentUser.Id);
             }
             _input.VendorId = VendorId;
+            _input.UserId = currentUser.Id;
             var resultSearch = await _reportTalkTimeGroupByDayBussiness.Export(_input);
 
 
             return Results.Ok(resultSearch);
         }
-
 
 
 

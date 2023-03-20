@@ -40,7 +40,12 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(GroupEmployeeRequest request)
         {
             var user = GetCurrentUser();
-
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+                request.VendorId = vendorId;
+            }
             var searchRequest = new GroupEmployeeRequest()
             {
                 UserId = user.Id,
@@ -49,6 +54,7 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+                VendorId = request.VendorId,
                 From = request.From,
                 Type = request.Type
 
@@ -58,7 +64,55 @@ namespace vsrolAPI2022.Controllers
         }
 
 
-        [AllowAnonymous]
+        [HttpPost("~/api/groupEmployee/getAllMemberHaveNotIngroup")]
+        public async Task<IResult> getAllMemberHaveNotIngroup(GroupEmployeeHaveNotInGroupRequest request)
+        {
+            var user = GetCurrentUser();
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+                request.VendorId = vendorId;
+            }
+            var searchRequest = new GroupEmployeeHaveNotInGroupRequest()
+            {
+                UserId = user.Id,
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = request.Limit,
+                To = request.To,
+                VendorId = request.VendorId,
+                From = request.From,
+
+
+            };
+            var resultSearch = await _groupEmpBussiness.GetAllMeberHaveNotGroup(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+
+        [HttpPost("~/api/groupEmployee/getMemberByGroup")]
+        public async Task<IResult> getMemberByGroup(MemberGroupByIdRequest request)
+        {
+            var user = GetCurrentUser();
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+                request.VendorId = vendorId;
+            }
+            var searchRequest = new MemberGroupByIdRequest()
+            {
+                VendorId = request.VendorId,
+                GroupId = request.GroupId
+
+            };
+            var resultSearch = await _groupEmpBussiness.getMemberByGroup(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+
         [HttpPost("~/api/groupEmployee/add")]
         public async Task<IResult> Add(GroupEmployeeAdd input)
         {
@@ -87,7 +141,54 @@ namespace vsrolAPI2022.Controllers
                 ManagerId = input.ManagerId
             };
 
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+                itemInsert.VendorId = vendorId;
+            }
+
             var result = await _groupEmpBussiness.AddAsync(itemInsert);
+            return Results.Ok(result);
+        }
+
+        [HttpPost("~/api/groupEmployee/AddMember")]
+        public async Task<IResult> AddMember(AddMemberGroupRequest input)
+        {
+            var user = GetCurrentUser();
+            if (!input.Groupid.HasValue)
+            {
+                return Results.BadRequest("Không có thông tin nhóm");
+            }
+            if (!input.Memberid.HasValue)
+            {
+                return Results.BadRequest("Không có thông tin nhân viên");
+            }
+            var itemInsert = new GroupMember()
+            {
+                Groupid = input.Groupid,
+                Memberid = input.Memberid,
+            };
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+                itemInsert.VendorId = vendorId;
+            }
+            var result = await _groupEmpBussiness.AddMemberGroup(itemInsert);
+            return Results.Ok(result);
+        }
+        [HttpPost("~/api/groupEmployee/DeleteMember")]
+        public async Task<IResult> DeleteMember(DeleteModelRequest input)
+        {
+            var user = GetCurrentUser();
+            if (string.IsNullOrEmpty(input.Id))
+            {
+                return Results.BadRequest("Không có thông tin cần xóa");
+            }
+
+
+            var result = await _groupEmpBussiness.Deletemember(int.Parse(input.Id));
             return Results.Ok(result);
         }
 
@@ -100,6 +201,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin ID");
             }
+
 
             if (string.IsNullOrEmpty(input.Name))
             {
@@ -152,6 +254,12 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAllManager(GroupEmployeeRequest request)
         {
             var user = GetCurrentUser();
+            int? vendorId = null;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+                request.VendorId = vendorId;
+            }
             var resultSearch = await _groupEmpBussiness.GetAllManager(request);
             return Results.Ok(resultSearch);
         }

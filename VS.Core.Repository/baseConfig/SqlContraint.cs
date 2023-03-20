@@ -72,6 +72,7 @@
         public string CampaignImpact_getAll = "sp_ImpactHistory_getAll";
         public string CallLog_getAll = "sp_CallLog_getAll";
         public string CallLog_insert = "sp_CallLog_Insert";
+        public string LogCall_insert = "sp_LogCall_Insert";
         public string ReportTalkTimeGroupByDay_insert = "sp_reportTalkTimeGroupByDay_insert";
         public string ReportTalkTimeGroupByDay_update = "sp_reportTalkTimeGroupByDay_update";
 
@@ -84,10 +85,14 @@
         public string MasterData_reasonNew_getAll = "sp_MasterData_getAll";
 
         public string GroupEmpl_insert = "sp_GroupEmpl_Insert";
+        public string sp_GroupMember_Insert = "sp_GroupMember_Insert";
 
         public string GroupEmpl_update = "sp_GroupEmpl_Update";
 
         public string GroupEmpl_getAll = "sp_GroupEmpl_getAll";
+
+        public string Sp_GetAllMeberHaveNotGroup = "sp_GetAllMeberHaveNotGroup";
+        public string sp_GetAllMeberByGroupId = "sp_GetAllMeberByGroupId";
         public string GroupEmpl_getAllManager = "sp_GroupEmpl_getAllManager";
 
         public string LoginReport_insert = "sp_LogHistory_Insert";

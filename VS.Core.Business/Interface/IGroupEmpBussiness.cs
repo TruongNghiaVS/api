@@ -11,6 +11,11 @@ namespace VS.Core.Business.Interface
         Task<List<SelectIndexModel>> GetAllManager(GroupEmployeeRequest? request);
         Task<bool> CheckDuplicate(string code);
         Task<GroupEmployeeReponse> GetALl(GroupEmployeeRequest request);
+        Task<EmployeeSearchReponse> getMemberByGroup(MemberGroupByIdRequest request);
+        Task<int> AddMemberGroup(GroupMember entity);
+        Task<int> Deletemember(int id);
+        Task<GroupEmployeeHaveNotInGroupRequestReponse> GetAllMeberHaveNotGroup(GroupEmployeeHaveNotInGroupRequest request);
+
 
     }
 }
