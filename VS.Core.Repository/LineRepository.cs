@@ -103,6 +103,8 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.VendorId,
+                        request.Userid,
                         status,
                         request.Limit,
                         request.Page,

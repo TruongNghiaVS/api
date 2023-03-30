@@ -62,6 +62,31 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
+
+
+        [HttpPost("~/api/groupReason/getAllStatus")]
+        public async Task<IResult> getAllStatus()
+        {
+            var user = GetCurrentUser();
+            int? vendorId = null;
+
+            if (user.RoleId == "4" || user.RoleId == "5" || user.RoleId == "3")
+            {
+                vendorId = user.VendorId;
+            }
+
+            var searchRequest = new GroupReasonRequest()
+            {
+                UserId = "1",
+
+                VendorId = vendorId,
+
+
+            };
+            var resultSearch = await _groupReasonBusiness.getAllStatus(vendorId, int.Parse(user.Id));
+            return Results.Ok(resultSearch);
+        }
+
         [AllowAnonymous]
         [HttpPost("~/api/groupReason/add")]
         public async Task<IResult> Add(GroupReasonAdd employeeAdd)

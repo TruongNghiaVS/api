@@ -23,6 +23,8 @@
         public bool? IsActive { get; set; }
 
         public string LineCode { get; set; }
+        public int? LineId { get; set; }
+
         public string PositionName
         {
 

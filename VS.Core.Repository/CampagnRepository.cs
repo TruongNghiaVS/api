@@ -130,7 +130,28 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(CampangnOverviewByIdRequest request)
+        {
 
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CampangnOverviewByIdReponse>(_Sql.Campaign_sp_campaign_getOverviewDashboardbyId, new
+                    {
+                        request.CampaignId
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+
+                    return fistElement;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
         public async Task<CampagnRequestReponse> GetALl(CampagnRequest request)
         {
             int page = request.Page;

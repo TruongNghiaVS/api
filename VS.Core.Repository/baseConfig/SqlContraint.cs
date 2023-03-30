@@ -43,7 +43,12 @@
 
         public string Group_reason_update = "sp_groupReason_Update";
 
-        public string Group_reason_getAll = "sp_groupReason_getAll";
+        public string Group_reason_getAll = "sp_Reason_getAll";
+
+        public string Sp_reason_getAllByHistoryReport = "sp_reason_getAllByHistoryReport";
+
+
+        public string Group_sp_Reason_getAll = "sp_groupReason_getAll";
 
         public string Group_reason_exportData = "sp_groupReason_exportData";
         public string campaign_UpdateOverview = "sp_campaign_UpdateOverview";
@@ -54,6 +59,7 @@
         public string Campaign_getOverviewbyId = "sp_campaign_getOverviewbyId";
 
         public string Campaign_getAll = "sp_campaign_getAll";
+        public string Campaign_sp_campaign_getOverviewDashboardbyId = "sp_campaign_getOverviewDashboardbyId";
         public string Campaign_GetAllAsiggeeByCampagnId = "sp_campaign_getAll_AssigneebyCampagnId";
 
         public string Campaign_exportData = "sp_Employee_exportData";
@@ -66,10 +72,13 @@
         public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
 
         public string CampaignImpact_insert = "sp_ImpactHistory_Insert";
+        public string Sp_ImpactHistory_Insert2 = "sp_ImpactHistory_Insert2";
 
         public string CampaignImpact_update = "CampaignImpact_update";
 
         public string CampaignImpact_getAll = "sp_ImpactHistory_getAll";
+
+        public string CampaignImpact_getAllHistory = "sp_ImpactHistory_getAllHistory";
         public string CallLog_getAll = "sp_CallLog_getAll";
         public string CallLog_insert = "sp_CallLog_Insert";
         public string LogCall_insert = "sp_LogCall_Insert";

@@ -78,3 +78,5 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\VS.core.API.genruntimeconfig.cache
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\ref\VS.core.API.dll
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\appsettings - Copy.Development.json.bk
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\bin\Release\net6.0\appsettings - Copy.json.bk

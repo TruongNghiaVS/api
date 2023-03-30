@@ -26,5 +26,7 @@
         public string? AssigeeId { get; set; }
 
         public string? LineCode { get; set; }
+
+        public int? CampagnId { get; set; }
     }
 }

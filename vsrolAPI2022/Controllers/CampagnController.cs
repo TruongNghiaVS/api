@@ -65,6 +65,25 @@ namespace vsrolAPI2022.Controllers
         }
 
 
+        [HttpPost("~/api/campagn/getOverViewDashboardById")]
+        public async Task<IResult> getOverViewDashboardById(CampangnOverviewByIdRequest request)
+        {
+            var user = GetCurrentUser();
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            var searchRequest = new CampangnOverviewByIdRequest()
+            {
+                CampaignId = request.CampaignId
+            };
+            var resultSearch = await _campagnBusiness.GetOverViewDashboardById(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+
+
         [HttpPost("~/api/campagn/add")]
         public async Task<IResult> Add(CampagnAdd employeeAdd)
         {
@@ -444,6 +463,9 @@ namespace vsrolAPI2022.Controllers
 
         }
 
+
+
+
         [AllowAnonymous]
         [HttpPost("~/api/campagn/importHistory")]
         public async Task<IResult> ImportHistory([FromForm] CampanginDataImport request)
@@ -687,7 +709,7 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-        [AllowAnonymous]
+
         [HttpPost("~/api/campagn/getAllCampangeAssigess")]
         public async Task<IResult> GetAllCampangeAssigess(CampagnSearchInput request)
         {
@@ -734,6 +756,9 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
 
         }
+
+
+
 
 
     }

@@ -1,6 +1,4 @@
-﻿
-
-using VS.core.Request;
+﻿using VS.core.Request;
 using VS.Core.Business.Interface;
 using VS.Core.Business.Model;
 using VS.Core.dataEntry.User;
@@ -10,11 +8,8 @@ namespace VS.Core.Business
 {
     public class CampagnBusiness : BaseBusiness, ICampagnBussiness
     {
+        public CampagnBusiness(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public CampagnBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-
-        }
         public Task<int> AddAsync(Campagn entity)
         {
             return _unitOfWork.CampagnRe.AddAsync(entity);
@@ -25,8 +20,6 @@ namespace VS.Core.Business
             return _unitOfWork.CampagnRe.CheckDuplicate(code);
         }
 
-
-
         public Task Delete(Campagn entity)
         {
             return _unitOfWork.CampagnRe.Delete(entity);
@@ -36,18 +29,36 @@ namespace VS.Core.Business
         {
             return _unitOfWork.CampagnRe.GetALl(request);
         }
-        public async Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(CampagnRequest request)
+
+        public Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(
+            CampangnOverviewByIdRequest request
+        )
+        {
+            return _unitOfWork.CampagnRe.GetOverViewDashboardById(request);
+        }
+
+        //public Task<CampangnOverviewByIdReponse> getOverViewDashboardById(CampangnOverviewByIdRequest request)
+        //{
+        //    return _unitOfWork.CampagnRe.getOverViewDashboardById(request);
+        //}
+
+
+        public async Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(
+            CampagnRequest request
+        )
         {
             var result = await _unitOfWork.CampagnRe.GetAllAsiggeeByCampagnId(request);
-            var campagnOverviewByid = await _unitOfWork.CampagnRe.GetOverviewCampagnById(request.CampaignId);
+            //var campagnOverviewByid = await _unitOfWork.CampagnRe.GetOverviewCampagnById(
+            //    request.CampaignId
+            //);
 
-            if (campagnOverviewByid != null)
-            {
-                result.Model = campagnOverviewByid.model;
-            }
-            else result.Model = new GetOverviewCampaignModelById();
+            //if (campagnOverviewByid != null)
+            //{
+            //    result.Model = campagnOverviewByid.model;
+            //}
+            //else
+            //    result.Model = new GetOverviewCampaignModelById();
             return result;
-
         }
 
         public Task<Campagn> Getbyid(string Id)
@@ -67,10 +78,12 @@ namespace VS.Core.Business
 
         public Task<int> UpdateAsyn(Campagn entity)
         {
-
             return _unitOfWork.CampagnRe.UpdateAsyn(entity);
         }
-        public Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request)
+
+        public Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(
+            GetAllProfileByCampang request
+        )
         {
             return _unitOfWork.CampagnProfileRe.GetALlProfileByCampaign(request);
         }
@@ -80,10 +93,8 @@ namespace VS.Core.Business
             return _unitOfWork.CampagnProfileRe.GetALLAsiggnee(request);
         }
 
-
         public Task<int> UpdateProfile(Profile entity)
         {
-
             return _unitOfWork.CampagnProfileRe.UpdateAsyn(entity);
         }
 
@@ -96,8 +107,6 @@ namespace VS.Core.Business
         {
             return _unitOfWork.CampagnProfileRe.GetByIdAsync(id);
         }
-
-
 
         public Task DeleteProfile(Profile entity)
         {
@@ -112,8 +121,6 @@ namespace VS.Core.Business
             var vendorId = _campagnImport.VendorId;
             foreach (var item in listData)
             {
-
-
                 var itemInsert = new Profile
                 {
                     CustomerName = item.CustomerName,
@@ -123,7 +130,6 @@ namespace VS.Core.Business
                     MobilePhone = item.MobilePhone,
                     Phone1 = item.Phone1,
                     AmountLoan = item.AmountLoan,
-
                     CampaignId = int.Parse(id),
                     CodeProduct = item.CodeProduct,
                     CreateAt = item.CreateAt,
@@ -160,15 +166,14 @@ namespace VS.Core.Business
                     TotalMoneyPaid = item.TotalMoneyPaid,
                     TotalPaid = item.TotalPaid,
                     UpdateAt = item.UpdateAt,
-
                     UpdatedBy = item.UpdatedBy
-
                 };
-                var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(item.NoAgreement, request.Id);
+                var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
+                    item.NoAgreement,
+                    request.Id
+                );
                 if (result != null)
                 {
-
-
                     string? assignedId = null;
                     if (string.IsNullOrEmpty(item.AssignedId))
                     {
@@ -226,34 +231,47 @@ namespace VS.Core.Business
 
                     await _unitOfWork.CampagnProfileRe.UpdateAsyn(result);
                 }
-                else
-                {
 
+                {
                     string? assignedId = null;
                     if (!string.IsNullOrEmpty(item.AssignedId))
                     {
-
                         assignedId = item.AssignedId;
                         itemInsert.Status = 0;
                     }
                     else
                     {
-
                         itemInsert.Status = 10;
                     }
-
                     itemInsert.CreatedBy = userLogin.Id;
-
                     itemInsert.Assignee = assignedId;
                     itemInsert.VendorId = vendorId;
+                    var result2 = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
+                        item.NoAgreement
+                    );
                     await _unitOfWork.CampagnProfileRe.AddAsync(itemInsert);
+                    if (result2 != null)
+                    {
+                        var result3 = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
+                            item.NoAgreement,
+                            request.Id
+                        );
+                        var listImpactHistory = await _unitOfWork.ImpactRe.GetAllHistory(
+                            new ImpactHistorySerarchRequest()
+                            {
+                                Limit = 1000,
+                                ProfileId = result3.Id
+                            }
+                        );
+                        foreach (var itemHistory in listImpactHistory)
+                        {
+                            itemHistory.CampagnId = int.Parse(request.Id);
+                            itemHistory.ProfileId = int.Parse(result3.Id);
+                            await _unitOfWork.ImpactRe.AddHistoryImpact(itemHistory);
+                        }
+                    }
                 }
-
-
-
             }
-
-
             var campaign = await _unitOfWork.CampagnRe.GetByIdAsync(request.Id);
             campaign.SumCount = listData.Count;
             campaign.ProcessingCount = 0;
@@ -262,10 +280,12 @@ namespace VS.Core.Business
             await UpdateAsyn(campaign);
             return true;
         }
+
         public Task<bool> AssignedTask(string profileId, string userId)
         {
             return _unitOfWork.CampagnProfileRe.AssignedTask(profileId, userId);
         }
+
         public async Task<CampangeProfileInforReponse> GetIno(string id)
         {
             var result = await _unitOfWork.CampagnProfileRe.GetByIdAsync(id);
@@ -275,28 +295,23 @@ namespace VS.Core.Business
             };
             if (result == null)
             {
-
                 return reponse;
             }
 
-            reponse.campagn = await _unitOfWork.CampagnRe.GetByIdAsync(result.CampaignId.ToString());
+            reponse.campagn = await _unitOfWork.CampagnRe.GetByIdAsync(
+                result.CampaignId.ToString()
+            );
 
+            var allImpactHistory = await _unitOfWork.ImpactRe.GetALl(
+                new ImpactHistorySerarchRequest() { ProfileId = id }
+            );
 
-            var allImpactHistory = await _unitOfWork.ImpactRe.GetALl(new ImpactHistorySerarchRequest()
-            {
-                ProfileId = id
-            });
+            var listReason = await _unitOfWork.MasterRe.GetALl(
+                new MaterDataRequest()
+                { GroupStatus = reponse.campagn.GroupStatus }
+            );
 
-            var listReason = await _unitOfWork.MasterRe.GetALl(new MaterDataRequest()
-            {
-                GroupStatus = reponse.campagn.GroupStatus
-
-            });
-
-            var listUser = await _unitOfWork.Employees.GetALl(new EmployeeSearchRequest()
-            {
-
-            });
+            var listUser = await _unitOfWork.Employees.GetALl(new EmployeeSearchRequest() { });
 
             reponse.ListUser = listUser.Data;
 
@@ -321,17 +336,16 @@ namespace VS.Core.Business
             reponse.StatusProfile = statusText;
             reponse.ListReason = listReason.Data;
             return reponse;
-
-
         }
 
         public async Task<bool> HandleCase(CampaignProfile_caseRequest request)
         {
-            return await _unitOfWork.CampagnProfileRe.HanldleCase(request.Id, request.ResetCase, request.Skipp);
-
-
+            return await _unitOfWork.CampagnProfileRe.HanldleCase(
+                request.Id,
+                request.ResetCase,
+                request.Skipp
+            );
         }
-
 
         public async Task<bool> UpdateOverViewAllCampagn()
         {
@@ -342,15 +356,17 @@ namespace VS.Core.Business
             }
             return true;
         }
+
         public async Task<bool> ResetCase(string campagnCase = "11")
         {
-            var allCampang = await _unitOfWork.CampagnProfileRe.GetALLAsiggnee(new GetAllProfileByCampang()
-            {
-                Id = campagnCase,
-                Skipp = 0,
-                Limit = 20000
-
-            });
+            var allCampang = await _unitOfWork.CampagnProfileRe.GetALLAsiggnee(
+                new GetAllProfileByCampang()
+                {
+                    Id = campagnCase,
+                    Skipp = 0,
+                    Limit = 20000
+                }
+            );
             foreach (var item in allCampang)
             {
                 item.Status = 20;
@@ -362,19 +378,18 @@ namespace VS.Core.Business
                 item.Assignee = null;
 
                 await _unitOfWork.CampagnProfileRe.UpdateAsyn(item);
-
             }
             return true;
         }
+
         public async Task<Profile> GetProfileByNoAgree(string noAgree)
         {
             return await _unitOfWork.CampagnProfileRe.GetByNoAgreement(noAgree);
         }
+
         public async Task<Profile> GetProfileByNoCMND(string noNational)
         {
             return await _unitOfWork.CampagnProfileRe.GetProfileByNoCMND(noNational);
         }
-
-
     }
 }

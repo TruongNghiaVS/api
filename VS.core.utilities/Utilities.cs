@@ -126,7 +126,6 @@ namespace VS.core.Utilities
             return new DateTime?(new DateTime(item.Value.Year, item.Value.Month, item.Value.Day, 23, 59, 59));
         }
 
-
         public static double? GetDurationAudio(this string? filePath)
         {
 
@@ -135,8 +134,6 @@ namespace VS.core.Utilities
             Byte[] bytes = null;
             using (var webClient = new WebClient())
             {
-
-
                 try
                 {
                     bytes = webClient.DownloadData(path);
@@ -170,12 +167,7 @@ namespace VS.core.Utilities
                 }
                 return 0;
             }
-
-
-
-
         }
-
         public static string GetFileRecordingFile(string fileAudio = "out-0383338840-9005-20230119-081349-1674116029.387926.wav", DateTime? callDate = null)
         {
             if (string.IsNullOrEmpty(fileAudio))

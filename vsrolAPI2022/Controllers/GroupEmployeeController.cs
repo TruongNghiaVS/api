@@ -59,6 +59,7 @@ namespace vsrolAPI2022.Controllers
                 Type = request.Type
 
             };
+
             var resultSearch = await _groupEmpBussiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
         }

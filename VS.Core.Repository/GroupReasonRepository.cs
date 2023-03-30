@@ -78,7 +78,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<GroupReasonIndexModel>(_Sql.Group_reason_getAll, new
+                    var result = await con.QueryAsync<GroupReasonIndexModel>(_Sql.Group_sp_Reason_getAll, new
                     {
                         request.Token,
                         request.From,
@@ -108,6 +108,44 @@ namespace VS.Core.Repository
                 return null;
             }
         }
+
+
+        public async Task<ReasonReponse> getAllStatus(int? vendorId, int? userId)
+        {
+
+
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ReasonIndexModel>(_Sql.Sp_reason_getAllByHistoryReport, new
+                    {
+                        vendorId,
+                        userId
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    if (fistElement != null)
+                    {
+                        totalRecord = fistElement.TotalRecord;
+                    }
+                    var reponse = new ReasonReponse()
+                    {
+                        Total = totalRecord,
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
 
         public async Task<GroupReasonReponse> GetDataForExport(GroupReasonRequest request)
         {

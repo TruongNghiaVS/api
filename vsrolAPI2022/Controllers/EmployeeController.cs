@@ -114,6 +114,7 @@ namespace vsrolAPI2022.Controllers
                 Pass = passNew,
                 Email = employeeAdd.Email,
                 UpdatedBy = user.Id,
+                LineId = employeeAdd.LineId,
                 IsActive = true,
                 VendorId = vendorId,
                 UserName = employeeAdd.UserName
@@ -222,6 +223,7 @@ namespace vsrolAPI2022.Controllers
             accoutUpdate.Email = request.Email;
             accoutUpdate.IsActive = request.Status == 1;
             accoutUpdate.UpdatedBy = user.Id;
+
             if (!string.IsNullOrEmpty(request.LineCode))
             {
                 accoutUpdate.LineCode = request.LineCode;

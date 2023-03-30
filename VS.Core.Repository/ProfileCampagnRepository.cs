@@ -209,8 +209,22 @@ namespace VS.Core.Repository
             }
 
         }
+        public async Task<Profile> GetBYNoAreeMentLasted(string profileId)
+        {
+            using (var con = GetConnection())
+            {
+
+                var sql = "select top 1 * from CampaignProfile e " + " WHERE NoAgreement = @profileId order by e.UpdateAt desc ";
 
 
+                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId });
+                if (result == null)
+                {
+                    return null;
+                }
+                return result;
+            }
+        }
         public async Task<Profile> GetByNoAgreement(string profileId, string campanId = null)
         {
             using (var con = GetConnection())
@@ -230,6 +244,9 @@ namespace VS.Core.Repository
                 return result;
             }
         }
+
+
+
 
 
         public async Task<Profile> GetProfileByNoCMND(string noNational)

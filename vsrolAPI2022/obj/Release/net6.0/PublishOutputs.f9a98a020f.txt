@@ -1,6 +1,8 @@
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\VS.core.API.exe
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\appsettings - Copy.Development.json.bk
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\appsettings - Copy.json.bk
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\VS.core.API.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\VS.core.API.deps.json
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\obj\Release\net6.0\PubTmp\Out\VS.core.API.runtimeconfig.json

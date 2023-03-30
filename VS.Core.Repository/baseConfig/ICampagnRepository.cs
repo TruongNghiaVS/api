@@ -8,6 +8,10 @@ namespace VS.Core.Repository.baseConfig
     {
         Task<CampagnRequestReponse> GetALl(CampagnRequest request);
 
+
+        Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(CampangnOverviewByIdRequest request);
+
+
         Task<List<Campagn>> GetALlCampang();
         Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request);
         Task<bool> CheckDuplicate(string code);

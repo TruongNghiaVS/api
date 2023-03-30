@@ -247,6 +247,8 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.VendorId,
+                        request.UserId,
                         request.Limit,
                         request.Page,
                         request.OrderBy

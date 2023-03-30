@@ -49,6 +49,33 @@ namespace VS.Core.Repository
 
         }
 
+        public async Task<int> AddHistoryImpact(ImpactHistory entity)
+        {
+
+            var par = GetParams(entity, new string[] {
+
+                nameof(entity.Id),
+
+                nameof(entity.Deleted)
+            }, "Id");
+
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.Sp_ImpactHistory_Insert2, par, commandType: CommandType.StoredProcedure);
+
+                    return 1;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+
+            }
+
+        }
+
 
 
         public async Task<bool> CheckDuplicate(string code)
@@ -66,6 +93,32 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<List<ImpactHistory>> GetAllHistory(ImpactHistorySerarchRequest request)
+        {
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ImpactHistory>(_Sql.CampaignImpact_getAllHistory, new
+                    {
+
+                        request.ProfileId,
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                    if (result != null)
+                    {
+                        return result.ToList();
+                    }
+                    return new List<ImpactHistory>();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<ImpactHistory>();
+            }
+        }
         public async Task<ImpactHistoryReponse> GetALl(ImpactHistorySerarchRequest request)
         {
             int page = request.Page;
@@ -107,9 +160,6 @@ namespace VS.Core.Repository
                 return null;
             }
         }
-
-
-
 
         public async Task<int> UpdateAsyn(ImpactHistory entity)
         {

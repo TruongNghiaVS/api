@@ -13,6 +13,7 @@
         public string? Pass { get; set; }
         public string? CreateBy { get; set; }
 
+        public int? LineId { get; set; }
 
     }
     public class EmployeeUpdate

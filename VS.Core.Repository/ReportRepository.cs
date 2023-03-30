@@ -236,14 +236,14 @@ namespace VS.Core.Repository
 
                     var dataFirst = result.FirstOrDefault();
                     var total = 0;
-                    if (dataFirst != null)
-                    {
-                        total = dataFirst.TotalRecord;
-                    }
+                    //if (dataFirst != null)
+                    //{
+                    //    total = dataFirst.TotalRecord;
+                    //}
                     var reponse = new ReportCDRReponse()
                     {
                         Data = result?.ToList(),
-                        Total = total
+                        Total = 0
                     };
                     return reponse;
                 }

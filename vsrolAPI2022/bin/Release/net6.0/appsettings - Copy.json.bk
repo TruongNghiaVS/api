@@ -1,0 +1,17 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "stringConnect": "Server=DESKTOP-8VPTK1U; Initial Catalog=vsroldev2022;Persist Security Info=False;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;Integrated Security=True;"
+  },
+  "AllowedHosts": "*",
+  "Jwt": {
+    "Issuer": "https://vietstargroup.vn/",
+    "Audience": "nguyentruongnghia",
+    "Key": "product of vietstargroup"
+  }
+} 

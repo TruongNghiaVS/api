@@ -33,6 +33,11 @@ namespace VS.Core.Business
             return _unitOfWork.GroupRe.GetALl(request);
         }
 
+        public Task<ReasonReponse> getAllStatus(int? vendorId, int? userId)
+        {
+            return _unitOfWork.GroupRe.getAllStatus(vendorId, userId);
+        }
+
         public Task<GroupReason> Getbyid(string Id)
         {
             return _unitOfWork.GroupRe.GetByIdAsync(Id);

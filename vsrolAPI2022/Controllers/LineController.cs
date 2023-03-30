@@ -39,7 +39,7 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/line/getAll")]
         public async Task<IResult> getAll(LineSearchInput request)
         {
-            //var user = GetCurrentUser();
+            var user = GetCurrentUser();
 
             var searchRequest = new LineManagementRequest()
             {
@@ -49,6 +49,8 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+                VendorId = user.VendorId != null ? user.VendorId : null,
+                Userid = int.Parse(user.Id),
                 From = request.From
 
             };
@@ -84,7 +86,11 @@ namespace vsrolAPI2022.Controllers
             {
                 Code = employeeAdd.Code,
                 Name = employeeAdd.Name,
-                Status = employeeAdd.Status,
+                Status = 2,
+
+                VendorId = user.VendorId,
+                CreatedBy = user.CreatedBy
+
 
             };
             var result = await _business.AddAsync(account);

@@ -73,6 +73,9 @@ namespace VS.core.Request
     {
         public string Msg { get; set; }
 
+        public int? Userid { get; set; }
+        public int? VendorId { get; set; }
+
         public LineManagementRequest()
         {
             this.Page = 1;
@@ -101,6 +104,21 @@ namespace VS.core.Request
     }
 
 
+    public class ReasonReponse : BaseSearchRepons
+
+    {
+        public ReasonReponse()
+        {
+            Total = 0;
+        }
+    }
+
+    public class CampangnOverviewByIdRequest
+    {
+        public string? CampaignId { get; set; }
+
+    }
+
     public class CampagnRequest : BaseSearchRequest
     {
         public string? Msg { get; set; }
@@ -127,7 +145,28 @@ namespace VS.core.Request
     }
 
 
+    public class CampangnOverviewByIdReponse
+    {
+        public int? NumberHaveNotAssigee { get; set; }
 
+        public int? NumberHasAssigee { get; set; }
+        public int? Total { get; set; }
+
+        public int? NumberHasClose { get; set; }
+
+        public int? NumberHasKeep { get; set; }
+
+        public int? NumberProcessing { get; set; }
+
+        public CampangnOverviewByIdReponse()
+        {
+            NumberHaveNotAssigee = NumberHasAssigee = NumberHasClose = NumberHasKeep = 0;
+            NumberProcessing = 0;
+        }
+
+
+
+    }
     public class OverViewCampangnReponse : BaseSearchRepons
 
     {
@@ -594,12 +633,41 @@ namespace VS.core.Request
     }
 
 
-    public class ReportCDRItemExport : ReportCDRItem
+    public class ReportCDRItemExport
     {
-        public string? UserName { get; set; }
+        public string? Src { get; set; }
+        public DateTime? Calldate { get; set; }
+        public string? Dst { get; set; }
+        private string? Disposition { get; set; }
+        private double? DurationReal { get; set; }
 
-        public string? FullName { get; set; }
+        public string DurationRealText
+        {
 
+            get
+            {
+                if (!DurationReal.HasValue)
+                {
+                    return "00:00:00";
+                }
+                TimeSpan t = TimeSpan.FromSeconds(DurationReal.Value);
+                string s = string.Format("{0}:{1}:{2}", ((int)t.TotalHours), t.Minutes, t.Seconds);
+                return s;
+            }
+        }
+        public string? Duration { get; set; }
+        private string? Recordingfile { get; set; }
+        public string? RecordingfileUrl
+        {
+            get
+            {
+                if (Src.StartsWith("1"))
+                {
+                    return "http://118.69.182.32:7879/api/getFileAudio?filePath=" + Recordingfile;
+                }
+                return "http://42.115.94.180:7878/api/getFileAudio?filePath=" + Recordingfile;
+            }
+        }
 
     }
 

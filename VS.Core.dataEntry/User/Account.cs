@@ -18,6 +18,7 @@
 
         public string? LineCode { get; set; }
 
+        public int? LineId { get; set; }
 
         public string? Pass { get; set; }
 
