@@ -57,7 +57,7 @@ namespace VS.Core.Repository
         {
             using (var con = GetConnection())
             {
-                var sql = "select top 1  * from Employees d where d.LineCode = @LineCode";
+                var sql = "select top 1  * from Employees d where d.LineCode = @LineCode  ";
                 var result = await con.QuerySingleOrDefaultAsync<Account>(sql, new { LineCode = lineCode });
                 return result;
             }

@@ -7,8 +7,9 @@ namespace VS.Core.Repository.baseConfig
     public interface IReportTalkTimeRepository : IGenericRepository<ReportTalkTime>
     {
         Task<ReportTalkTimeReponse> GetALl(ReportTalkTimeRequest request);
-
+        Task<List<ReportTalkTimeIndexModel>> GetAllDeleted();
         Task<int> DeleteAll();
+        Task<int> UpdateFileDeleted(string filePath);
         Task<int> DeleteAllRangeFromTo(DateTime from, DateTime to);
         Task<DateTime?> GetMaxLinked(string type);
 

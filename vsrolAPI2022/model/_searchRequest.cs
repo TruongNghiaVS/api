@@ -41,7 +41,7 @@
 
     public partial class LineSearchInput : BaseInputSearch
     {
-
+        public int? lineIdAdd { get; set; }
 
     }
 

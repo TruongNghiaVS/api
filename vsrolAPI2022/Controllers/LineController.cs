@@ -48,6 +48,7 @@ namespace vsrolAPI2022.Controllers
                 Status = request.Status,
                 Page = request.Page,
                 Limit = request.Limit,
+                lineIdAdd = request.lineIdAdd,
                 To = request.To,
                 VendorId = user.VendorId != null ? user.VendorId : null,
                 Userid = int.Parse(user.Id),
@@ -118,6 +119,7 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Không có thông tin profile tương ứng");
             }
             accoutUpdate.Name = request.Name;
+            accoutUpdate.LineId = request.LineId;
             accoutUpdate.Status = request.Status;
             var result = await _business.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);

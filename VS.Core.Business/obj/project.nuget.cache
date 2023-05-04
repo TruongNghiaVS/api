@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ga2REefLMjtD3tT+fNaOt7Jv4q26ApNSjRDRslq5+rW2kruCC86pFgYqIOVHiTJXZCdA4elGMwHLzLt53GaZdQ==",
+  "dgSpecHash": "cf52phEbU+MseEFKYpn4YmBezIwTDBvTDfuKuLdQTD2xVxXyX+uO/8dQtyFL09FZhi+LYKtyuGYA/sIAuyDF+A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.Core.Business\\VS.Core.Business.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.midi\\2.1.0\\naudio.midi.2.1.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.wasapi\\2.1.0\\naudio.wasapi.2.1.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\naudio.winmm\\2.1.0\\naudio.winmm.2.1.0.nupkg.sha512",
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

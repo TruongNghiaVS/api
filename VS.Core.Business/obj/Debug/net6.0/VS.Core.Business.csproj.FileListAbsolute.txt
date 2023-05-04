@@ -1,8 +1,3 @@
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.csproj.AssemblyReference.cache
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.AssemblyInfoInputs.cache
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.AssemblyInfo.cs
-C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.csproj.CoreCompileInputs.cache
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.Core.Business.deps.json
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.Core.Business.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.Core.Business.pdb
@@ -16,6 +11,11 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Utilities.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Report.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\bin\Debug\net6.0\VS.core.Request.pdb
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.csproj.AssemblyReference.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.AssemblyInfoInputs.cache
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.AssemblyInfo.cs
+C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.csproj.CoreCompileInputs.cache
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.csproj.CopyComplete
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\VS.Core.Business.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.Business\obj\Debug\net6.0\refint\VS.Core.Business.dll

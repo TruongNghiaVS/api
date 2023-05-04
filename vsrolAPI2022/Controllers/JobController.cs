@@ -49,14 +49,10 @@ namespace vsrolAPI2022.Controllers
         {
             var resultSearch = await _handleReportBussiness.CalTalkingTime();
             Task.WaitAll();
-
-
             var timerun = DateTime.UtcNow;
-            timerun = timerun.AddHours(-1);
+            timerun = timerun.AddHours(-3);
             var startTime = timerun;
             var endTime = DateTime.UtcNow.AddDays(1).EndDateTime();
-
-
             while (startTime < endTime)
             {
                 await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
@@ -67,13 +63,10 @@ namespace vsrolAPI2022.Controllers
                 Task.WaitAll();
                 startTime = startTime.AddDays(1);
             }
-
             Task.WaitAll();
-
             return Ok(true);
 
         }
-
         [HttpGet("~/api/job/GroupByDate")]
         public async Task<ActionResult> GroupByDate()
         {
@@ -87,7 +80,6 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
 
         }
-
 
         [HttpGet("~/api/job/rebuildBeginAll")]
         public async Task<ActionResult> RebuildBegin()
@@ -140,8 +132,6 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-
-
         [HttpGet("~/api/job/RunSumCampagnOverview")]
         public async Task<ActionResult> RunSumCampagnOverview()
         {
@@ -150,9 +140,6 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
 
         }
-
-
-
 
         [HttpPost("~/api/job/runAll")]
         public async Task<ActionResult> RunAll()
@@ -181,9 +168,7 @@ namespace vsrolAPI2022.Controllers
 
         private async void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-
             var resultSearch = await _handleReportBussiness.CalTalkingTime();
-
         }
 
 
@@ -196,7 +181,13 @@ namespace vsrolAPI2022.Controllers
             });
 
         }
-
+        [HttpGet("~/api/job/DeleteFileRecoring")]
+        public async Task<ActionResult> DeleteFileRecoring()
+        {
+            var resultSearch = await _handleReportBussiness.DeleteFileRecoring();
+            Task.WaitAll();
+            return Ok(true);
+        }
 
     }
 }

@@ -75,7 +75,10 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin tên đăng nhập");
             }
-
+            if (!employeeAdd.LineId.HasValue)
+            {
+                return Results.BadRequest("Chưa chọn thông tin lineCode");
+            }
             if (string.IsNullOrEmpty(employeeAdd.Pass))
             {
                 return Results.BadRequest("Không có thông tin mật khẩu");

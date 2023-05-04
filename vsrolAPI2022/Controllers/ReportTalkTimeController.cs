@@ -76,8 +76,6 @@ namespace vsrolAPI2022.Controllers
             _input.VendorId = VendorId;
             _input.UserId = currentUser.Id;
             var resultSearch = await _reportTalkTimeGroupByDayBussiness.Export(_input);
-
-
             return Results.Ok(resultSearch);
         }
 

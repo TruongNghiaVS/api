@@ -1,4 +1,6 @@
-﻿using VS.core.Utilities;
+﻿using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using VS.core.Utilities;
 using VS.Core.Business.Interface;
 using VS.Core.dataEntry.User;
 using VS.Core.Repository.baseConfig;
@@ -18,9 +20,11 @@ namespace VS.Core.Business
         public async Task<int> CalTalkingTime(DateTime? dateGet)
         {
             var timerun = DateTime.UtcNow;
-            timerun = timerun.AddHours(-1);
+            timerun = timerun.AddHours(-3);
             var startTime = timerun;
             var endTime = DateTime.Now;
+
+
             //await _unitOfWork1.ReportTalkTimeRepository.DeleteAllRangeFromTo(startTime, endTime);
             Task.WaitAll();
             if (dateGet == null)
@@ -29,7 +33,7 @@ namespace VS.Core.Business
             }
             var i = 0;
 
-            while (i < 1)
+            while (i < 2)
             {
                 IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
                 if (i == 0)
@@ -46,8 +50,6 @@ namespace VS.Core.Business
                 }
                 else
                 {
-
-
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe2(
                         new core.Request.HandlelFileRecordingRequest()
                         {
@@ -91,7 +93,8 @@ namespace VS.Core.Business
                         reportTalkTime.VendorId = usergetByLinecode.VendorId;
                     }
 
-                    await _unitOfWork1.ReportTalkTimeRepository.AddAsync(reportTalkTime);
+                    var resultInsert = await _unitOfWork1.ReportTalkTimeRepository.AddAsync(reportTalkTime);
+
                 }
                 Task.WaitAll();
             }
@@ -100,6 +103,88 @@ namespace VS.Core.Business
             return await Task.FromResult(0);
 
 
+        }
+
+        public async Task<int> DeleteFileRecoring(bool? DeleteAll = false)
+        {
+            var index = 1;
+            var listLine19 = new List<string>();
+            var listLine12 = new List<string>();
+
+            var allRecored = await _unitOfWork1.ReportTalkTimeRepository.GetAllDeleted();
+            index = allRecored.Count;
+
+            if (index > 1)
+            {
+                foreach (var item in allRecored)
+                {
+                    if (item.LineCode.StartsWith("1"))
+                    {
+                        listLine19.Add(item.FileRecording);
+                    }
+                    else
+                    {
+
+                        listLine12.Add(item.FileRecording);
+                    }
+                }
+            }
+
+
+
+
+            foreach (var item in listLine19)
+            {
+
+
+                var linkUrl = "http://192.168.1.9:3002";
+
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(linkUrl);
+                    var data = new StringContent(JsonConvert.SerializeObject(new
+                    {
+                        filePath = item
+                    }));
+                    data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    var reponse = await client.PostAsync("api/deleteFile", data);
+                    var result = await reponse.Content.ReadAsStringAsync();
+                    if (reponse.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        await _unitOfWork1.ReportTalkTimeRepository.UpdateFileDeleted(item);
+
+                    }
+                }
+            }
+
+            foreach (var item in listLine12)
+            {
+
+
+
+                var linkUrl = "http://192.168.1.12:3002";
+
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(linkUrl);
+                    var data = new StringContent(JsonConvert.SerializeObject(new
+                    {
+                        filePath = item
+                    }));
+                    data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    var reponse = await client.PostAsync("api/deleteFile", data);
+                    var result = await reponse.Content.ReadAsStringAsync();
+                    if (reponse.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        await _unitOfWork1.ReportTalkTimeRepository.UpdateFileDeleted(item);
+
+                    }
+                }
+            }
+
+            return 1;
         }
 
         public async Task<int> CalTalkingTimeAll(DateTime? dateGet)

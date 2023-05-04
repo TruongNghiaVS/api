@@ -222,7 +222,7 @@ namespace vsrolAPI2022.Controllers
             }
             accoutUpdate.SkipContent = request.SkipContent;
             accoutUpdate.UpdatedBy = user.Id;
-            var result = await _campagnBusiness.UpdateProfile(accoutUpdate);
+            var result = await _campagnBusiness.UpdateProfileSkip(accoutUpdate);
             return Results.Ok(result);
         }
 

@@ -98,6 +98,11 @@ namespace VS.Core.Business
             return _unitOfWork.CampagnProfileRe.UpdateAsyn(entity);
         }
 
+        public Task<int> UpdateProfileSkip(Profile entity)
+        {
+            return _unitOfWork.CampagnProfileRe.UpdateSkip(entity);
+        }
+
         public Task<int> AddProfile(Profile entity)
         {
             return _unitOfWork.CampagnProfileRe.AddAsync(entity);
@@ -229,9 +234,9 @@ namespace VS.Core.Business
                     result.UpdatedBy = item.UpdatedBy;
                     result.UpdatedBy = userLogin.Id;
 
-                    await _unitOfWork.CampagnProfileRe.UpdateAsyn(result);
+                    await _unitOfWork.CampagnProfileRe.ImportUpdate(result);
                 }
-
+                else
                 {
                     string? assignedId = null;
                     if (!string.IsNullOrEmpty(item.AssignedId))
@@ -260,7 +265,7 @@ namespace VS.Core.Business
                             new ImpactHistorySerarchRequest()
                             {
                                 Limit = 1000,
-                                ProfileId = result3.Id
+                                ProfileId = result2.Id
                             }
                         );
                         foreach (var itemHistory in listImpactHistory)

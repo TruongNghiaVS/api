@@ -76,6 +76,8 @@ namespace VS.core.Request
         public int? Userid { get; set; }
         public int? VendorId { get; set; }
 
+        public int? lineIdAdd { get; set; }
+
         public LineManagementRequest()
         {
             this.Page = 1;

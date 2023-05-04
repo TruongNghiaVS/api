@@ -18,6 +18,7 @@ namespace VS.Core.Business.Interface
         Task<Profile> GetProfileByNoCMND(string noNational);
         Task<int> AddProfile(Profile entity);
         Task<int> UpdateProfile(Profile entity);
+        Task<int> UpdateProfileSkip(Profile entity);
         Task DeleteProfile(Profile entity);
         Task<bool> HandleImport(CampanginDataImportRequest request, Account userLogin);
         Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request);

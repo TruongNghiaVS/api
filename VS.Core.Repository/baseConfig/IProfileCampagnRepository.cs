@@ -7,6 +7,8 @@ namespace VS.Core.Repository.baseConfig
     public interface IProfileCampagnRepository : IGenericRepository<Profile>
     {
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
+        Task<int> UpdateSkip(Profile entity);
+
 
         Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request);
 
@@ -19,6 +21,8 @@ namespace VS.Core.Repository.baseConfig
         Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp);
 
         Task<int> ResetCase(Profile entity);
+
+        Task<int> ImportUpdate(Profile entity);
 
     }
 }

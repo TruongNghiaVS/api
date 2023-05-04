@@ -142,6 +142,57 @@ namespace VS.Core.Repository
 
             }
         }
+
+        public async Task<int> UpdateSkip(Profile entity)
+        {
+            entity.CreateAt = DateTime.Now;
+            entity.UpdateAt = DateTime.Now;
+            var par = GetParams(entity, new string[] {
+                nameof(entity.UpdateAt),
+                nameof(entity.CreateAt),
+                nameof(entity.Deleted),
+                nameof(entity.CreatedBy)
+            });
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.CampaignProfile_update_skip, par, commandType: CommandType.StoredProcedure);
+                    return 1;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+
+            }
+        }
+
+        public async Task<int> ImportUpdate(Profile entity)
+        {
+            entity.CreateAt = DateTime.Now;
+            entity.UpdateAt = DateTime.Now;
+            var par = GetParams(entity, new string[] {
+                nameof(entity.UpdateAt),
+                nameof(entity.CreateAt),
+                nameof(entity.Deleted),
+                nameof(entity.CreatedBy)
+            });
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.Sp_CampaignProfile_import_update, par, commandType: CommandType.StoredProcedure);
+                    return 1;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+
+            }
+        }
+
         public async Task<bool> AssignedTask(string profileId, string userId)
         {
             using (var con = GetConnection())
@@ -226,6 +277,7 @@ namespace VS.Core.Repository
             }
         }
         public async Task<Profile> GetByNoAgreement(string profileId, string campanId = null)
+
         {
             using (var con = GetConnection())
             {
@@ -236,12 +288,23 @@ namespace VS.Core.Repository
                 {
                     sql = "SELECT * FROM CampaignProfile " + " WHERE NoAgreement = @profileId and campaignId = @campanId";
                 }
-                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId, campanId = campanId });
-                if (result == null)
+               ;
+
+                try
                 {
+                    var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId, campanId = campanId });
+                    if (result == null)
+                    {
+                        return null;
+                    }
+                    return result;
+                }
+                catch (Exception e)
+                {
+
                     return null;
                 }
-                return result;
+
             }
         }
 
@@ -253,7 +316,7 @@ namespace VS.Core.Repository
         {
             using (var con = GetConnection())
             {
-                var sql = "SELECT top 1 * FROM CampaignProfile " + " WHERE NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId";
+                var sql = "SELECT top 1 * FROM CampaignProfile " + " WHERE NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId order by id desc";
                 var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = noNational });
 
                 if (result == null)

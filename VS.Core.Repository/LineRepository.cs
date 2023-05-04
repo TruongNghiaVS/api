@@ -106,6 +106,7 @@ namespace VS.Core.Repository
                         request.VendorId,
                         request.Userid,
                         status,
+                        request.lineIdAdd,
                         request.Limit,
                         request.Page,
                         request.OrderBy

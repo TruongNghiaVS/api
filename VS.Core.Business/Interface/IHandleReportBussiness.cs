@@ -4,5 +4,7 @@
     {
         Task<int> CalTalkingTime(DateTime? dateGet = null);
         Task<int> CalTalkingTimeAll(DateTime? dateGet = null);
+
+        Task<int> DeleteFileRecoring(bool? DeleteAll = false);
     }
 }

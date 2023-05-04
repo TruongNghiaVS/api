@@ -11,6 +11,8 @@
 
         public int? Status { get; set; }
 
+        public int? LineId { get; set; }
+
 
     }
 

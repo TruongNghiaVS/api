@@ -74,6 +74,23 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<int> UpdateFileDeleted(string filePath)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "update ReportTalkTime set deleteFile = 1 where  FileRecording = @filePath  ";
+                var result = await con.QueryAsync(sql, new
+                {
+                    filePath
+                }, commandType: CommandType.Text);
+
+                return 1;
+            }
+        }
+
+
+
+
         public async Task<int> DeleteAllRangeFromTo(DateTime from, DateTime to)
         {
             using (var con = GetConnection())
@@ -103,6 +120,38 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<List<ReportTalkTimeIndexModel>> GetAllDeleted()
+        {
+            ReportTalkTimeRequest request = new ReportTalkTimeRequest()
+            {
+                Limit = 100
+            };
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ReportTalkTimeIndexModel>(_Sql.ReportTalkTime_getAllNotDeleteFile, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    }, commandType: CommandType.StoredProcedure);
+                    return result.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<ReportTalkTimeIndexModel>();
+            }
+        }
         public async Task<ReportTalkTimeReponse> GetALl(ReportTalkTimeRequest request)
         {
             int page = request.Page;
@@ -113,7 +162,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<CallLogIndexModel>(_Sql.ReportTalkTime_getAll, new
+                    var result = await con.QueryAsync<ReportTalkTimeIndexModel>(_Sql.ReportTalkTime_getAll, new
                     {
                         request.Token,
                         request.From,

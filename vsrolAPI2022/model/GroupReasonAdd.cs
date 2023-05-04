@@ -25,6 +25,8 @@
 
         public int? Status { get; set; }
 
+        public int? LineId { get; set; }
+
 
 
 
@@ -32,9 +34,10 @@
     public class LineUpdate
     {
         public string? Id { get; set; }
-        public string? Code { get; set; }
+
         public string? Name { get; set; }
         public int? Status { get; set; }
+        public int? LineId { get; set; }
 
     }
 

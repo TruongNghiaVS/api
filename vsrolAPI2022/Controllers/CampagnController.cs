@@ -213,37 +213,47 @@ namespace vsrolAPI2022.Controllers
 
         private DateTime? ReadvalueDateExcel(ExcelWorksheet excelworksheet, int row, int col)
         {
-            var cellRange = excelworksheet.Cells[row, col];
-            if (cellRange != null)
+            try
             {
-
-                if (cellRange.Text != null)
+                var cellRange = excelworksheet.Cells[row, col];
+                if (cellRange != null)
                 {
-                    try
-                    {
 
-                        return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
-
-                    }
-                    catch (Exception)
+                    if (cellRange.Text != null)
                     {
                         try
                         {
-                            return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+
+                            return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
+
                         }
                         catch (Exception)
                         {
+                            try
+                            {
+                                return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+                            }
+                            catch (Exception)
+                            {
+
+                                return null;
+                            }
 
                             return null;
                         }
 
-                        return null;
                     }
 
                 }
-
+                return null;
             }
-            return null;
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+
 
         }
 
@@ -251,106 +261,142 @@ namespace vsrolAPI2022.Controllers
 
         private DateTime? ReadvalueDateExcel2(ExcelWorksheet excelworksheet, int row, int col)
         {
-            var cellRange = excelworksheet.Cells[row, col];
-            if (cellRange != null)
+            try
             {
-
-                if (cellRange.Text != null)
+                var cellRange = excelworksheet.Cells[row, col];
+                if (cellRange != null)
                 {
-                    try
-                    {
 
-                        return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
-
-                    }
-                    catch (Exception)
+                    if (cellRange.Text != null)
                     {
                         try
                         {
-                            return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+
+                            return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
+
                         }
                         catch (Exception)
                         {
+                            try
+                            {
+                                return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+                            }
+                            catch (Exception)
+                            {
+
+                                return null;
+                            }
 
                             return null;
                         }
 
-                        return null;
                     }
 
                 }
-
+                return null;
             }
-            return null;
+            catch (Exception)
+            {
+
+                return null;
+            }
+
 
         }
 
         private float ReadvaluefloatExcel(ExcelWorksheet excelworksheet, int row, int col)
         {
-            var cellRange = excelworksheet.Cells[row, col];
-            if (cellRange == null)
+            try
             {
+                var cellRange = excelworksheet.Cells[row, col];
+                if (cellRange == null)
+                {
+                    return 0;
+                }
+
+                if (cellRange.Value == null)
+
+                {
+
+                    return 0;
+                }
+                var valueCell = cellRange.Value.ToString();
+
+                float b1 = 0;
+                if (!float.TryParse(valueCell, out b1))
+                {
+
+                }
+                return b1;
+            }
+            catch (Exception)
+            {
+
                 return 0;
             }
 
-            if (cellRange.Value == null)
-
-            {
-
-                return 0;
-            }
-            var valueCell = cellRange.Value.ToString();
-
-            float b1 = 0;
-            if (!float.TryParse(valueCell, out b1))
-            {
-
-            }
-            return b1;
         }
 
         private int ReadvalueintExcel(ExcelWorksheet excelworksheet, int row, int col)
         {
-            var cellRange = excelworksheet.Cells[row, col];
-            if (cellRange == null)
+            try
             {
+                var cellRange = excelworksheet.Cells[row, col];
+                if (cellRange == null)
+                {
+                    return 0;
+                }
+
+                if (cellRange.Value == null)
+
+                {
+
+                    return 0;
+                }
+                var valueCell = cellRange.Value.ToString();
+
+                int b1 = 0;
+                if (!int.TryParse(valueCell, out b1))
+                {
+
+                }
+                return b1;
+            }
+            catch (Exception)
+            {
+
                 return 0;
             }
 
-            if (cellRange.Value == null)
-
-            {
-
-                return 0;
-            }
-            var valueCell = cellRange.Value.ToString();
-
-            int b1 = 0;
-            if (!int.TryParse(valueCell, out b1))
-            {
-
-            }
-            return b1;
         }
 
         private string? ReadvaluestringExcelWidthNull(ExcelWorksheet excelworksheet, int row, int col)
         {
-            var cellRange = excelworksheet.Cells[row, col];
-            if (cellRange == null)
+            try
             {
-                return null;
+                var cellRange = excelworksheet.Cells[row, col];
+                if (cellRange == null)
+                {
+                    return null;
+                }
+
+                if (cellRange.Value == null)
+
+                {
+
+                    return null;
+                }
+                var valueCell = cellRange.Value.ToString();
+
+
+                return valueCell;
+            }
+            catch (Exception)
+            {
+
+                return "";
             }
 
-            if (cellRange.Value == null)
-
-            {
-
-                return null;
-            }
-            var valueCell = cellRange.Value.ToString();
-
-
-            return valueCell;
         }
 
 
@@ -358,107 +404,131 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/campagn/importDataById")]
         public async Task<IResult> ImportData([FromForm] CampanginDataImport request)
         {
-            var userLogin = new Account()
+            int k = 0;
+            try
             {
-                Id = "1"
-            };
-            var fileRequest = request.FileData;
-            if (fileRequest == null || fileRequest.Count == 0)
-            {
-                return Results.BadRequest("No error report");
-            }
-            var fileHandler = fileRequest.FirstOrDefault();
-            if (fileHandler == null)
-            {
-                return Results.BadRequest("No error report");
-            }
-            List<ProfileHandler> profileList = new List<ProfileHandler>();
-            await using (MemoryStream ms = new MemoryStream())
-            {
-                await fileHandler.CopyToAsync(ms);
-                using (ExcelPackage package = new ExcelPackage(ms))
+
+
+                var userLogin = new Account()
                 {
-                    ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
-                    int totalRows = workSheet.Dimension.Rows;
-
-                    for (int i = 2; i <= totalRows; i++)
+                    Id = "1"
+                };
+                var fileRequest = request.FileData;
+                if (fileRequest == null || fileRequest.Count == 0)
+                {
+                    return Results.BadRequest("No error report");
+                }
+                var fileHandler = fileRequest.FirstOrDefault();
+                if (fileHandler == null)
+                {
+                    return Results.BadRequest("No error report");
+                }
+                List<ProfileHandler> profileList = new List<ProfileHandler>();
+                await using (MemoryStream ms = new MemoryStream())
+                {
+                    await fileHandler.CopyToAsync(ms);
+                    using (ExcelPackage package = new ExcelPackage(ms))
                     {
-                        if (i < 1)
+                        ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                        int totalRows = workSheet.Dimension.Rows;
+
+                        for (int i = 2; i < totalRows; i++)
                         {
-                            continue;
+                            k = i;
+
+
+                            if (i < 1)
+                            {
+                                continue;
+                            }
+                            var lastDayPad = ReadvalueDateExcel2(workSheet, i, 22);
+                            if (lastDayPad == null)
+                            {
+                                lastDayPad = DateTime.Now;
+                            }
+                            var registerDate = ReadvalueDateExcel(workSheet, i, 5);
+                            var doB = ReadvalueDateExcel(workSheet, i, 3);
+                            string? assigneeId = null;
+
+                            assigneeId = ReadvaluestringExcelWidthNull(workSheet, i, 40);
+                            try
+                            {
+                                profileList.Add(new ProfileHandler
+                                {
+                                    CustomerName = ReadvalueStringExcel(workSheet, i, 2),
+                                    NoAgreement = ReadvalueStringExcel(workSheet, i, 1),
+                                    DayOfBirth = doB,
+                                    NationalId = ReadvalueStringExcel(workSheet, i, 4),
+                                    MobilePhone = ReadvalueStringExcel(workSheet, i, 26),
+                                    Phone1 = ReadvalueStringExcel(workSheet, i, 28),
+                                    HouseNumber = ReadvalueStringExcel(workSheet, i, 27),
+                                    OfficeNumber = ReadvalueStringExcel(workSheet, i, 30),
+                                    OtherPhone = ReadvalueStringExcel(workSheet, i, 29),
+                                    DPD = ReadvalueStringExcel(workSheet, i, 25),
+                                    Email = "",
+
+                                    Road = ReadvalueStringExcel(workSheet, i, 31),
+                                    SuburbanDir = ReadvalueStringExcel(workSheet, i, 32),
+                                    Provice = ReadvalueStringExcel(workSheet, i, 33),
+                                    Road1 = ReadvalueStringExcel(workSheet, i, 34),
+                                    SuburbanDir1 = ReadvalueStringExcel(workSheet, i, 35),
+                                    Provice1 = ReadvalueStringExcel(workSheet, i, 36),
+
+                                    Road2 = "",
+                                    SuburbanDir2 = "",
+                                    Provice2 = "",
+                                    StatusPayMent = ReadvalueStringExcel(workSheet, i, 23),
+
+                                    RegisterDay = registerDate,
+
+                                    DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
+                                    AmountLoan = ReadvaluefloatExcel(workSheet, i, 12),
+                                    EMI = ReadvaluefloatExcel(workSheet, i, 15),
+                                    CampaignId = int.Parse(request.Id),
+                                    //Assignee = "-1",
+                                    TotalFines = ReadvaluefloatExcel(workSheet, i, 19),
+                                    TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 13),
+                                    Tenure = ReadvalueintExcel(workSheet, i, 14),
+                                    NoTenure = ReadvalueintExcel(workSheet, i, 18),
+                                    TotalPaid = 0,
+
+                                    LastPaid = 0,
+                                    LastPadDay = lastDayPad,
+                                    NameProduct = ReadvalueStringExcel(workSheet, i, 7),
+                                    CodeProduct = ReadvalueStringExcel(workSheet, i, 6),
+                                    PriceProduct = ReadvalueStringExcel(workSheet, i, 10),
+                                    NoteFirstTime = ReadvalueStringExcel(workSheet, i, 38),
+                                    NoteRel = ReadvalueStringExcel(workSheet, i, 39),
+                                    CreatedBy = userLogin.Id,
+                                    AssignedId = assigneeId
+
+                                }); ;
+                            }
+                            catch (Exception)
+                            {
+
+
+                            }
+
                         }
-                        var lastDayPad = ReadvalueDateExcel2(workSheet, i, 22);
-                        if (lastDayPad == null)
-                        {
-                            lastDayPad = DateTime.Now;
-                        }
-                        var registerDate = ReadvalueDateExcel(workSheet, i, 5);
-                        var doB = ReadvalueDateExcel(workSheet, i, 3);
-                        string? assigneeId = null;
 
-                        assigneeId = ReadvaluestringExcelWidthNull(workSheet, i, 40);
-                        profileList.Add(new ProfileHandler
-                        {
-                            CustomerName = ReadvalueStringExcel(workSheet, i, 2),
-                            NoAgreement = ReadvalueStringExcel(workSheet, i, 1),
-                            DayOfBirth = doB,
-                            NationalId = ReadvalueStringExcel(workSheet, i, 4),
-                            MobilePhone = ReadvalueStringExcel(workSheet, i, 26),
-                            Phone1 = ReadvalueStringExcel(workSheet, i, 28),
-                            HouseNumber = ReadvalueStringExcel(workSheet, i, 27),
-                            OfficeNumber = ReadvalueStringExcel(workSheet, i, 30),
-                            OtherPhone = ReadvalueStringExcel(workSheet, i, 29),
-                            DPD = ReadvalueStringExcel(workSheet, i, 25),
-                            Email = "",
-
-                            Road = ReadvalueStringExcel(workSheet, i, 31),
-                            SuburbanDir = ReadvalueStringExcel(workSheet, i, 32),
-                            Provice = ReadvalueStringExcel(workSheet, i, 33),
-                            Road1 = ReadvalueStringExcel(workSheet, i, 34),
-                            SuburbanDir1 = ReadvalueStringExcel(workSheet, i, 35),
-                            Provice1 = ReadvalueStringExcel(workSheet, i, 36),
-
-                            Road2 = "",
-                            SuburbanDir2 = "",
-                            Provice2 = "",
-                            StatusPayMent = ReadvalueStringExcel(workSheet, i, 23),
-
-                            RegisterDay = registerDate,
-
-                            DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
-                            AmountLoan = ReadvaluefloatExcel(workSheet, i, 12),
-                            EMI = ReadvaluefloatExcel(workSheet, i, 15),
-                            CampaignId = int.Parse(request.Id),
-                            //Assignee = "-1",
-                            TotalFines = ReadvaluefloatExcel(workSheet, i, 19),
-                            TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 13),
-                            Tenure = ReadvalueintExcel(workSheet, i, 14),
-                            NoTenure = ReadvalueintExcel(workSheet, i, 18),
-                            TotalPaid = 0,
-
-                            LastPaid = 0,
-                            LastPadDay = lastDayPad,
-                            NameProduct = ReadvalueStringExcel(workSheet, i, 7),
-                            CodeProduct = ReadvalueStringExcel(workSheet, i, 6),
-                            PriceProduct = ReadvalueStringExcel(workSheet, i, 10),
-                            NoteFirstTime = ReadvalueStringExcel(workSheet, i, 38),
-                            NoteRel = ReadvalueStringExcel(workSheet, i, 39),
-                            CreatedBy = userLogin.Id,
-                            AssignedId = assigneeId
-
-                        }); ;
                     }
+
+
+
 
                 }
 
-
-
-
+                var reqeustImport = new CampanginDataImportRequest();
+                reqeustImport.ListData = profileList;
+                reqeustImport.Id = request.Id;
+                await _campagnBusiness.HandleImport(reqeustImport, userLogin);
             }
-            var reqeustImport = new CampanginDataImportRequest();
-            reqeustImport.ListData = profileList;
-            reqeustImport.Id = request.Id;
-            await _campagnBusiness.HandleImport(reqeustImport, userLogin);
+            catch (Exception e)
+            {
+
+                return Results.BadRequest(k);
+            }
             return Results.Ok();
 
         }
@@ -610,9 +680,11 @@ namespace vsrolAPI2022.Controllers
                         {
                             continue;
                         }
-                        profile.SkipContent = text;
+                        profile.SkipContent += "\n";
+                        profile.SkipContent += "Ngày " + DateTime.Now.ToString("dd-mm-yyyy") + ":" + ";";
+                        profile.SkipContent += text;
 
-                        await _campagnBusiness.UpdateProfile(profile);
+                        await _campagnBusiness.UpdateProfileSkip(profile);
                     }
 
                 }

@@ -17,7 +17,7 @@
         }
         public string Employee_login = "sp_Employee_Login";
 
-        public string Employee_insert = "sp_Employee_Insert";
+        public string Employee_insert = "sp_Employee_Insertv2";
 
         public string Employee_update = "sp_Employee_Update";
 
@@ -36,7 +36,7 @@
 
         public string Line_Insert = "sp_line_Insert";
         public string Line_Update = "sp_line_Update";
-        public string Line_getAll = "sp_line_getAll";
+        public string Line_getAll = "sp_line_getAll2";
 
 
         public string Group_reason_insert = "sp_groupReason_Insert";
@@ -68,6 +68,8 @@
         public string CampaignProfile_insert = "sp_CampaignProfile_Insert";
 
         public string CampaignProfile_update = "sp_CampaignProfile_update";
+        public string CampaignProfile_update_skip = "sp_CampaignProfile_update_skip";
+        public string Sp_CampaignProfile_import_update = "sp_CampaignProfile_import_update";
         public string Sp_CampaignProfile_resetCase = "sp_CampaignProfile_resetCase";
         public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
 
@@ -121,6 +123,7 @@
         public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
+        public string ReportTalkTime_getAllNotDeleteFile = "sp_ReportTalkTime_getAllNotDeleteFile";
         public string RecordingFile_getAll = "sp_RecordingFile_getAll";
         public string RecordingFileExport_getAll = "sp_RecordingFileExport_getAll";
 
