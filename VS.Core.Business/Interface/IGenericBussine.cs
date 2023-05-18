@@ -6,7 +6,7 @@ namespace VS.Core.Business.Interface
     {
         Task<T> GetByIdAsync(string id);
 
-        Task<int> AddAsync(T entity);
+        Task<int> Add(T entity);
         Task<int> UpdateAsyn(T entity);
         Task Delete(T entity);
     }

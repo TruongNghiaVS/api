@@ -79,7 +79,7 @@ namespace vsrolAPI2022.Controllers
 
 
             };
-            var result = await _impactBusiness.AddAsync(account);
+            var result = await _impactBusiness.Add(account);
             return Results.Ok(result);
         }
 

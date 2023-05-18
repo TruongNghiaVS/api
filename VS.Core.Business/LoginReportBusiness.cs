@@ -12,9 +12,9 @@ namespace VS.Core.Business
         {
 
         }
-        public Task<int> AddAsync(LoginReport entity)
+        public Task<int> Add(LoginReport entity)
         {
-            return _unitOfWork.LoginRe.AddAsync(entity);
+            return _unitOfWork.LoginRe.Add(entity);
         }
 
 
@@ -31,17 +31,17 @@ namespace VS.Core.Business
 
         public Task<LoginReport> Getbyid(string Id)
         {
-            return _unitOfWork.LoginRe.GetByIdAsync(Id);
+            return _unitOfWork.LoginRe.GetById(Id);
         }
 
         public Task<LoginReport> GetByIdAsync(string id)
         {
-            return _unitOfWork.LoginRe.GetByIdAsync(id);
+            return _unitOfWork.LoginRe.GetById(id);
         }
         public Task<int> UpdateAsyn(LoginReport entity)
         {
 
-            return _unitOfWork.LoginRe.UpdateAsyn(entity);
+            return _unitOfWork.LoginRe.Update(entity);
         }
 
     }

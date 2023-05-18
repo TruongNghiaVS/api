@@ -115,7 +115,7 @@ namespace vsrolAPI2022.Controllers
                 GroupId = employeeAdd.GroupId,
                 VendorId = vendorId
             };
-            var result = await _masterDataBusiness.AddAsync(account);
+            var result = await _masterDataBusiness.Add(account);
             return Results.Ok(result);
         }
 

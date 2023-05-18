@@ -14,9 +14,9 @@ namespace VS.Core.Business
 
         }
 
-        public Task<int> AddAsync(GroupEmployee entity)
+        public Task<int> Add(GroupEmployee entity)
         {
-            return _unitOfWork.GroupEmployRe.AddAsync(entity);
+            return _unitOfWork.GroupEmployRe.Add(entity);
         }
 
         public Task<int> AddMemberGroup(GroupMember entity)
@@ -61,17 +61,17 @@ namespace VS.Core.Business
 
         public Task<GroupEmployee> Getbyid(string Id)
         {
-            return _unitOfWork.GroupEmployRe.GetByIdAsync(Id);
+            return _unitOfWork.GroupEmployRe.GetById(Id);
         }
 
         public Task<GroupEmployee> GetByIdAsync(string id)
         {
-            return _unitOfWork.GroupEmployRe.GetByIdAsync(id);
+            return _unitOfWork.GroupEmployRe.GetById(id);
         }
 
         public Task<int> UpdateAsyn(GroupEmployee entity)
         {
-            return _unitOfWork.GroupEmployRe.UpdateAsyn(entity);
+            return _unitOfWork.GroupEmployRe.Update(entity);
         }
 
 

@@ -38,7 +38,7 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Dữ liệu không hợp lệ");
 
             }
-            if (linecode == "122")
+            if (linecode.Length < 4)
             {
                 return Results.BadRequest("không gọi được");
             }
@@ -59,6 +59,10 @@ namespace vsrolAPI2022.Controllers
 
             if (linecode.StartsWith('1'))
             {
+                linkUrl = "http://192.168.1.10:3002";
+            }
+            if (linecode.StartsWith('3'))
+            {
                 linkUrl = "http://192.168.1.9:3002";
             }
             using (var client = new HttpClient())
@@ -70,7 +74,7 @@ namespace vsrolAPI2022.Controllers
 
                 var reponse = await client.PostAsync("api/client/makeCall", data);
                 var result = await reponse.Content.ReadAsStringAsync();
-                await callLogBussiness.AddAsync(new VS.Core.dataEntry.User.LogCall()
+                await callLogBussiness.Add(new VS.Core.dataEntry.User.LogCall()
                 {
                     Phone = _input.PhoneNumber,
                     CreateAt = DateTime.Now,

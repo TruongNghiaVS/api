@@ -120,7 +120,7 @@ namespace vsrolAPI2022.Controllers
                 VendorId = vendorId
 
             };
-            var result = await _campagnBusiness.AddAsync(account);
+            var result = await _campagnBusiness.Add(account);
             return Results.Ok(result);
         }
 
@@ -432,7 +432,7 @@ namespace vsrolAPI2022.Controllers
                         ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
                         int totalRows = workSheet.Dimension.Rows;
 
-                        for (int i = 2; i < totalRows; i++)
+                        for (int i = 2; i <= totalRows; i++)
                         {
                             k = i;
 
@@ -466,19 +466,16 @@ namespace vsrolAPI2022.Controllers
                                     OtherPhone = ReadvalueStringExcel(workSheet, i, 29),
                                     DPD = ReadvalueStringExcel(workSheet, i, 25),
                                     Email = "",
-
                                     Road = ReadvalueStringExcel(workSheet, i, 31),
                                     SuburbanDir = ReadvalueStringExcel(workSheet, i, 32),
                                     Provice = ReadvalueStringExcel(workSheet, i, 33),
                                     Road1 = ReadvalueStringExcel(workSheet, i, 34),
                                     SuburbanDir1 = ReadvalueStringExcel(workSheet, i, 35),
                                     Provice1 = ReadvalueStringExcel(workSheet, i, 36),
-
                                     Road2 = "",
                                     SuburbanDir2 = "",
                                     Provice2 = "",
                                     StatusPayMent = ReadvalueStringExcel(workSheet, i, 23),
-
                                     RegisterDay = registerDate,
 
                                     DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
@@ -491,7 +488,6 @@ namespace vsrolAPI2022.Controllers
                                     Tenure = ReadvalueintExcel(workSheet, i, 14),
                                     NoTenure = ReadvalueintExcel(workSheet, i, 18),
                                     TotalPaid = 0,
-
                                     LastPaid = 0,
                                     LastPadDay = lastDayPad,
                                     NameProduct = ReadvalueStringExcel(workSheet, i, 7),
@@ -502,7 +498,7 @@ namespace vsrolAPI2022.Controllers
                                     CreatedBy = userLogin.Id,
                                     AssignedId = assigneeId
 
-                                }); ;
+                                });
                             }
                             catch (Exception)
                             {
@@ -513,10 +509,6 @@ namespace vsrolAPI2022.Controllers
                         }
 
                     }
-
-
-
-
                 }
 
                 var reqeustImport = new CampanginDataImportRequest();
@@ -617,7 +609,6 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("No error report");
             }
-            List<ProfileHandler> profileList = new List<ProfileHandler>();
             await using (MemoryStream ms = new MemoryStream())
             {
                 await fileHandler.CopyToAsync(ms);
@@ -642,9 +633,28 @@ namespace vsrolAPI2022.Controllers
                         var dobNT = ReadvalueStringExcel(workSheet, i, 12);
                         var cmnNT = ReadvalueStringExcel(workSheet, i, 13);
                         var phoneNT = ReadvalueStringExcel(workSheet, i, 14);
-                        var workNT = ReadvalueStringExcel(workSheet, i, 27);
+                        var noicap = ReadvalueStringExcel(workSheet, i, 15);
 
                         var text = "";
+                        var CCCD7 = ReadvalueStringExcel(workSheet, i, 7);
+                        var BHXH = ReadvalueStringExcel(workSheet, i, 8);
+                        var phanloaikhac = ReadvalueStringExcel(workSheet, i, 9);
+                        var quanhechuho = ReadvalueStringExcel(workSheet, i, 11);
+
+                        var diachilh10 = ReadvalueStringExcel(workSheet, i, 16);
+                        var dichihk9 = ReadvalueStringExcel(workSheet, i, 17);
+                        var noikhaisinh = ReadvalueStringExcel(workSheet, i, 18);
+                        var thoigiandilam = ReadvalueStringExcel(workSheet, i, 19);
+                        var tuthang = ReadvalueStringExcel(workSheet, i, 20);
+                        var denthang = ReadvalueStringExcel(workSheet, i, 21);
+                        var chucdanhcongviec = ReadvalueStringExcel(workSheet, i, 22);
+                        var mucluong15 = ReadvalueStringExcel(workSheet, i, 24);
+                        var hsl = ReadvalueStringExcel(workSheet, i, 25);
+                        var pa = ReadvalueStringExcel(workSheet, i, 23);
+                        var tendonvi = ReadvalueStringExcel(workSheet, i, 26);
+                        var workNT = ReadvalueStringExcel(workSheet, i, 27);
+                        var trangthai = ReadvalueStringExcel(workSheet, i, 28);
+                        var soluong = ReadvalueStringExcel(workSheet, i, 29);
 
                         if (!string.IsNullOrEmpty(nameNT))
                         {
@@ -656,13 +666,11 @@ namespace vsrolAPI2022.Controllers
                             text += "Ngày sinh NT:" + dobNT + "\n";
 
                         }
-
                         if (!string.IsNullOrEmpty(cmnNT))
                         {
                             text += "CMND NT:" + cmnNT + "\n";
 
                         }
-
                         if (!string.IsNullOrEmpty(phoneNT))
                         {
                             text += "SĐT NT:" + phoneNT + "\n";
@@ -673,8 +681,101 @@ namespace vsrolAPI2022.Controllers
                             text += "Nơi làm việc:" + workNT + "\n";
 
                         }
+                        if (!string.IsNullOrEmpty(CCCD7))
+                        {
+                            text += "CCCD 7:" + CCCD7 + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(BHXH))
+                        {
+                            text += "Mã BHXH :" + BHXH + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(phanloaikhac))
+                        {
+                            text += "Phân loại khách hàng 2 :" + phanloaikhac + "\n";
+
+                        }
 
 
+                        if (!string.IsNullOrEmpty(quanhechuho))
+                        {
+                            text += "QH với chủ hộ 5 :" + quanhechuho + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(diachilh10))
+                        {
+                            text += "Địa chỉ LH 10 :" + diachilh10 + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(dichihk9))
+                        {
+                            text += "Địa chỉ HK 9 :" + dichihk9 + "\n";
+
+                        }
+                        if (!string.IsNullOrEmpty(noikhaisinh))
+                        {
+                            text += "Nơi khai sinh :" + noikhaisinh + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(tuthang))
+                        {
+                            text += "Từ tháng 11 :" + tuthang + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(denthang))
+                        {
+                            text += "Đến tháng 1 2 :" + denthang + "\n";
+
+                        }
+
+
+                        if (!string.IsNullOrEmpty(pa))
+                        {
+                            text += "Chức danh, công việc 14 :" + pa + "\n";
+
+                        }
+                        if (!string.IsNullOrEmpty(tendonvi))
+                        {
+                            text += "Tên đơn vị 16 :" + tendonvi + "\n";
+
+                        }
+                        if (!string.IsNullOrEmpty(mucluong15))
+                        {
+                            text += "Mức lương 15 :" + mucluong15 + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(hsl))
+                        {
+                            text += "HSL 16 :" + hsl + "\n";
+
+                        }
+
+
+                        if (!string.IsNullOrEmpty(chucdanhcongviec))
+                        {
+                            text += "PA :" + chucdanhcongviec + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(soluong))
+                        {
+                            text += "Số lượng :" + soluong + "\n";
+
+                        }
+
+                        if (!string.IsNullOrEmpty(trangthai))
+                        {
+                            text += "Trạng thái :" + trangthai + "\n";
+
+                        }
                         var profile = await _campagnBusiness.GetProfileByNoCMND(noAgree);
                         if (profile == null)
                         {
@@ -682,8 +783,8 @@ namespace vsrolAPI2022.Controllers
                         }
                         profile.SkipContent += "\n";
                         profile.SkipContent += "Ngày " + DateTime.Now.ToString("dd-mm-yyyy") + ":" + ";";
-                        profile.SkipContent += text;
-
+                        profile.SkipContent = text + profile.SkipContent;
+                        profile.SkipContent += "\n";
                         await _campagnBusiness.UpdateProfileSkip(profile);
                     }
 

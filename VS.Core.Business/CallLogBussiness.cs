@@ -11,9 +11,9 @@ namespace VS.Core.Business
         {
 
         }
-        public Task<int> AddAsync(LogCall entity)
+        public Task<int> Add(LogCall entity)
         {
-            return _unitOfWork.CallRe.AddAsync(entity);
+            return _unitOfWork.CallRe.Add(entity);
         }
 
         public Task Delete(LogCall entity)

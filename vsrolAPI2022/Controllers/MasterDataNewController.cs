@@ -94,7 +94,7 @@ namespace vsrolAPI2022.Controllers
                 CreatedBy = user.Id
             };
 
-            var result = await _masterDataBusiness.AddAsync(itemInsert);
+            var result = await _masterDataBusiness.Add(itemInsert);
             return Results.Ok(result);
         }
 

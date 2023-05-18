@@ -13,9 +13,9 @@ namespace VS.Core.Business
         {
             _unitOfWork = unitOfWork;
         }
-        public Task<int> AddAsync(ReportTalkTimeGroupByDay entity)
+        public Task<int> Add(ReportTalkTimeGroupByDay entity)
         {
-            return _unitOfWork.ReportTalkTimeGroupByDay.AddAsync(entity);
+            return _unitOfWork.ReportTalkTimeGroupByDay.Add(entity);
         }
         public Task Delete(ReportTalkTimeGroupByDay entity)
         {
@@ -23,11 +23,11 @@ namespace VS.Core.Business
         }
         public async Task<ReportTalkTimeGroupByDay> GetByIdAsync(string id)
         {
-            return await _unitOfWork.ReportTalkTimeGroupByDay.GetByIdAsync(id);
+            return await _unitOfWork.ReportTalkTimeGroupByDay.GetById(id);
         }
         public Task<int> UpdateAsyn(ReportTalkTimeGroupByDay entity)
         {
-            return _unitOfWork.ReportTalkTimeGroupByDay.UpdateAsyn(entity);
+            return _unitOfWork.ReportTalkTimeGroupByDay.Update(entity);
         }
 
         public Task<GetAllRecordGroupByLineCodeReponse> ProcessCalReportGroupByDay(GetAllRecordGroupByLineCodeRequest entity)

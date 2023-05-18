@@ -20,7 +20,7 @@ namespace VS.Core.Repository
             _baseTable = tableName;
         }
 
-        public async Task<int> AddAsync(MasterData entity)
+        public async Task<int> Add(MasterData entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -170,7 +170,7 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<int> UpdateAsyn(MasterData entity)
+        public async Task<int> Update(MasterData entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;

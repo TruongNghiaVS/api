@@ -20,7 +20,7 @@ namespace VS.Core.Repository
             _baseTable = tableName;
         }
 
-        public async Task<int> AddAsync(ReportTalkTimeGroupByDay entity)
+        public async Task<int> Add(ReportTalkTimeGroupByDay entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -192,7 +192,7 @@ namespace VS.Core.Repository
                             {
                                 groupItem.VendorId = usergetByLinecode.VendorId;
                             }
-                            await AddAsync(groupItem);
+                            await Add(groupItem);
                         }
                         else
                         {
@@ -217,7 +217,7 @@ namespace VS.Core.Repository
                             {
 
                             }
-                            await UpdateAsyn(groupItemgroupByLineCode);
+                            await Update(groupItemgroupByLineCode);
                         }
                     }
                     return new GetAllRecordGroupByLineCodeReponse();
@@ -355,7 +355,7 @@ namespace VS.Core.Repository
 
         }
 
-        public async Task<int> UpdateAsyn(ReportTalkTimeGroupByDay entity)
+        public async Task<int> Update(ReportTalkTimeGroupByDay entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;

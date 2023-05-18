@@ -84,6 +84,8 @@
         public string CallLog_getAll = "sp_CallLog_getAll";
         public string CallLog_insert = "sp_CallLog_Insert";
         public string LogCall_insert = "sp_LogCall_Insert";
+
+        public string Sms_insert = "sp_Sms_Insert";
         public string ReportTalkTimeGroupByDay_insert = "sp_reportTalkTimeGroupByDay_insert";
         public string ReportTalkTimeGroupByDay_update = "sp_reportTalkTimeGroupByDay_update";
 
@@ -120,7 +122,7 @@
         public string ReportCampaignProfile = "sp_CampaignProfile_getOverviewDashboard";
 
 
-        public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert";
+        public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert2";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
         public string ReportTalkTime_getAllNotDeleteFile = "sp_ReportTalkTime_getAllNotDeleteFile";

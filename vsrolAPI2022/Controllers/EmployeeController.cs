@@ -123,7 +123,7 @@ namespace vsrolAPI2022.Controllers
                 UserName = employeeAdd.UserName
             };
 
-            var result = await _employeeBusiness.AddAsync(account);
+            var result = await _employeeBusiness.Add(account);
             return Results.Ok(result);
         }
 

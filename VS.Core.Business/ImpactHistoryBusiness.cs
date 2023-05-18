@@ -13,9 +13,9 @@ namespace VS.Core.Business
         {
 
         }
-        public Task<int> AddAsync(ImpactHistory entity)
+        public Task<int> Add(ImpactHistory entity)
         {
-            return _unitOfWork.ImpactRe.AddAsync(entity);
+            return _unitOfWork.ImpactRe.Add(entity);
         }
 
 
@@ -31,12 +31,12 @@ namespace VS.Core.Business
 
         public Task<ImpactHistory> Getbyid(string Id)
         {
-            return _unitOfWork.ImpactRe.GetByIdAsync(Id);
+            return _unitOfWork.ImpactRe.GetById(Id);
         }
 
         public Task<ImpactHistory> GetByIdAsync(string id)
         {
-            return _unitOfWork.ImpactRe.GetByIdAsync(id);
+            return _unitOfWork.ImpactRe.GetById(id);
         }
 
         public Task<int> UpdateAsyn(ImpactHistory entity)

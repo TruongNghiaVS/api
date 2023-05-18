@@ -21,7 +21,7 @@ namespace VS.Core.Repository
             _baseTable = tableName;
         }
 
-        public async Task<int> AddAsync(ReportTalkTime entity)
+        public async Task<int> Add(ReportTalkTime entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -193,7 +193,7 @@ namespace VS.Core.Repository
                 return null;
             }
         }
-        public async Task<int> UpdateAsyn(ReportTalkTime entity)
+        public async Task<int> Update(ReportTalkTime entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -294,6 +294,48 @@ namespace VS.Core.Repository
             }
         }
 
+
+        public async Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecordingServe3(HandlelFileRecordingRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetMysqlConnection4())
+                {
+                    if (request.Linked.HasValue)
+                    {
+
+                    }
+                    else
+                    {
+                        request.Linked = DateTime.UtcNow.AddDays(-5);
+                    }
+                    var sqlQuerry = "SELECT d.src AS 'LineCode', '3' as SourceCall,  d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE   d.calldate >= @timeFrom and d.calldate <= @timeTo and d.lastapp = 'Dial'";
+                    var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.TimeFrom,
+                        request.TimeTo,
+                        request.Linked,
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    });
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
         public async Task<ReportQuerryRecordingFileIndex> GetInfomationRecording(string likiedId)
         {
 
@@ -336,6 +378,14 @@ namespace VS.Core.Repository
             con.Open();
             return con;
         }
+
+        protected IDbConnection GetMysqlConnection4()
+        {
+            var con = new MySqlConnection(_configuration.GetConnectionString("mysqlStringConnect4"));
+            con.Open();
+            return con;
+        }
+
 
 
 

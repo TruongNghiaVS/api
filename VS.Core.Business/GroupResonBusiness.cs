@@ -13,9 +13,9 @@ namespace VS.Core.Business
 
         }
 
-        public Task<int> AddAsync(GroupReason entity)
+        public Task<int> Add(GroupReason entity)
         {
-            return _unitOfWork.GroupRe.AddAsync(entity);
+            return _unitOfWork.GroupRe.Add(entity);
         }
 
         public Task<bool> CheckDuplicate(string code)
@@ -40,12 +40,12 @@ namespace VS.Core.Business
 
         public Task<GroupReason> Getbyid(string Id)
         {
-            return _unitOfWork.GroupRe.GetByIdAsync(Id);
+            return _unitOfWork.GroupRe.GetById(Id);
         }
 
         public Task<GroupReason> GetByIdAsync(string id)
         {
-            return _unitOfWork.GroupRe.GetByIdAsync(id);
+            return _unitOfWork.GroupRe.GetById(id);
         }
 
         public Task<GroupReasonReponse> GetDataForExport(GroupReasonRequest request)
@@ -55,7 +55,7 @@ namespace VS.Core.Business
 
         public Task<int> UpdateAsyn(GroupReason entity)
         {
-            return _unitOfWork.GroupRe.UpdateAsyn(entity);
+            return _unitOfWork.GroupRe.Update(entity);
         }
     }
 }

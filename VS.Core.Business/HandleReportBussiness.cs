@@ -33,7 +33,7 @@ namespace VS.Core.Business
             }
             var i = 0;
 
-            while (i < 2)
+            while (i < 3)
             {
                 IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
                 if (i == 0)
@@ -48,7 +48,7 @@ namespace VS.Core.Business
                         }
                     );
                 }
-                else
+                else if (i == 1)
                 {
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe2(
                         new core.Request.HandlelFileRecordingRequest()
@@ -59,6 +59,18 @@ namespace VS.Core.Business
 
                         }
                     );
+                }
+                else
+                {
+                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe3(
+                      new core.Request.HandlelFileRecordingRequest()
+                      {
+                          TimeSelect = dateGet,
+                          TimeFrom = startTime,
+                          TimeTo = endTime
+
+                      }
+                  );
                 }
                 i++;
                 var data = allcdrHaving;
@@ -93,7 +105,7 @@ namespace VS.Core.Business
                         reportTalkTime.VendorId = usergetByLinecode.VendorId;
                     }
 
-                    var resultInsert = await _unitOfWork1.ReportTalkTimeRepository.AddAsync(reportTalkTime);
+                    var resultInsert = await _unitOfWork1.ReportTalkTimeRepository.Add(reportTalkTime);
 
                 }
                 Task.WaitAll();
@@ -137,7 +149,7 @@ namespace VS.Core.Business
             {
 
 
-                var linkUrl = "http://192.168.1.9:3002";
+                var linkUrl = "http://192.168.1.10:3002";
 
 
                 using (var client = new HttpClient())
@@ -272,7 +284,7 @@ namespace VS.Core.Business
                         reportTalkTime.VendorId = usergetByLinecode.VendorId;
                     }
 
-                    await _unitOfWork1.ReportTalkTimeRepository.AddAsync(reportTalkTime);
+                    await _unitOfWork1.ReportTalkTimeRepository.Add(reportTalkTime);
                 }
                 Task.WaitAll();
             }

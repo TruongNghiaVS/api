@@ -35,7 +35,7 @@ namespace VS.Core.Repository
                 return new List<Campagn>();
             }
         }
-        public async Task<int> AddAsync(Campagn entity)
+        public async Task<int> Add(Campagn entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -280,7 +280,7 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<int> UpdateAsyn(Campagn entity)
+        public async Task<int> Update(Campagn entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;

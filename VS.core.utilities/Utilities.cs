@@ -140,7 +140,7 @@ namespace VS.core.Utilities
                 }
                 catch (Exception e)
                 {
-                    string path2 = @"http://192.168.1.9:3002/api/getFileAudio?filePath=";
+                    string path2 = @"http://192.168.1.10:3002/api/getFileAudio?filePath=";
                     path2 = path2 + "" + filePath;
                     try
                     {
@@ -149,7 +149,16 @@ namespace VS.core.Utilities
                     catch (Exception)
                     {
 
-                        return 0;
+                        string path3 = @"http://192.168.1.9:3002/api/getFileAudio?filePath=";
+                        path3 = path3 + "" + filePath;
+                        try
+                        {
+                            bytes = webClient.DownloadData(path3);
+                        }
+                        catch (Exception)
+                        {
+                            return 0;
+                        }
                     }
 
                 }

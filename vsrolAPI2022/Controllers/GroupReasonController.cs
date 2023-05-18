@@ -124,7 +124,7 @@ namespace vsrolAPI2022.Controllers
                 Description = employeeAdd.Description,
                 CreatedBy = "1"
             };
-            var result = await _groupReasonBusiness.AddAsync(account);
+            var result = await _groupReasonBusiness.Add(account);
             return Results.Ok(result);
         }
 

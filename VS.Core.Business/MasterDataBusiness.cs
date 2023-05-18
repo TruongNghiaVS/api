@@ -14,9 +14,9 @@ namespace VS.Core.Business
 
         }
 
-        public Task<int> AddAsync(MasterData entity)
+        public Task<int> Add(MasterData entity)
         {
-            return _unitOfWork.MasterRe.AddAsync(entity);
+            return _unitOfWork.MasterRe.Add(entity);
         }
 
         public Task<bool> CheckDuplicate(string code, string vendorId = null)
@@ -42,12 +42,12 @@ namespace VS.Core.Business
 
         public Task<MasterData> Getbyid(string Id)
         {
-            return _unitOfWork.MasterRe.GetByIdAsync(Id);
+            return _unitOfWork.MasterRe.GetById(Id);
         }
 
         public Task<MasterData> GetByIdAsync(string id)
         {
-            return _unitOfWork.MasterRe.GetByIdAsync(id);
+            return _unitOfWork.MasterRe.GetById(id);
         }
 
         public Task<MasterDataReponse> GetDataForExport(MaterDataRequest request)
@@ -60,7 +60,7 @@ namespace VS.Core.Business
         {
             var id = request.Id;
             var listData = request.ListData;
-            var _campagnImport = await _unitOfWork.GroupRe.GetByIdAsync(request.Id);
+            var _campagnImport = await _unitOfWork.GroupRe.GetById(request.Id);
             var vendorId = _campagnImport.VendorId;
             foreach (var item in listData)
             {
@@ -85,7 +85,7 @@ namespace VS.Core.Business
                     result.FullName = result.DisplayName = itemInsert.FullName;
                     result.UpdatedBy = userLogin.Id;
 
-                    await _unitOfWork.MasterRe.UpdateAsyn(result);
+                    await _unitOfWork.MasterRe.Update(result);
                 }
                 else
                 {
@@ -93,7 +93,7 @@ namespace VS.Core.Business
                     itemInsert.CreatedBy = userLogin.Id;
                     itemInsert.VendorId = vendorId;
                     itemInsert.GroupId = id != null ? int.Parse(id) : null;
-                    await _unitOfWork.MasterRe.AddAsync(itemInsert);
+                    await _unitOfWork.MasterRe.Add(itemInsert);
                 }
 
 
@@ -106,7 +106,7 @@ namespace VS.Core.Business
 
         public Task<int> UpdateAsyn(MasterData entity)
         {
-            return _unitOfWork.MasterRe.UpdateAsyn(entity);
+            return _unitOfWork.MasterRe.Update(entity);
         }
     }
 }

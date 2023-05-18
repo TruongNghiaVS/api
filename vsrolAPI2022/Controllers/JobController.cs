@@ -28,21 +28,21 @@ namespace vsrolAPI2022.Controllers
             _handleReportBussiness = handleReportBussiness;
         }
 
-        [HttpGet("~/api/job/RunAllJob")]
-        public async Task<ActionResult> RunAllJob()
-        {
-            var resultSearch = await _handleReportBussiness.CalTalkingTime();
-            return Ok(true);
-            Task.WaitAll();
-            var timeSelect = DateTime.UtcNow;
-            await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-            {
-                TimeSelect = timeSelect
-            });
-            Task.WaitAll();
-            return Ok(true);
+        //[HttpGet("~/api/job/RunAllJob")]
+        //public async Task<ActionResult> RunAllJob()
+        //{
+        //    var resultSearch = await _handleReportBussiness.CalTalkingTime();
+        //    return Ok(true);
+        //    Task.WaitAll();
+        //    var timeSelect = DateTime.UtcNow;
+        //    await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+        //    {
+        //        TimeSelect = timeSelect
+        //    });
+        //    Task.WaitAll();
+        //    return Ok(true);
 
-        }
+        //}
 
         [HttpGet("~/api/job/CalculatingTalktime")]
         public async Task<ActionResult> CalculatingTalktime()

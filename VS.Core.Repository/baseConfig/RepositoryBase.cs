@@ -90,7 +90,7 @@ namespace VS.Core.Repository.baseConfig
             return Task.CompletedTask;
         }
 
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<T> GetById(string id)
         {
             using (var con = GetConnection())
             {

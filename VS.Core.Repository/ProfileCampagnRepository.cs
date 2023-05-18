@@ -18,7 +18,7 @@ namespace VS.Core.Repository
             _baseTable = tableName;
         }
 
-        public async Task<int> AddAsync(Profile model)
+        public async Task<int> Add(Profile model)
         {
             model.CreateAt = DateTime.Now;
             model.UpdateAt = DateTime.Now;
@@ -118,7 +118,7 @@ namespace VS.Core.Repository
 
             }
         }
-        public async Task<int> UpdateAsyn(Profile entity)
+        public async Task<int> Update(Profile entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -316,7 +316,7 @@ namespace VS.Core.Repository
         {
             using (var con = GetConnection())
             {
-                var sql = "SELECT top 1 * FROM CampaignProfile " + " WHERE NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId order by id desc";
+                var sql = "SELECT top 1 * FROM CampaignProfile " + " WHERE (isnull(Deleted,0) =0) and  (NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId) order by id desc";
                 var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = noNational });
 
                 if (result == null)

@@ -35,7 +35,7 @@ namespace vsrolAPI2022.Controllers
                 }
                 catch (Exception)
                 {
-                    urlDow = "http://192.168.1.9:3002/api/getFileAudio?filePath=" + filePath;
+                    urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
                     try
                     {
                         data = net.DownloadData(urlDow);
@@ -59,6 +59,95 @@ namespace vsrolAPI2022.Controllers
 
                     return File(content, contentType);
                 };
+            }
+            return null;
+
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("~/api/file/getaudio10")]
+        public async Task<FileResult> getaudio10(string? filePath)
+        {
+
+
+            //await _campagnBusiness.ResetCase();
+            string urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
+
+            using (var net = new System.Net.WebClient())
+            {
+                var fileName = Path.GetFileName(filePath);
+
+                byte[] data;
+                try
+                {
+                    data = net.DownloadData(urlDow);
+                    return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                }
+                catch (Exception)
+                {
+                    return null;
+
+                }
+            }
+            return null;
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet("~/api/file/getaudio12")]
+        public async Task<FileResult> getaudio12(string? filePath)
+        {
+
+
+            //await _campagnBusiness.ResetCase();
+            string urlDow = "http://192.168.1.12:3002/api/getFileAudio?filePath=" + filePath;
+
+            using (var net = new System.Net.WebClient())
+            {
+                var fileName = Path.GetFileName(filePath);
+
+                byte[] data;
+                try
+                {
+                    data = net.DownloadData(urlDow);
+                    return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                }
+                catch (Exception)
+                {
+                    return null;
+
+                }
+            }
+            return null;
+
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("~/api/file/getaudio09")]
+        public async Task<FileResult> getaudio09(string? filePath)
+        {
+
+
+            //await _campagnBusiness.ResetCase();
+            string urlDow = "http://192.168.1.9:3002/api/getFileAudio?filePath=" + filePath;
+
+            using (var net = new System.Net.WebClient())
+            {
+                var fileName = Path.GetFileName(filePath);
+
+                byte[] data;
+                try
+                {
+                    data = net.DownloadData(urlDow);
+                    return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                }
+                catch (Exception)
+                {
+                    return null;
+
+                }
             }
             return null;
 

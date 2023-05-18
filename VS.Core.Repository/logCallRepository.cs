@@ -18,7 +18,7 @@ namespace VS.Core.Repository
             _baseTable = tableName;
         }
 
-        public async Task<int> AddAsync(LogCall entity)
+        public async Task<int> Add(LogCall entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -47,7 +47,7 @@ namespace VS.Core.Repository
 
         }
 
-        public Task<int> UpdateAsyn(LogCall entity)
+        public Task<int> Update(LogCall entity)
         {
             throw new NotImplementedException();
         }

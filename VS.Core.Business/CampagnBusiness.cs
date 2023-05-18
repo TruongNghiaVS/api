@@ -10,9 +10,9 @@ namespace VS.Core.Business
     {
         public CampagnBusiness(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public Task<int> AddAsync(Campagn entity)
+        public Task<int> Add(Campagn entity)
         {
-            return _unitOfWork.CampagnRe.AddAsync(entity);
+            return _unitOfWork.CampagnRe.Add(entity);
         }
 
         public Task<bool> CheckDuplicate(string code)
@@ -63,12 +63,12 @@ namespace VS.Core.Business
 
         public Task<Campagn> Getbyid(string Id)
         {
-            return _unitOfWork.CampagnRe.GetByIdAsync(Id);
+            return _unitOfWork.CampagnRe.GetById(Id);
         }
 
         public Task<Campagn> GetByIdAsync(string id)
         {
-            return _unitOfWork.CampagnRe.GetByIdAsync(id);
+            return _unitOfWork.CampagnRe.GetById(id);
         }
 
         public Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request)
@@ -78,7 +78,7 @@ namespace VS.Core.Business
 
         public Task<int> UpdateAsyn(Campagn entity)
         {
-            return _unitOfWork.CampagnRe.UpdateAsyn(entity);
+            return _unitOfWork.CampagnRe.Update(entity);
         }
 
         public Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(
@@ -95,7 +95,7 @@ namespace VS.Core.Business
 
         public Task<int> UpdateProfile(Profile entity)
         {
-            return _unitOfWork.CampagnProfileRe.UpdateAsyn(entity);
+            return _unitOfWork.CampagnProfileRe.Update(entity);
         }
 
         public Task<int> UpdateProfileSkip(Profile entity)
@@ -105,12 +105,12 @@ namespace VS.Core.Business
 
         public Task<int> AddProfile(Profile entity)
         {
-            return _unitOfWork.CampagnProfileRe.AddAsync(entity);
+            return _unitOfWork.CampagnProfileRe.Add(entity);
         }
 
         public Task<Profile> GetProfile(string id)
         {
-            return _unitOfWork.CampagnProfileRe.GetByIdAsync(id);
+            return _unitOfWork.CampagnProfileRe.GetById(id);
         }
 
         public Task DeleteProfile(Profile entity)
@@ -122,7 +122,7 @@ namespace VS.Core.Business
         {
             var id = request.Id;
             var listData = request.ListData;
-            var _campagnImport = await _unitOfWork.CampagnRe.GetByIdAsync(id);
+            var _campagnImport = await _unitOfWork.CampagnRe.GetById(id);
             var vendorId = _campagnImport.VendorId;
             foreach (var item in listData)
             {
@@ -254,7 +254,7 @@ namespace VS.Core.Business
                     var result2 = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
                         item.NoAgreement
                     );
-                    await _unitOfWork.CampagnProfileRe.AddAsync(itemInsert);
+                    await _unitOfWork.CampagnProfileRe.Add(itemInsert);
                     if (result2 != null)
                     {
                         var result3 = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
@@ -277,7 +277,7 @@ namespace VS.Core.Business
                     }
                 }
             }
-            var campaign = await _unitOfWork.CampagnRe.GetByIdAsync(request.Id);
+            var campaign = await _unitOfWork.CampagnRe.GetById(request.Id);
             campaign.SumCount = listData.Count;
             campaign.ProcessingCount = 0;
             campaign.ClosedCount = 0;
@@ -293,7 +293,7 @@ namespace VS.Core.Business
 
         public async Task<CampangeProfileInforReponse> GetIno(string id)
         {
-            var result = await _unitOfWork.CampagnProfileRe.GetByIdAsync(id);
+            var result = await _unitOfWork.CampagnProfileRe.GetById(id);
             var reponse = new CampangeProfileInforReponse()
             {
 
@@ -303,7 +303,7 @@ namespace VS.Core.Business
                 return reponse;
             }
 
-            reponse.campagn = await _unitOfWork.CampagnRe.GetByIdAsync(
+            reponse.campagn = await _unitOfWork.CampagnRe.GetById(
                 result.CampaignId.ToString()
             );
 
@@ -382,7 +382,7 @@ namespace VS.Core.Business
                 item.UpdateAt = DateTime.Now;
                 item.Assignee = null;
 
-                await _unitOfWork.CampagnProfileRe.UpdateAsyn(item);
+                await _unitOfWork.CampagnProfileRe.Update(item);
             }
             return true;
         }

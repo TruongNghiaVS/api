@@ -13,9 +13,9 @@ namespace VS.Core.Business
 
         }
 
-        public Task<int> AddAsync(MasterDataNew entity)
+        public Task<int> Add(MasterDataNew entity)
         {
-            return _unitOfWork.MasterNewRe.AddAsync(entity);
+            return _unitOfWork.MasterNewRe.Add(entity);
         }
 
         public Task<bool> CheckDuplicate(string code)
@@ -35,17 +35,17 @@ namespace VS.Core.Business
 
         public Task<MasterDataNew> Getbyid(string Id)
         {
-            return _unitOfWork.MasterNewRe.GetByIdAsync(Id);
+            return _unitOfWork.MasterNewRe.GetById(Id);
         }
 
         public Task<MasterDataNew> GetByIdAsync(string id)
         {
-            return _unitOfWork.MasterNewRe.GetByIdAsync(id);
+            return _unitOfWork.MasterNewRe.GetById(id);
         }
 
         public Task<int> UpdateAsyn(MasterDataNew entity)
         {
-            return _unitOfWork.MasterNewRe.UpdateAsyn(entity);
+            return _unitOfWork.MasterNewRe.Update(entity);
         }
         public async Task<MasterDataInfoReponse> GetInfo(MaterDataNewRequest request)
         {

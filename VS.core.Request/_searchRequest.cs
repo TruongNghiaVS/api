@@ -453,6 +453,42 @@ namespace VS.core.Request
         }
     }
 
+    public class SmsRequest
+    {
+        public string? PhoneNumber { get; set; }
+
+        public string? ContentSms { get; set; }
+        public string? NoAgree { get; set; }
+        public int? ProfileId { get; set; }
+        public SmsRequest()
+        {
+
+        }
+    }
+
+
+    public class SmsContentGateway
+    {
+
+        public string text { get; set; }
+
+        public List<ObjectPhone> param { get; set; }
+    }
+
+    public class SmsReponse
+    {
+        public int error_code { get; set; }
+
+        public string sn { get; set; }
+
+        public string sms_in_queue { get; set; }
+
+        public string task_id { get; set; }
+    }
+    public class ObjectPhone
+    {
+        public string number { get; set; }
+    }
 
 
     public class ReportCDRReponse : BaseSearchRepons

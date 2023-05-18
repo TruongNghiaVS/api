@@ -32,6 +32,8 @@ namespace VS.Core.Business.Infrastructures
             services.AddScoped<IReportBussiness, ReportBussiness>();
 
             services.AddScoped<ICallLogBussiness, CallLogBussiness>();
+
+            services.AddScoped<ISmsBussiness, SmsBussiness>();
             services.AddScoped<IHandleReportBussiness, HandleReportBussiness>();
 
             services.AddScoped<IReportTalkTimeGroupByDayBussiness, ReportTalkTimeGroupByDayBussiness>();
@@ -40,6 +42,9 @@ namespace VS.Core.Business.Infrastructures
 
 
         }
+
+
+
     }
 
 }

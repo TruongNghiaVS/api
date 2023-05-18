@@ -20,7 +20,7 @@ namespace VS.Core.Repository.Report
             _baseTable = tableName;
         }
 
-        public async Task<int> AddAsync(LoginReport entity)
+        public async Task<int> Add(LoginReport entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -110,7 +110,7 @@ namespace VS.Core.Repository.Report
 
 
 
-        public async Task<int> UpdateAsyn(LoginReport entity)
+        public async Task<int> Update(LoginReport entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;

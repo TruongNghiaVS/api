@@ -44,7 +44,7 @@ namespace vsrolAPI2022.Controllers
             loginreport.Note = "";
             loginreport.CreatedBy = loginUser.Id;
             loginreport.CreateAt = DateTime.Now;
-            await _loginReportBussiness.AddAsync(loginreport);
+            await _loginReportBussiness.Add(loginreport);
 
             string token = GetToken(loginUser);
             return Results.Ok(token);
@@ -70,7 +70,7 @@ namespace vsrolAPI2022.Controllers
             loginreport.Note = "";
             loginreport.CreatedBy = user.Id;
             loginreport.CreateAt = DateTime.Now;
-            await _loginReportBussiness.AddAsync(loginreport);
+            await _loginReportBussiness.Add(loginreport);
             return Results.Ok("Đăng xuất thành công");
         }
 

@@ -12,19 +12,19 @@ namespace VS.Core.Business
         {
 
         }
-        public Task<int> AddAsync(Account entity)
+        public Task<int> Add(Account entity)
         {
-            return _unitOfWork.Employees.AddAsync(entity);
+            return _unitOfWork.Employees.Add(entity);
         }
 
         public Task<Account> GetByIdAsync(string id)
         {
-            return _unitOfWork.Employees.GetByIdAsync(id);
+            return _unitOfWork.Employees.GetById(id);
         }
 
         public Task<int> UpdateAsyn(Account entity)
         {
-            return _unitOfWork.Employees.UpdateAsyn(entity);
+            return _unitOfWork.Employees.Update(entity);
         }
 
         public Task Delete(Account entity)
@@ -34,7 +34,7 @@ namespace VS.Core.Business
 
         public async Task<Account> Getbyid(string id)
         {
-            return await _unitOfWork.Employees.GetByIdAsync(id);
+            return await _unitOfWork.Employees.GetById(id);
         }
         public async Task<bool> CheckDuplicate(string userName, string phone)
         {

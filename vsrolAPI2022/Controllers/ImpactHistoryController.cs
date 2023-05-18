@@ -66,7 +66,6 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> Add(ImpactHistoryAdd employeeAdd)
         {
             var user = GetCurrentUser();
-
             var lineCode = "";
             if (user != null)
             {
@@ -103,7 +102,7 @@ namespace vsrolAPI2022.Controllers
                 campangnProfile.Status = int.Parse(employeeAdd.StatusIm);
                 await _campagnBussiness.UpdateProfile(campangnProfile);
             }
-            var result = await _impactBusiness.AddAsync(itemInsert);
+            var result = await _impactBusiness.Add(itemInsert);
             return Results.Ok(result);
         }
 

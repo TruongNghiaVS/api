@@ -149,7 +149,7 @@ namespace vsrolAPI2022.Controllers
                 itemInsert.VendorId = vendorId;
             }
 
-            var result = await _groupEmpBussiness.AddAsync(itemInsert);
+            var result = await _groupEmpBussiness.Add(itemInsert);
             return Results.Ok(result);
         }
 

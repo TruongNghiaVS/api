@@ -21,6 +21,7 @@ namespace VS.Core.Repository.baseConfig
 
         IReportRepository ReportRe { get; }
         ICallLogRepository CallRe { get; }
+        ISmsMessageRepository SmsRe { get; }
 
         IReportTalkTimeRepository ReportTalkTimeRepository { get; }
 

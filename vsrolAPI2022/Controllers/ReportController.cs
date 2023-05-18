@@ -98,6 +98,9 @@ namespace vsrolAPI2022.Controllers
                 _input.To = _input.To.EndDateTime();
             }
             var resultSearch = await _impactBusiness.ExportImpactData(_input);
+
+
+
             return Results.Ok(resultSearch);
         }
 

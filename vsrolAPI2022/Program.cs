@@ -34,6 +34,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddAuthorization();
+
 //var issuer = builder.Configuration["Jwt:Issuer"];
 var app = builder.Build();
 

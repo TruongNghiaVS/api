@@ -1,0 +1,4 @@
+﻿namespace VS.core.API
+{
+
+}

@@ -24,6 +24,11 @@
         public string? StatusName { get; set; }
 
 
+        public DateTime? CreateAt { get; set; }
+
+
+
+
 
 
 

@@ -13,9 +13,9 @@ namespace VS.Core.Business
 
         }
 
-        public Task<int> AddAsync(Line entity)
+        public Task<int> Add(Line entity)
         {
-            return _unitOfWork.LineRe.AddAsync(entity);
+            return _unitOfWork.LineRe.Add(entity);
         }
 
         public Task<bool> CheckDuplicate(string code)
@@ -35,12 +35,12 @@ namespace VS.Core.Business
 
         public Task<Line> Getbyid(string Id)
         {
-            return _unitOfWork.LineRe.GetByIdAsync(Id);
+            return _unitOfWork.LineRe.GetById(Id);
         }
 
         public Task<Line> GetByIdAsync(string id)
         {
-            return _unitOfWork.LineRe.GetByIdAsync(id);
+            return _unitOfWork.LineRe.GetById(id);
         }
 
         public Task<LineManagementReponse> GetDataForExport(LineManagementRequest request)
@@ -50,7 +50,7 @@ namespace VS.Core.Business
 
         public Task<int> UpdateAsyn(Line entity)
         {
-            return _unitOfWork.LineRe.UpdateAsyn(entity);
+            return _unitOfWork.LineRe.Update(entity);
         }
     }
 }

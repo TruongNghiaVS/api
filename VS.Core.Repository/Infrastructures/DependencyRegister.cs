@@ -20,6 +20,7 @@ namespace VS.Core.Repository.Infrastructures
             services.AddScoped<IGroupEmployRepository, GroupEmployRepository>();
             services.AddScoped<IloginReportRepository, LoginReportReposiotry>();
             services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<ISmsMessageRepository, SmsMessageRepository>();
             services.AddScoped<ICallLogRepository, logCallRepository>();
             services.AddScoped<IReportTalkTimeRepository, ReportTalkTimeRepository>();
             services.AddScoped<IReportTalkTimeGroupByDay, ReportTalkTimeGroupByDayRepository>();

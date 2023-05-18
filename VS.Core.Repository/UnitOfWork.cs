@@ -21,7 +21,7 @@ namespace VS.Core.Repository
         public ICallLogRepository CallRe { get; set; }
         public ILineRepository LineRe { get; set; }
         public IReportTalkTimeGroupByDay ReportTalkTimeGroupByDay { get; set; }
-
+        public ISmsMessageRepository SmsRe { get; set; }
 
 
         public IReportTalkTimeRepository ReportTalkTimeRepository { get; }
@@ -39,10 +39,12 @@ namespace VS.Core.Repository
               ICallLogRepository _callLogRepository,
             IReportTalkTimeRepository _reportTalkTimeRe,
             IReportTalkTimeGroupByDay _reportTalkTimeGroupByDay,
-            ILineRepository _lineRe
+            ILineRepository _lineRe,
+            ISmsMessageRepository _smsRe
 
             )
         {
+            SmsRe = _smsRe;
             Employees = employeeRepository;
             UserRe = userRepository;
             MasterRe = masterDataRepository;
