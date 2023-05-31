@@ -96,6 +96,115 @@ namespace VS.core.Request
         }
     }
 
+
+
+    public class DPDRequest : BaseSearchRequest
+    {
+
+        public int? VendorId { get; set; }
+
+        public DPDRequest()
+        {
+
+        }
+    }
+
+
+
+    public class PackageRequestALl : BaseSearchRequest
+    {
+
+        public int? VendorId { get; set; }
+        public PackageRequestALl()
+        {
+
+        }
+    }
+
+
+    public class PackageIndexViewModel
+    {
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public int Total { get; set; }
+
+        public int Remain { get; set; }
+
+        public bool Active { get; set; }
+
+        public PackageIndexViewModel()
+        {
+            Active = false;
+            Remain = Total = 0;
+
+        }
+
+    }
+    public class PackageReponseInfo
+    {
+
+        public string? Name { get; set; }
+        public int? Status { get; set; }
+        public string? Type { get; set; }
+        public string? Value { get; set; }
+
+        public string? IdUser { get; set; }
+
+        public int? VendorId { get; set; }
+        public int? Min { get; set; }
+        public int? Max { get; set; }
+
+    }
+    public class DpdReponse : BaseSearchRepons
+
+    {
+        public DpdReponse()
+        {
+            Total = 0;
+        }
+    }
+
+
+    public class PackageRequest : BaseSearchRequest
+    {
+        public int? VendorId { get; set; }
+
+        public PackageRequest()
+        {
+
+        }
+    }
+
+    public class GetCountBYMinMaxRequest
+    {
+        public int? Min { get; set; }
+        public int? Max { get; set; }
+        public string? UserId { get; set; }
+        public int? VendorId { get; set; }
+        public GetCountBYMinMaxRequest()
+        {
+
+        }
+    }
+
+    public class GetCountBYMinMaxReponse
+    {
+
+        public int Total { get; set; }
+
+        public int Remain { get; set; }
+    }
+
+
+
+    public class PackageReponse : BaseSearchRepons
+
+    {
+        public PackageReponse()
+        {
+            Total = 0;
+        }
+    }
     public class GroupReasonReponse : BaseSearchRepons
 
     {
@@ -243,6 +352,7 @@ namespace VS.core.Request
         public string? Msg { get; set; }
 
         public string? ProfileId { get; set; }
+        public string? NoAgreement { get; set; }
         public ImpactHistorySerarchRequest()
         {
             this.Page = 1;
@@ -471,6 +581,8 @@ namespace VS.core.Request
     {
 
         public string text { get; set; }
+
+        public int[] port { get; set; }
 
         public List<ObjectPhone> param { get; set; }
     }

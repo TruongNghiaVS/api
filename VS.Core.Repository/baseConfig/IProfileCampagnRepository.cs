@@ -18,6 +18,7 @@ namespace VS.Core.Repository.baseConfig
 
         Task<Profile> GetBYNoAreeMentLasted(string profileId);
         Task<Profile> GetProfileByNoCMND(string noNational);
+        Task<List<Profile>> GetAllInfoSkipp(string noNational);
         Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp);
 
         Task<int> ResetCase(Profile entity);

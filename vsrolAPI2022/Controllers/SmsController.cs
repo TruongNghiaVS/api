@@ -46,20 +46,22 @@ namespace vsrolAPI2022.Controllers
         {
             var _userCurrent = GetCurrentUser();
             var linecode = _userCurrent.LineCode;
+            var vendorId = _userCurrent.VendorId;
             if (string.IsNullOrEmpty(linecode))
             {
-                return Results.BadRequest("Dữ liệu không hợp lệ");
+                linecode = "8888";
             }
-            if (linecode.Length < 4)
+
+            if (linecode != "8888")
             {
-                return Results.BadRequest("không gọi được");
+                return Results.BadRequest("không gửi dược tin nhắn");
             }
 
             if (string.IsNullOrEmpty(_input.PhoneNumber))
             {
                 return Results.BadRequest("Dữ liệu không hợp lệ");
             }
-            var linkUrl = "https://192.168.1.251/api/send_sms";
+            var linkUrl = "https://192.168.1.249/api/send_sms";
             Uri myUri = new Uri(linkUrl);
             WebRequest myWebRequest = HttpWebRequest.Create(myUri);
 
@@ -68,11 +70,38 @@ namespace vsrolAPI2022.Controllers
             myHttpWebRequest.ContentType = "application/json";
             myHttpWebRequest.Method = "POST";
 
+            var templateNumberViettel = "096|097|098|086|030|031|032|033|034|035|036|037|038|039";
+            var templateNumberVina = "091|094|088|083|084|085|081|082|087";
+            var templateNumberMobi = "090|093|089|070|079|077|076|078|092|018|056|058|052|053";
+
+            var numberBegin = _input.PhoneNumber.Substring(0, 3);
+
+            int[] portArray = new int[] { };
+            if (templateNumberMobi.Contains(numberBegin))
+            {
+                portArray = new int[] { 0, 1, 2, 3, 4, 5 };
+            }
+
+            else if (templateNumberVina.Contains(numberBegin))
+            {
+                portArray = new int[] { 6, 7, 8, 9, 10 };
+            }
+            else if (templateNumberViettel.Contains(numberBegin))
+            {
+                portArray = new int[] { 11, 12, 13, 14, 15 };
+            }
+            else
+            {
+
+                portArray = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            }
+
             using (var streamWriter = new StreamWriter(myHttpWebRequest.GetRequestStream()))
             {
                 var bodyRequest = new SmsContentGateway()
                 {
                     text = _input.ContentSms,
+                    port = portArray,
                     param = new List<ObjectPhone>()
                     {
                         new ObjectPhone() { number = _input.PhoneNumber }
@@ -119,7 +148,7 @@ namespace vsrolAPI2022.Controllers
                 ProfileId = _input.ProfileId,
                 NoAgree = _input.NoAgree,
                 TimeBuisiness = DateTime.Now,
-                VendorId = 9000,
+                VendorId = vendorId,
                 CreatedBy = _userCurrent.CreatedBy,
                 UserId = _userCurrent.Id,
                 Content = _input.ContentSms,

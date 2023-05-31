@@ -5,52 +5,58 @@ using VS.Core.Repository.baseConfig;
 
 namespace VS.Core.Business
 {
-    public class LineManagementBusiness : BaseBusiness, ILineManagementBussiness
+    public class PackageManagementBusiness : BaseBusiness, IPackageManagementBussiness
     {
 
-        public LineManagementBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public PackageManagementBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }
 
-        public Task<int> Add(Line entity)
+        public Task<int> Add(Package entity)
         {
-            return _unitOfWork.LineRe.Add(entity);
+            return _unitOfWork.PackageRe.Add(entity);
         }
 
         public Task<bool> CheckDuplicate(string code)
         {
-            return _unitOfWork.LineRe.CheckDuplicate(code);
+            return _unitOfWork.PackageRe.CheckDuplicate(code);
         }
 
-        public Task Delete(Line entity)
+        public Task Delete(Package entity)
         {
-            return _unitOfWork.LineRe.Delete(entity);
+            return _unitOfWork.PackageRe.Delete(entity);
         }
 
-        public Task<LineManagementReponse> GetALl(LineManagementRequest request)
+        public Task<PackageReponse> GetALl(PackageRequest request)
         {
-            return _unitOfWork.LineRe.GetALl(request);
+            return _unitOfWork.PackageRe.GetALl(request);
         }
 
-        public Task<Line> Getbyid(string Id)
+        public Task<GetCountBYMinMaxReponse> GetCountBYMinMax(GetCountBYMinMaxRequest request)
         {
-            return _unitOfWork.LineRe.GetById(Id);
+            return _unitOfWork.PackageRe.GetCountBYMinMax(request);
         }
 
-        public Task<Line> GetByIdAsync(string id)
+
+        public Task<PackageReponse> GetALlInfo(PackageRequest request)
         {
-            return _unitOfWork.LineRe.GetById(id);
+            return _unitOfWork.PackageRe.GetALlInfo(request);
         }
 
-        public Task<LineManagementReponse> GetDataForExport(LineManagementRequest request)
+        public Task<Package> Getbyid(string Id)
         {
-            return _unitOfWork.LineRe.GetDataForExport(request);
+            return _unitOfWork.PackageRe.GetById(Id);
         }
 
-        public Task<int> UpdateAsyn(Line entity)
+        public Task<Package> GetByIdAsync(string id)
         {
-            return _unitOfWork.LineRe.Update(entity);
+            return _unitOfWork.PackageRe.GetById(id);
+        }
+
+        public Task<int> UpdateAsyn(Package entity)
+        {
+            return _unitOfWork.PackageRe.Update(entity);
         }
     }
 }

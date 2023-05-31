@@ -328,6 +328,21 @@ namespace VS.Core.Repository
         }
 
 
+        public async Task<List<Profile>> GetAllInfoSkipp(string noNational)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = "SELECT * FROM CampaignProfile " + " WHERE (isnull(Deleted,0) =0) and  (NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId) order by id desc";
+                var result = await con.QueryAsync<Profile>(sql, new { profileId = noNational });
+
+                if (result == null)
+                {
+                    return new List<Profile>();
+                }
+                return result.ToList();
+            }
+        }
+
 
     }
 }

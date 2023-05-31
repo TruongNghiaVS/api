@@ -25,6 +25,10 @@ namespace VS.Core.Repository
 
 
         public IReportTalkTimeRepository ReportTalkTimeRepository { get; }
+
+        public IDpdRepository DpdRe { get; set; }
+
+        public IPackageRepository PackageRe { get; }
         public UnitOfWork(IEmployeeRepository employeeRepository,
              IUserRepository userRepository,
              IMasterDataRepository masterDataRepository,
@@ -40,10 +44,13 @@ namespace VS.Core.Repository
             IReportTalkTimeRepository _reportTalkTimeRe,
             IReportTalkTimeGroupByDay _reportTalkTimeGroupByDay,
             ILineRepository _lineRe,
-            ISmsMessageRepository _smsRe
+            ISmsMessageRepository _smsRe,
+            IDpdRepository _dpdRe,
+            IPackageRepository _PackageRe
 
             )
         {
+            PackageRe = _PackageRe;
             SmsRe = _smsRe;
             Employees = employeeRepository;
             UserRe = userRepository;
@@ -60,6 +67,7 @@ namespace VS.Core.Repository
             ReportTalkTimeRepository = _reportTalkTimeRe;
             ReportTalkTimeGroupByDay = _reportTalkTimeGroupByDay;
             LineRe = _lineRe;
+            DpdRe = _dpdRe;
         }
 
     }

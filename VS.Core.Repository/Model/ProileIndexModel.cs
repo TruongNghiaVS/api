@@ -44,6 +44,8 @@ namespace VS.Core.Repository.Model
         public DateTime? UpdatedTime { get; set; }
         public string AuthorName { get; set; }
 
+        public string ColorCode { get; set; }
+
         public string UpdateByName
         {
             get; set;

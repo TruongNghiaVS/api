@@ -44,6 +44,9 @@ namespace vsrolAPI2022.Controllers
             loginreport.Note = "";
             loginreport.CreatedBy = loginUser.Id;
             loginreport.CreateAt = DateTime.Now;
+
+
+
             await _loginReportBussiness.Add(loginreport);
 
             string token = GetToken(loginUser);

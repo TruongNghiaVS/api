@@ -28,21 +28,7 @@ namespace vsrolAPI2022.Controllers
             _handleReportBussiness = handleReportBussiness;
         }
 
-        //[HttpGet("~/api/job/RunAllJob")]
-        //public async Task<ActionResult> RunAllJob()
-        //{
-        //    var resultSearch = await _handleReportBussiness.CalTalkingTime();
-        //    return Ok(true);
-        //    Task.WaitAll();
-        //    var timeSelect = DateTime.UtcNow;
-        //    await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-        //    {
-        //        TimeSelect = timeSelect
-        //    });
-        //    Task.WaitAll();
-        //    return Ok(true);
 
-        //}
 
         [HttpGet("~/api/job/CalculatingTalktime")]
         public async Task<ActionResult> CalculatingTalktime()
@@ -50,7 +36,7 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _handleReportBussiness.CalTalkingTime();
             Task.WaitAll();
             var timerun = DateTime.UtcNow;
-            timerun = timerun.AddHours(-3);
+            timerun = timerun.AddMinutes(-10);
             var startTime = timerun;
             var endTime = DateTime.UtcNow.AddDays(1).EndDateTime();
             while (startTime < endTime)
@@ -81,56 +67,32 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-        [HttpGet("~/api/job/rebuildBeginAll")]
-        public async Task<ActionResult> RebuildBegin()
-        {
-            var dtFrom = DateTime.Now.AddDays(-5);
-            var dtTo = DateTime.Now.AddDays(1);
-
-            var resultSearch = await _handleReportBussiness.CalTalkingTimeAll(dtFrom);
-            Task.WaitAll();
-            while (dtFrom < dtTo)
-            {
-
-                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-                {
-                    TimeSelect = dtFrom
-
-                });
-                Task.WaitAll();
-                dtFrom = dtFrom.AddDays(1);
-            }
-
-            Task.WaitAll();
-            return Ok(true);
-
-        }
 
 
-        [HttpGet("~/api/job/rebuildReportGroup")]
-        public async Task<ActionResult> rebuildReportGroup()
-        {
-            var dtFrom = DateTime.Now.AddDays(-5);
-            var dtTo = DateTime.Now.AddDays(1);
+        //[HttpGet("~/api/job/rebuildReportGroup")]
+        //public async Task<ActionResult> rebuildReportGroup()
+        //{
+        //    var dtFrom = DateTime.Now.AddDays(-5);
+        //    var dtTo = DateTime.Now.AddDays(1);
 
-            //var resultSearch = await _handleReportBussiness.CalTalkingTime();
-            Task.WaitAll();
-            while (dtFrom < dtTo)
-            {
+        //    //var resultSearch = await _handleReportBussiness.CalTalkingTime();
+        //    Task.WaitAll();
+        //    while (dtFrom < dtTo)
+        //    {
 
-                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-                {
-                    TimeSelect = dtFrom
+        //        await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+        //        {
+        //            TimeSelect = dtFrom
 
-                });
-                Task.WaitAll();
-                dtFrom = dtFrom.AddDays(1);
-            }
+        //        });
+        //        Task.WaitAll();
+        //        dtFrom = dtFrom.AddDays(1);
+        //    }
 
-            Task.WaitAll();
-            return Ok(true);
+        //    Task.WaitAll();
+        //    return Ok(true);
 
-        }
+        //}
 
         [HttpGet("~/api/job/RunSumCampagnOverview")]
         public async Task<ActionResult> RunSumCampagnOverview()
@@ -181,13 +143,7 @@ namespace vsrolAPI2022.Controllers
             });
 
         }
-        [HttpGet("~/api/job/DeleteFileRecoring")]
-        public async Task<ActionResult> DeleteFileRecoring()
-        {
-            var resultSearch = await _handleReportBussiness.DeleteFileRecoring();
-            Task.WaitAll();
-            return Ok(true);
-        }
+
 
     }
 }

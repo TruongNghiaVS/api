@@ -129,12 +129,13 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<ImpactHistoryIndexModel>(_Sql.CampaignImpact_getAll, new
+                    var result = await con.QueryAsync<ImpactHistoryIndexModel>(_Sql.CampaignImpact_getAllv2, new
                     {
                         request.Token,
                         request.From,
                         request.To,
                         request.ProfileId,
+                        request.NoAgreement,
                         request.Limit,
                         request.Page,
                         request.OrderBy

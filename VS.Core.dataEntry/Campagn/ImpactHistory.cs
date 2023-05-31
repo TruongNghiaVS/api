@@ -28,5 +28,9 @@
         public string? LineCode { get; set; }
 
         public int? CampagnId { get; set; }
+
+        public string? NoteCode { get; set; }
+
+        public string ColorCode { get; set; }
     }
 }

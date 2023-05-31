@@ -22,25 +22,17 @@ namespace VS.Core.Business.Infrastructures
             services.AddScoped<ICampagnBussiness, CampagnBusiness>();
 
             services.AddScoped<IImpactHistoryBussiness, ImpactHistoryBusiness>();
-
             services.AddScoped<IMasterDataNewBussiness, MasterDataNewBussiness>();
-
             services.AddScoped<IGroupEmpBussiness, GroupEmpBussiness>();
-
             services.AddScoped<ILoginReportBussiness, LoginReportBusiness>();
-
             services.AddScoped<IReportBussiness, ReportBussiness>();
-
             services.AddScoped<ICallLogBussiness, CallLogBussiness>();
-
             services.AddScoped<ISmsBussiness, SmsBussiness>();
             services.AddScoped<IHandleReportBussiness, HandleReportBussiness>();
-
             services.AddScoped<IReportTalkTimeGroupByDayBussiness, ReportTalkTimeGroupByDayBussiness>();
-
             services.AddScoped<ILineManagementBussiness, LineManagementBusiness>();
-
-
+            services.AddScoped<IDpdManagementBussiness, DpdManagementBusiness>();
+            services.AddScoped<IPackageManagementBussiness, PackageManagementBusiness>();
         }
 
 

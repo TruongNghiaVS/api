@@ -1,4 +1,6 @@
-﻿namespace VS.core.API.model
+﻿using VS.Core.dataEntry.User;
+
+namespace VS.core.API.model
 {
     public class GroupReasonAdd
     {
@@ -31,6 +33,15 @@
 
 
     }
+
+    public class DpdAdd : Dpd
+    {
+
+
+
+
+
+    }
     public class LineUpdate
     {
         public string? Id { get; set; }
@@ -38,6 +49,12 @@
         public string? Name { get; set; }
         public int? Status { get; set; }
         public int? LineId { get; set; }
+
+    }
+
+    public class DpdUpdate : Dpd
+    {
+
 
     }
 

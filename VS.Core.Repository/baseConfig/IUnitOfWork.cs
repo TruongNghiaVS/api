@@ -30,5 +30,9 @@ namespace VS.Core.Repository.baseConfig
 
         ILineRepository LineRe { get; }
 
+        IDpdRepository DpdRe { get; }
+
+        IPackageRepository PackageRe { get; }
+
     }
 }

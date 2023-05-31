@@ -60,6 +60,8 @@
 
         public string? PhoneSerach { get; set; }
         public string? TypegetData { get; set; }
+
+        public string? IdPackage { get; set; }
         public CampagnProfileSearchInput()
         {
             Status = 0;

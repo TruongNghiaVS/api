@@ -80,10 +80,12 @@ namespace vsrolAPI2022.Controllers
                 Promiseday = employeeAdd.Promiseday,
                 ProfileId = employeeAdd.ProfileId,
                 Relationship = employeeAdd.Relationship,
+                ColorCode = employeeAdd.ColorCode,
                 Priority = 1,
                 CreatedBy = user.Id,
                 StatusFollow = employeeAdd.StatusFollow,
                 StatusIm = employeeAdd.StatusIm,
+                NoteCode = employeeAdd.NoteCode,
                 ShortDescription = employeeAdd.NoteIm,
                 DaysuggestTime = employeeAdd.DaysuggestTime,
                 UpdatedBy = user.Id,
@@ -100,6 +102,7 @@ namespace vsrolAPI2022.Controllers
             {
                 campangnProfile.Reasonstatus = int.Parse(employeeAdd.StatusIm);
                 campangnProfile.Status = int.Parse(employeeAdd.StatusIm);
+                campangnProfile.ColorCode = employeeAdd.ColorCode;
                 await _campagnBussiness.UpdateProfile(campangnProfile);
             }
             var result = await _impactBusiness.Add(itemInsert);

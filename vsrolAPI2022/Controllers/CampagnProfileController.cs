@@ -7,7 +7,6 @@ using VS.core.Utilities;
 using VS.Core.Business.Interface;
 using VS.Core.dataEntry.User;
 
-
 namespace vsrolAPI2022.Controllers
 {
     [ApiController]
@@ -17,12 +16,20 @@ namespace vsrolAPI2022.Controllers
     {
 
         private readonly ICampagnBussiness _campagnBusiness;
-
+        private readonly IPackageManagementBussiness _packageManagementBussiness;
+        private readonly IDpdManagementBussiness _dpdManagementBussiness;
+        private readonly IPackageManagementBussiness _business;
         public CampagnProfileController(
             ICampagnBussiness campagnBusiness,
+             IPackageManagementBussiness packageManagementBussiness,
+             IDpdManagementBussiness dpdManagementBussiness,
+             IPackageManagementBussiness bussiness,
             IUserBusiness userBusiness) : base(userBusiness)
         {
             _campagnBusiness = campagnBusiness;
+            _packageManagementBussiness = packageManagementBussiness;
+            _dpdManagementBussiness = dpdManagementBussiness;
+            _business = bussiness;
         }
 
         [AllowAnonymous]
@@ -51,8 +58,18 @@ namespace vsrolAPI2022.Controllers
             {
                 VendorId = int.Parse(user.Id);
             }
-            var dpdMax = -1;
-            var dpdMin = -1;
+            //if (user.RoleId == "1")
+            //{
+            //    return await this.getAll1(request);
+            //}
+
+            if (request.TypegetData != "0")
+            {
+
+                request.IdPackage = "";
+            }
+            int dpdMax = -1;
+            int dpdMin = -1;
             if (request.Dpd == 0)
             {
                 dpdMax = 30;
@@ -94,6 +111,42 @@ namespace vsrolAPI2022.Controllers
                 dpdMax = 10000;
                 dpdMin = 1001;
             }
+
+            if (!string.IsNullOrEmpty(request.IdPackage))
+            {
+                var packageFile = await _packageManagementBussiness.Getbyid(request.IdPackage);
+
+                var valueRangDpd = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DPDItem>>(packageFile.Value);
+                foreach (var item in valueRangDpd)
+                {
+                    var dpdItem = await _dpdManagementBussiness.GetByIdAsync(item.value);
+                    if (dpdItem == null)
+                    {
+                        continue;
+                    }
+                    if (dpdMin < 0)
+                    {
+                        dpdMin = dpdItem.Min.Value;
+                    }
+                    if (dpdMax < dpdItem.Max)
+                    {
+                        dpdMax = dpdItem.Max.Value;
+                    }
+
+                    if (dpdItem.Min < dpdMin)
+                    {
+                        dpdMin = dpdItem.Min.Value;
+                    }
+                    if (dpdItem.Max > dpdMax)
+                    {
+                        dpdMax = dpdItem.Max.Value;
+                    }
+
+
+                }
+            }
+
+
             var searchRequest = new GetAllProfileByCampang()
             {
                 Token = request.Token,
@@ -118,6 +171,162 @@ namespace vsrolAPI2022.Controllers
             }
             var resultSearch = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
             return Results.Ok(resultSearch);
+        }
+
+        [Authorize]
+        [HttpPost("~/api/campagnProfile/getAll1")]
+        public async Task<IResult> getAll1(CampagnProfileSearchInput request)
+        {
+
+            var user = GetCurrentUser();
+
+
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+
+
+
+
+            int dpdMax = -1;
+            int dpdMin = -1;
+
+
+
+            if (request.Dpd == 0)
+            {
+                dpdMax = 30;
+                dpdMin = 0;
+            }
+
+            if (request.Dpd == 1)
+            {
+                dpdMax = 60;
+                dpdMin = 31;
+            }
+
+            if (request.Dpd == 2)
+            {
+                dpdMax = 90;
+                dpdMin = 61;
+            }
+
+            if (request.Dpd == 3)
+            {
+                dpdMax = 180;
+                dpdMin = 91;
+            }
+
+            if (request.Dpd == 4)
+            {
+                dpdMax = 360;
+                dpdMin = 181;
+            }
+
+
+            if (request.Dpd == 5)
+            {
+                dpdMax = 361;
+                dpdMin = 1000;
+            }
+            if (request.Dpd == 6)
+            {
+                dpdMax = 10000;
+                dpdMin = 1001;
+            }
+            if (!string.IsNullOrEmpty(request.IdPackage))
+            {
+                var packageFile = await _packageManagementBussiness.Getbyid(request.IdPackage);
+
+                var valueRangDpd = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DPDItem>>(packageFile.Value);
+
+
+
+                foreach (var item in valueRangDpd)
+                {
+
+
+                    var dpdItem = await _dpdManagementBussiness.GetByIdAsync(item.value);
+                    if (dpdItem == null)
+                    {
+                        continue;
+                    }
+                    if (dpdMin < 0)
+                    {
+                        dpdMin = dpdItem.Min.Value;
+                    }
+                    if (dpdMax < dpdItem.Max)
+                    {
+                        dpdMax = dpdItem.Max.Value;
+                    }
+
+                    if (dpdItem.Min < dpdMin)
+                    {
+                        dpdMin = dpdItem.Min.Value;
+                    }
+                    if (dpdItem.Max > dpdMax)
+                    {
+                        dpdMax = dpdItem.Max.Value;
+                    }
+
+
+                }
+            }
+            //else  if (user.RoleId == "1")
+            // {
+            //     VendorId = user.VendorId;
+            //     var searchRequest1 = new PackageRequest()
+            //     {
+            //         UserId = user.Id,
+            //         VendorId = VendorId
+            //     };
+            //     var resultSearch = await _business.GetALlInfo(searchRequest1);
+            //     var dataList = resultSearch.Data as List<PackageIndexModel>;
+
+
+            //     if (dataList.Count == 1)
+            //     {
+            //         request.IdPackage = dataList[0].Id;
+            //     }
+            //     var filterAsi = dataList.Where(x => x.Type == "2" && x.IdUser == user.Id).FirstOrDefault();
+            //     if (filterAsi == null)
+            //     {
+
+            //         filterAsi = dataList.Where(x => x.Type == "1").FirstOrDefault();
+            //     }
+            //     if (filterAsi != null)
+            //     {
+            //         request.IdPackage = filterAsi.Id;
+            //     }
+            // }
+
+
+            var searchRequest = new GetAllProfileByCampang()
+            {
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = request.Limit,
+                To = request.To,
+                DpdMax = dpdMax,
+                DpdMin = dpdMin,
+                Id = request.Id,
+                From = request.From,
+                UserId = user.Id,
+                VendorId = VendorId,
+                PhoneSerach = request.PhoneSerach,
+                LineCode = request.LineCode,
+                NoAgreement = request.NoAgree,
+                TypegetData = request.TypegetData
+            };
+            if (searchRequest.To.HasValue)
+            {
+                searchRequest.To = searchRequest.To.ToEndDateTime();
+            }
+            var resultSearch1 = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
+            return Results.Ok(resultSearch1);
         }
 
         [Authorize]

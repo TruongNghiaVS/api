@@ -308,7 +308,7 @@ namespace VS.Core.Business
             );
 
             var allImpactHistory = await _unitOfWork.ImpactRe.GetALl(
-                new ImpactHistorySerarchRequest() { ProfileId = id }
+                new ImpactHistorySerarchRequest() { ProfileId = id, NoAgreement = result.NoAgreement }
             );
 
             var listReason = await _unitOfWork.MasterRe.GetALl(
@@ -395,6 +395,12 @@ namespace VS.Core.Business
         public async Task<Profile> GetProfileByNoCMND(string noNational)
         {
             return await _unitOfWork.CampagnProfileRe.GetProfileByNoCMND(noNational);
+        }
+
+        public async Task<List<Profile>> GetAllInfoSkipp(string noNational)
+        {
+            return await _unitOfWork.CampagnProfileRe.GetAllInfoSkipp(noNational);
+
         }
     }
 }

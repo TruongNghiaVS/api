@@ -76,6 +76,8 @@
         public string? SkipContent { get; set; }
 
         public int? VendorId { get; set; }
+
+        public string? ColorCode { get; set; }
         public Profile()
         {
 

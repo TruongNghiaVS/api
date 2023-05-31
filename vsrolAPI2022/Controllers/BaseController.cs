@@ -37,6 +37,7 @@ namespace vsrolAPI2022.Controllers
             var roleId = request.RoleId;
             var fullName = request.FullName;
             var lineCode = request.LineCode != null ? request.LineCode : "";
+            var vendorCode = request.VendorId.HasValue ? request.VendorId.ToString() : "";
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -47,7 +48,8 @@ namespace vsrolAPI2022.Controllers
                         new Claim("RoleUser",roleId ),
                         new Claim("userName", userName),
                         new Claim("email", email),
-                        new Claim("lineCode", lineCode)
+                        new Claim("lineCode", lineCode),
+                         new Claim("vendorCode", vendorCode)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(60),
                 Issuer = issuer,
@@ -76,13 +78,15 @@ namespace vsrolAPI2022.Controllers
                 var roleId = userClaims.FirstOrDefault(o => o.Type == "RoleUser")?.Value;
                 var fullName = userClaims.FirstOrDefault(o => o.Type == "Name")?.Value;
                 var lineCode = userClaims.FirstOrDefault(o => o.Type == "lineCode")?.Value;
+                var vendorCode = userClaims.FirstOrDefault(o => o.Type == "vendorCode")?.Value;
                 return new Account
                 {
                     UserName = userName,
                     Id = idUser,
                     RoleId = roleId,
                     FullName = fullName,
-                    LineCode = lineCode
+                    LineCode = lineCode,
+                    VendorId = string.IsNullOrEmpty(vendorCode) ? null : int.Parse(vendorCode)
                 };
             }
             return null;

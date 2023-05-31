@@ -8,6 +8,7 @@
         public string? StatusIm { get; set; }
 
         public string? NoteIm { get; set; }
+        public string? NoteCode { get; set; }
 
         public DateTime? Promiseday { get; set; }
 
@@ -24,6 +25,8 @@
         public int? Priority { get; set; }
 
         public int? Assignee { get; set; }
+
+        public string ColorCode { get; set; }
     }
     public class ImpactHistoryUpdate
     {

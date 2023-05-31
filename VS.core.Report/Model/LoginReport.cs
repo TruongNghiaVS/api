@@ -10,6 +10,8 @@ namespace VS.core.Report.Model
         public string? Note { get; set; }
         public DateTime? BusinessTime { get; set; }
 
+
+
         public LoginReport()
         {
             BusinessTime = DateTime.Now;

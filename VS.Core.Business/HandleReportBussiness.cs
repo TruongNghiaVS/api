@@ -20,9 +20,9 @@ namespace VS.Core.Business
         public async Task<int> CalTalkingTime(DateTime? dateGet)
         {
             var timerun = DateTime.UtcNow;
-            timerun = timerun.AddHours(-3);
+            timerun = timerun.AddMinutes(-10);
             var startTime = timerun;
-            var endTime = DateTime.Now;
+            var endTime = DateTime.Now.EndDateTime();
 
 
             //await _unitOfWork1.ReportTalkTimeRepository.DeleteAllRangeFromTo(startTime, endTime);

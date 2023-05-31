@@ -776,16 +776,26 @@ namespace vsrolAPI2022.Controllers
                             text += "Trạng thái :" + trangthai + "\n";
 
                         }
-                        var profile = await _campagnBusiness.GetProfileByNoCMND(noAgree);
-                        if (profile == null)
+                        var profiles = await _campagnBusiness.GetAllInfoSkipp(noAgree);
+
+                        if (profiles == null || profiles.Count < 1)
                         {
                             continue;
                         }
-                        profile.SkipContent += "\n";
-                        profile.SkipContent += "Ngày " + DateTime.Now.ToString("dd-mm-yyyy") + ":" + ";";
-                        profile.SkipContent = text + profile.SkipContent;
-                        profile.SkipContent += "\n";
-                        await _campagnBusiness.UpdateProfileSkip(profile);
+                        if (profiles.Count > 1)
+                        {
+                            int k = 0;
+                        }
+                        foreach (var item in profiles)
+                        {
+                            item.SkipContent += "\n";
+                            item.SkipContent += "Ngày " + DateTime.Now.ToString("dd-mm-yyyy") + ":" + ";";
+                            item.SkipContent = text + item.SkipContent;
+                            item.SkipContent += "\n";
+                            await _campagnBusiness.UpdateProfileSkip(item);
+
+                        }
+
                     }
 
                 }

@@ -16,6 +16,9 @@ namespace VS.Core.Business.Interface
         Task<Profile> GetProfile(string id);
         Task<Profile> GetProfileByNoAgree(string noAgree);
         Task<Profile> GetProfileByNoCMND(string noNational);
+
+        Task<List<Profile>> GetAllInfoSkipp(string noNational);
+
         Task<int> AddProfile(Profile entity);
         Task<int> UpdateProfile(Profile entity);
         Task<int> UpdateProfileSkip(Profile entity);

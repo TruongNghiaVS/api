@@ -39,6 +39,18 @@
         public string Line_getAll = "sp_line_getAll2";
 
 
+
+        public string Dpd_Insert = "sp_DPD_Insert";
+        public string Dpd_Update = "sp_DPD_Update";
+        public string Dpd_getAll = "sp_dpd_getAll";
+        public string Dpd_getInfo = "sp_dpd_getInfo";
+
+        public string Package_Insert = "sp_Package_Insert";
+        public string Package_Update = "sp_Package_Update";
+        public string Package_getAll = "sp_Package_getAll";
+
+        public string Package_getAll2 = "sp_Package_getAll2";
+
         public string Group_reason_insert = "sp_groupReason_Insert";
 
         public string Group_reason_update = "sp_groupReason_Update";
@@ -79,6 +91,7 @@
         public string CampaignImpact_update = "CampaignImpact_update";
 
         public string CampaignImpact_getAll = "sp_ImpactHistory_getAll";
+        public string CampaignImpact_getAllv2 = "sp_ImpactHistory_getAllv2";
 
         public string CampaignImpact_getAllHistory = "sp_ImpactHistory_getAllHistory";
         public string CallLog_getAll = "sp_CallLog_getAll";

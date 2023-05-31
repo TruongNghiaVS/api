@@ -40,6 +40,11 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(LineSearchInput request)
         {
             var user = GetCurrentUser();
+            int? vendorId = user.VendorId;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+            }
 
             var searchRequest = new LineManagementRequest()
             {
@@ -50,7 +55,7 @@ namespace vsrolAPI2022.Controllers
                 Limit = request.Limit,
                 lineIdAdd = request.lineIdAdd,
                 To = request.To,
-                VendorId = user.VendorId != null ? user.VendorId : null,
+                VendorId = vendorId,
                 Userid = int.Parse(user.Id),
                 From = request.From
 
@@ -82,6 +87,11 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Bị trùng thông tin tên đăng nhập hoặc số điện thoại");
             }
+            int? vendorId = user.VendorId;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+            }
 
             var account = new Line()
             {
@@ -89,7 +99,7 @@ namespace vsrolAPI2022.Controllers
                 Name = employeeAdd.Name,
                 Status = 2,
 
-                VendorId = user.VendorId,
+                VendorId = vendorId,
                 CreatedBy = user.CreatedBy
 
 
