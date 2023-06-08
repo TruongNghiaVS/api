@@ -81,6 +81,12 @@ namespace VS.Core.Business
             return _unitOfWork.CampagnRe.Update(entity);
         }
 
+
+        public Task<int> UpdateSkipData(CampagnProfile entity)
+        {
+            return _unitOfWork.CampagnProfileRe.UpdateSkipData(entity);
+        }
+
         public Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(
             GetAllProfileByCampang request
         )
@@ -88,32 +94,37 @@ namespace VS.Core.Business
             return _unitOfWork.CampagnProfileRe.GetALlProfileByCampaign(request);
         }
 
-        public Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request)
+
+        public Task<GetAllProfileByCampangReponse> ExportDataByCampaign(GetAllProfileByCampang request)
+        {
+            return _unitOfWork.CampagnProfileRe.ExportDataByCampaign(request);
+        }
+        public Task<List<CampagnProfile>> GetALLAsiggnee(GetAllProfileByCampang request)
         {
             return _unitOfWork.CampagnProfileRe.GetALLAsiggnee(request);
         }
 
-        public Task<int> UpdateProfile(Profile entity)
+        public Task<int> UpdateProfile(CampagnProfile entity)
         {
             return _unitOfWork.CampagnProfileRe.Update(entity);
         }
 
-        public Task<int> UpdateProfileSkip(Profile entity)
+        public Task<int> UpdateProfileSkip(CampagnProfile entity)
         {
             return _unitOfWork.CampagnProfileRe.UpdateSkip(entity);
         }
 
-        public Task<int> AddProfile(Profile entity)
+        public Task<int> AddProfile(CampagnProfile entity)
         {
             return _unitOfWork.CampagnProfileRe.Add(entity);
         }
 
-        public Task<Profile> GetProfile(string id)
+        public Task<CampagnProfile> GetProfile(string id)
         {
             return _unitOfWork.CampagnProfileRe.GetById(id);
         }
 
-        public Task DeleteProfile(Profile entity)
+        public Task DeleteProfile(CampagnProfile entity)
         {
             return _unitOfWork.CampagnProfileRe.Delete(entity);
         }
@@ -126,7 +137,7 @@ namespace VS.Core.Business
             var vendorId = _campagnImport.VendorId;
             foreach (var item in listData)
             {
-                var itemInsert = new Profile
+                var itemInsert = new CampagnProfile
                 {
                     CustomerName = item.CustomerName,
                     NoAgreement = item.NoAgreement,
@@ -180,14 +191,19 @@ namespace VS.Core.Business
                 if (result != null)
                 {
                     string? assignedId = null;
-                    if (string.IsNullOrEmpty(item.AssignedId))
+                    if (string.IsNullOrEmpty(item.AssignedId) || result.Assignee != item.AssignedId)
                     {
                         assignedId = result.Assignee;
+                        result.Status = 0;
                     }
                     else
                     {
                         assignedId = item.AssignedId;
+                        result.Status = 0;
+
                     }
+
+                    result.Assignee = assignedId;
                     result.CustomerName = item.CustomerName;
                     result.NoAgreement = item.NoAgreement;
                     result.DayOfBirth = item.DayOfBirth;
@@ -233,7 +249,6 @@ namespace VS.Core.Business
                     result.UpdateAt = item.UpdateAt;
                     result.UpdatedBy = item.UpdatedBy;
                     result.UpdatedBy = userLogin.Id;
-
                     await _unitOfWork.CampagnProfileRe.ImportUpdate(result);
                 }
                 else
@@ -251,30 +266,8 @@ namespace VS.Core.Business
                     itemInsert.CreatedBy = userLogin.Id;
                     itemInsert.Assignee = assignedId;
                     itemInsert.VendorId = vendorId;
-                    var result2 = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
-                        item.NoAgreement
-                    );
                     await _unitOfWork.CampagnProfileRe.Add(itemInsert);
-                    if (result2 != null)
-                    {
-                        var result3 = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
-                            item.NoAgreement,
-                            request.Id
-                        );
-                        var listImpactHistory = await _unitOfWork.ImpactRe.GetAllHistory(
-                            new ImpactHistorySerarchRequest()
-                            {
-                                Limit = 1000,
-                                ProfileId = result2.Id
-                            }
-                        );
-                        foreach (var itemHistory in listImpactHistory)
-                        {
-                            itemHistory.CampagnId = int.Parse(request.Id);
-                            itemHistory.ProfileId = int.Parse(result3.Id);
-                            await _unitOfWork.ImpactRe.AddHistoryImpact(itemHistory);
-                        }
-                    }
+
                 }
             }
             var campaign = await _unitOfWork.CampagnRe.GetById(request.Id);
@@ -286,6 +279,244 @@ namespace VS.Core.Business
             return true;
         }
 
+        public async Task<bool> HandleImportV2(CampanginDataImportRequest request, Account userLogin)
+        {
+            var id = request.Id;
+            var listData = request.ListData;
+            var _campagnImport = await _unitOfWork.CampagnRe.GetById(id);
+            var vendorId = _campagnImport.VendorId;
+
+
+            //var tiemInsert = "insert into CampaignProfile (dpd,NationalId,Skipp, Reasonstatus,Status, MobilePhone, Phone1,HouseNumber, OfficeNumber, OtherPhone,Email, DayOfBirth, Road,SuburbanDir, Provice,Road1,SuburbanDir1, Provice1,Road2,SuburbanDir2, Provice2,StatusPayMent,RegisterDay,DebitOriginal,AmountLoan,EMI,CampaignId,Assignee,TotalFines,TotalMoneyPaid,Tenure,NoTenure,TotalPaid,LastPaid,LastPadDay,NameProduct,CodeProduct,PriceProduct,NoteFirstTime,NoteRel,SkipContent,VendorId,CreatedBy,UpdatedBy,CreateAt,UpdateAt,Deleted,NoAgreement,CustomerName, DeleteRecord) values";
+            //foreach (var item in listData)
+            //{
+
+            //    var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
+            //        item.NoAgreement,
+            //        request.Id
+            //    );
+            //    if (result != null)
+            //    {
+            //        string? assignedId = null;
+            //        if (string.IsNullOrEmpty(item.AssignedId) || result.Assignee != item.AssignedId)
+            //        {
+            //            assignedId = result.Assignee;
+            //            result.Status = 0;
+            //        }
+            //        else
+            //        {
+            //            assignedId = item.AssignedId;
+            //            result.Status = 0;
+
+            //        }
+
+            //        result.Assignee = assignedId;
+            //        result.CustomerName = item.CustomerName;
+            //        result.NoAgreement = item.NoAgreement;
+            //        result.DayOfBirth = item.DayOfBirth;
+            //        result.NationalId = item.NationalId;
+            //        result.MobilePhone = item.MobilePhone;
+            //        result.Phone1 = item.Phone1;
+            //        result.AmountLoan = item.AmountLoan;
+            //        result.Assignee = assignedId;
+            //        result.CampaignId = item.CampaignId;
+            //        result.CodeProduct = item.CodeProduct;
+            //        result.CreateAt = item.CreateAt;
+            //        result.CreatedBy = item.CreatedBy;
+            //        result.DebitOriginal = item.DebitOriginal;
+            //        result.Deleted = item.Deleted;
+            //        result.DPD = item.DPD;
+            //        result.Email = item.Email;
+            //        result.EMI = item.EMI;
+            //        result.HouseNumber = item.HouseNumber;
+            //        result.LastPadDay = item.LastPadDay;
+            //        result.LastPaid = item.LastPaid;
+            //        result.NameProduct = item.NameProduct;
+            //        result.NoteFirstTime = item.NoteFirstTime;
+            //        result.NoteRel = item.NoteRel;
+            //        result.NoTenure = item.NoTenure;
+            //        result.OfficeNumber = item.OfficeNumber;
+            //        result.OtherPhone = item.OtherPhone;
+            //        result.PriceProduct = item.PriceProduct;
+            //        result.Provice = item.Provice;
+            //        result.Provice1 = item.Provice1;
+            //        result.Provice2 = item.Provice2;
+            //        result.RegisterDay = item.RegisterDay;
+            //        result.Road = item.Road;
+            //        result.Road1 = item.Road1;
+            //        result.Road2 = item.Road2;
+            //        result.StatusPayMent = item.StatusPayMent;
+            //        result.SuburbanDir = item.SuburbanDir;
+            //        result.SuburbanDir1 = item.SuburbanDir1;
+            //        result.SuburbanDir2 = item.SuburbanDir2;
+            //        result.Tenure = item.Tenure;
+            //        result.TotalFines = item.TotalFines;
+            //        result.TotalMoneyPaid = item.TotalMoneyPaid;
+            //        result.TotalPaid = item.TotalPaid;
+            //        result.UpdateAt = item.UpdateAt;
+            //        result.UpdatedBy = item.UpdatedBy;
+            //        result.UpdatedBy = userLogin.Id;
+            //        await _unitOfWork.CampagnProfileRe.ImportUpdate(result);
+            //    }
+            //    else
+            //    {
+            //        string? assignedId = null;
+            //        if (!string.IsNullOrEmpty(item.AssignedId))
+            //        {
+            //            assignedId = item.AssignedId;
+            //            itemInsert.Status = 0;
+            //        }
+            //        else
+            //        {
+            //            itemInsert.Status = 10;
+            //        }
+            //        itemInsert.CreatedBy = userLogin.Id;
+            //        itemInsert.Assignee = assignedId;
+            //        itemInsert.VendorId = vendorId;
+            //        await _unitOfWork.CampagnProfileRe.Add(itemInsert);
+
+            //    }
+            //}
+            var campaign = await _unitOfWork.CampagnRe.GetById(request.Id);
+            campaign.SumCount = listData.Count;
+            campaign.ProcessingCount = 0;
+            campaign.ClosedCount = 0;
+            campaign.UpdateAt = DateTime.Now;
+            await UpdateAsyn(campaign);
+            return true;
+        }
+        public async Task<bool> HandleImportSkip(CampanginDataImportRequest request, Account userLogin)
+        {
+
+            var id = request.Id;
+            var listData = request.ListData;
+            foreach (var item in listData)
+            {
+                var itemInsert = new CampagnProfile
+                {
+                    CustomerName = item.CustomerName,
+                    NoAgreement = item.NoAgreement,
+                    DayOfBirth = item.DayOfBirth,
+                    NationalId = item.NationalId,
+                    MobilePhone = item.MobilePhone,
+                    Phone1 = item.Phone1,
+                    AmountLoan = item.AmountLoan,
+                    CampaignId = int.Parse(id),
+                    CodeProduct = item.CodeProduct,
+                    CreateAt = item.CreateAt,
+                    CreatedBy = item.CreatedBy,
+                    DebitOriginal = item.DebitOriginal,
+                    Deleted = item.Deleted,
+                    DPD = item.DPD,
+                    Email = item.Email,
+                    EMI = item.EMI,
+                    HouseNumber = item.HouseNumber,
+                    Id = item.Id,
+                    LastPadDay = item.LastPadDay,
+                    LastPaid = item.LastPaid,
+                    NameProduct = item.NameProduct,
+                    NoteFirstTime = item.NoteFirstTime,
+                    NoteRel = item.NoteRel,
+                    NoTenure = item.NoTenure,
+                    OfficeNumber = item.OfficeNumber,
+                    OtherPhone = item.OtherPhone,
+                    PriceProduct = item.PriceProduct,
+                    Provice = item.Provice,
+                    Provice1 = item.Provice1,
+                    Provice2 = item.Provice2,
+                    RegisterDay = item.RegisterDay,
+                    Road = item.Road,
+                    Road1 = item.Road1,
+                    Road2 = item.Road2,
+                    StatusPayMent = item.StatusPayMent,
+                    SuburbanDir = item.SuburbanDir,
+                    SuburbanDir1 = item.SuburbanDir1,
+                    SuburbanDir2 = item.SuburbanDir2,
+                    Tenure = item.Tenure,
+                    TotalFines = item.TotalFines,
+                    TotalMoneyPaid = item.TotalMoneyPaid,
+                    TotalPaid = item.TotalPaid,
+                    UpdateAt = item.UpdateAt,
+                    UpdatedBy = item.UpdatedBy
+                };
+                var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
+                    item.NoAgreement
+                );
+                if (result != null)
+                {
+                    string? assignedId = null;
+                    if (string.IsNullOrEmpty(item.AssignedId) || result.Assignee != item.AssignedId)
+                    {
+                        assignedId = result.Assignee;
+                        result.Status = 0;
+                    }
+                    else
+                    {
+                        assignedId = item.AssignedId;
+                        result.Status = 0;
+
+                    }
+
+                    result.Assignee = assignedId;
+                    result.CustomerName = item.CustomerName;
+                    result.NoAgreement = item.NoAgreement;
+                    result.DayOfBirth = item.DayOfBirth;
+                    result.NationalId = item.NationalId;
+                    result.MobilePhone = item.MobilePhone;
+                    result.Phone1 = item.Phone1;
+                    result.AmountLoan = item.AmountLoan;
+                    result.Assignee = assignedId;
+                    result.CampaignId = item.CampaignId;
+                    result.CodeProduct = item.CodeProduct;
+                    result.CreateAt = item.CreateAt;
+                    result.CreatedBy = item.CreatedBy;
+                    result.DebitOriginal = item.DebitOriginal;
+                    result.Deleted = item.Deleted;
+                    result.DPD = item.DPD;
+                    result.Email = item.Email;
+                    result.EMI = item.EMI;
+                    result.HouseNumber = item.HouseNumber;
+                    result.LastPadDay = item.LastPadDay;
+                    result.LastPaid = item.LastPaid;
+                    result.NameProduct = item.NameProduct;
+                    result.NoteFirstTime = item.NoteFirstTime;
+                    result.NoteRel = item.NoteRel;
+                    result.NoTenure = item.NoTenure;
+                    result.OfficeNumber = item.OfficeNumber;
+                    result.OtherPhone = item.OtherPhone;
+                    result.PriceProduct = item.PriceProduct;
+                    result.Provice = item.Provice;
+                    result.Provice1 = item.Provice1;
+                    result.Provice2 = item.Provice2;
+                    result.RegisterDay = item.RegisterDay;
+                    result.Road = item.Road;
+                    result.Road1 = item.Road1;
+                    result.Road2 = item.Road2;
+                    result.StatusPayMent = item.StatusPayMent;
+                    result.SuburbanDir = item.SuburbanDir;
+                    result.SuburbanDir1 = item.SuburbanDir1;
+                    result.SuburbanDir2 = item.SuburbanDir2;
+                    result.Tenure = item.Tenure;
+                    result.TotalFines = item.TotalFines;
+                    result.TotalMoneyPaid = item.TotalMoneyPaid;
+                    result.TotalPaid = item.TotalPaid;
+                    result.UpdateAt = item.UpdateAt;
+                    result.UpdatedBy = item.UpdatedBy;
+                    result.UpdatedBy = userLogin.Id;
+                    await UpdateSkipData(result);
+                }
+
+            }
+
+            return true;
+
+        }
+
+
+        public async Task<bool> DeleteCampagnFile(List<string> DataDelete, string campagnId)
+        {
+            return await _unitOfWork.CampagnProfileRe.DeleteMutipleCam(DataDelete, campagnId);
+        }
         public Task<bool> AssignedTask(string profileId, string userId)
         {
             return _unitOfWork.CampagnProfileRe.AssignedTask(profileId, userId);
@@ -306,22 +537,16 @@ namespace VS.Core.Business
             reponse.campagn = await _unitOfWork.CampagnRe.GetById(
                 result.CampaignId.ToString()
             );
-
             var allImpactHistory = await _unitOfWork.ImpactRe.GetALl(
                 new ImpactHistorySerarchRequest() { ProfileId = id, NoAgreement = result.NoAgreement }
             );
-
             var listReason = await _unitOfWork.MasterRe.GetALl(
                 new MaterDataRequest()
                 { GroupStatus = reponse.campagn.GroupStatus }
             );
-
             var listUser = await _unitOfWork.Employees.GetALl(new EmployeeSearchRequest() { });
-
             reponse.ListUser = listUser.Data;
-
             reponse.Result = result;
-
             var statusText = "Chưa rõ trạng thái";
             reponse.ListHistory = allImpactHistory.Data;
 
@@ -387,17 +612,17 @@ namespace VS.Core.Business
             return true;
         }
 
-        public async Task<Profile> GetProfileByNoAgree(string noAgree)
+        public async Task<CampagnProfile> GetProfileByNoAgree(string noAgree)
         {
             return await _unitOfWork.CampagnProfileRe.GetByNoAgreement(noAgree);
         }
 
-        public async Task<Profile> GetProfileByNoCMND(string noNational)
+        public async Task<CampagnProfile> GetProfileByNoCMND(string noNational)
         {
             return await _unitOfWork.CampagnProfileRe.GetProfileByNoCMND(noNational);
         }
 
-        public async Task<List<Profile>> GetAllInfoSkipp(string noNational)
+        public async Task<List<CampagnProfile>> GetAllInfoSkipp(string noNational)
         {
             return await _unitOfWork.CampagnProfileRe.GetAllInfoSkipp(noNational);
 

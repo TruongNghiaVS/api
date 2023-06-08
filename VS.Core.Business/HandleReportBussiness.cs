@@ -20,12 +20,9 @@ namespace VS.Core.Business
         public async Task<int> CalTalkingTime(DateTime? dateGet)
         {
             var timerun = DateTime.UtcNow;
-            timerun = timerun.AddMinutes(-10);
+            timerun = timerun.AddMinutes(-15);
             var startTime = timerun;
             var endTime = DateTime.Now.EndDateTime();
-
-
-            //await _unitOfWork1.ReportTalkTimeRepository.DeleteAllRangeFromTo(startTime, endTime);
             Task.WaitAll();
             if (dateGet == null)
             {
@@ -33,13 +30,16 @@ namespace VS.Core.Business
             }
             var i = 0;
 
-            while (i < 3)
+            while (i < 4)
             {
                 IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
                 if (i == 0)
                 {
+                    i++;
+                    continue;
 
-                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
+                    startTime = startTime.AddMinutes(-15);
+                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe4(
                         new core.Request.HandlelFileRecordingRequest()
                         {
                             TimeSelect = dateGet,
@@ -60,9 +60,24 @@ namespace VS.Core.Business
                         }
                     );
                 }
+                else if (i == 2)
+                {
+                    i++;
+                    continue;
+                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe3(
+                      new core.Request.HandlelFileRecordingRequest()
+                      {
+                          TimeSelect = dateGet,
+                          TimeFrom = startTime,
+                          TimeTo = endTime
+
+                      }
+                  );
+                }
+
                 else
                 {
-                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe3(
+                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
                       new core.Request.HandlelFileRecordingRequest()
                       {
                           TimeSelect = dateGet,

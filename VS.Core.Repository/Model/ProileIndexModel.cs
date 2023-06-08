@@ -2,7 +2,7 @@
 
 namespace VS.Core.Repository.Model
 {
-    public class ProileIndexModel : Profile
+    public class ProileIndexModel : CampagnProfile
     {
 
         public int TotalRecord { get; set; }

@@ -7,7 +7,7 @@ namespace VS.Core.Business.Model
     public class CampangeProfileInforReponse
 
     {
-        public Profile Result { get; set; }
+        public CampagnProfile Result { get; set; }
 
         public string StatusProfile { get; set; }
 
@@ -20,7 +20,7 @@ namespace VS.Core.Business.Model
         public CampangeProfileInforReponse()
         {
             ListHistory = new List<ImpactHistoryIndexModel>();
-            Result = new Profile();
+            Result = new CampagnProfile();
         }
 
     }

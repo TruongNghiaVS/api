@@ -307,6 +307,7 @@ namespace VS.core.Request
         public string? PhoneSerach { get; set; }
         public string? LineCode { get; set; }
         public int? Skipp { get; set; }
+        public string? ColorCode { get; set; }
 
 
 

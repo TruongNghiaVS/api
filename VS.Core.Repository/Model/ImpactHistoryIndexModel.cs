@@ -23,14 +23,8 @@
 
         public string? StatusName { get; set; }
 
-
+        public string? ColorCode { get; set; }
         public DateTime? CreateAt { get; set; }
-
-
-
-
-
-
 
 
     }

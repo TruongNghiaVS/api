@@ -38,6 +38,13 @@ namespace VS.Core.Business
             return _unitOfWork1.ReportRe.GetAllRecordingFile(request);
         }
 
+
+        public Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportCDRequest request)
+        {
+            return _unitOfWork1.ReportRe.getAllRecordingFileWithNo(request);
+        }
+
+
         public Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request)
         {
             return _unitOfWork1.ReportRe.ExportRecordingFile(request);

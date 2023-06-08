@@ -68,6 +68,8 @@
 
         public string Campaign_update = "sp_Campaign_update";
 
+        public string Campaign_update_caseSkip = "sp_CampaignProfile_updateCaseSkip";
+
         public string Campaign_getOverviewbyId = "sp_campaign_getOverviewbyId";
 
         public string Campaign_getAll = "sp_campaign_getAll";
@@ -84,8 +86,10 @@
         public string Sp_CampaignProfile_import_update = "sp_CampaignProfile_import_update";
         public string Sp_CampaignProfile_resetCase = "sp_CampaignProfile_resetCase";
         public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
+        public string CampaignProfile_exportData = "sp_CampaignProfile_ExportData";
 
         public string CampaignImpact_insert = "sp_ImpactHistory_Insert";
+
         public string Sp_ImpactHistory_Insert2 = "sp_ImpactHistory_Insert2";
 
         public string CampaignImpact_update = "CampaignImpact_update";
@@ -140,6 +144,8 @@
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
         public string ReportTalkTime_getAllNotDeleteFile = "sp_ReportTalkTime_getAllNotDeleteFile";
         public string RecordingFile_getAll = "sp_RecordingFile_getAll";
+
+        public string RecordingFile_getAllWithNo = "sp_RecordingFile_getAllWithNo";
         public string RecordingFileExport_getAll = "sp_RecordingFileExport_getAll";
 
         public string GetAllRecordGroupByLineCode_getAll = "sp_GetAllRecordGroupByLineCode_getAll";

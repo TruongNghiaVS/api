@@ -63,7 +63,12 @@ namespace vsrolAPI2022.Controllers
             }
             if (linecode.StartsWith('3'))
             {
-                linkUrl = "http://192.168.1.9:3002";
+                linkUrl = "http://192.168.1.10:3002";
+            }
+
+            if (linecode.StartsWith('4'))
+            {
+                linkUrl = "http://192.168.1.151:3002";
             }
             using (var client = new HttpClient())
             {

@@ -36,7 +36,7 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _handleReportBussiness.CalTalkingTime();
             Task.WaitAll();
             var timerun = DateTime.UtcNow;
-            timerun = timerun.AddMinutes(-10);
+            timerun = timerun.AddMinutes(-15);
             var startTime = timerun;
             var endTime = DateTime.UtcNow.AddDays(1).EndDateTime();
             while (startTime < endTime)
@@ -66,8 +66,6 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
 
         }
-
-
 
         //[HttpGet("~/api/job/rebuildReportGroup")]
         //public async Task<ActionResult> rebuildReportGroup()

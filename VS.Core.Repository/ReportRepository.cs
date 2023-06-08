@@ -256,6 +256,56 @@ namespace VS.Core.Repository
 
 
 
+
+        public async Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportCDRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+
+
+                    var sqlName = SqlContraint.GetVariable().RecordingFile_getAllWithNo;
+                    request.OrderBy = " d.calldate desc ";
+                    var result = await con.QueryAsync<ReportCDRItem>(sqlName,
+                        new
+                        {
+                            request.Disposition,
+                            request.PhoneLog,
+                            request.LineCode,
+                            request.Token,
+                            request.VendorId,
+                            request.From,
+                            request.To,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy,
+                            request.UserId
+                        }, commandType: CommandType.StoredProcedure);
+
+                    var dataFirst = result.FirstOrDefault();
+                    var total = 0;
+                    if (dataFirst != null)
+                    {
+                        total = dataFirst.TotalRecord;
+                    }
+                    var reponse = new ReportCDRReponse()
+                    {
+                        Data = result?.ToList(),
+                        Total = total
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
         public async Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request)
         {
             int page = request.Page;

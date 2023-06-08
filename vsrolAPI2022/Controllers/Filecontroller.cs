@@ -153,6 +153,33 @@ namespace vsrolAPI2022.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpGet("~/api/file/getaudio151")]
+        public async Task<FileResult> getaudio151(string? filePath)
+        {
 
+
+            //await _campagnBusiness.ResetCase();
+            string urlDow = "http://192.168.1.151:3002/api/getFileAudio?filePath=" + filePath;
+
+            using (var net = new System.Net.WebClient())
+            {
+                var fileName = Path.GetFileName(filePath);
+
+                byte[] data;
+                try
+                {
+                    data = net.DownloadData(urlDow);
+                    return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                }
+                catch (Exception)
+                {
+                    return null;
+
+                }
+            }
+            return null;
+
+        }
     }
 }

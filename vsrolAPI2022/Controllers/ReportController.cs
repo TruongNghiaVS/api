@@ -143,6 +143,32 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
             return Results.Ok(resultSearch);
         }
+
+
+
+
+
+        [HttpPost("~/api/report/getAllRecordingFileWithNo")]
+        public async Task<IResult> getAllRecordingFileWithNo(ReportCDRequest _input)
+        {
+            var user = GetCurrentUser();
+            if (user.RoleId == "1")
+            {
+                _input.LineCode = user.LineCode;
+
+            }
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            _input.VendorId = VendorId;
+            _input.UserId = user.Id;
+            var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
+            return Results.Ok(resultSearch);
+        }
+
+
         [HttpPost("~/api/report/ExportRecordingFile")]
         public async Task<IResult> ExportRecordingFile(ReportCDRequest _input)
         {

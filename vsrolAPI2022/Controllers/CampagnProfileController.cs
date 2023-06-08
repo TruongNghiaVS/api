@@ -147,6 +147,11 @@ namespace vsrolAPI2022.Controllers
             }
 
 
+
+            if (request.ColorCode == "" || request.ColorCode == "-1" || request.ColorCode == "" || request.ColorCode == "white" || request.ColorCode == null)
+            {
+                request.ColorCode = string.Empty;
+            }
             var searchRequest = new GetAllProfileByCampang()
             {
                 Token = request.Token,
@@ -159,6 +164,7 @@ namespace vsrolAPI2022.Controllers
                 Id = request.Id,
                 From = request.From,
                 UserId = user.Id,
+                ColorCode = request.ColorCode,
                 VendorId = VendorId,
                 PhoneSerach = request.PhoneSerach,
                 LineCode = request.LineCode,
@@ -174,6 +180,140 @@ namespace vsrolAPI2022.Controllers
         }
 
         [Authorize]
+        [HttpPost("~/api/campagnProfile/exportData1")]
+        public async Task<IResult> exportData1(CampagnProfileSearchInput request)
+        {
+
+            var user = GetCurrentUser();
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            //if (user.RoleId == "1")
+            //{
+            //    return await this.getAll1(request);
+            //}
+
+            if (request.TypegetData != "0")
+            {
+
+                request.IdPackage = "";
+            }
+            int dpdMax = -1;
+            int dpdMin = -1;
+            if (request.Dpd == 0)
+            {
+                dpdMax = 30;
+                dpdMin = 0;
+            }
+
+            if (request.Dpd == 1)
+            {
+                dpdMax = 60;
+                dpdMin = 31;
+            }
+
+            if (request.Dpd == 2)
+            {
+                dpdMax = 90;
+                dpdMin = 61;
+            }
+
+            if (request.Dpd == 3)
+            {
+                dpdMax = 180;
+                dpdMin = 91;
+            }
+
+            if (request.Dpd == 4)
+            {
+                dpdMax = 360;
+                dpdMin = 181;
+            }
+
+
+            if (request.Dpd == 5)
+            {
+                dpdMax = 361;
+                dpdMin = 1000;
+            }
+            if (request.Dpd == 6)
+            {
+                dpdMax = 10000;
+                dpdMin = 1001;
+            }
+
+            if (!string.IsNullOrEmpty(request.IdPackage))
+            {
+                var packageFile = await _packageManagementBussiness.Getbyid(request.IdPackage);
+
+                var valueRangDpd = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DPDItem>>(packageFile.Value);
+                foreach (var item in valueRangDpd)
+                {
+                    var dpdItem = await _dpdManagementBussiness.GetByIdAsync(item.value);
+                    if (dpdItem == null)
+                    {
+                        continue;
+                    }
+                    if (dpdMin < 0)
+                    {
+                        dpdMin = dpdItem.Min.Value;
+                    }
+                    if (dpdMax < dpdItem.Max)
+                    {
+                        dpdMax = dpdItem.Max.Value;
+                    }
+
+                    if (dpdItem.Min < dpdMin)
+                    {
+                        dpdMin = dpdItem.Min.Value;
+                    }
+                    if (dpdItem.Max > dpdMax)
+                    {
+                        dpdMax = dpdItem.Max.Value;
+                    }
+
+
+                }
+            }
+
+
+
+            if (request.ColorCode == "" || request.ColorCode == "-1" || request.ColorCode == "" || request.ColorCode == "white" || request.ColorCode == null)
+            {
+                request.ColorCode = string.Empty;
+            }
+            var searchRequest = new GetAllProfileByCampang()
+            {
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = request.Limit,
+                To = request.To,
+                DpdMax = dpdMax,
+                DpdMin = dpdMin,
+                Id = request.Id,
+                From = request.From,
+                UserId = user.Id,
+                ColorCode = request.ColorCode,
+                VendorId = VendorId,
+                PhoneSerach = request.PhoneSerach,
+                LineCode = request.LineCode,
+                NoAgreement = request.NoAgree,
+                TypegetData = request.TypegetData
+            };
+            if (searchRequest.To.HasValue)
+            {
+                searchRequest.To = searchRequest.To.ToEndDateTime();
+            }
+            var resultSearch = await _campagnBusiness.ExportDataByCampaign(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+
+
+        [Authorize]
         [HttpPost("~/api/campagnProfile/getAll1")]
         public async Task<IResult> getAll1(CampagnProfileSearchInput request)
         {
@@ -186,21 +326,13 @@ namespace vsrolAPI2022.Controllers
             {
                 VendorId = int.Parse(user.Id);
             }
-
-
-
-
             int dpdMax = -1;
             int dpdMin = -1;
-
-
-
             if (request.Dpd == 0)
             {
                 dpdMax = 30;
                 dpdMin = 0;
             }
-
             if (request.Dpd == 1)
             {
                 dpdMax = 60;
@@ -246,8 +378,6 @@ namespace vsrolAPI2022.Controllers
 
                 foreach (var item in valueRangDpd)
                 {
-
-
                     var dpdItem = await _dpdManagementBussiness.GetByIdAsync(item.value);
                     if (dpdItem == null)
                     {
@@ -339,7 +469,7 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Không có thông tin mã hợp đồng");
             }
 
-            var account = new Profile()
+            var account = new CampagnProfile()
             {
 
 

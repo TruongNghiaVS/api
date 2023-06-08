@@ -2,13 +2,13 @@
 
 namespace VS.core.API.model
 {
-    public class CampagnProfileAdd : Profile
+    public class CampagnProfileAdd : CampagnProfile
     {
 
 
 
     }
-    public class CampagnProfileUpdate : Profile
+    public class CampagnProfileUpdate : CampagnProfile
     {
 
         public CampagnProfileUpdate()

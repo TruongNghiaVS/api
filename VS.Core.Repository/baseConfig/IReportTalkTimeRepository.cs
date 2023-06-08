@@ -17,6 +17,7 @@ namespace VS.Core.Repository.baseConfig
 
         Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecordingServe2(HandlelFileRecordingRequest request);
         Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecordingServe3(HandlelFileRecordingRequest request);
+        Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecordingServe4(HandlelFileRecordingRequest request);
         Task<ReportQuerryRecordingFileIndex> GetInfomationRecording(string likiedId);
     }
 

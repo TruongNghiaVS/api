@@ -8,7 +8,7 @@ namespace VS.Core.Repository.baseConfig
     {
         Task<CampagnRequestReponse> GetALl(CampagnRequest request);
 
-
+        Task<int> UpdateSkipData(Campagn entity);
         Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(CampangnOverviewByIdRequest request);
 
 

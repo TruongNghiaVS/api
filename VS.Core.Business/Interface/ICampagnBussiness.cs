@@ -13,24 +13,32 @@ namespace VS.Core.Business.Interface
         Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(CampangnOverviewByIdRequest request);
         Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request);
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
-        Task<Profile> GetProfile(string id);
-        Task<Profile> GetProfileByNoAgree(string noAgree);
-        Task<Profile> GetProfileByNoCMND(string noNational);
 
-        Task<List<Profile>> GetAllInfoSkipp(string noNational);
+        Task<GetAllProfileByCampangReponse> ExportDataByCampaign(GetAllProfileByCampang request);
+        Task<CampagnProfile> GetProfile(string id);
+        Task<CampagnProfile> GetProfileByNoAgree(string noAgree);
+        Task<CampagnProfile> GetProfileByNoCMND(string noNational);
 
-        Task<int> AddProfile(Profile entity);
-        Task<int> UpdateProfile(Profile entity);
-        Task<int> UpdateProfileSkip(Profile entity);
-        Task DeleteProfile(Profile entity);
+        Task<List<CampagnProfile>> GetAllInfoSkipp(string noNational);
+
+        Task<int> AddProfile(CampagnProfile entity);
+        Task<int> UpdateProfile(CampagnProfile entity);
+        Task<int> UpdateProfileSkip(CampagnProfile entity);
+        Task DeleteProfile(CampagnProfile entity);
         Task<bool> HandleImport(CampanginDataImportRequest request, Account userLogin);
-        Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request);
+        Task<bool> HandleImportSkip(CampanginDataImportRequest request, Account userLogin);
+        Task<bool> HandleImportV2(CampanginDataImportRequest request, Account userLogin);
+
+        Task<List<CampagnProfile>> GetALLAsiggnee(GetAllProfileByCampang request);
         Task<CampangeProfileInforReponse> GetIno(string id);
         Task<bool> AssignedTask(string profileId, string userId);
         Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(CampagnRequest request);
         Task<bool> HandleCase(CampaignProfile_caseRequest request);
         Task<bool> UpdateOverViewAllCampagn();
         Task<bool> ResetCase(string campagnCase = "11");
+
+
+        Task<bool> DeleteCampagnFile(List<string> DataDelete, string idRequest);
 
     }
 }

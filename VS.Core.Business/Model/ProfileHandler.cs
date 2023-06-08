@@ -2,7 +2,7 @@
 
 namespace VS.Core.Business.Model
 {
-    public class ProfileHandler : Profile
+    public class ProfileHandler : CampagnProfile
     {
         public string? AssignedId { get; set; }
     }

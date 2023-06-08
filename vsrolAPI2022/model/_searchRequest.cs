@@ -62,6 +62,8 @@
         public string? TypegetData { get; set; }
 
         public string? IdPackage { get; set; }
+
+        public string? ColorCode { get; set; }
         public CampagnProfileSearchInput()
         {
             Status = 0;

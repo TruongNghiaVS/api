@@ -8,7 +8,7 @@ using VS.Core.Repository.Model;
 
 namespace VS.Core.Repository
 {
-    public class ProfileCampagnRepository : RepositoryBase<Profile>, IProfileCampagnRepository
+    public class ProfileCampagnRepository : RepositoryBase<CampagnProfile>, IProfileCampagnRepository
     {
         private readonly IConfiguration _configuration;
         private readonly string tableName = "CampaignProfile";
@@ -18,7 +18,7 @@ namespace VS.Core.Repository
             _baseTable = tableName;
         }
 
-        public async Task<int> Add(Profile model)
+        public async Task<int> Add(CampagnProfile model)
         {
             model.CreateAt = DateTime.Now;
             model.UpdateAt = DateTime.Now;
@@ -45,6 +45,33 @@ namespace VS.Core.Repository
 
             }
         }
+        public async Task<int> UpdateSkipData(CampagnProfile entity)
+        {
+            entity.CreateAt = DateTime.Now;
+            entity.UpdateAt = DateTime.Now;
+            var par = GetParams(entity, new string[] {
+                nameof(entity.UpdateAt),
+                nameof(entity.CreateAt),
+                nameof(entity.Deleted),
+                nameof(entity.CreatedBy)
+            });
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.Campaign_update_caseSkip, par, commandType: CommandType.StoredProcedure);
+
+                    return 1;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+
+            }
+        }
+
+
         public async Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request)
         {
             int page = request.Page;
@@ -71,6 +98,7 @@ namespace VS.Core.Repository
                         request.TypegetData,
                         request.OrderBy,
                         request.VendorId,
+                        request.ColorCode,
                         request.UserId
                     }, commandType: CommandType.StoredProcedure);
                     var fistElement = result.FirstOrDefault();
@@ -94,7 +122,53 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<int> ResetCase(Profile entity)
+        public async Task<GetAllProfileByCampangReponse> ExportDataByCampaign(GetAllProfileByCampang request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CampagnProileExportIndexModel>(_Sql.CampaignProfile_exportData, new
+                    {
+                        request.Id,
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.DpdMax,
+                        request.DpdMin,
+                        request.LineCode,
+                        request.Limit,
+                        request.NoAgreement,
+                        request.Page,
+                        request.PhoneSerach,
+                        request.TypegetData,
+                        request.OrderBy,
+                        request.VendorId,
+                        request.ColorCode,
+                        request.UserId
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var reponse = new GetAllProfileByCampangReponse()
+                    {
+                        Total = 0,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+        public async Task<int> ResetCase(CampagnProfile entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -118,7 +192,7 @@ namespace VS.Core.Repository
 
             }
         }
-        public async Task<int> Update(Profile entity)
+        public async Task<int> Update(CampagnProfile entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -143,13 +217,16 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<int> UpdateSkip(Profile entity)
+
+
+        public async Task<int> UpdateSkip(CampagnProfile entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
             var par = GetParams(entity, new string[] {
                 nameof(entity.UpdateAt),
                 nameof(entity.CreateAt),
+                nameof(entity.ColorCode),
                 nameof(entity.Deleted),
                 nameof(entity.CreatedBy)
             });
@@ -168,7 +245,7 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<int> ImportUpdate(Profile entity)
+        public async Task<int> ImportUpdate(CampagnProfile entity)
         {
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
@@ -208,7 +285,31 @@ namespace VS.Core.Repository
             }
         }
 
-        public async Task<List<Profile>> GetALLAsiggnee(GetAllProfileByCampang request)
+
+        public async Task<bool> DeleteMutipleCam(List<string> dataDelete, string requestId)
+        {
+            if (dataDelete.Count < 1)
+                return true;
+            using (var con = GetConnection())
+            {
+                string listOfIdsJoined = "(" + String.Join(",", dataDelete.ToArray()) + ")";
+                var sql = "update CampaignProfile set Deleted = 1  where CampaignId = @CampaignId and  Id in @dataDelete";
+                var result = await con.ExecuteAsync(sql, new
+                {
+                    dataDelete = listOfIdsJoined,
+                    CampaignId = requestId
+                });
+
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+
+        public async Task<List<CampagnProfile>> GetALLAsiggnee(GetAllProfileByCampang request)
         {
             int page = request.Page;
             int limit = request.Limit;
@@ -217,7 +318,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<Profile>(_Sql.CampaignProfile_getAll, new
+                    var result = await con.QueryAsync<CampagnProfile>(_Sql.CampaignProfile_getAll, new
                     {
                         request.Id,
                         request.Token,
@@ -234,7 +335,7 @@ namespace VS.Core.Repository
             }
             catch (Exception e)
             {
-                return new List<Profile>();
+                return new List<CampagnProfile>();
             }
         }
 
@@ -260,7 +361,7 @@ namespace VS.Core.Repository
             }
 
         }
-        public async Task<Profile> GetBYNoAreeMentLasted(string profileId)
+        public async Task<CampagnProfile> GetBYNoAreeMentLasted(string profileId)
         {
             using (var con = GetConnection())
             {
@@ -268,7 +369,7 @@ namespace VS.Core.Repository
                 var sql = "select top 1 * from CampaignProfile e " + " WHERE NoAgreement = @profileId order by e.UpdateAt desc ";
 
 
-                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId });
+                var result = await con.QuerySingleOrDefaultAsync<CampagnProfile>(sql, new { profileId = profileId });
                 if (result == null)
                 {
                     return null;
@@ -276,7 +377,7 @@ namespace VS.Core.Repository
                 return result;
             }
         }
-        public async Task<Profile> GetByNoAgreement(string profileId, string campanId = null)
+        public async Task<CampagnProfile> GetByNoAgreement(string profileId, string campanId = null)
 
         {
             using (var con = GetConnection())
@@ -292,7 +393,7 @@ namespace VS.Core.Repository
 
                 try
                 {
-                    var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = profileId, campanId = campanId });
+                    var result = await con.QuerySingleOrDefaultAsync<CampagnProfile>(sql, new { profileId = profileId, campanId = campanId });
                     if (result == null)
                     {
                         return null;
@@ -312,12 +413,12 @@ namespace VS.Core.Repository
 
 
 
-        public async Task<Profile> GetProfileByNoCMND(string noNational)
+        public async Task<CampagnProfile> GetProfileByNoCMND(string noNational)
         {
             using (var con = GetConnection())
             {
                 var sql = "SELECT top 1 * FROM CampaignProfile " + " WHERE (isnull(Deleted,0) =0) and  (NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId) order by id desc";
-                var result = await con.QuerySingleOrDefaultAsync<Profile>(sql, new { profileId = noNational });
+                var result = await con.QuerySingleOrDefaultAsync<CampagnProfile>(sql, new { profileId = noNational });
 
                 if (result == null)
                 {
@@ -328,16 +429,16 @@ namespace VS.Core.Repository
         }
 
 
-        public async Task<List<Profile>> GetAllInfoSkipp(string noNational)
+        public async Task<List<CampagnProfile>> GetAllInfoSkipp(string noNational)
         {
             using (var con = GetConnection())
             {
                 var sql = "SELECT * FROM CampaignProfile " + " WHERE (isnull(Deleted,0) =0) and  (NoAgreement = @profileId or NationalId  = @profileId  or  MobilePhone = @profileId) order by id desc";
-                var result = await con.QueryAsync<Profile>(sql, new { profileId = noNational });
+                var result = await con.QueryAsync<CampagnProfile>(sql, new { profileId = noNational });
 
                 if (result == null)
                 {
-                    return new List<Profile>();
+                    return new List<CampagnProfile>();
                 }
                 return result.ToList();
             }

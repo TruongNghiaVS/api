@@ -52,12 +52,13 @@ namespace vsrolAPI2022.Controllers
                 linecode = "8888";
             }
 
-            if (linecode != "8888")
-            {
-                return Results.BadRequest("không gửi dược tin nhắn");
-            }
 
             if (string.IsNullOrEmpty(_input.PhoneNumber))
+            {
+                return Results.BadRequest("Dữ liệu không hợp lệ");
+            }
+
+            if (string.IsNullOrEmpty(_input.ContentSms))
             {
                 return Results.BadRequest("Dữ liệu không hợp lệ");
             }
