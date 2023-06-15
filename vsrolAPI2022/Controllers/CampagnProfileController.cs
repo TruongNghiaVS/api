@@ -63,6 +63,21 @@ namespace vsrolAPI2022.Controllers
             //    return await this.getAll1(request);
             //}
 
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            else if (user.RoleId == "2")
+            {
+
+            }
+            else
+            {
+                VendorId = user.VendorId;
+            }
+
+
+
             if (request.TypegetData != "0")
             {
 
@@ -169,7 +184,9 @@ namespace vsrolAPI2022.Controllers
                 PhoneSerach = request.PhoneSerach,
                 LineCode = request.LineCode,
                 NoAgreement = request.NoAgree,
-                TypegetData = request.TypegetData
+                TypegetData = request.TypegetData,
+                SkipData = request.SkipData
+
             };
             if (searchRequest.To.HasValue)
             {
@@ -190,6 +207,17 @@ namespace vsrolAPI2022.Controllers
             {
                 VendorId = int.Parse(user.Id);
             }
+            else if (user.RoleId == "2")
+            {
+
+            }
+            else
+            {
+                VendorId = user.VendorId;
+            }
+
+
+
             //if (user.RoleId == "1")
             //{
             //    return await this.getAll1(request);
@@ -440,6 +468,7 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
+                SkipData = request.SkipData,
                 DpdMax = dpdMax,
                 DpdMin = dpdMin,
                 Id = request.Id,

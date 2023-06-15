@@ -309,6 +309,8 @@ namespace VS.core.Request
         public int? Skipp { get; set; }
         public string? ColorCode { get; set; }
 
+        public bool? SkipData { get; set; }
+
 
 
     }
@@ -354,6 +356,8 @@ namespace VS.core.Request
 
         public string? ProfileId { get; set; }
         public string? NoAgreement { get; set; }
+
+        public string? VendorId { get; set; }
         public ImpactHistorySerarchRequest()
         {
             this.Page = 1;

@@ -28,4 +28,32 @@
 
 
     }
+
+
+
+    public class ImpactHistoryv2IndexModel : BaseIndexModel
+    {
+        public DateTime? CreateTime { get; set; }
+        public string? Username { get; set; }
+
+        public string? NoAgreement { get; set; }
+
+        public string? PlaceCode { get; set; }
+
+        public string? WayContact { get; set; }
+
+        public string? NoteCode { get; set; }
+
+        public string? StatusName { get; set; }
+
+        public DateTime? Promiseday { get; set; }
+
+        public string? MoneyPromise { get; set; }
+
+        public string? NoteIm { get; set; }
+
+
+
+    }
+
 }

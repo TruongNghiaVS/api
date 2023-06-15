@@ -55,6 +55,8 @@
 
         public string Group_reason_update = "sp_groupReason_Update";
 
+        public string ImpactHistoryFinal_getAll = "sp_ImpactHistoryFinal_getAll";
+
         public string Group_reason_getAll = "sp_Reason_getAll";
 
         public string Sp_reason_getAllByHistoryReport = "sp_reason_getAllByHistoryReport";

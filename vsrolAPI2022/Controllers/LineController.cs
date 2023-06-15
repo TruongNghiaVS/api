@@ -100,7 +100,7 @@ namespace vsrolAPI2022.Controllers
                 Status = 2,
 
                 VendorId = vendorId,
-                CreatedBy = user.CreatedBy
+                CreatedBy = user.Id
 
 
             };

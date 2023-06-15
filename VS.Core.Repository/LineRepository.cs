@@ -43,6 +43,7 @@ namespace VS.Core.Repository
                         {
                             entity.Code,
                             entity.Name,
+                            entity.VendorId,
                             entity.Status,
                             entity.CreatedBy
                         },

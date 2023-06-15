@@ -29,6 +29,13 @@ namespace VS.Core.Business
             return _unitOfWork.ImpactRe.GetALl(request);
         }
 
+        public Task<ImpactHistoryReponse> GetFinal(ImpactHistorySerarchRequest request)
+        {
+            return _unitOfWork.ImpactRe.GetFinal(request);
+        }
+
+
+
         public Task<ImpactHistory> Getbyid(string Id)
         {
             return _unitOfWork.ImpactRe.GetById(Id);

@@ -408,7 +408,6 @@ namespace vsrolAPI2022.Controllers
             try
             {
 
-
                 var userLogin = new Account()
                 {
                     Id = "1"
@@ -451,6 +450,13 @@ namespace vsrolAPI2022.Controllers
                             string? assigneeId = null;
 
                             assigneeId = ReadvaluestringExcelWidthNull(workSheet, i, 40);
+
+                            int Haskip = 0;
+                            Haskip = ReadvalueintExcel(workSheet, i, 41);
+
+                            bool? havedSkipData = Haskip > 0;
+
+
                             try
                             {
                                 profileList.Add(new ProfileHandler
@@ -496,7 +502,8 @@ namespace vsrolAPI2022.Controllers
                                     NoteFirstTime = ReadvalueStringExcel(workSheet, i, 38),
                                     NoteRel = ReadvalueStringExcel(workSheet, i, 39),
                                     CreatedBy = userLogin.Id,
-                                    AssignedId = assigneeId
+                                    AssignedId = assigneeId,
+                                    SkipData = havedSkipData
 
                                 });
                             }
@@ -577,7 +584,12 @@ namespace vsrolAPI2022.Controllers
                             var doB = ReadvalueDateExcel(workSheet, i, 3);
                             string? assigneeId = null;
 
+                            var hasKip = ReadvaluestringExcelWidthNull(workSheet, i, 41);
                             assigneeId = ReadvaluestringExcelWidthNull(workSheet, i, 40);
+                            if (hasKip != "0")
+                            {
+                                continue;
+                            }
                             try
                             {
                                 profileList.Add(new ProfileHandler
@@ -608,8 +620,8 @@ namespace vsrolAPI2022.Controllers
                                     DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
                                     AmountLoan = ReadvaluefloatExcel(workSheet, i, 12),
                                     EMI = ReadvaluefloatExcel(workSheet, i, 15),
-                                    CampaignId = int.Parse(request.Id),
-                                    //Assignee = "-1",
+
+
                                     TotalFines = ReadvaluefloatExcel(workSheet, i, 19),
                                     TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 13),
                                     Tenure = ReadvalueintExcel(workSheet, i, 14),
@@ -640,8 +652,7 @@ namespace vsrolAPI2022.Controllers
 
                 var reqeustImport = new CampanginDataImportRequest();
                 reqeustImport.ListData = profileList;
-                reqeustImport.Id = request.Id;
-                await _campagnBusiness.HandleImport(reqeustImport, userLogin);
+                await _campagnBusiness.HandleImportSkip(reqeustImport, userLogin);
             }
             catch (Exception e)
             {

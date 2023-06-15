@@ -56,7 +56,6 @@ namespace vsrolAPI2022.Controllers
         [HttpGet("~/api/job/GroupByDate")]
         public async Task<ActionResult> GroupByDate()
         {
-
             var timeSelect = DateTime.UtcNow;
             await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
             {

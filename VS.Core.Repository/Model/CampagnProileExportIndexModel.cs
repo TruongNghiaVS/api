@@ -27,6 +27,9 @@
         public string LastImpact { get; set; }
         public string ColorCode { get; set; }
         public DateTime? UpdateAt { get; set; }
+        public string? MoneyPromise { get; set; }
+
+        public string? Promiseday { get; set; }
         public string Id { get; set; }
 
 

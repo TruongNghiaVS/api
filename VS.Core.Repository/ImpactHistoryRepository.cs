@@ -119,6 +119,51 @@ namespace VS.Core.Repository
                 return new List<ImpactHistory>();
             }
         }
+
+
+        public async Task<ImpactHistoryReponse> GetFinal(ImpactHistorySerarchRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ImpactHistoryv2IndexModel>(_Sql.ImpactHistoryFinal_getAll, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.VendorId,
+                        request.ProfileId,
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    if (fistElement != null)
+                    {
+                        totalRecord = fistElement.TotalRecord;
+                    }
+                    var reponse = new ImpactHistoryReponse()
+                    {
+                        Total = totalRecord,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public async Task<ImpactHistoryReponse> GetALl(ImpactHistorySerarchRequest request)
         {
             int page = request.Page;

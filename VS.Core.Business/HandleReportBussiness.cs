@@ -30,26 +30,13 @@ namespace VS.Core.Business
             }
             var i = 0;
 
-            while (i < 4)
+            while (i < 2)
             {
                 IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
+
                 if (i == 0)
                 {
-                    i++;
-                    continue;
 
-                    startTime = startTime.AddMinutes(-15);
-                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe4(
-                        new core.Request.HandlelFileRecordingRequest()
-                        {
-                            TimeSelect = dateGet,
-                            TimeFrom = startTime,
-                            TimeTo = endTime
-                        }
-                    );
-                }
-                else if (i == 1)
-                {
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe2(
                         new core.Request.HandlelFileRecordingRequest()
                         {
@@ -60,10 +47,9 @@ namespace VS.Core.Business
                         }
                     );
                 }
-                else if (i == 2)
+                else
                 {
-                    i++;
-                    continue;
+
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe3(
                       new core.Request.HandlelFileRecordingRequest()
                       {
@@ -75,18 +61,18 @@ namespace VS.Core.Business
                   );
                 }
 
-                else
-                {
-                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
-                      new core.Request.HandlelFileRecordingRequest()
-                      {
-                          TimeSelect = dateGet,
-                          TimeFrom = startTime,
-                          TimeTo = endTime
+                //else
+                //{
+                //    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
+                //      new core.Request.HandlelFileRecordingRequest()
+                //      {
+                //          TimeSelect = dateGet,
+                //          TimeFrom = startTime,
+                //          TimeTo = endTime
 
-                      }
-                  );
-                }
+                //      }
+                //  );
+                //}
                 i++;
                 var data = allcdrHaving;
 

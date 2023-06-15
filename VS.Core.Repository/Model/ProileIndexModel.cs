@@ -51,5 +51,12 @@ namespace VS.Core.Repository.Model
             get; set;
         }
 
+        public bool? SkipData { get; set; }
+
+        public ProileIndexModel()
+        {
+            SkipData = false;
+        }
+
     }
 }

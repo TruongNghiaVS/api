@@ -10,5 +10,7 @@ namespace VS.Core.Business.Interface
         //Task<bool> CheckDuplicate(string code);
         Task<ImpactHistoryReponse> GetALl(ImpactHistorySerarchRequest request);
 
+        Task<ImpactHistoryReponse> GetFinal(ImpactHistorySerarchRequest request);
+
     }
 }

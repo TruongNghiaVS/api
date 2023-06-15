@@ -191,15 +191,26 @@ namespace VS.Core.Business
                 if (result != null)
                 {
                     string? assignedId = null;
-                    if (string.IsNullOrEmpty(item.AssignedId) || result.Assignee != item.AssignedId)
+                    if (result.Assignee != item.AssignedId)
                     {
-                        assignedId = result.Assignee;
+
+                        assignedId = item.AssignedId;
                         result.Status = 0;
+
+
+
                     }
                     else
                     {
-                        assignedId = item.AssignedId;
-                        result.Status = 0;
+
+                        if (result.Status == 0)
+                        {
+                            assignedId = item.AssignedId;
+                            result.Status = 0;
+                        }
+                        assignedId = result.Assignee;
+
+
 
                     }
 
@@ -249,6 +260,8 @@ namespace VS.Core.Business
                     result.UpdateAt = item.UpdateAt;
                     result.UpdatedBy = item.UpdatedBy;
                     result.UpdatedBy = userLogin.Id;
+
+                    result.SkipData = item.SkipData;
                     await _unitOfWork.CampagnProfileRe.ImportUpdate(result);
                 }
                 else
@@ -265,6 +278,7 @@ namespace VS.Core.Business
                     }
                     itemInsert.CreatedBy = userLogin.Id;
                     itemInsert.Assignee = assignedId;
+                    itemInsert.SkipData = item.SkipData;
                     itemInsert.VendorId = vendorId;
                     await _unitOfWork.CampagnProfileRe.Add(itemInsert);
 
@@ -401,7 +415,6 @@ namespace VS.Core.Business
                     MobilePhone = item.MobilePhone,
                     Phone1 = item.Phone1,
                     AmountLoan = item.AmountLoan,
-                    CampaignId = int.Parse(id),
                     CodeProduct = item.CodeProduct,
                     CreateAt = item.CreateAt,
                     CreatedBy = item.CreatedBy,
@@ -436,12 +449,18 @@ namespace VS.Core.Business
                     TotalFines = item.TotalFines,
                     TotalMoneyPaid = item.TotalMoneyPaid,
                     TotalPaid = item.TotalPaid,
-                    UpdateAt = item.UpdateAt,
-                    UpdatedBy = item.UpdatedBy
+                    UpdateAt = DateTime.Now,
+                    SkipContent = item.SkipContent,
+                    UpdatedBy = userLogin.Id
                 };
                 var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
                     item.NoAgreement
                 );
+
+                if (result == null)
+                {
+                    continue;
+                }
                 if (result != null)
                 {
                     string? assignedId = null;
@@ -456,10 +475,11 @@ namespace VS.Core.Business
                         result.Status = 0;
 
                     }
+                    result.Status = 0;
 
                     result.Assignee = assignedId;
-                    result.CustomerName = item.CustomerName;
-                    result.NoAgreement = item.NoAgreement;
+
+
                     result.DayOfBirth = item.DayOfBirth;
                     result.NationalId = item.NationalId;
                     result.MobilePhone = item.MobilePhone;
@@ -500,8 +520,7 @@ namespace VS.Core.Business
                     result.TotalFines = item.TotalFines;
                     result.TotalMoneyPaid = item.TotalMoneyPaid;
                     result.TotalPaid = item.TotalPaid;
-                    result.UpdateAt = item.UpdateAt;
-                    result.UpdatedBy = item.UpdatedBy;
+                    result.UpdateAt = DateTime.Now;
                     result.UpdatedBy = userLogin.Id;
                     await UpdateSkipData(result);
                 }

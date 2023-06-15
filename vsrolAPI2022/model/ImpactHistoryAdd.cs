@@ -10,6 +10,8 @@
         public string? NoteIm { get; set; }
         public string? NoteCode { get; set; }
 
+        public string? PlaceCode { get; set; }
+
         public DateTime? Promiseday { get; set; }
 
         public string? MoneyPromise { get; set; }
@@ -27,6 +29,8 @@
         public int? Assignee { get; set; }
 
         public string ColorCode { get; set; }
+
+        public string WayContact { get; set; }
     }
     public class ImpactHistoryUpdate
     {

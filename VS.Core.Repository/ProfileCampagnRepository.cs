@@ -5,6 +5,7 @@ using VS.core.Request;
 using VS.Core.dataEntry.User;
 using VS.Core.Repository.baseConfig;
 using VS.Core.Repository.Model;
+using static Dapper.SqlMapper;
 
 namespace VS.Core.Repository
 {
@@ -26,6 +27,7 @@ namespace VS.Core.Repository
                 nameof(model.UpdatedBy),
                 nameof(model.UpdateAt),
                 nameof(model.Id),
+
                 nameof(model.CreateAt),
                 nameof(model.Deleted)
             }, "Id");
@@ -52,6 +54,7 @@ namespace VS.Core.Repository
             var par = GetParams(entity, new string[] {
                 nameof(entity.UpdateAt),
                 nameof(entity.CreateAt),
+
                 nameof(entity.Deleted),
                 nameof(entity.CreatedBy)
             });

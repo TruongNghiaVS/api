@@ -51,7 +51,10 @@ namespace vsrolAPI2022.Controllers
             {
                 linecode = "8888";
             }
-
+            if (linecode != "8888")
+            {
+                return Results.BadRequest("Không gọi được");
+            }
 
             if (string.IsNullOrEmpty(_input.PhoneNumber))
             {
@@ -80,21 +83,21 @@ namespace vsrolAPI2022.Controllers
             int[] portArray = new int[] { };
             if (templateNumberMobi.Contains(numberBegin))
             {
-                portArray = new int[] { 0, 1, 2, 3, 4, 5 };
+                portArray = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
             }
 
             else if (templateNumberVina.Contains(numberBegin))
             {
-                portArray = new int[] { 6, 7, 8, 9, 10 };
+                portArray = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
             }
             else if (templateNumberViettel.Contains(numberBegin))
             {
-                portArray = new int[] { 11, 12, 13, 14, 15 };
+                portArray = new int[] { 8, 9, 10, 11, 12, 13, 14, 15 };
             }
             else
             {
 
-                portArray = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+                portArray = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
             }
 
             using (var streamWriter = new StreamWriter(myHttpWebRequest.GetRequestStream()))

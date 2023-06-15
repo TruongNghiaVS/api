@@ -61,6 +61,32 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
+
+
+        [HttpPost("~/api/impacthistory/exportFinal")]
+        public async Task<IResult> GetFinal(ImpactHistorySearchInput request)
+        {
+            var user = GetCurrentUser();
+            int? vendorId = 0;
+            if (user.RoleId == "4")
+            {
+                vendorId = int.Parse(user.Id);
+            }
+            vendorId = user.VendorId;
+            var searchRequest = new ImpactHistorySerarchRequest()
+            {
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = request.Limit,
+                To = request.To,
+                VendorId = vendorId.ToString(),
+                From = request.From
+            };
+            var resultSearch = await _impactBusiness.GetFinal(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
         [AllowAnonymous]
         [HttpPost("~/api/impacthistory/add")]
         public async Task<IResult> Add(ImpactHistoryAdd employeeAdd)
@@ -82,6 +108,7 @@ namespace vsrolAPI2022.Controllers
                 Relationship = employeeAdd.Relationship,
                 ColorCode = employeeAdd.ColorCode,
                 Priority = 1,
+                PlaceCode = employeeAdd.PlaceCode,
                 CreatedBy = user.Id,
                 StatusFollow = employeeAdd.StatusFollow,
                 StatusIm = employeeAdd.StatusIm,

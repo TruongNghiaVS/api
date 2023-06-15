@@ -79,8 +79,11 @@
 
         public string? ColorCode { get; set; }
         public bool? DeleteRecord { get; set; }
+
+        public bool? SkipData { get; set; }
         public CampagnProfile()
         {
+            SkipData = false;
 
         }
 

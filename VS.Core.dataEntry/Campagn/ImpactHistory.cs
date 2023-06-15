@@ -30,7 +30,9 @@
         public int? CampagnId { get; set; }
 
         public string? NoteCode { get; set; }
+        public string? ColorCode { get; set; }
+        public string? PlaceCode { get; set; }
+        public string? WayContact { get; set; }
 
-        public string ColorCode { get; set; }
     }
 }
