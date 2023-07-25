@@ -31,8 +31,8 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> TriggerCall(MakeCallRequest _input)
         {
             var _userCurrent = GetCurrentUser();
-
             var linecode = _userCurrent.LineCode;
+
             if (string.IsNullOrEmpty(linecode))
             {
                 return Results.BadRequest("Dữ liệu không hợp lệ");
@@ -48,6 +48,20 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Dữ liệu không hợp lệ");
 
             }
+            _input.PhoneNumber = _input.PhoneNumber.Trim();
+            await callLogBussiness.Add(new VS.Core.dataEntry.User.LogCall()
+            {
+                Phone = _input.PhoneNumber,
+                CreateAt = DateTime.Now,
+                LineCode = linecode,
+                ProfileId = _input.ProfileId,
+                NoAgree = _input.NoAgree,
+                TimeBuisiness = DateTime.Now,
+                VendorId = _userCurrent.VendorId,
+                CreatedBy = _userCurrent.Id,
+                UserId = _userCurrent.Id
+
+            });
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
                 phoneNumber = _input.PhoneNumber,
@@ -55,7 +69,7 @@ namespace vsrolAPI2022.Controllers
             }));
             data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var linkUrl = "http://192.168.1.12:3002";
+            var linkUrl = "http://192.168.1.10:3002";
 
             if (linecode.StartsWith('1'))
             {
@@ -79,22 +93,9 @@ namespace vsrolAPI2022.Controllers
 
                 var reponse = await client.PostAsync("api/client/makeCall", data);
                 var result = await reponse.Content.ReadAsStringAsync();
-                await callLogBussiness.Add(new VS.Core.dataEntry.User.LogCall()
-                {
-                    Phone = _input.PhoneNumber,
-                    CreateAt = DateTime.Now,
-                    LineCode = linecode,
-                    ProfileId = _input.ProfileId,
-                    NoAgree = _input.NoAgree,
-                    TimeBuisiness = DateTime.Now,
-                    VendorId = _userCurrent.VendorId,
-                    CreatedBy = _userCurrent.Id,
-                    UserId = _userCurrent.Id
-
-                });
-
                 return Results.Ok(result);
             }
         }
     }
+
 }

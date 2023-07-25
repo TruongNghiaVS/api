@@ -99,6 +99,27 @@ namespace VS.Core.Repository
         }
 
 
+        public async Task<bool> DeleteEmployee(Account entity)
+        {
+            using (var con = GetConnection())
+            {
+
+
+                var result = await con.ExecuteAsync(_Sql.Employee_delete,
+                   new
+                   {
+                       entity.Id
+
+                   },
+                   commandType: CommandType.StoredProcedure);
+
+                return true;
+
+            }
+        }
+
+
+
         public async Task<EmployeeSearchReponse> GetALl(EmployeeSearchRequest request)
         {
 

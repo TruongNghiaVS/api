@@ -29,6 +29,9 @@ namespace VS.Core.Repository
         public IDpdRepository DpdRe { get; set; }
 
         public IPackageRepository PackageRe { get; }
+
+        public IViewRecordingRepository ViewRe { get; }
+        public ISkipInfoRepository SkipRe { get; }
         public UnitOfWork(IEmployeeRepository employeeRepository,
              IUserRepository userRepository,
              IMasterDataRepository masterDataRepository,
@@ -46,10 +49,13 @@ namespace VS.Core.Repository
             ILineRepository _lineRe,
             ISmsMessageRepository _smsRe,
             IDpdRepository _dpdRe,
-            IPackageRepository _PackageRe
+            IPackageRepository _PackageRe,
+            IViewRecordingRepository _ViewRe,
+            ISkipInfoRepository _SkipRe
 
             )
         {
+            ViewRe = _ViewRe;
             PackageRe = _PackageRe;
             SmsRe = _smsRe;
             Employees = employeeRepository;
@@ -68,6 +74,8 @@ namespace VS.Core.Repository
             ReportTalkTimeGroupByDay = _reportTalkTimeGroupByDay;
             LineRe = _lineRe;
             DpdRe = _dpdRe;
+            SkipRe = _SkipRe;
+
         }
 
     }

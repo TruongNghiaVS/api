@@ -17,6 +17,8 @@ namespace VS.Core.Business.Model
         public IEnumerable? ListReason { get; set; }
 
         public IEnumerable? ListHistory { get; set; }
+
+        public List<SkipInfo> ListSkipNew { get; set; }
         public CampangeProfileInforReponse()
         {
             ListHistory = new List<ImpactHistoryIndexModel>();

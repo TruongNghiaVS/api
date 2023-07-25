@@ -136,6 +136,7 @@ namespace VS.Core.Repository
                         request.Token,
                         request.From,
                         request.To,
+                        request.Status,
                         request.VendorId,
                         request.ProfileId,
                         request.Limit,
@@ -145,10 +146,7 @@ namespace VS.Core.Repository
 
                     var fistElement = result.FirstOrDefault();
                     var totalRecord = 0;
-                    if (fistElement != null)
-                    {
-                        totalRecord = fistElement.TotalRecord;
-                    }
+
                     var reponse = new ImpactHistoryReponse()
                     {
                         Total = totalRecord,

@@ -129,7 +129,7 @@ namespace VS.core.Utilities
         public static double? GetDurationAudio(this string? filePath)
         {
 
-            string path = @"http://192.168.1.12:3002/api/getFileAudio?filePath=";
+            string path = @"http://192.168.1.10:3002/api/getFileAudio?filePath=";
             path = path + "" + filePath;
             Byte[] bytes = null;
             using (var webClient = new WebClient())
@@ -140,7 +140,7 @@ namespace VS.core.Utilities
                 }
                 catch (Exception e)
                 {
-                    string path2 = @"http://192.168.1.10:3002/api/getFileAudio?filePath=";
+                    string path2 = @"http://192.168.1.12:3002/api/getFileAudio?filePath=";
                     path2 = path2 + "" + filePath;
                     try
                     {

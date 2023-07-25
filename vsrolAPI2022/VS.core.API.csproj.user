@@ -4,7 +4,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\Properties\PublishProfiles\FolderProfile12.pubxml</NameOfLastUsedPublishProfile>
+    <ActiveDebugProfile>vsrolAPI2022</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\Vietstargroup\source\repos\vsrolAPI2022\vsrolAPI2022\Properties\PublishProfiles\FolderProfile13.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

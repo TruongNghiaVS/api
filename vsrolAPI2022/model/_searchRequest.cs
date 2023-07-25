@@ -81,6 +81,22 @@
 
 
 
+    public partial class ViewRecordingInput : BaseInputSearch
+    {
+
+        public string? LineCode { get; set; }
+    }
+
+
+
+    public partial class SmsSearchInput : BaseInputSearch
+    {
+
+
+    }
+
+
+
 
 
 

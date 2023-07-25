@@ -13,6 +13,9 @@ namespace VS.Core.Repository.baseConfig
 
         Task<bool> UpdatePass(string userName, string pass);
 
+
+        Task<bool> DeleteEmployee(Account entity);
+
         Task<Account> GetByLineCode(string lineCode);
     }
 

@@ -87,6 +87,53 @@ namespace VS.core.Request
         }
     }
 
+    public class SmsGetallRequest : BaseSearchRequest
+    {
+
+
+        public string Userid { get; set; }
+        public int? VendorId { get; set; }
+
+        public int? lineIdAdd { get; set; }
+
+        public SmsGetallRequest()
+        {
+            this.Page = 1;
+            this.Limit = 10;
+            this.From = new DateTime(2022, 09, 20);
+            this.To = new DateTime(2022, 10, 01);
+        }
+    }
+
+
+    public class ViewRecordingRequest : BaseSearchRequest
+    {
+
+        public string LineCode { get; set; }
+        public string UserId { get; set; }
+
+    }
+
+    public class SmsGetallReponse : BaseSearchRepons
+
+    {
+        public SmsGetallReponse()
+        {
+            Total = 0;
+        }
+    }
+
+    public class ViewRecordingReponse : BaseSearchRepons
+
+    {
+        public ViewRecordingReponse()
+        {
+            Total = 0;
+        }
+    }
+
+
+
     public class LineManagementReponse : BaseSearchRepons
 
     {
@@ -366,6 +413,21 @@ namespace VS.core.Request
         }
     }
 
+    public class SkipInfoSerarchRequest : BaseSearchRequest
+    {
+
+        public string? NoAgreement { get; set; }
+
+
+
+        public SkipInfoSerarchRequest()
+        {
+            this.Page = 1;
+            this.Limit = 10;
+
+        }
+    }
+
     public class ImpactHistoryReponse : BaseSearchRepons
 
     {
@@ -375,6 +437,14 @@ namespace VS.core.Request
         }
     }
 
+    public class SkipInfoReponse : BaseSearchRepons
+
+    {
+        public SkipInfoReponse()
+        {
+            Total = 0;
+        }
+    }
 
 
     public class GroupEmployeeRequest : BaseSearchRequest
@@ -762,6 +832,7 @@ namespace VS.core.Request
     public class ReportCDRItem
     {
         public int TotalRecord { get; set; }
+        public int Id { get; set; }
         public DateTime? Calldate { get; set; }
         public string? Dst { get; set; }
         public string? Src { get; set; }
@@ -772,6 +843,8 @@ namespace VS.core.Request
         public string? Recordingfile { get; set; }
         public int DurationBill { get; set; }
         public double DurationReal { get; set; }
+
+        public bool IsCal { get; set; }
         public bool IsShow
         {
             get
@@ -816,11 +889,8 @@ namespace VS.core.Request
         {
             get
             {
-                if (Src.StartsWith("1"))
-                {
-                    return "http://118.69.182.32:7879/api/getFileAudio?filePath=" + Recordingfile;
-                }
-                return "http://42.115.94.180:7878/api/getFileAudio?filePath=" + Recordingfile;
+
+                return "http://118.69.182.32:7879/api/getaudio10?filePath=" + Recordingfile;
             }
         }
 
@@ -1088,6 +1158,18 @@ namespace VS.core.Request
         }
     }
 
+    public class SmsGetHandleRequest : BaseSearchRequest
+    {
+        public int Netword { get; set; }
 
+
+
+        public SmsGetHandleRequest()
+        {
+            this.Page = 1;
+            this.Limit = 10;
+
+        }
+    }
 
 }

@@ -35,10 +35,10 @@ namespace vsrolAPI2022.Controllers
         {
             var resultSearch = await _handleReportBussiness.CalTalkingTime();
             Task.WaitAll();
-            var timerun = DateTime.UtcNow;
-            timerun = timerun.AddMinutes(-15);
+            var timerun = DateTime.Now;
+            timerun = timerun.AddMinutes(-30);
             var startTime = timerun;
-            var endTime = DateTime.UtcNow.AddDays(1).EndDateTime();
+            var endTime = DateTime.Now.AddDays(1).EndDateTime();
             while (startTime < endTime)
             {
                 await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
@@ -51,8 +51,8 @@ namespace vsrolAPI2022.Controllers
             }
             Task.WaitAll();
             return Ok(true);
-
         }
+
         [HttpGet("~/api/job/GroupByDate")]
         public async Task<ActionResult> GroupByDate()
         {
@@ -63,6 +63,7 @@ namespace vsrolAPI2022.Controllers
             });
             Task.WaitAll();
             return Ok(true);
+
 
         }
 

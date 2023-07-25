@@ -11,16 +11,12 @@ namespace VS.Core.Business.Infrastructures
         {
             //repository
             services.RegisterRepository();
-
             //business
             services.AddScoped<IEmployeeBusiness, EmployeeBusiness>();
             services.AddScoped<IUserBusiness, UserBusiness>();
             services.AddScoped<IMasterDataBussiness, MasterDataBusiness>();
-
             services.AddScoped<IGroupResonBussiness, GroupResonBusiness>();
-
             services.AddScoped<ICampagnBussiness, CampagnBusiness>();
-
             services.AddScoped<IImpactHistoryBussiness, ImpactHistoryBusiness>();
             services.AddScoped<IMasterDataNewBussiness, MasterDataNewBussiness>();
             services.AddScoped<IGroupEmpBussiness, GroupEmpBussiness>();
@@ -33,6 +29,9 @@ namespace VS.Core.Business.Infrastructures
             services.AddScoped<ILineManagementBussiness, LineManagementBusiness>();
             services.AddScoped<IDpdManagementBussiness, DpdManagementBusiness>();
             services.AddScoped<IPackageManagementBussiness, PackageManagementBusiness>();
+            services.AddScoped<IViewRecordingBussiness, ViewRecordingBussiness>();
+            services.AddScoped<ISkipInfoBussiness, SkipInfoBussiness>();
+
         }
 
 

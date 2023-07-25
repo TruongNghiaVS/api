@@ -311,9 +311,10 @@ namespace VS.Core.Repository
                     }
                     else
                     {
-                        request.Linked = DateTime.UtcNow.AddDays(-5);
+                        request.Linked = DateTime.Now.AddDays(-5);
                     }
                     var sqlQuerry = "SELECT d.cnum AS 'LineCode', '3' as SourceCall,  d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE   d.calldate >= @timeFrom and d.calldate <= @timeTo and d.lastapp = 'Dial'";
+
                     var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
                     {
                         request.Token,

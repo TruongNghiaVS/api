@@ -19,23 +19,24 @@ namespace VS.Core.Business
 
         public async Task<int> CalTalkingTime(DateTime? dateGet)
         {
-            var timerun = DateTime.UtcNow;
-            timerun = timerun.AddMinutes(-15);
+            var timerun = DateTime.Now;
+            timerun = timerun.AddMinutes(-30);
             var startTime = timerun;
             var endTime = DateTime.Now.EndDateTime();
             Task.WaitAll();
             if (dateGet == null)
             {
-                dateGet = DateTime.UtcNow;
+                dateGet = DateTime.Now;
             }
             var i = 0;
 
-            while (i < 2)
+            while (i < 1)
             {
                 IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
 
                 if (i == 0)
                 {
+
 
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe2(
                         new core.Request.HandlelFileRecordingRequest()
@@ -47,7 +48,7 @@ namespace VS.Core.Business
                         }
                     );
                 }
-                else
+                else if (i == 2)
                 {
 
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe3(
@@ -61,18 +62,18 @@ namespace VS.Core.Business
                   );
                 }
 
-                //else
-                //{
-                //    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecording(
-                //      new core.Request.HandlelFileRecordingRequest()
-                //      {
-                //          TimeSelect = dateGet,
-                //          TimeFrom = startTime,
-                //          TimeTo = endTime
+                else
+                {
+                    allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe4(
+                      new core.Request.HandlelFileRecordingRequest()
+                      {
+                          TimeSelect = dateGet,
+                          TimeFrom = startTime,
+                          TimeTo = endTime
 
-                //      }
-                //  );
-                //}
+                      }
+                  );
+                }
                 i++;
                 var data = allcdrHaving;
 

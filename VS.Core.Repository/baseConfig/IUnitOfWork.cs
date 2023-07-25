@@ -34,5 +34,10 @@ namespace VS.Core.Repository.baseConfig
 
         IPackageRepository PackageRe { get; }
 
+
+        IViewRecordingRepository ViewRe { get; }
+
+        ISkipInfoRepository SkipRe { get; }
+
     }
 }

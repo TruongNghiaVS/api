@@ -30,6 +30,8 @@ namespace VS.Core.Repository.baseConfig
         Task<int> ResetCase(CampagnProfile entity);
 
         Task<int> ImportUpdate(CampagnProfile entity);
+        Task<CampagnProfile> GetProfileByNoCMNDv2(string noNational, string cmnd, string phoneNumber);
+
 
     }
 }

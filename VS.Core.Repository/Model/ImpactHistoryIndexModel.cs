@@ -31,7 +31,7 @@
 
 
 
-    public class ImpactHistoryv2IndexModel : BaseIndexModel
+    public class ImpactHistoryv2IndexModel
     {
         public DateTime? CreateTime { get; set; }
         public string? Username { get; set; }
@@ -50,7 +50,17 @@
 
         public string? MoneyPromise { get; set; }
 
+        public string? Question
+        {
+            get
+            {
+                return "";
+            }
+        }
+
         public string? NoteIm { get; set; }
+
+
 
 
 

@@ -67,7 +67,7 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> GetFinal(ImpactHistorySearchInput request)
         {
             var user = GetCurrentUser();
-            int? vendorId = 0;
+            int? vendorId = null;
             if (user.RoleId == "4")
             {
                 vendorId = int.Parse(user.Id);
@@ -80,7 +80,7 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 To = request.To,
-                VendorId = vendorId.ToString(),
+                VendorId = vendorId.HasValue ? vendorId.ToString() : null,
                 From = request.From
             };
             var resultSearch = await _impactBusiness.GetFinal(searchRequest);
@@ -117,7 +117,8 @@ namespace vsrolAPI2022.Controllers
                 DaysuggestTime = employeeAdd.DaysuggestTime,
                 UpdatedBy = user.Id,
                 AssigeeId = campangnProfile.Assignee,
-                LineCode = lineCode
+                LineCode = lineCode,
+                WayContact = employeeAdd.WayContact
 
             };
 

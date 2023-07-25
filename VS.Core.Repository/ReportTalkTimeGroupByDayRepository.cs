@@ -55,18 +55,27 @@ namespace VS.Core.Repository
         public async Task<ReportTalkTimeGroupByDay> GetLineGroupBydate(string lineCode,
             int day, int month, int year)
         {
-            using (var con = GetConnection())
+            try
             {
-                var sql = " SELECT * FROM  ReportTalkTimeGroupByDay WHERE dayR = @dayR  and monthR = @monthR and yearR = @yearR and lineCode = @lineCode ";
-                var result = await con.QuerySingleOrDefaultAsync<ReportTalkTimeGroupByDay>(sql, new
+                using (var con = GetConnection())
                 {
-                    dayR = day,
-                    monthR = month,
-                    yearR = year,
-                    lineCode = @lineCode
-                });
-                return result;
+                    var sql = " SELECT * FROM  ReportTalkTimeGroupByDay WHERE dayR = @dayR  and monthR = @monthR and yearR = @yearR and lineCode = @lineCode ";
+                    var result = await con.QuerySingleOrDefaultAsync<ReportTalkTimeGroupByDay>(sql, new
+                    {
+                        dayR = day,
+                        monthR = month,
+                        yearR = year,
+                        lineCode = @lineCode
+                    });
+                    return result;
+                }
             }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+
         }
 
         public async Task<Account> GetByLineCode(string lineCode)
@@ -216,6 +225,10 @@ namespace VS.Core.Repository
                             else
                             {
 
+                            }
+                            if (groupItemgroupByLineCode.LineCode == "3012")
+                            {
+                                await Update(groupItemgroupByLineCode);
                             }
                             await Update(groupItemgroupByLineCode);
                         }

@@ -131,6 +131,10 @@ namespace VS.Core.Business
 
         public async Task<bool> HandleImport(CampanginDataImportRequest request, Account userLogin)
         {
+            if (request.Updatedata == true)
+            {
+                return await UpdateData(request, userLogin);
+            }
             var id = request.Id;
             var listData = request.ListData;
             var _campagnImport = await _unitOfWork.CampagnRe.GetById(id);
@@ -290,6 +294,73 @@ namespace VS.Core.Business
             campaign.ClosedCount = 0;
             campaign.UpdateAt = DateTime.Now;
             await UpdateAsyn(campaign);
+            return true;
+        }
+
+
+        public async Task<bool> UpdateData(CampanginDataImportRequest request, Account userLogin)
+        {
+            var id = request.Id;
+            var listData = request.ListData;
+            var _campagnImport = await _unitOfWork.CampagnRe.GetById(id);
+            var vendorId = _campagnImport.VendorId;
+            foreach (var item in listData)
+            {
+                var result = await _unitOfWork.CampagnProfileRe.GetByNoAgreement(
+                    item.NoAgreement,
+                    request.Id
+                );
+                if (result == null)
+                {
+                    continue;
+                }
+                result.CustomerName = item.CustomerName;
+
+                result.DayOfBirth = item.DayOfBirth;
+
+                result.MobilePhone = item.MobilePhone;
+                result.Phone1 = item.Phone1;
+                result.AmountLoan = item.AmountLoan;
+
+
+                result.CodeProduct = item.CodeProduct;
+
+                result.DebitOriginal = item.DebitOriginal;
+
+                result.DPD = item.DPD;
+                result.Email = item.Email;
+                result.EMI = item.EMI;
+                result.HouseNumber = item.HouseNumber;
+                result.LastPadDay = item.LastPadDay;
+                result.LastPaid = item.LastPaid;
+                result.NameProduct = item.NameProduct;
+                result.NoteFirstTime = item.NoteFirstTime;
+                result.NoteRel = item.NoteRel;
+                result.NoTenure = item.NoTenure;
+                result.OfficeNumber = item.OfficeNumber;
+                result.OtherPhone = item.OtherPhone;
+                result.PriceProduct = item.PriceProduct;
+                result.Provice = item.Provice;
+                result.Provice1 = item.Provice1;
+                result.Provice2 = item.Provice2;
+                result.RegisterDay = item.RegisterDay;
+                result.Road = item.Road;
+                result.Road1 = item.Road1;
+                result.Road2 = item.Road2;
+                result.StatusPayMent = item.StatusPayMent;
+                result.SuburbanDir = item.SuburbanDir;
+                result.SuburbanDir1 = item.SuburbanDir1;
+                result.SuburbanDir2 = item.SuburbanDir2;
+                result.Tenure = item.Tenure;
+                result.TotalFines = item.TotalFines;
+                result.TotalMoneyPaid = item.TotalMoneyPaid;
+                result.TotalPaid = item.TotalPaid;
+                result.UpdateAt = DateTime.Now;
+                result.UpdatedBy = userLogin.Id;
+
+                await _unitOfWork.CampagnProfileRe.ImportUpdate(result);
+            }
+
             return true;
         }
 
@@ -559,6 +630,14 @@ namespace VS.Core.Business
             var allImpactHistory = await _unitOfWork.ImpactRe.GetALl(
                 new ImpactHistorySerarchRequest() { ProfileId = id, NoAgreement = result.NoAgreement }
             );
+
+            var allSkipData = await _unitOfWork.SkipRe.GetALl(
+                new SkipInfoSerarchRequest()
+                {
+                    NoAgreement = result.NoAgreement
+                }
+
+                );
             var listReason = await _unitOfWork.MasterRe.GetALl(
                 new MaterDataRequest()
                 { GroupStatus = reponse.campagn.GroupStatus }
@@ -584,6 +663,7 @@ namespace VS.Core.Business
 
             reponse.StatusProfile = statusText;
             reponse.ListReason = listReason.Data;
+            reponse.ListSkipNew = allSkipData;
             return reponse;
         }
 
@@ -639,6 +719,11 @@ namespace VS.Core.Business
         public async Task<CampagnProfile> GetProfileByNoCMND(string noNational)
         {
             return await _unitOfWork.CampagnProfileRe.GetProfileByNoCMND(noNational);
+        }
+
+        public async Task<CampagnProfile> GetProfileByNoCMNDv2(string noNational, string cmnd, string phoneNumber)
+        {
+            return await _unitOfWork.CampagnProfileRe.GetProfileByNoCMNDv2(noNational, cmnd, phoneNumber);
         }
 
         public async Task<List<CampagnProfile>> GetAllInfoSkipp(string noNational)

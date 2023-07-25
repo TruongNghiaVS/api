@@ -32,6 +32,12 @@ namespace VS.Core.Business
             return _unitOfWork.Employees.Delete(entity);
         }
 
+
+        public Task DeleteEmployee(Account entity)
+        {
+            return _unitOfWork.Employees.Delete(entity);
+        }
+
         public async Task<Account> Getbyid(string id)
         {
             return await _unitOfWork.Employees.GetById(id);

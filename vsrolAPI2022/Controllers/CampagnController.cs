@@ -19,10 +19,14 @@ namespace vsrolAPI2022.Controllers
     {
 
         private readonly ICampagnBussiness _campagnBusiness;
+
+        private readonly ISkipInfoBussiness _skipInfoBussiness;
         public CampagnController(ICampagnBussiness campagnBusiness,
+            ISkipInfoBussiness skipInfoBussiness,
             IUserBusiness userBusiness) : base(userBusiness)
         {
             _campagnBusiness = campagnBusiness;
+            _skipInfoBussiness = skipInfoBussiness;
         }
 
 
@@ -223,21 +227,43 @@ namespace vsrolAPI2022.Controllers
                     {
                         try
                         {
-
+                            var dtp = DateTime.Parse(cellRange.Text.ToString());
+                            return dtp;
                             return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
 
                         }
                         catch (Exception)
                         {
+
                             try
                             {
-                                return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+                                return DateTime.ParseExact(cellRange.Text.Trim(), "MM/dd/yyyy", null);
                             }
                             catch (Exception)
                             {
 
+                                try
+                                {
+                                    var dtp = DateTime.Parse(cellRange.Text.ToString());
+                                    return dtp;
+                                }
+                                catch (Exception)
+                                {
+                                    try
+                                    {
+                                        return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                        return null;
+                                    }
+                                    return null;
+                                }
+
                                 return null;
                             }
+
 
                             return null;
                         }
@@ -271,7 +297,8 @@ namespace vsrolAPI2022.Controllers
                     {
                         try
                         {
-
+                            var dtp = DateTime.Parse(cellRange.Text.ToString());
+                            return dtp;
                             return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
 
                         }
@@ -279,10 +306,22 @@ namespace vsrolAPI2022.Controllers
                         {
                             try
                             {
-                                return DateTime.Now.AddYears(-int.Parse(cellRange.Text));
+                                return DateTime.ParseExact(cellRange.Text.Trim(), "MM/dd/yyyy", null);
+
                             }
                             catch (Exception)
                             {
+                                try
+                                {
+                                    var dtp = DateTime.Parse(cellRange.Text.ToString());
+                                    return dtp;
+                                    return null;
+                                }
+                                catch (Exception)
+                                {
+
+                                    return null;
+                                }
 
                                 return null;
                             }
@@ -532,16 +571,13 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-
-
         [AllowAnonymous]
-        [HttpPost("~/api/campagn/importDataSkipInfo")]
-        public async Task<IResult> ImportDataSkipInfo([FromForm] CampanginDataImport request)
+        [HttpPost("~/api/campagn/importDataFile")]
+        public async Task<IResult> ImportDataFile([FromForm] CampanginDataImport request)
         {
             int k = 0;
             try
             {
-
 
                 var userLogin = new Account()
                 {
@@ -584,12 +620,14 @@ namespace vsrolAPI2022.Controllers
                             var doB = ReadvalueDateExcel(workSheet, i, 3);
                             string? assigneeId = null;
 
-                            var hasKip = ReadvaluestringExcelWidthNull(workSheet, i, 41);
                             assigneeId = ReadvaluestringExcelWidthNull(workSheet, i, 40);
-                            if (hasKip != "0")
-                            {
-                                continue;
-                            }
+
+                            int Haskip = 0;
+                            Haskip = ReadvalueintExcel(workSheet, i, 41);
+
+                            bool? havedSkipData = Haskip > 0;
+
+
                             try
                             {
                                 profileList.Add(new ProfileHandler
@@ -620,8 +658,8 @@ namespace vsrolAPI2022.Controllers
                                     DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
                                     AmountLoan = ReadvaluefloatExcel(workSheet, i, 12),
                                     EMI = ReadvaluefloatExcel(workSheet, i, 15),
-
-
+                                    CampaignId = int.Parse(request.Id),
+                                    //Assignee = "-1",
                                     TotalFines = ReadvaluefloatExcel(workSheet, i, 19),
                                     TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 13),
                                     Tenure = ReadvalueintExcel(workSheet, i, 14),
@@ -635,7 +673,8 @@ namespace vsrolAPI2022.Controllers
                                     NoteFirstTime = ReadvalueStringExcel(workSheet, i, 38),
                                     NoteRel = ReadvalueStringExcel(workSheet, i, 39),
                                     CreatedBy = userLogin.Id,
-                                    AssignedId = assigneeId
+                                    AssignedId = assigneeId,
+                                    SkipData = havedSkipData
 
                                 });
                             }
@@ -652,7 +691,9 @@ namespace vsrolAPI2022.Controllers
 
                 var reqeustImport = new CampanginDataImportRequest();
                 reqeustImport.ListData = profileList;
-                await _campagnBusiness.HandleImportSkip(reqeustImport, userLogin);
+                reqeustImport.Id = request.Id;
+                reqeustImport.Updatedata = true;
+                await _campagnBusiness.HandleImport(reqeustImport, userLogin);
             }
             catch (Exception e)
             {
@@ -662,6 +703,371 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok();
 
         }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/campagn/deleteProfile")]
+        public async Task<IResult> DeleteFile([FromForm] CampanginDataImport request)
+        {
+            int k = 0;
+            try
+            {
+
+                var userLogin = new Account()
+                {
+                    Id = "1"
+                };
+                var fileRequest = request.FileData;
+                if (fileRequest == null || fileRequest.Count == 0)
+                {
+                    return Results.BadRequest("No error report");
+                }
+                var fileHandler = fileRequest.FirstOrDefault();
+                if (fileHandler == null)
+                {
+                    return Results.BadRequest("No error report");
+                }
+                List<string> listNo = new List<string>();
+
+
+                await using (MemoryStream ms = new MemoryStream())
+                {
+                    await fileHandler.CopyToAsync(ms);
+                    using (ExcelPackage package = new ExcelPackage(ms))
+                    {
+                        ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                        int totalRows = workSheet.Dimension.Rows;
+
+                        for (int i = 2; i <= totalRows; i++)
+                        {
+                            k = i;
+                            if (i < 1)
+                            {
+                                continue;
+                            }
+
+                            try
+                            {
+                                var noAgree = ReadvalueStringExcel(workSheet, i, 1);
+                                var hasDelete = ReadvalueStringExcel(workSheet, i, 2);
+                                if (hasDelete == "1")
+                                {
+                                    listNo.Add(noAgree);
+                                }
+
+
+                            }
+                            catch (Exception)
+                            {
+
+
+                            }
+
+                        }
+
+                    }
+                }
+                var listString = new List<string>();
+                int indexX = 0;
+                foreach (var item in listNo)
+                {
+                    indexX++;
+                    if (indexX % 1000 == 0)
+                    {
+                        await _campagnBusiness.DeleteCampagnFile(listString, request.Id);
+                        listString.Clear();
+                        continue;
+                    }
+                    listString.Add(item);
+
+
+                }
+
+                if (listString.Count > 0)
+                {
+                    await _campagnBusiness.DeleteCampagnFile(listString, request.Id);
+
+                }
+
+
+
+            }
+            catch (Exception e)
+            {
+
+                return Results.BadRequest(k);
+            }
+            return Results.Ok();
+
+        }
+
+
+
+        //[AllowAnonymous]
+        //[HttpPost("~/api/campagn/importDataSkipInfo")]
+        //public async Task<IResult> ImportDataSkipInfo([FromForm] CampanginDataImport request)
+        //{
+        //    int k = 0;
+        //    try
+        //    {
+
+
+        //        var userLogin = new Account()
+        //        {
+        //            Id = "1" 
+        //        };
+        //        var fileRequest = request.FileData;
+        //        if (fileRequest == null || fileRequest.Count == 0)
+        //        {
+        //            return Results.BadRequest("No error report");
+        //        }
+        //        var fileHandler = fileRequest.FirstOrDefault();
+        //        if (fileHandler == null)
+        //        {
+        //            return Results.BadRequest("No error report");
+        //        }
+        //        List<ProfileHandler> profileList = new List<ProfileHandler>();
+        //        await using (MemoryStream ms = new MemoryStream())
+        //        {
+        //            await fileHandler.CopyToAsync(ms);
+        //            using (ExcelPackage package = new ExcelPackage(ms))
+        //            {
+        //                ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+        //                int totalRows = workSheet.Dimension.Rows;
+
+        //                for (int i = 2; i <= totalRows; i++)
+        //                {
+        //                    k = i;
+
+
+        //                    if (i < 1)
+        //                    {
+        //                        continue;
+        //                    }
+        //                    var lastDayPad = ReadvalueDateExcel2(workSheet, i, 22);
+        //                    if (lastDayPad == null)
+        //                    {
+        //                        lastDayPad = DateTime.Now;
+        //                    }
+        //                    var registerDate = ReadvalueDateExcel(workSheet, i, 5);
+        //                    var doB = ReadvalueDateExcel(workSheet, i, 3);
+        //                    string? assigneeId = null;
+
+        //                    var hasKip = ReadvaluestringExcelWidthNull(workSheet, i, 41);
+        //                    assigneeId = ReadvaluestringExcelWidthNull(workSheet, i, 40);
+        //                    if (hasKip != "0")
+        //                    {
+        //                        continue;
+        //                    }
+        //                    try
+        //                    {
+        //                        profileList.Add(new ProfileHandler
+        //                        {
+        //                            CustomerName = ReadvalueStringExcel(workSheet, i, 2),
+        //                            NoAgreement = ReadvalueStringExcel(workSheet, i, 1),
+        //                            DayOfBirth = doB,
+        //                            NationalId = ReadvalueStringExcel(workSheet, i, 4),
+        //                            MobilePhone = ReadvalueStringExcel(workSheet, i, 26),
+        //                            Phone1 = ReadvalueStringExcel(workSheet, i, 28),
+        //                            HouseNumber = ReadvalueStringExcel(workSheet, i, 27),
+        //                            OfficeNumber = ReadvalueStringExcel(workSheet, i, 30),
+        //                            OtherPhone = ReadvalueStringExcel(workSheet, i, 29),
+        //                            DPD = ReadvalueStringExcel(workSheet, i, 25),
+        //                            Email = "",
+        //                            Road = ReadvalueStringExcel(workSheet, i, 31),
+        //                            SuburbanDir = ReadvalueStringExcel(workSheet, i, 32),
+        //                            Provice = ReadvalueStringExcel(workSheet, i, 33),
+        //                            Road1 = ReadvalueStringExcel(workSheet, i, 34),
+        //                            SuburbanDir1 = ReadvalueStringExcel(workSheet, i, 35),
+        //                            Provice1 = ReadvalueStringExcel(workSheet, i, 36),
+        //                            Road2 = "",
+        //                            SuburbanDir2 = "",
+        //                            Provice2 = "",
+        //                            StatusPayMent = ReadvalueStringExcel(workSheet, i, 23),
+        //                            RegisterDay = registerDate,
+
+        //                            DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
+        //                            AmountLoan = ReadvaluefloatExcel(workSheet, i, 12),
+        //                            EMI = ReadvaluefloatExcel(workSheet, i, 15),
+
+
+        //                            TotalFines = ReadvaluefloatExcel(workSheet, i, 19),
+        //                            TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 13),
+        //                            Tenure = ReadvalueintExcel(workSheet, i, 14),
+        //                            NoTenure = ReadvalueintExcel(workSheet, i, 18),
+        //                            TotalPaid = 0,
+        //                            LastPaid = 0,
+        //                            LastPadDay = lastDayPad,
+        //                            NameProduct = ReadvalueStringExcel(workSheet, i, 7),
+        //                            CodeProduct = ReadvalueStringExcel(workSheet, i, 6),
+        //                            PriceProduct = ReadvalueStringExcel(workSheet, i, 10),
+        //                            NoteFirstTime = ReadvalueStringExcel(workSheet, i, 38),
+        //                            NoteRel = ReadvalueStringExcel(workSheet, i, 39),
+        //                            CreatedBy = userLogin.Id,
+        //                            AssignedId = assigneeId
+
+        //                        });
+        //                    }
+        //                    catch (Exception)
+        //                    {
+
+
+        //                    }
+
+        //                }
+
+        //            }
+        //        }
+
+        //        var reqeustImport = new CampanginDataImportRequest();
+        //        reqeustImport.ListData = profileList;
+        //        await _campagnBusiness.HandleImportSkip(reqeustImport, userLogin);
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        return Results.BadRequest(k);
+        //    }
+        //    return Results.Ok();
+
+        //}
+
+
+
+        [AllowAnonymous]
+        [HttpPost("~/api/campagn/importDataSkipInfo")]
+        public async Task<IResult> ImportDataSkipInfo([FromForm] CampanginDataImport request)
+        {
+            int k = 0;
+            try
+            {
+
+
+                var userLogin = new Account()
+                {
+                    Id = "1"
+                };
+                var fileRequest = request.FileData;
+                if (fileRequest == null || fileRequest.Count == 0)
+                {
+                    return Results.BadRequest("No error report");
+                }
+                var fileHandler = fileRequest.FirstOrDefault();
+                if (fileHandler == null)
+                {
+                    return Results.BadRequest("No error report");
+                }
+                List<SkipInfo> profileList = new List<SkipInfo>();
+                await using (MemoryStream ms = new MemoryStream())
+                {
+                    await fileHandler.CopyToAsync(ms);
+                    using (ExcelPackage package = new ExcelPackage(ms))
+                    {
+                        ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                        int totalRows = workSheet.Dimension.Rows;
+
+                        for (int i = 2; i <= totalRows; i++)
+                        {
+                            k = i;
+
+
+                            if (i < 1)
+                            {
+                                continue;
+                            }
+
+                            var cccd = ReadvaluestringExcelWidthNull(workSheet, i, 1);
+
+                            var type = ReadvaluestringExcelWidthNull(workSheet, i, 2);
+
+                            var name = ReadvaluestringExcelWidthNull(workSheet, i, 3);
+
+                            var relationship = ReadvaluestringExcelWidthNull(workSheet, i, 4);
+                            var dob = ReadvalueDateExcel(workSheet, i, 5);
+                            var cmnd = ReadvaluestringExcelWidthNull(workSheet, i, 6);
+                            var phoneNumber = ReadvaluestringExcelWidthNull(workSheet, i, 7);
+
+                            var addressContact = ReadvaluestringExcelWidthNull(workSheet, i, 8);
+
+                            var timeWork = ReadvaluestringExcelWidthNull(workSheet, i, 9);
+
+                            var positionWork = ReadvaluestringExcelWidthNull(workSheet, i, 10);
+                            var hsl = ReadvaluestringExcelWidthNull(workSheet, i, 11);
+                            var companyWork = ReadvaluestringExcelWidthNull(workSheet, i, 12);
+                            var workPlace = ReadvaluestringExcelWidthNull(workSheet, i, 13);
+                            var lastDayPad = ReadvalueDateExcel2(workSheet, i, 22);
+
+                            try
+                            {
+                                profileList.Add(new SkipInfo
+                                {
+                                    Address = addressContact,
+                                    CompanyName = companyWork,
+                                    Dob = dob,
+                                    NationalId = cccd,
+                                    Cmnd = cmnd,
+                                    Name = name,
+                                    Position = positionWork,
+                                    Relation = relationship,
+                                    PhoneNumber = phoneNumber,
+                                    SalaryDe = hsl,
+                                    TimeWork = timeWork,
+                                    WorkPlace = workPlace,
+                                    TypeCustomer = type,
+
+
+
+
+                                });
+                            }
+                            catch (Exception)
+                            {
+                                continue;
+
+                            }
+
+                        }
+
+                    }
+
+                    foreach (var item in profileList)
+                    {
+
+                        var campangnProfile = await _campagnBusiness.GetProfileByNoCMNDv2(item.NationalId, item.Cmnd, item.PhoneNumber);
+                        if (campangnProfile == null)
+                        {
+                            continue;
+                        }
+                        item.NoAgree = campangnProfile.NoAgreement;
+                        await _skipInfoBussiness.AddSkip(item);
+
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+
+                return Results.BadRequest(k);
+            }
+            return Results.Ok();
+
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/api/campagn/getAllSkip")]
+        public async Task<IResult> GetAll(SkipInfoSerarchRequest request)
+        {
+            //var user = GetCurrentUser();
+            var searchRequest = new SkipInfoSerarchRequest()
+            {
+                NoAgreement = request.NoAgreement
+            };
+            var resultSearch = await _skipInfoBussiness.GetALl(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+
+
 
 
 

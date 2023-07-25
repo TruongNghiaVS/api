@@ -83,6 +83,9 @@ namespace vsrolAPI2022.Controllers
                 {
                     data = net.DownloadData(urlDow);
                     return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+
+
+
                 }
                 catch (Exception)
                 {
@@ -99,8 +102,6 @@ namespace vsrolAPI2022.Controllers
         public async Task<FileResult> getaudio12(string? filePath)
         {
 
-
-            //await _campagnBusiness.ResetCase();
             string urlDow = "http://192.168.1.12:3002/api/getFileAudio?filePath=" + filePath;
 
             using (var net = new System.Net.WebClient())
@@ -115,7 +116,19 @@ namespace vsrolAPI2022.Controllers
                 }
                 catch (Exception)
                 {
-                    return null;
+
+                    try
+                    {
+                        urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
+                        data = net.DownloadData(urlDow);
+                        return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                    }
+                    catch (Exception)
+                    {
+
+                        return null;
+                    }
+
 
                 }
             }

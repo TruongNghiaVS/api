@@ -291,23 +291,51 @@ namespace VS.Core.Repository
 
         public async Task<bool> DeleteMutipleCam(List<string> dataDelete, string requestId)
         {
+
+
             if (dataDelete.Count < 1)
                 return true;
-            using (var con = GetConnection())
-            {
-                string listOfIdsJoined = "(" + String.Join(",", dataDelete.ToArray()) + ")";
-                var sql = "update CampaignProfile set Deleted = 1  where CampaignId = @CampaignId and  Id in @dataDelete";
-                var result = await con.ExecuteAsync(sql, new
-                {
-                    dataDelete = listOfIdsJoined,
-                    CampaignId = requestId
-                });
 
-                if (result > 0)
+            try
+            {
+                using (var con = GetConnection())
                 {
-                    return true;
+                    string listOfIdsJoined = "(" + String.Join(",", dataDelete.ToArray()) + ")";
+                    string arrayResult = "( ";
+                    for (int i = 0; i < dataDelete.Count; i++)
+                    {
+                        if (i + 1 == dataDelete.Count)
+                        {
+                            arrayResult += "" + dataDelete[i] + "";
+                        }
+                        else
+                        {
+                            arrayResult += "" + dataDelete[i] + "" + ',';
+
+                        }
+
+
+                    }
+
+                    arrayResult += " ) ";
+                    var sql = "update CampaignProfile set Deleted = 1, UpdateAt =getdate()  where CampaignId = @CampaignId and  NoAgreement in @dataDelete";
+                    var result = await con.ExecuteAsync(sql, new
+                    {
+                        dataDelete = arrayResult,
+                        CampaignId = requestId
+                    });
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (Exception e)
+            {
                 return false;
+
             }
         }
 
@@ -430,6 +458,46 @@ namespace VS.Core.Repository
                 return result;
             }
         }
+
+
+
+        public async Task<CampagnProfile> GetProfileByNoCMNDv2(string noNational, string cmnd, string phoneNumber)
+        {
+            using (var con = GetConnection())
+            {
+                var sql = @"SELECT top 1 * FROM CampaignProfile
+WHERE  ";
+                if (!string.IsNullOrEmpty(noNational))
+                {
+                    sql += "  NationalId like '%" + noNational + "%' or NationalId like '%" + noNational + "%' ";
+                    sql += " or NationalId like '%" + cmnd + "%' or NationalId like '%" + cmnd + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(phoneNumber))
+                {
+                    sql += " or MobilePhone like '%" + phoneNumber + "%' or Phone1 like '%" + phoneNumber + "%' ";
+                }
+
+
+                sql += "";
+
+
+                var result = await con.QuerySingleOrDefaultAsync<CampagnProfile>(sql, new
+                {
+                    noNational = noNational,
+                    cmnd = cmnd,
+                    phoneNumber = phoneNumber
+                });
+
+                if (result == null)
+                {
+                    return null;
+                }
+                return result;
+            }
+        }
+
+
 
 
         public async Task<List<CampagnProfile>> GetAllInfoSkipp(string noNational)

@@ -20,7 +20,7 @@
         public string Employee_insert = "sp_Employee_Insertv2";
 
         public string Employee_update = "sp_Employee_Update";
-
+        public string Employee_delete = "sp_Employee_Delete";
         public string Employee_getAll = "sp_Employee_getAll";
 
         public string Employee_exportData = "sp_Employee_exportData";
@@ -91,7 +91,9 @@
         public string CampaignProfile_exportData = "sp_CampaignProfile_ExportData";
 
         public string CampaignImpact_insert = "sp_ImpactHistory_Insert";
+        public string SkipInfo_insert = "sp_SkipInfo_Insert";
 
+        public string SkipInfo_getAll = "sp_SkipInfo_getAll";
         public string Sp_ImpactHistory_Insert2 = "sp_ImpactHistory_Insert2";
 
         public string CampaignImpact_update = "CampaignImpact_update";
@@ -103,8 +105,13 @@
         public string CallLog_getAll = "sp_CallLog_getAll";
         public string CallLog_insert = "sp_CallLog_Insert";
         public string LogCall_insert = "sp_LogCall_Insert";
-
+        public string ViewRecording_insert = "sp_ViewRecording_Insert";
         public string Sms_insert = "sp_Sms_Insert";
+        public string Sms_insert2 = "sp_Sms_Insert2";
+
+        public string Sms_update2 = "sp_Sms_Update2";
+
+        public string Sms_CheckExitsCall = "sp_CheckExitsCall";
         public string ReportTalkTimeGroupByDay_insert = "sp_reportTalkTimeGroupByDay_insert";
         public string ReportTalkTimeGroupByDay_update = "sp_reportTalkTimeGroupByDay_update";
 
@@ -144,6 +151,10 @@
         public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert2";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
+
+        public string sms_getAll = "sp_sms_getAll";
+        public string View_Recording = "sp_view_Recording";
+        public string sms_getAllHandle = "sp_sms_getAllHandle";
         public string ReportTalkTime_getAllNotDeleteFile = "sp_ReportTalkTime_getAllNotDeleteFile";
         public string RecordingFile_getAll = "sp_RecordingFile_getAll";
 

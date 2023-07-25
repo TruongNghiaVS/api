@@ -26,6 +26,8 @@ namespace VS.Core.Business.Interface
         Task<int> UpdateProfileSkip(CampagnProfile entity);
         Task DeleteProfile(CampagnProfile entity);
         Task<bool> HandleImport(CampanginDataImportRequest request, Account userLogin);
+
+
         Task<bool> HandleImportSkip(CampanginDataImportRequest request, Account userLogin);
         Task<bool> HandleImportV2(CampanginDataImportRequest request, Account userLogin);
 
@@ -39,6 +41,7 @@ namespace VS.Core.Business.Interface
 
 
         Task<bool> DeleteCampagnFile(List<string> DataDelete, string idRequest);
+        Task<CampagnProfile> GetProfileByNoCMNDv2(string noNational, string cmnd, string phoneNumber);
 
     }
 }

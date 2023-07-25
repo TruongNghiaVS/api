@@ -9,6 +9,7 @@ namespace VS.Core.Repository.Infrastructures
     {
         public static void RegisterRepository(this IServiceCollection services)
         {
+
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMasterDataRepository, MasterdataRepository>();
@@ -28,6 +29,11 @@ namespace VS.Core.Repository.Infrastructures
             services.AddScoped<IDpdRepository, DpdRepository>();
 
             services.AddScoped<IPackageRepository, PackageRepository>();
+
+            services.AddScoped<IViewRecordingRepository, ViewRecordingRepository>();
+
+            services.AddScoped<ISkipInfoRepository, SkipInfoRepository>();
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 

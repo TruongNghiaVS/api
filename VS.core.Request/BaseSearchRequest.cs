@@ -10,6 +10,8 @@ namespace VS.core.Request
         public string? OrderBy { get; set; }
         public string? Status { get; set; }
 
+        public string? UserId { get; set; }
+
         private DateTime? FromTimeAss { get; set; }
 
         public DateTime? From
@@ -57,7 +59,7 @@ namespace VS.core.Request
             }
         }
 
-        public string? UserId { get; set; }
+
         public BaseSearchRequest()
         {
             Page = 1;
