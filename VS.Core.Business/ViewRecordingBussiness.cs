@@ -17,6 +17,10 @@ namespace VS.Core.Business
             return _unitOfWork.SmsRe.GetALlReCording(request);
         }
 
+        public Task<GetDashboardQcReponse> GetDataQc(GetDashboardQcRequest request)
+        {
+            return _unitOfWork.ViewRe.GetDataQc(request);
+        }
 
         public Task<int> Add(ViewRecording entity)
         {

@@ -1,8 +1,10 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using VS.core.Request;
 using VS.Core.dataEntry.User;
 using VS.Core.Repository.baseConfig;
+using VS.Core.Repository.Model;
 
 namespace VS.Core.Repository
 {
@@ -50,6 +52,44 @@ namespace VS.Core.Repository
 
             }
 
+        }
+
+        public async Task<GetDashboardQcReponse> GetDataQc(GetDashboardQcRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<DataQCViewModel>(_Sql.Data_Qc, new
+                    {
+                        request.From,
+                        request.To,
+                        request.LineCode
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    if (fistElement != null)
+                    {
+                        totalRecord = fistElement.TotalRecord;
+                    }
+                    var reponse = new GetDashboardQcReponse()
+                    {
+                        Total = totalRecord,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public Task<int> Update(ViewRecording entity)

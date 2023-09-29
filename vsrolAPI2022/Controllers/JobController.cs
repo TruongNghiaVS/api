@@ -33,10 +33,36 @@ namespace vsrolAPI2022.Controllers
         [HttpGet("~/api/job/CalculatingTalktime")]
         public async Task<ActionResult> CalculatingTalktime()
         {
-            var resultSearch = await _handleReportBussiness.CalTalkingTime();
+            
+            var timerun = DateTime.UtcNow;
+            timerun = timerun.AddMinutes(-12);
+            var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
-            var timerun = DateTime.Now;
-            timerun = timerun.AddMinutes(-30);
+          
+            var startTime = timerun;
+            var endTime = DateTime.Now.AddDays(1).EndDateTime();
+            while (startTime < endTime)
+            {
+                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+                {
+                    TimeSelect = startTime
+
+                });
+                Task.WaitAll();
+                startTime = startTime.AddDays(1);
+            }
+            Task.WaitAll();
+            return Ok(true);
+        }
+
+        [HttpGet("~/api/job/RunCalTimeEndDay")]
+        public async Task<ActionResult> RunCalTimeEndDay()
+        {
+            var timerun = DateTime.UtcNow;
+            timerun = timerun.AddHours(-3);
+            var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
+            Task.WaitAll();
+      
             var startTime = timerun;
             var endTime = DateTime.Now.AddDays(1).EndDateTime();
             while (startTime < endTime)

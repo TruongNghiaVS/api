@@ -173,6 +173,63 @@ namespace vsrolAPI2022.Controllers
                 Status = request.Status,
                 Page = request.Page,
                 Limit = request.Limit,
+               
+                To = request.To,
+                DpdMax = dpdMax,
+                DpdMin = dpdMin,
+                Id = request.Id,
+                From = request.From,
+                UserId = user.Id,
+                ColorCode = request.ColorCode,
+                VendorId = VendorId,
+                PhoneSerach = request.PhoneSerach,
+                LineCode = request.LineCode,
+                NoAgreement = request.NoAgree,
+                TypegetData = request.TypegetData,
+                SkipData = request.SkipData,
+
+            };
+            if (searchRequest.To.HasValue)
+            {
+                searchRequest.To = searchRequest.To.ToEndDateTime();
+            }
+            var resultSearch = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
+            return Results.Ok(resultSearch);
+        }
+
+        [Authorize]
+        [HttpPost("~/api/campagnProfile/getAllOriginal")]
+        public async Task<IResult> getAllOriginal(CampagnProfileSearchInput request)
+        {
+
+            var user = GetCurrentUser();
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            else if (user.RoleId == "2")
+            {
+
+            }
+            else
+            {
+                VendorId = user.VendorId;
+            }
+
+            int dpdMax = -1;
+            int dpdMin = -1;
+
+            var searchRequest = new GetAllProfileByCampang()
+            {
+                Token = request.Token,
+                Status = request.Status,
+                Page = request.Page,
+                Limit = request.Limit,
                 To = request.To,
                 DpdMax = dpdMax,
                 DpdMin = dpdMin,
@@ -195,6 +252,7 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _campagnBusiness.GetALlProfileByCampaign(searchRequest);
             return Results.Ok(resultSearch);
         }
+
 
         [Authorize]
         [HttpPost("~/api/campagnProfile/exportData1")]

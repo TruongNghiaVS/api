@@ -35,7 +35,7 @@ namespace vsrolAPI2022.Controllers
                 }
                 catch (Exception)
                 {
-                    urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
+                    urlDow = "http://192.168.1.151:3002/api/getFileAudio?filePath=" + filePath;
                     try
                     {
                         data = net.DownloadData(urlDow);
@@ -72,7 +72,7 @@ namespace vsrolAPI2022.Controllers
 
 
             //await _campagnBusiness.ResetCase();
-            string urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
+            string urlDow = "http://192.168.1.151:3002/api/getFileAudio?filePath=" + filePath;
 
             using (var net = new System.Net.WebClient())
             {
@@ -89,7 +89,17 @@ namespace vsrolAPI2022.Controllers
                 }
                 catch (Exception)
                 {
-                    return null;
+                    try
+                    {
+                        urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
+                        data = net.DownloadData(urlDow);
+                        return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                    }
+                    catch (Exception)
+                    {
+
+                        return null;
+                    }
 
                 }
             }
@@ -119,7 +129,7 @@ namespace vsrolAPI2022.Controllers
 
                     try
                     {
-                        urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
+                        urlDow = "http://192.168.1.151:3002/api/getFileAudio?filePath=" + filePath;
                         data = net.DownloadData(urlDow);
                         return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
                     }

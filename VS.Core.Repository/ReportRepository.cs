@@ -1,9 +1,10 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Math.Field;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Net.WebSockets;
 using VS.core.Request;
 using VS.Core.Repository.baseConfig;
 
@@ -214,9 +215,41 @@ namespace VS.Core.Repository
             ProcessInputPaging(ref page, ref limit, out offset);
             try
             {
+
+
                 using (var con = GetConnection())
                 {
-                    var sqlName = SqlContraint.GetVariable().RecordingFileExport_getAll;
+                    var from = request.From;
+                    if (request.TimeFrom1 > -1)
+                    {
+                        from = from.Value.AddSeconds(request.TimeFrom1.Value);
+                    }
+
+                    var to = request.From;
+                    if (request.TimeFrom2 > -1)
+                    {
+                        to = to.Value.AddSeconds(request.TimeFrom2.Value);
+                    }
+                    else
+                    {
+
+                        to = request.To;
+                    }
+                    from = from.Value.AddHours(-7);
+                    to = to.Value.AddHours(-7);
+                    var TimeTalkBegin = 0;
+                    if (request.TimeTalkBegin > -1)
+                    {
+                        TimeTalkBegin = request.TimeTalkBegin.Value;
+                    }
+
+                    var TimeTalkEnd = 600;
+                    if (request.TimeTalkEnd > -1)
+                    {
+                        TimeTalkEnd = request.TimeTalkEnd.Value;
+                    }
+
+                        var sqlName = SqlContraint.GetVariable().RecordingFileExport_getAll;
                     request.OrderBy = " d.calldate desc ";
                     var result = await con.QueryAsync<ReportCDRItemExport>(sqlName,
                         new
@@ -226,8 +259,10 @@ namespace VS.Core.Repository
                             request.LineCode,
                             request.Token,
                             request.VendorId,
-                            request.From,
-                            request.To,
+                           from, 
+                           to, 
+                           TimeTalkBegin, 
+                            TimeTalkEnd,
                             request.Limit,
                             request.Page,
                             request.OrderBy,
@@ -316,18 +351,55 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var sqlName = SqlContraint.GetVariable().RecordingFile_getAll;
+                    var sqlName = SqlContraint.GetVariable().RecordingFile_getAllv3;
                     request.OrderBy = " d.calldate desc ";
+
+                    var from = request.From;
+                    if( request.TimeFrom1 > -1)
+                    {
+                        from = from.Value.AddSeconds(request.TimeFrom1.Value);
+                    }
+
+                    var to = request.From;
+                    if (request.TimeFrom2 > -1)
+                    {
+                        to = to.Value.AddSeconds(request.TimeFrom2.Value);
+                    }
+                    else
+                    {
+
+                        to = request.To;
+                    }
+                    from = from.Value.AddHours(-7);
+                    to = to.Value.AddHours(-7);
+                    var TimeTalkBegin = 0;
+                    if (request.TimeTalkBegin > -1)
+                    {
+                        TimeTalkBegin = request.TimeTalkBegin.Value;
+                    }
+
+                    var TimeTalkEnd = 600;
+                    if (request.TimeTalkEnd > -1)
+                    {
+                        TimeTalkEnd = request.TimeTalkEnd.Value;
+                    }
+
+
                     var result = await con.QueryAsync<ReportCDRItem>(sqlName,
                         new
                         {
                             request.Disposition,
                             request.PhoneLog,
                             request.LineCode,
+                            TimeTalkEnd,
+
+                            TimeTalkBegin,
+                            from, 
+                            to,
+
                             request.Token,
                             request.VendorId,
-                            request.From,
-                            request.To,
+                          
                             request.Limit,
                             request.Page,
                             request.OrderBy,

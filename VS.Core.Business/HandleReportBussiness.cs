@@ -20,7 +20,15 @@ namespace VS.Core.Business
         public async Task<int> CalTalkingTime(DateTime? dateGet)
         {
             var timerun = DateTime.Now;
-            timerun = timerun.AddMinutes(-30);
+            if(dateGet.HasValue)
+            {
+                timerun = dateGet.Value;
+            }
+            else
+            {
+                timerun = timerun.AddMinutes(-12);
+            }
+         
             var startTime = timerun;
             var endTime = DateTime.Now.EndDateTime();
             Task.WaitAll();
@@ -30,14 +38,12 @@ namespace VS.Core.Business
             }
             var i = 0;
 
-            while (i < 1)
+            while (i < 2)
             {
                 IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
 
                 if (i == 0)
                 {
-
-
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe2(
                         new core.Request.HandlelFileRecordingRequest()
                         {
@@ -48,12 +54,13 @@ namespace VS.Core.Business
                         }
                     );
                 }
-                else if (i == 2)
+                else if (i == 1)
                 {
 
                     allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe3(
                       new core.Request.HandlelFileRecordingRequest()
                       {
+
                           TimeSelect = dateGet,
                           TimeFrom = startTime,
                           TimeTo = endTime
@@ -74,6 +81,7 @@ namespace VS.Core.Business
                       }
                   );
                 }
+
                 i++;
                 var data = allcdrHaving;
 
@@ -151,7 +159,7 @@ namespace VS.Core.Business
             {
 
 
-                var linkUrl = "http://192.168.1.10:3002";
+                var linkUrl = "http://192.168.1.151:3002";
 
 
                 using (var client = new HttpClient())

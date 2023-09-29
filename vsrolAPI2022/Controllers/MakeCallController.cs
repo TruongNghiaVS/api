@@ -65,19 +65,20 @@ namespace vsrolAPI2022.Controllers
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
                 phoneNumber = _input.PhoneNumber,
+                userid = _userCurrent.Id,
                 lineCode = linecode
             }));
             data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var linkUrl = "http://192.168.1.10:3002";
+            var linkUrl = "http://192.168.1.151:3002";
 
             if (linecode.StartsWith('1'))
             {
-                linkUrl = "http://192.168.1.10:3002";
+                linkUrl = "http://192.168.1.151:3002";
             }
             if (linecode.StartsWith('3'))
             {
-                linkUrl = "http://192.168.1.10:3002";
+                linkUrl = "http://192.168.1.151:3002";
             }
 
             if (linecode.StartsWith('4'))

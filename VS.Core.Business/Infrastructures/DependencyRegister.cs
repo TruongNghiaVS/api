@@ -31,6 +31,7 @@ namespace VS.Core.Business.Infrastructures
             services.AddScoped<IPackageManagementBussiness, PackageManagementBusiness>();
             services.AddScoped<IViewRecordingBussiness, ViewRecordingBussiness>();
             services.AddScoped<ISkipInfoBussiness, SkipInfoBussiness>();
+            services.AddScoped<IWorkplaceNotedBussiness, WorkplaceNotedBussiness>();
 
         }
 

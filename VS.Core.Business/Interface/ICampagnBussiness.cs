@@ -13,6 +13,7 @@ namespace VS.Core.Business.Interface
         Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(CampangnOverviewByIdRequest request);
         Task<CampagnRequestReponse> GetDataForExport(CampagnRequest request);
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
+        Task<GetAllProfileByCampangReponse> GetAllOriginal(GetAllProfileByCampang request);
 
         Task<GetAllProfileByCampangReponse> ExportDataByCampaign(GetAllProfileByCampang request);
         Task<CampagnProfile> GetProfile(string id);

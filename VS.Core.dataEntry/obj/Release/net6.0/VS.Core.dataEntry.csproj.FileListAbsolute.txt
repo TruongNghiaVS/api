@@ -10,3 +10,15 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.dataEntry\obj\Release\n
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\refint\VS.Core.dataEntry.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\ref\VS.Core.dataEntry.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\bin\Release\net6.0\VS.Core.dataEntry.deps.json
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\bin\Release\net6.0\VS.Core.dataEntry.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\bin\Release\net6.0\VS.Core.dataEntry.pdb
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.csproj.AssemblyReference.cache
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\refint\VS.Core.dataEntry.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\VS.Core.dataEntry.pdb
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Release\net6.0\ref\VS.Core.dataEntry.dll

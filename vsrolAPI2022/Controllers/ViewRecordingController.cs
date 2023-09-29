@@ -43,8 +43,6 @@ namespace vsrolAPI2022.Controllers
                 To = request.To,
                 Token = request.Token,
                 UserId = user.Id
-
-
             };
             var resultSearch = await _viewRecordingBussiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);

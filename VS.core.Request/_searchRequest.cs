@@ -114,6 +114,22 @@ namespace VS.core.Request
 
     }
 
+    public class WorkplaceNotedRequest : BaseSearchRequest
+    {
+
+        public string LineCode { get; set; }
+        public string UserId { get; set; }
+
+    }
+
+
+
+    public class GetDashboardQcRequest : BaseSearchRequest
+    {
+        public string? LineCode { get; set; }
+
+    }
+
     public class SmsGetallReponse : BaseSearchRepons
 
     {
@@ -127,6 +143,24 @@ namespace VS.core.Request
 
     {
         public ViewRecordingReponse()
+        {
+            Total = 0;
+        }
+    }
+
+
+    public class WorkplaceNotedReponse : BaseSearchRepons
+
+    {
+        public WorkplaceNotedReponse()
+        {
+            Total = 0;
+        }
+    }
+
+    public class GetDashboardQcReponse : BaseSearchRepons
+    {
+        public GetDashboardQcReponse()
         {
             Total = 0;
         }
@@ -695,9 +729,19 @@ namespace VS.core.Request
 
         public string? PhoneLog { get; set; }
 
+     
+        public int? TimeTalkBegin { get; set; }
+        public int? TimeTalkEnd { get; set; }
+        public int? TimeFrom1 { get; set; }
+        public int? TimeFrom2 { get; set; }
+
         public int? VendorId { get; set; }
         public ReportCDRequest()
         {
+            TimeFrom2 = 64800;
+            TimeFrom1 = 25200;
+            TimeTalkEnd = 600;
+            TimeTalkBegin = 0;
 
         }
     }

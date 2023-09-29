@@ -8,5 +8,7 @@ namespace VS.Core.Business.Interface
     {
 
         Task<ViewRecordingReponse> GetALl(ViewRecordingRequest request);
+
+        Task<GetDashboardQcReponse> GetDataQc(GetDashboardQcRequest request);
     }
 }

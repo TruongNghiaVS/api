@@ -36,7 +36,7 @@ namespace VS.Core.Repository.baseConfig
 
 
         IViewRecordingRepository ViewRe { get; }
-
+        IWorkplaceNotedRepository Workplace { get; }
         ISkipInfoRepository SkipRe { get; }
 
     }

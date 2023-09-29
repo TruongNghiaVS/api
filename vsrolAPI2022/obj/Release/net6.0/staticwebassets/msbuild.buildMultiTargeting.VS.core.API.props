@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\VS.core.API.props" />
+</Project>

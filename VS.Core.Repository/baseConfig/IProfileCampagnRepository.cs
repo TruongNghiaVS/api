@@ -7,6 +7,9 @@ namespace VS.Core.Repository.baseConfig
     public interface IProfileCampagnRepository : IGenericRepository<CampagnProfile>
     {
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
+        Task<GetAllProfileByCampangReponse> GetAllOriginal(GetAllProfileByCampang request);
+
+
         Task<GetAllProfileByCampangReponse>
         ExportDataByCampaign(GetAllProfileByCampang request);
 

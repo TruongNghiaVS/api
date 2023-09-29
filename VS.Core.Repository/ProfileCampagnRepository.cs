@@ -125,6 +125,57 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<GetAllProfileByCampangReponse> GetAllOriginal(GetAllProfileByCampang request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ProileIndexModel>(_Sql.CampaignProfile_getAllNoted, new
+                    {
+                        request.Id,
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.DpdMax,
+                        request.DpdMin,
+                        request.LineCode,
+                        request.Limit,
+                        request.NoAgreement,
+                        request.Page,
+                        request.PhoneSerach,
+                        request.TypegetData,
+                        request.OrderBy,
+                        request.VendorId,
+                        request.ColorCode,
+                        request.UserId
+                    }, commandType: CommandType.StoredProcedure);
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    if (fistElement != null)
+                    {
+                        totalRecord = fistElement.TotalRecord;
+                    }
+                    var reponse = new GetAllProfileByCampangReponse()
+                    {
+                        Total = totalRecord,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
         public async Task<GetAllProfileByCampangReponse> ExportDataByCampaign(GetAllProfileByCampang request)
         {
             int page = request.Page;

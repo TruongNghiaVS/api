@@ -10,3 +10,15 @@ C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\refint\VS.core.IO.dll
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.pdb
 C:\Users\Vietstargroup\source\repos\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\ref\VS.core.IO.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\bin\Debug\net6.0\VS.core.IO.deps.json
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\bin\Debug\net6.0\VS.core.IO.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\bin\Debug\net6.0\VS.core.IO.pdb
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.csproj.AssemblyReference.cache
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\refint\VS.core.IO.dll
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\VS.core.IO.pdb
+C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.core.IO\obj\Debug\net6.0\ref\VS.core.IO.dll

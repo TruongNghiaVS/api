@@ -95,6 +95,13 @@ namespace VS.Core.Business
         }
 
 
+        public Task<GetAllProfileByCampangReponse> GetAllOriginal(
+       GetAllProfileByCampang request
+        )
+        {
+            return _unitOfWork.CampagnProfileRe.GetALlProfileByCampaign(request);
+        }
+
         public Task<GetAllProfileByCampangReponse> ExportDataByCampaign(GetAllProfileByCampang request)
         {
             return _unitOfWork.CampagnProfileRe.ExportDataByCampaign(request);

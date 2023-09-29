@@ -32,6 +32,8 @@ namespace VS.Core.Repository
 
         public IViewRecordingRepository ViewRe { get; }
         public ISkipInfoRepository SkipRe { get; }
+
+        public IWorkplaceNotedRepository Workplace { get; }
         public UnitOfWork(IEmployeeRepository employeeRepository,
              IUserRepository userRepository,
              IMasterDataRepository masterDataRepository,
@@ -51,7 +53,8 @@ namespace VS.Core.Repository
             IDpdRepository _dpdRe,
             IPackageRepository _PackageRe,
             IViewRecordingRepository _ViewRe,
-            ISkipInfoRepository _SkipRe
+            ISkipInfoRepository _SkipRe,
+            IWorkplaceNotedRepository _workplaceNoted
 
             )
         {
@@ -75,6 +78,7 @@ namespace VS.Core.Repository
             LineRe = _lineRe;
             DpdRe = _dpdRe;
             SkipRe = _SkipRe;
+            Workplace = _workplaceNoted;
 
         }
 

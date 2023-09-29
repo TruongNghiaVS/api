@@ -33,7 +33,7 @@ namespace VS.Core.Repository.Infrastructures
             services.AddScoped<IViewRecordingRepository, ViewRecordingRepository>();
 
             services.AddScoped<ISkipInfoRepository, SkipInfoRepository>();
-
+            services.AddScoped<IWorkplaceNotedRepository, WorkplaceNotedRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 
