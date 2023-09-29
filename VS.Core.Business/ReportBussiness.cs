@@ -50,6 +50,11 @@ namespace VS.Core.Business
             return _unitOfWork1.ReportRe.ExportRecordingFile(request);
         }
 
+        public Task<ReportCDRReponse> ExportRecordingFileNo(ReportNoCDRequest request)
+        {
+            return _unitOfWork1.ReportRe.ExportRecordingFileNo(request);
+        }
+        
 
 
         public Task<ReportCDRReponse> GetAllReportRecordingFile(ReportCDRequest request)

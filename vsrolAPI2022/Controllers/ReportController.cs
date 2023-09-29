@@ -190,6 +190,27 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
+        [HttpPost("~/api/report/ExportRecordingFileNo")]
+        public async Task<IResult> ExportRecordingFileNo(ReportNoCDRequest _input)
+        {
+            var user = GetCurrentUser();
+            if (user.RoleId == "1")
+            {
+                _input.LineCode = user.LineCode;
+
+            }
+
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            _input.VendorId = VendorId;
+            _input.UserId = user.Id;
+            var resultSearch = await _impactBusiness.ExportRecordingFileNo(_input);
+            return Results.Ok(resultSearch);
+        } 
+
 
         [HttpPost("~/api/report/ReportRecordingFile")]
         public async Task<IResult> GetAllReportRecordingFile(ReportCDRequest _input)

@@ -289,6 +289,90 @@ namespace VS.Core.Repository
 
 
 
+        public async Task<ReportCDRReponse> ExportRecordingFileNo(ReportNoCDRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+
+
+                using (var con = GetConnection())
+                {
+                    var from = request.From;
+                    if (request.TimeFrom1 > -1)
+                    {
+                        from = from.Value.AddSeconds(request.TimeFrom1.Value);
+                    }
+
+                    var to = request.From;
+                    if (request.TimeFrom2 > -1)
+                    {
+                        to = to.Value.AddSeconds(request.TimeFrom2.Value);
+                    }
+                    else
+                    {
+
+                        to = request.To;
+                    }
+                    from = from.Value.AddHours(-7);
+                    to = to.Value.AddHours(-7);
+                    var TimeTalkBegin = 0;
+                    if (request.TimeTalkBegin > -1)
+                    {
+                        TimeTalkBegin = request.TimeTalkBegin.Value;
+                    }
+
+                    var TimeTalkEnd = 600;
+                    if (request.TimeTalkEnd > -1)
+                    {
+                        TimeTalkEnd = request.TimeTalkEnd.Value;
+                    }
+
+                    var sqlName = SqlContraint.GetVariable().RecordingFileExportNo_getAll;
+                    request.OrderBy = " d.calldate desc ";
+                    var result = await con.QueryAsync<ReportCDRItemExport>(sqlName,
+                        new
+                        {
+                            request.Disposition,
+                            request.PhoneLog,
+                            request.LineCode,
+                            request.Token,
+                            request.VendorId,
+                            from,
+                            to,
+                            TimeTalkBegin,
+                            TimeTalkEnd,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy,
+                            request.UserId
+                        }, commandType: CommandType.StoredProcedure);
+
+                    var dataFirst = result.FirstOrDefault();
+                    var total = 0;
+                    //if (dataFirst != null)
+                    //{
+                    //    total = dataFirst.TotalRecord;
+                    //}
+                    var reponse = new ReportCDRReponse()
+                    {
+                        Data = result?.ToList(),
+                        Total = 0
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+
 
         public async Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportNoCDRequest request)
         {

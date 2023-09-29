@@ -942,6 +942,7 @@ namespace VS.core.Request
                 return "http://118.69.182.32:7879/api/getaudio10?filePath=" + Recordingfile;
             }
         }
+        public string? NoAgree { get; set; }
 
     }
 

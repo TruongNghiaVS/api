@@ -21,7 +21,7 @@ namespace VS.Core.Business.Interface
 
         Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request);
 
-
+        Task<ReportCDRReponse> ExportRecordingFileNo(ReportNoCDRequest request);
         Task<GetOverViewTalkingItemReponse> GetOverViewTimeTalking(GetOverViewInfoRequest request);
 
 

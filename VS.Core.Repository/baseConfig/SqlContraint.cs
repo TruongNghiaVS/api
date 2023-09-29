@@ -166,6 +166,9 @@
 
         public string RecordingFile_getAllWithNo = "sp_RecordingFile_getAllWithNo";
         public string RecordingFileExport_getAll = "sp_RecordingFileExport_getAll";
+        public string RecordingFileExportNo_getAll = "sp_RecordingFileExportNo_getAll";
+
+        
 
         public string GetAllRecordGroupByLineCode_getAll = "sp_GetAllRecordGroupByLineCode_getAll";
 

@@ -55,6 +55,34 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
         }
 
+        [HttpGet("~/api/job/CalculatingTalktime2")]
+        public async Task<ActionResult> CalculatingTalktime2()
+        {
+
+            var timerun = DateTime.UtcNow;
+            timerun = timerun.AddMinutes(-12);
+
+            return Ok(timerun);
+
+            var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
+            Task.WaitAll();
+
+            var startTime = timerun;
+            var endTime = DateTime.Now.AddDays(1).EndDateTime();
+            while (startTime < endTime)
+            {
+                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+                {
+                    TimeSelect = startTime
+
+                });
+                Task.WaitAll();
+                startTime = startTime.AddDays(1);
+            }
+            Task.WaitAll();
+            return Ok(true);
+        }
+
         [HttpGet("~/api/job/RunCalTimeEndDay")]
         public async Task<ActionResult> RunCalTimeEndDay()
         {
@@ -78,6 +106,8 @@ namespace vsrolAPI2022.Controllers
             Task.WaitAll();
             return Ok(true);
         }
+
+
 
         [HttpGet("~/api/job/GroupByDate")]
         public async Task<ActionResult> GroupByDate()
