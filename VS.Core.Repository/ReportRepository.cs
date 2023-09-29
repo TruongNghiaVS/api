@@ -340,6 +340,7 @@ namespace VS.Core.Repository
                             request.PhoneLog,
                             request.LineCode,
                             request.Token,
+                            request.NoAgree,
                             request.VendorId,
                             from,
                             to,
