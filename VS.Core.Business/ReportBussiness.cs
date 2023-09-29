@@ -39,7 +39,7 @@ namespace VS.Core.Business
         }
 
 
-        public Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportCDRequest request)
+        public Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportNoCDRequest request)
         {
             return _unitOfWork1.ReportRe.getAllRecordingFileWithNo(request);
         }

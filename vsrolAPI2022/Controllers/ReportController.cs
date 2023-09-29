@@ -149,7 +149,7 @@ namespace vsrolAPI2022.Controllers
 
 
         [HttpPost("~/api/report/getAllRecordingFileWithNo")]
-        public async Task<IResult> getAllRecordingFileWithNo(ReportCDRequest _input)
+        public async Task<IResult> getAllRecordingFileWithNo(ReportNoCDRequest _input)
         {
             var user = GetCurrentUser();
             if (user.RoleId == "1")
@@ -164,7 +164,7 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = user.Id;
-            var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
+            var resultSearch = await _impactBusiness.getAllRecordingFileWithNo(_input);
             return Results.Ok(resultSearch);
         }
 

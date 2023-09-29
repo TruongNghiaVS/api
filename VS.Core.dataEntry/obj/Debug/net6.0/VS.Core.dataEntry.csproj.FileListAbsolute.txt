@@ -22,3 +22,15 @@ C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.data
 C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Debug\net6.0\refint\VS.Core.dataEntry.dll
 C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.pdb
 C:\Users\Administrator\Desktop\sourcecode\vsrolAPI2022\vsrolAPI2022\VS.Core.dataEntry\obj\Debug\net6.0\ref\VS.Core.dataEntry.dll
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\bin\Debug\net6.0\VS.Core.dataEntry.deps.json
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\bin\Debug\net6.0\VS.Core.dataEntry.dll
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\bin\Debug\net6.0\VS.Core.dataEntry.pdb
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.csproj.AssemblyReference.cache
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.AssemblyInfoInputs.cache
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.AssemblyInfo.cs
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.csproj.CoreCompileInputs.cache
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.dll
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\refint\VS.Core.dataEntry.dll
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\VS.Core.dataEntry.pdb
+C:\Users\Vietstargroup\Desktop\vs\crm2022be\VS.Core.dataEntry\obj\Debug\net6.0\ref\VS.Core.dataEntry.dll

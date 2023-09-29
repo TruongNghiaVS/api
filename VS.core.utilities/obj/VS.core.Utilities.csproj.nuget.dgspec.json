@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Desktop\\sourcecode\\vsrolAPI2022\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj": {}
+    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\sourcecode\\vsrolAPI2022\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj": {
+    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\sourcecode\\vsrolAPI2022\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj",
+        "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
         "projectName": "VS.core.Utilities",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\sourcecode\\vsrolAPI2022\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\sourcecode\\vsrolAPI2022\\vsrolAPI2022\\VS.core.utilities\\obj\\",
+        "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
+        "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

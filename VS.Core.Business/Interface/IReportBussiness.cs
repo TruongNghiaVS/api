@@ -16,7 +16,8 @@ namespace VS.Core.Business.Interface
         //Task<LoginReportReponse> GetALl(LoginReportSerarchRequest request);
         Task<ReportCDRReponse> GetAllReportCDR(ReportCDRequest request);
         Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request);
-        Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportCDRequest request);
+
+        Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportNoCDRequest request);
 
         Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request);
 

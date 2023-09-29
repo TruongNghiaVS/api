@@ -729,7 +729,7 @@ namespace VS.core.Request
 
         public string? PhoneLog { get; set; }
 
-     
+
         public int? TimeTalkBegin { get; set; }
         public int? TimeTalkEnd { get; set; }
         public int? TimeFrom1 { get; set; }
@@ -745,7 +745,11 @@ namespace VS.core.Request
 
         }
     }
+    public class ReportNoCDRequest : ReportCDRequest
+    {
+        public string? NoAgree { get; set; }
 
+    }
 
     public class GetAllRecordGroupByLineCodeReponse : BaseSearchRepons
 
@@ -887,6 +891,7 @@ namespace VS.core.Request
         public string? Recordingfile { get; set; }
         public int DurationBill { get; set; }
         public double DurationReal { get; set; }
+        public string? NoAgree { get; set; }
 
         public bool IsCal { get; set; }
         public bool IsShow

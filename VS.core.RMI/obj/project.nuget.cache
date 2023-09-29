@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Y4mQs8cECTj5cPjsi/d3zgw4iXv7uvOsYGlKnfg68taufod+en2xAyM38PKbgrWC4ZBZE88TPizL3CXTp6cgpA==",
+  "dgSpecHash": "3knz7zhMBwd1rhw1NhXOdSWvG/L7jqonTnwzTr7HZFsnW5V/tfDFcyMrddMXQmBVMvnXcIgdGkNAJcPY6nin6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\sourcecode\\vsrolAPI2022\\vsrolAPI2022\\VS.core.RMI\\VS.core.RMI.csproj",
+  "projectFilePath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Administrator\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
   ],
   "logs": []
 }

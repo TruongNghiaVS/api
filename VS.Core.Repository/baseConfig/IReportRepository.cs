@@ -14,7 +14,7 @@ namespace VS.Core.Repository.baseConfig
 
         Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request);
 
-        Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportCDRequest request);
+        Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportNoCDRequest request);
 
         Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request);
 
