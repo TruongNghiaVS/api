@@ -532,7 +532,7 @@ namespace vsrolAPI2022.Controllers
                                     TotalMoneyPaid = ReadvaluefloatExcel(workSheet, i, 13),
                                     Tenure = ReadvalueintExcel(workSheet, i, 14),
                                     NoTenure = ReadvalueintExcel(workSheet, i, 18),
-                                    TotalPaid = 0,
+                                    TotalPaid = ReadvaluefloatExcel(workSheet, i, 23),
                                     LastPaid = 0,
                                     LastPadDay = lastDayPad,
                                     NameProduct = ReadvalueStringExcel(workSheet, i, 7),
