@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Administrator\Desktop\deploy</_PublishTargetUrl>
-    <History>True|2023-09-29T04:02:47.9682550Z;True|2023-09-29T10:39:31.2077216+07:00;</History>
+    <History>True|2023-10-06T02:38:15.9023617Z;False|2023-10-06T09:38:06.4058570+07:00;True|2023-09-29T11:02:47.9682550+07:00;True|2023-09-29T10:39:31.2077216+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZXnEPixsUcHJE+N/OBlDm5EJr/HWtq1bcDyHSLL343bff6j+WUQ8EfEBjawAo+/2yOpO3fxyG/LqQa8+M8PODg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\sourceAPi\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
+  ],
+  "logs": []
+}
