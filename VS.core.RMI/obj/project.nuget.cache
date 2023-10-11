@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZXnEPixsUcHJE+N/OBlDm5EJr/HWtq1bcDyHSLL343bff6j+WUQ8EfEBjawAo+/2yOpO3fxyG/LqQa8+M8PODg==",
+  "dgSpecHash": "3knz7zhMBwd1rhw1NhXOdSWvG/L7jqonTnwzTr7HZFsnW5V/tfDFcyMrddMXQmBVMvnXcIgdGkNAJcPY6nin6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\sourceAPi\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
+  "projectFilePath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Administrator\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
+    "C:\\Users\\Vietstargroup\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
   ],
   "logs": []
 }

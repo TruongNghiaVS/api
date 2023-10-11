@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {}
+    "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.IO\\VS.core.IO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {
+    "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.IO\\VS.core.IO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
-        "projectName": "VS.core.Request",
-        "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
+        "projectUniqueName": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.IO\\VS.core.IO.csproj",
+        "projectName": "VS.core.RMI",
+        "projectPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.IO\\VS.core.IO.csproj",
         "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\obj\\",
+        "outputPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.RMI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "EPPlus.Core": {
+              "target": "Package",
+              "version": "[1.5.4, )"
+            },
+            "EPPlus.Core.Extensions": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

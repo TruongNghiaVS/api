@@ -33,12 +33,12 @@ namespace vsrolAPI2022.Controllers
         [HttpGet("~/api/job/CalculatingTalktime")]
         public async Task<ActionResult> CalculatingTalktime()
         {
-            
+
             var timerun = DateTime.UtcNow;
             timerun = timerun.AddMinutes(-12);
             var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
-          
+
             var startTime = timerun;
             var endTime = DateTime.Now.AddDays(1).EndDateTime();
             while (startTime < endTime)
@@ -90,7 +90,7 @@ namespace vsrolAPI2022.Controllers
             timerun = timerun.AddHours(-3);
             var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
-      
+
             var startTime = timerun;
             var endTime = DateTime.Now.AddDays(1).EndDateTime();
             while (startTime < endTime)
@@ -123,30 +123,6 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-        //[HttpGet("~/api/job/rebuildReportGroup")]
-        //public async Task<ActionResult> rebuildReportGroup()
-        //{
-        //    var dtFrom = DateTime.Now.AddDays(-5);
-        //    var dtTo = DateTime.Now.AddDays(1);
-
-        //    //var resultSearch = await _handleReportBussiness.CalTalkingTime();
-        //    Task.WaitAll();
-        //    while (dtFrom < dtTo)
-        //    {
-
-        //        await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-        //        {
-        //            TimeSelect = dtFrom
-
-        //        });
-        //        Task.WaitAll();
-        //        dtFrom = dtFrom.AddDays(1);
-        //    }
-
-        //    Task.WaitAll();
-        //    return Ok(true);
-
-        //}
 
         [HttpGet("~/api/job/RunSumCampagnOverview")]
         public async Task<ActionResult> RunSumCampagnOverview()
@@ -174,9 +150,9 @@ namespace vsrolAPI2022.Controllers
             z.Elapsed += OnTimedEventGroupByDay;
             z.AutoReset = true;
 
-            // Start the timer
+
             z.Enabled = true;
-            // run job create report ime
+
 
             return Ok(true);
 

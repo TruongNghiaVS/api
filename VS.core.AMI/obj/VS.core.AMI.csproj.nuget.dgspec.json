@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {}
+    "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\VS.core.AMI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {
+    "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\VS.core.AMI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
-        "projectName": "VS.core.Request",
-        "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
+        "projectUniqueName": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\VS.core.AMI.csproj",
+        "projectName": "VS.core.AMI",
+        "projectPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\VS.core.AMI.csproj",
         "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\obj\\",
+        "outputPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,6 +51,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

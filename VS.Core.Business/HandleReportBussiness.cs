@@ -20,7 +20,7 @@ namespace VS.Core.Business
         public async Task<int> CalTalkingTime(DateTime? dateGet)
         {
             var timerun = DateTime.Now;
-            if(dateGet.HasValue)
+            if (dateGet.HasValue)
             {
                 timerun = dateGet.Value;
             }
@@ -28,7 +28,7 @@ namespace VS.Core.Business
             {
                 timerun = timerun.AddMinutes(-12);
             }
-         
+
             var startTime = timerun;
             var endTime = DateTime.Now.EndDateTime();
             Task.WaitAll();
@@ -38,7 +38,7 @@ namespace VS.Core.Business
             }
             var i = 0;
 
-            while (i < 2)
+            while (i < 1)
             {
                 IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
 

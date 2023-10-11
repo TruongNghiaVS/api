@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "VS.Core.dataEntry/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/VS.Core.dataEntry.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/VS.Core.dataEntry.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "VS.Core.dataEntry/1.0.0": {
-      "type": "project",
-      "path": "../VS.Core.dataEntry/VS.Core.dataEntry.csproj",
-      "msbuildProject": "../VS.Core.dataEntry/VS.Core.dataEntry.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "VS.Core.dataEntry >= 1.0.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\Vietstargroup\\.nuget\\packages\\": {}
@@ -32,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Report\\VS.core.Report.csproj",
-      "projectName": "VS.core.Report",
-      "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Report\\VS.core.Report.csproj",
+      "projectUniqueName": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\VS.core.AMI.csproj",
+      "projectName": "VS.core.AMI",
+      "projectPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\VS.core.AMI.csproj",
       "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Report\\obj\\",
+      "outputPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.AMI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -52,11 +33,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -80,6 +57,9 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }

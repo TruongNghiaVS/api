@@ -140,7 +140,7 @@ namespace VS.core.Utilities
                 }
                 catch (Exception e)
                 {
-                 
+                    return 0;
                     string path2 = @"http://192.168.1.10:3002/api/getFileAudio?filePath=";
                     path2 = path2 + "" + filePath;
                     try

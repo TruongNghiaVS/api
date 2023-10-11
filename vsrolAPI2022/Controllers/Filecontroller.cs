@@ -91,7 +91,7 @@ namespace vsrolAPI2022.Controllers
                 {
                     try
                     {
-                        urlDow = "http://192.168.1.10:3002/api/getFileAudio?filePath=" + filePath;
+                        urlDow = "http://192.168.1.253:3002/api/getFileAudio?filePath=" + filePath;
                         data = net.DownloadData(urlDow);
                         return File(data, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
                     }

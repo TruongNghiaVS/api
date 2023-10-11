@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {}
+    "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {
+    "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
+        "projectUniqueName": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj",
         "projectName": "VS.core.Request",
-        "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
+        "projectPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.utilities\\VS.core.Utilities.csproj",
         "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\obj\\",
+        "outputPath": "C:\\Users\\Vietstargroup\\source\\repos\\vsrolAPI2022\\VS.core.Request\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
