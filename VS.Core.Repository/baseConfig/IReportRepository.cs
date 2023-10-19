@@ -14,11 +14,14 @@ namespace VS.Core.Repository.baseConfig
 
         Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request);
 
+
+        Task<FirstCallLastCallReponse> getAllFirstLastCall(FirstCallLastCallRequest request);
+
         Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportNoCDRequest request);
 
         Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request);
         Task<ReportCDRReponse> ExportRecordingFileNo(ReportNoCDRequest request);
-     
+
 
 
         Task<ReportCDRReponse> GetAllReportCDR(ReportCDRequest request);

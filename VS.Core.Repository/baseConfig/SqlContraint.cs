@@ -163,12 +163,14 @@
         public string ReportTalkTime_getAllNotDeleteFile = "sp_ReportTalkTime_getAllNotDeleteFile";
         public string RecordingFile_getAll = "sp_RecordingFile_getAll";
         public string RecordingFile_getAllv3 = "sp_RecordingFile_getAllv3";
+        public string Call_FirstLast = "sp_RecordingFile_fetFLCall";
+
 
         public string RecordingFile_getAllWithNo = "sp_RecordingFile_getAllWithNo";
         public string RecordingFileExport_getAll = "sp_RecordingFileExport_getAll";
         public string RecordingFileExportNo_getAll = "sp_RecordingFileExportNo_getAll";
 
-        
+
 
         public string GetAllRecordGroupByLineCode_getAll = "sp_GetAllRecordGroupByLineCode_getAll";
 

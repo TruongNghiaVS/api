@@ -38,6 +38,11 @@ namespace VS.Core.Business
             return _unitOfWork1.ReportRe.GetAllRecordingFile(request);
         }
 
+        public Task<FirstCallLastCallReponse> getAllFirstLastCall(FirstCallLastCallRequest request)
+        {
+            return _unitOfWork1.ReportRe.getAllFirstLastCall(request);
+        }
+
 
         public Task<ReportCDRReponse> getAllRecordingFileWithNo(ReportNoCDRequest request)
         {
@@ -54,7 +59,7 @@ namespace VS.Core.Business
         {
             return _unitOfWork1.ReportRe.ExportRecordingFileNo(request);
         }
-        
+
 
 
         public Task<ReportCDRReponse> GetAllReportRecordingFile(ReportCDRequest request)

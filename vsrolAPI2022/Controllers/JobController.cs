@@ -34,7 +34,7 @@ namespace vsrolAPI2022.Controllers
         public async Task<ActionResult> CalculatingTalktime()
         {
 
-            var timerun = DateTime.UtcNow;
+            var timerun = DateTime.Now;
             timerun = timerun.AddMinutes(-12);
             var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
@@ -59,10 +59,10 @@ namespace vsrolAPI2022.Controllers
         public async Task<ActionResult> CalculatingTalktime2()
         {
 
-            var timerun = DateTime.UtcNow;
-            timerun = timerun.AddMinutes(-12);
+            var timerun = DateTime.Now;
+            timerun = timerun.AddMinutes(-60);
 
-            return Ok(timerun);
+
 
             var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
@@ -133,30 +133,6 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-        [HttpPost("~/api/job/runAll")]
-        public async Task<ActionResult> RunAll()
-        {
-
-            var t = new System.Timers.Timer();
-            t.Interval = 60000;
-            t.Elapsed += OnTimedEvent;
-            t.AutoReset = true;
-
-            t.Enabled = true;
-
-
-            var z = new System.Timers.Timer();
-            z.Interval = 80000;
-            z.Elapsed += OnTimedEventGroupByDay;
-            z.AutoReset = true;
-
-
-            z.Enabled = true;
-
-
-            return Ok(true);
-
-        }
 
         private async void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {

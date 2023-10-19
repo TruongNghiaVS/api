@@ -223,18 +223,17 @@ namespace VS.Core.Repository
                         from = from.Value.AddSeconds(request.TimeFrom1.Value);
                     }
 
-                    var to = request.From;
+                    var to = request.To;
                     if (request.TimeFrom2 > -1)
                     {
-                        to = to.Value.AddSeconds(request.TimeFrom2.Value);
+                        to = new DateTime(to.Value.Year, to.Value.Month, to.Value.Day, 0, 0, 0).AddSeconds(request.TimeFrom2.Value);
                     }
                     else
                     {
 
                         to = request.To;
                     }
-                    from = from.Value.AddHours(-7);
-                    to = to.Value.AddHours(-7);
+
                     var TimeTalkBegin = 0;
                     if (request.TimeTalkBegin > -1)
                     {
@@ -257,6 +256,7 @@ namespace VS.Core.Repository
                             request.LineCode,
                             request.Token,
                             request.VendorId,
+                            request.NoAgree,
                             from,
                             to,
                             TimeTalkBegin,
@@ -307,18 +307,17 @@ namespace VS.Core.Repository
                         from = from.Value.AddSeconds(request.TimeFrom1.Value);
                     }
 
-                    var to = request.From;
+                    var to = request.To;
                     if (request.TimeFrom2 > -1)
                     {
-                        to = to.Value.AddSeconds(request.TimeFrom2.Value);
+                        to = new DateTime(to.Value.Year, to.Value.Month, to.Value.Day, 0, 0, 0).AddSeconds(request.TimeFrom2.Value);
                     }
                     else
                     {
 
                         to = request.To;
                     }
-                    from = from.Value.AddHours(-7);
-                    to = to.Value.AddHours(-7);
+
                     var TimeTalkBegin = 0;
                     if (request.TimeTalkBegin > -1)
                     {
@@ -391,18 +390,17 @@ namespace VS.Core.Repository
                         from = from.Value.AddSeconds(request.TimeFrom1.Value);
                     }
 
-                    var to = request.From;
+                    var to = request.To;
                     if (request.TimeFrom2 > -1)
                     {
-                        to = to.Value.AddSeconds(request.TimeFrom2.Value);
+                        to = new DateTime(to.Value.Year, to.Value.Month, to.Value.Day, 0, 0, 0).AddSeconds(request.TimeFrom2.Value);
                     }
                     else
                     {
 
                         to = request.To;
                     }
-                    from = from.Value.AddHours(-7);
-                    to = to.Value.AddHours(-7);
+
                     var TimeTalkBegin = 0;
                     if (request.TimeTalkBegin > -1)
                     {
@@ -477,18 +475,17 @@ namespace VS.Core.Repository
                         from = from.Value.AddSeconds(request.TimeFrom1.Value);
                     }
 
-                    var to = request.From;
+                    var to = request.To;
                     if (request.TimeFrom2 > -1)
                     {
-                        to = to.Value.AddSeconds(request.TimeFrom2.Value);
+                        to = new DateTime(to.Value.Year, to.Value.Month, to.Value.Day, 0, 0, 0).AddSeconds(request.TimeFrom2.Value);
                     }
                     else
                     {
 
                         to = request.To;
                     }
-                    from = from.Value.AddHours(-7);
-                    to = to.Value.AddHours(-7);
+
                     var TimeTalkBegin = 0;
                     if (request.TimeTalkBegin > -1)
                     {
@@ -516,6 +513,7 @@ namespace VS.Core.Repository
 
                             request.Token,
                             request.VendorId,
+                            request.NoAgree,
 
                             request.Limit,
                             request.Page,
@@ -542,6 +540,55 @@ namespace VS.Core.Repository
                 return null;
             }
         }
+
+        public async Task<FirstCallLastCallReponse> getAllFirstLastCall(FirstCallLastCallRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var sqlName = SqlContraint.GetVariable().Call_FirstLast;
+                    request.OrderBy = " d.calldate desc ";
+
+
+
+                    var result = await con.QueryAsync<FirstCallLastCallReponse>(sqlName,
+                        new
+                        {
+                            request.From,
+                            request.To,
+                            request.Token,
+                            request.VendorId,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy,
+                            request.UserId
+                        }, commandType: CommandType.StoredProcedure);
+
+                    var dataFirst = result.FirstOrDefault();
+                    var total = 0;
+                    if (dataFirst != null)
+                    {
+                        total = dataFirst.TotalRecord;
+                    }
+                    var reponse = new FirstCallLastCallReponse()
+                    {
+                        Data = result?.ToList(),
+                        Total = total
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public async Task<GetOverViewInfoReponse> GetOverViewInfo(GetOverViewInfoRequest request)
         {
             try

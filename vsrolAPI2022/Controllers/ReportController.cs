@@ -144,6 +144,25 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
+        [HttpPost("~/api/report/getAllFirstLastCall")]
+        public async Task<IResult> getAllFirstLastCall(FirstCallLastCallRequest _input)
+        {
+            var user = GetCurrentUser();
+            if (user.RoleId == "1")
+            {
+                _input.LineCode = user.LineCode;
+
+            }
+            int? VendorId = null;
+            if (user.RoleId == "4")
+            {
+                VendorId = int.Parse(user.Id);
+            }
+            _input.VendorId = VendorId;
+            _input.UserId = user.Id;
+            var resultSearch = await _impactBusiness.getAllFirstLastCall(_input);
+            return Results.Ok(resultSearch);
+        }
 
 
 
@@ -209,7 +228,7 @@ namespace vsrolAPI2022.Controllers
             _input.UserId = user.Id;
             var resultSearch = await _impactBusiness.ExportRecordingFileNo(_input);
             return Results.Ok(resultSearch);
-        } 
+        }
 
 
         [HttpPost("~/api/report/ReportRecordingFile")]

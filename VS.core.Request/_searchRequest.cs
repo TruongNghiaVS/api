@@ -729,6 +729,7 @@ namespace VS.core.Request
 
         public string? PhoneLog { get; set; }
 
+        public string? NoAgree { get; set; }
 
         public int? TimeTalkBegin { get; set; }
         public int? TimeTalkEnd { get; set; }
@@ -908,7 +909,18 @@ namespace VS.core.Request
 
 
     }
+    public class ReportFLCall
+    {
+        public int TotalRecord { get; set; }
+        public string UserName { get; set; }
 
+        public string LineCode { get; set; }
+
+        public string? Date { get; set; }
+        public DateTime? CallAt { get; set; }
+
+
+    }
 
     public class ReportCDRItemExport
     {
@@ -938,8 +950,7 @@ namespace VS.core.Request
         {
             get
             {
-
-                return "http://118.69.182.32:7879/api/getaudio10?filePath=" + Recordingfile;
+                return "http://42.115.94.180:7777/api/file/getaudio10?filePath=" + Recordingfile;
             }
         }
         public string? NoAgree { get; set; }
@@ -1222,4 +1233,28 @@ namespace VS.core.Request
         }
     }
 
+
+
+    public class FirstCallLastCallRequest : BaseSearchRequest
+    {
+
+        public int? VendorId { get; set; }
+        public string? LineCode { get; set; }
+        public FirstCallLastCallRequest()
+        {
+
+
+
+        }
+    }
+
+    public class FirstCallLastCallReponse : BaseSearchRepons
+
+    {
+        public int TotalRecord { get; set; }
+        public FirstCallLastCallReponse()
+        {
+            Total = 0;
+        }
+    }
 }

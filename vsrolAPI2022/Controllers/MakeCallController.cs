@@ -13,9 +13,7 @@ namespace vsrolAPI2022.Controllers
     [Route("[controller]")]
     public class MakeCallController : BaseController
     {
-
         private readonly IReportBussiness _impactBusiness;
-
         private readonly ICallLogBussiness callLogBussiness;
         private IHandleReportBussiness _handleReportBussiness;
         public MakeCallController(IReportBussiness campagnBusiness,
@@ -72,26 +70,9 @@ namespace vsrolAPI2022.Controllers
 
             var linkUrl = "http://192.168.1.151:3002";
 
-            //if (linecode.StartsWith('1'))
-            //{
-            //    linkUrl = "http://192.168.1.151:3002";
-            //}
-            //if (linecode.StartsWith('3'))
-            //{
-            //    linkUrl = "http://192.168.1.151:3002";
-            //}
-
-            //if (linecode.StartsWith('4'))
-            //{
-            //    linkUrl = "http://192.168.1.151:3002";
-            //}
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(linkUrl);
-
-
-
-
                 var reponse = await client.PostAsync("api/client/makeCall", data);
                 var result = await reponse.Content.ReadAsStringAsync();
                 return Results.Ok(result);
