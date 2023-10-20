@@ -22,7 +22,7 @@ namespace VS.Core.Repository.baseConfig
         Task<ReportCDRReponse> ExportRecordingFile(ReportCDRequest request);
         Task<ReportCDRReponse> ExportRecordingFileNo(ReportNoCDRequest request);
 
-
+        Task<ReportCDRReponse> getAllCall(ReportCallRequest request);
 
         Task<ReportCDRReponse> GetAllReportCDR(ReportCDRequest request);
 

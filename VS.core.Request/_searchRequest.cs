@@ -746,6 +746,25 @@ namespace VS.core.Request
 
         }
     }
+
+    public class ReportCallRequest : BaseSearchRequest
+    {
+
+        public string? LineCode { get; set; }
+        public string? Disposition { get; set; }
+
+        public string? PhoneLog { get; set; }
+
+        public string? NoAgree { get; set; }
+
+
+
+        public int? VendorId { get; set; }
+        public ReportCallRequest()
+        {
+
+        }
+    }
     public class ReportNoCDRequest : ReportCDRequest
     {
         public string? NoAgree { get; set; }
@@ -893,6 +912,42 @@ namespace VS.core.Request
         public int DurationBill { get; set; }
         public double DurationReal { get; set; }
         public string? NoAgree { get; set; }
+
+        public bool IsCal { get; set; }
+        public bool IsShow
+        {
+            get
+            {
+                if (Lastapp == "Dial" && Disposition == "ANSWERED")
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+
+    }
+
+
+    public class ReportCallItem
+    {
+        public int TotalRecord { get; set; }
+        public DateTime? CreateAt { get; set; }
+        public int Id { get; set; }
+        public DateTime? Calldate { get; set; }
+        public string? Phone { get; set; }
+        public string? Src { get; set; }
+        public string? Disposition { get; set; }
+        public string? Lastapp { get; set; }
+        public string? Billsec { get; set; }
+        public string? Duration { get; set; }
+        public string? Recordingfile { get; set; }
+        public int DurationBill { get; set; }
+        public double DurationReal { get; set; }
+        public string? NoAgree { get; set; }
+
+        public string? LineCode { get; set; }
 
         public bool IsCal { get; set; }
         public bool IsShow

@@ -154,7 +154,7 @@
         public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert2";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
-
+        public string ReportgetAllCall = "sp_ReportgetAllCall";
         public string sms_getAll = "sp_sms_getAll";
         public string View_Recording = "sp_view_Recording";
         public string Data_Qc = "sp_qc_GetData";

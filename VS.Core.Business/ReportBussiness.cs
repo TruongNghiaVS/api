@@ -33,6 +33,12 @@ namespace VS.Core.Business
         {
             return _unitOfWork1.ReportRe.GetAllReportCDR(request);
         }
+        public Task<ReportCDRReponse> getAllCall(ReportCallRequest request)
+        {
+            return _unitOfWork1.ReportRe.getAllCall(request);
+        }
+
+
         public Task<ReportCDRReponse> GetAllRecordingFile(ReportCDRequest request)
         {
             return _unitOfWork1.ReportRe.GetAllRecordingFile(request);

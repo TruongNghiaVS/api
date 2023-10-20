@@ -201,7 +201,55 @@ namespace VS.Core.Repository
         //GetAllRecordingFile
 
 
+        public async Task<ReportCDRReponse> getAllCall(ReportCallRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
 
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var sqlName = SqlContraint.GetVariable().ReportgetAllCall;
+                    request.OrderBy = " d.calldate desc ";
+                    var result = await con.QueryAsync<ReportCallItem>(sqlName,
+                        new
+                        {
+                            request.Disposition,
+                            request.PhoneLog,
+                            request.LineCode,
+                            request.Token,
+                            request.From,
+                            request.VendorId,
+                            request.To,
+                            request.NoAgree,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy,
+                            request.UserId
+                        }, commandType: CommandType.StoredProcedure);
+
+                    var dataFirst = result.FirstOrDefault();
+                    var total = 0;
+                    if (dataFirst != null)
+                    {
+                        total = dataFirst.TotalRecord;
+                    }
+                    var reponse = new ReportCDRReponse()
+                    {
+                        Data = result?.ToList(),
+                        Total = total
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        //GetAllRecordingFile
 
 
 
