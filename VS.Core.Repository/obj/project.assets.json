@@ -1591,19 +1591,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vietstargroup\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj",
+      "projectUniqueName": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj",
       "projectName": "VS.Core.Repository",
-      "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj",
-      "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Repository\\obj\\",
+      "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1617,14 +1617,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj"
             },
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Report\\VS.core.Report.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Report\\VS.core.Report.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Report\\VS.core.Report.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Report\\VS.core.Report.csproj"
             },
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.Request\\VS.core.Request.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Request\\VS.core.Request.csproj"
             }
           }
         }
@@ -1633,6 +1633,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1680,8 +1685,30 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Data.SqlClient' 4.8.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8g2p-5pqh-5jmc",
+      "libraryId": "System.Data.SqlClient",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Data.SqlClient' 4.8.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
+      "libraryId": "System.Data.SqlClient",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

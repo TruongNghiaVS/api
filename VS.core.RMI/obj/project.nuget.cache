@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "3knz7zhMBwd1rhw1NhXOdSWvG/L7jqonTnwzTr7HZFsnW5V/tfDFcyMrddMXQmBVMvnXcIgdGkNAJcPY6nin6Q==",
+  "dgSpecHash": "FLVjQbMnOBN9bKyRnFku6pnW79s/ojIOk/RRBFMEWHvCooUQvmpr/gKMcrugEEjHbbEuQY0HqvpvfOoDum3CxA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
+  "projectFilePath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Vietstargroup\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
+    "C:\\Users\\Admin\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
   ],
   "logs": []
 }

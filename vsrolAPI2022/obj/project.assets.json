@@ -5033,19 +5033,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vietstargroup\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\vsrolAPI2022\\VS.core.API.csproj",
+      "projectUniqueName": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\VS.core.API.csproj",
       "projectName": "VS.core.API",
-      "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\vsrolAPI2022\\VS.core.API.csproj",
-      "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\vsrolAPI2022\\obj\\",
+      "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\VS.core.API.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5059,11 +5059,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj"
             },
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj"
             }
           }
         }
@@ -5072,6 +5072,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -5102,6 +5107,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5110,7 +5133,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

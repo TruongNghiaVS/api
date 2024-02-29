@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {}
+    "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
+    "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
+        "projectUniqueName": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
         "projectName": "VS.core.Utilities",
-        "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
-        "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\obj\\",
+        "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -67,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

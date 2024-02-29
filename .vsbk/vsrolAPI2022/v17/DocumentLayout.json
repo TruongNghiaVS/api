@@ -1,0 +1,101 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\vietbank\\crm\\api\\crm2022be\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\vs.core.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\vs.core.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\controllers\\reporttalktimecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\reporttalktimecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VS.core.API",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\VS.core.API.csproj",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\VS.core.API.csproj",
+              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\VS.core.API.csproj",
+              "RelativeToolTip": "vsrolAPI2022\\VS.core.API.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-02-28T08:01:38.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\appsettings.json",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\appsettings.json",
+              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\appsettings.json",
+              "RelativeToolTip": "vsrolAPI2022\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-02-28T07:55:28.353Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\appsettings.Development.json",
+              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\appsettings.Development.json",
+              "RelativeToolTip": "vsrolAPI2022\\appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-02-28T07:49:46.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "JobController.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\JobController.cs",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\JobController.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\JobController.cs",
+              "RelativeToolTip": "vsrolAPI2022\\Controllers\\JobController.cs",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAAAFUAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T07:49:47.079Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ReportTalkTimeController.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
+              "RelativeToolTip": "vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
+              "ViewState": "AQIAACkAAAAANDMzM7MuwDoAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T07:49:47.09Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1951,19 +1951,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vietstargroup\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj",
+      "projectUniqueName": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj",
       "projectName": "VS.Core.Business",
-      "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj",
-      "packagesPath": "C:\\Users\\Vietstargroup\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Business\\obj\\",
+      "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Business\\VS.Core.Business.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Business\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vietstargroup\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1977,14 +1977,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj"
             },
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj"
             },
-            "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
-              "projectPath": "C:\\Users\\Vietstargroup\\Desktop\\vs\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj"
+            "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj"
             }
           }
         }
@@ -1993,6 +1993,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2028,8 +2033,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Newtonsoft.Json' 11.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+      "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
