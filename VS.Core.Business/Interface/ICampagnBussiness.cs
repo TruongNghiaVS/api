@@ -7,6 +7,7 @@ namespace VS.Core.Business.Interface
 {
     public interface ICampagnBussiness : IGenericBussine<Campagn>
     {
+        Task<MasterDataReponse> GetAllReason();
         Task<Campagn> Getbyid(string Id);
         Task<bool> CheckDuplicate(string code);
         Task<CampagnRequestReponse> GetALl(CampagnRequest request);
@@ -33,7 +34,7 @@ namespace VS.Core.Business.Interface
         Task<bool> HandleImportV2(CampanginDataImportRequest request, Account userLogin);
 
         Task<List<CampagnProfile>> GetALLAsiggnee(GetAllProfileByCampang request);
-        Task<CampangeProfileInforReponse> GetIno(string id);
+        Task<CampangeProfileInforReponse> GetInfo(string id);
         Task<bool> AssignedTask(string profileId, string userId);
         Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(CampagnRequest request);
         Task<bool> HandleCase(CampaignProfile_caseRequest request);

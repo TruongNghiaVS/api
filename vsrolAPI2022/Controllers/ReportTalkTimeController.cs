@@ -30,7 +30,7 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(GetAllRecordGroupByLineCodeRequest _input)
         {
             var currentUser = GetCurrentUser();
-            if (currentUser.RoleId == "2" || currentUser.RoleId == "4")
+            if (currentUser.RoleId == "2" || currentUser.RoleId == "4"  || currentUser.RoleId =="3")
             {
 
 
@@ -59,13 +59,10 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> ExportData(GetAllRecordGroupByLineCodeExportRequest _input)
         {
             var currentUser = GetCurrentUser();
-            if (currentUser.RoleId == "2" || currentUser.RoleId == "4")
-            {
-
-            }
-            else
+            if (currentUser.RoleId == "1")
             {
                 _input.LineCode = currentUser.LineCode;
+
             }
 
             int? VendorId = null;

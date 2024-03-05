@@ -102,7 +102,8 @@ namespace VS.Core.Repository
                         request.OrderBy,
                         request.VendorId,
                         request.ColorCode,
-                        request.UserId
+                        request.UserId,
+                        request.Cmnd
                     }, commandType: CommandType.StoredProcedure);
                     var fistElement = result.FirstOrDefault();
                     var totalRecord = 0;
@@ -198,6 +199,7 @@ namespace VS.Core.Repository
                         request.Limit,
                         request.NoAgreement,
                         request.Page,
+                        request.Cmnd,
                         request.PhoneSerach,
                         request.TypegetData,
                         request.OrderBy,
@@ -301,6 +303,11 @@ namespace VS.Core.Repository
 
         public async Task<int> ImportUpdate(CampagnProfile entity)
         {
+
+            if(string.IsNullOrEmpty(entity.Assignee))
+            {
+                return 0;
+            }    
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
             var par = GetParams(entity, new string[] {

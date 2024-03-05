@@ -1,13 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FLVjQbMnOBN9bKyRnFku6pnW79s/ojIOk/RRBFMEWHvCooUQvmpr/gKMcrugEEjHbbEuQY0HqvpvfOoDum3CxA==",
+  "dgSpecHash": "0BoXCrKz0M9NMG5VOsE5mHJpy9ObyCS0uMHjI9NSwNnTgYI/tJomHmZi4MIFP7/spkv9l0BIFi4tuvjKS5YG+w==",
   "success": true,
-  "projectFilePath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
+  "projectFilePath": "C:\\vietbank\\crm\\api\\VS.core.RMI\\VS.core.RMI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
+    "C:\\Users\\Admin\\.nuget\\packages\\asternet.netstandard\\2.2.1\\asternet.netstandard.2.2.1.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gpSApBrbxUGCMkeTN4zuvGV1jndEC9nuPxBfU4hjEWVlqQhi7lbVSaQPxSwSqn3ARePlwEOyp9auDFc10rhdzQ==",
+  "dgSpecHash": "iwmfASz+Oo75DthU/lY/YvOBvQsIgcBz6OHTRLTtX35K/hh+nILcuV0hoZIOhgRjiK6Pb57Cv1NwtN+n3WG2GQ==",
   "success": true,
-  "projectFilePath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.Repository\\VS.Core.Repository.csproj",
+  "projectFilePath": "C:\\vietbank\\crm\\api\\VS.Core.Repository\\VS.Core.Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",

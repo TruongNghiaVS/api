@@ -29,7 +29,10 @@ namespace VS.Core.Repository.Model
         public string ReasonstatusText
         {
 
-            get; set;
+            get;set;
+            
+
+          
         }
 
         public bool? Skipp { get; set; }

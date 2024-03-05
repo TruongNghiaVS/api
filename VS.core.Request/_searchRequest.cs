@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace VS.core.Request
 {
@@ -326,7 +327,23 @@ namespace VS.core.Request
             this.To = new DateTime(2022, 10, 01);
         }
     }
+    public class CampagnProfileExportRequest : BaseSearchRequest
+    {
+        public string? Msg { get; set; }
+        public int? VendorId { get; set; }
+        public string? CampaignId { get; set; }
 
+
+        public CampagnProfileExportRequest()
+        {
+            this.Page = 1;
+            this.Limit = 500;
+            this.From = new DateTime(2022, 09, 20);
+            this.To = new DateTime(2022, 10, 01);
+        }
+    }
+
+    
     public class CampagnRequestReponse : BaseSearchRepons
 
     {
@@ -391,6 +408,8 @@ namespace VS.core.Request
         public string? ColorCode { get; set; }
 
         public bool? SkipData { get; set; }
+
+        public string? Cmnd { get; set; }
 
 
 
@@ -1311,5 +1330,12 @@ namespace VS.core.Request
         {
             Total = 0;
         }
+    }
+
+    public class CampagnProfileExportReponse 
+
+    {
+        public IEnumerable? Data { get; set; }
+        public int?  NumberRecord { get; set; }
     }
 }

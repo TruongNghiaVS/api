@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {}
+    "C:\\vietbank\\crm\\api\\VS.core.utilities\\VS.core.Utilities.csproj": {}
   },
   "projects": {
-    "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj": {
+    "C:\\vietbank\\crm\\api\\VS.core.utilities\\VS.core.Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
+        "projectUniqueName": "C:\\vietbank\\crm\\api\\VS.core.utilities\\VS.core.Utilities.csproj",
         "projectName": "VS.core.Utilities",
-        "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
+        "projectPath": "C:\\vietbank\\crm\\api\\VS.core.utilities\\VS.core.Utilities.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\obj\\",
+        "outputPath": "C:\\vietbank\\crm\\api\\VS.core.utilities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

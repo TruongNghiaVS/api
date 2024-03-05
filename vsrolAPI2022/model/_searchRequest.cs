@@ -66,6 +66,8 @@
         public string? ColorCode { get; set; }
 
         public bool? SkipData { get; set; }
+
+        public string? Cmnd { get; set; }
         public CampagnProfileSearchInput()
         {
             Status = 0;

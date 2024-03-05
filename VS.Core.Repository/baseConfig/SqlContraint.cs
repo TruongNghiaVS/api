@@ -179,7 +179,9 @@
         public string Sp_ProcessingCalTimeIndexModel_getAll = "sp_ProcessingCalTimeIndexModel_getAll";
 
         public string GetGetOverViewDashBoard_getAll = "sp_GetGetOverViewDashBoard_getAll";
+        public string CampagnProfileGetAllExport = "sp_CampagnProfileGetAllExport";
 
+        public string CheckCallByCondition = "sp_checkCallByCondition";
 
     }
 }

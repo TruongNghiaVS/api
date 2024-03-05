@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XrfiFHDttVn6WjHSq1A6rrluQ3CMAL1hr07Jigeh0XVbcdTDmsaXT18l5AgR7NvvGg29DC/uPmPTsPAS8HINTw==",
+  "dgSpecHash": "oQr0sQeBuqSBQcMvSGajkRviV9hxDZH8z+MM511ge9Ii2114oIJXuNNViSyRSXJ7YejSV4q3l7Zk8LxQVLU69g==",
   "success": true,
-  "projectFilePath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\vietbank\\crm\\api\\VS.Core.dataEntry\\VS.Core.dataEntry.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

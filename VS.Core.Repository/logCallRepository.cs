@@ -47,6 +47,30 @@ namespace VS.Core.Repository
 
         }
 
+        public async Task<int> CountCallBYNoAgree(string noAgree, string phone, string lineCode)
+        {
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.CheckCallByCondition, new
+                    {
+                        noAgree, phone, lineCode
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                    return 1;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+
+            }
+
+
+        }
+
         public Task<int> Update(LogCall entity)
         {
             throw new NotImplementedException();

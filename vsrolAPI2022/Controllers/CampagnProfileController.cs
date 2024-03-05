@@ -45,6 +45,16 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(result);
 
         }
+        [Authorize]
+        [HttpPost("~/api/campagnProfile/getAllReason")]
+        public async Task<IResult> getAllReason(CampagnProfileSearchInput request)
+        {
+            var user = GetCurrentUser();
+            var resultSearch = await _campagnBusiness.GetAllReason();
+            return Results.Ok(resultSearch);
+        }
+
+
 
 
         [Authorize]
@@ -187,6 +197,7 @@ namespace vsrolAPI2022.Controllers
                 NoAgreement = request.NoAgree,
                 TypegetData = request.TypegetData,
                 SkipData = request.SkipData,
+                Cmnd = request.Cmnd
 
             };
             if (searchRequest.To.HasValue)
@@ -275,11 +286,6 @@ namespace vsrolAPI2022.Controllers
             }
 
 
-
-            //if (user.RoleId == "1")
-            //{
-            //    return await this.getAll1(request);
-            //}
 
             if (request.TypegetData != "0")
             {
@@ -380,6 +386,7 @@ namespace vsrolAPI2022.Controllers
                 DpdMax = dpdMax,
                 DpdMin = dpdMin,
                 Id = request.Id,
+                Cmnd =request.Cmnd,
                 From = request.From,
                 UserId = user.Id,
                 ColorCode = request.ColorCode,
@@ -708,7 +715,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest(_message.CommonError_ErrorRequestInput);
             }
-            var result = await _campagnBusiness.GetIno(inputRequest.Id);
+            var result = await _campagnBusiness.GetInfo(inputRequest.Id);
             return Results.Ok(result);
         }
 

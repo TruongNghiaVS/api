@@ -148,6 +148,10 @@ namespace VS.Core.Business
             var vendorId = _campagnImport.VendorId;
             foreach (var item in listData)
             {
+                if ( string.IsNullOrEmpty(item.AssignedId))
+                {
+                    continue;
+                }    
                 var itemInsert = new CampagnProfile
                 {
                     CustomerName = item.CustomerName,
@@ -207,6 +211,7 @@ namespace VS.Core.Business
 
                         assignedId = item.AssignedId;
                         result.Status = 0;
+                        result.ColorCode = "#ffffff";
 
 
 
@@ -233,7 +238,7 @@ namespace VS.Core.Business
                     result.MobilePhone = item.MobilePhone;
                     result.Phone1 = item.Phone1;
                     result.AmountLoan = item.AmountLoan;
-                    result.Assignee = assignedId;
+                   
                     result.CampaignId = item.CampaignId;
                     result.CodeProduct = item.CodeProduct;
                     result.CreateAt = item.CreateAt;
@@ -619,7 +624,7 @@ namespace VS.Core.Business
             return _unitOfWork.CampagnProfileRe.AssignedTask(profileId, userId);
         }
 
-        public async Task<CampangeProfileInforReponse> GetIno(string id)
+        public async Task<CampangeProfileInforReponse> GetInfo(string id)
         {
             var result = await _unitOfWork.CampagnProfileRe.GetById(id);
             var reponse = new CampangeProfileInforReponse()
@@ -631,9 +636,7 @@ namespace VS.Core.Business
                 return reponse;
             }
 
-            reponse.campagn = await _unitOfWork.CampagnRe.GetById(
-                result.CampaignId.ToString()
-            );
+            
             var allImpactHistory = await _unitOfWork.ImpactRe.GetALl(
                 new ImpactHistorySerarchRequest() { ProfileId = id, NoAgreement = result.NoAgreement }
             );
@@ -647,13 +650,17 @@ namespace VS.Core.Business
                 );
             var listReason = await _unitOfWork.MasterRe.GetALl(
                 new MaterDataRequest()
-                { GroupStatus = reponse.campagn.GroupStatus }
+                { GroupStatus = "4" }
             );
             var listUser = await _unitOfWork.Employees.GetALl(new EmployeeSearchRequest() { });
             reponse.ListUser = listUser.Data;
             reponse.Result = result;
             var statusText = "Chưa rõ trạng thái";
-            reponse.ListHistory = allImpactHistory.Data;
+            if (allImpactHistory !=null )
+            {
+                reponse.ListHistory = allImpactHistory.Data;
+            } 
+          
 
             if (result.Status == 0)
             {
@@ -674,6 +681,14 @@ namespace VS.Core.Business
             return reponse;
         }
 
+        public async Task<MasterDataReponse> GetAllReason()
+        {
+            var result = await _unitOfWork.MasterRe.GetALl(
+                new MaterDataRequest()
+                { GroupStatus = "4" }
+            );
+            return result;
+        }
         public async Task<bool> HandleCase(CampaignProfile_caseRequest request)
         {
             return await _unitOfWork.CampagnProfileRe.HanldleCase(

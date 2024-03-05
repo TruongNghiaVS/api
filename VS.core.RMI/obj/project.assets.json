@@ -38,11 +38,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
+      "projectUniqueName": "C:\\vietbank\\crm\\api\\VS.core.RMI\\VS.core.RMI.csproj",
       "projectName": "VS.core.RMI",
-      "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.RMI\\VS.core.RMI.csproj",
+      "projectPath": "C:\\vietbank\\crm\\api\\VS.core.RMI\\VS.core.RMI.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.RMI\\obj\\",
+      "outputPath": "C:\\vietbank\\crm\\api\\VS.core.RMI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -92,20 +92,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.27, 6.0.27]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.27, 6.0.27]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.27, 6.0.27]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"

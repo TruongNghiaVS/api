@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {}
+    "C:\\vietbank\\crm\\api\\VS.core.Request\\VS.core.Request.csproj": {}
   },
   "projects": {
-    "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Request\\VS.core.Request.csproj": {
+    "C:\\vietbank\\crm\\api\\VS.core.Request\\VS.core.Request.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
+        "projectUniqueName": "C:\\vietbank\\crm\\api\\VS.core.Request\\VS.core.Request.csproj",
         "projectName": "VS.core.Request",
-        "projectPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Request\\VS.core.Request.csproj",
+        "projectPath": "C:\\vietbank\\crm\\api\\VS.core.Request\\VS.core.Request.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.Request\\obj\\",
+        "outputPath": "C:\\vietbank\\crm\\api\\VS.core.Request\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,20 +55,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"

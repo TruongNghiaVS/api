@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aipelv4cyTixytq74J+mWo/Cc1EaR6+lQz+CMGG92gk3LnKDCwvG1dJ2D3WQj7VX5Zk7FSLtbAo/2/BxqoLZhw==",
+  "dgSpecHash": "3qzjWot/5eIOvzjj4giVYQ1bCGUCw7F2xfdf/f8oOaYDJyjfZMk78UTY6lfPZCvgW9x9vCNTua/Vp/FvgsH33A==",
   "success": true,
-  "projectFilePath": "C:\\vietbank\\crm\\api\\crm2022be\\VS.core.utilities\\VS.core.Utilities.csproj",
+  "projectFilePath": "C:\\vietbank\\crm\\api\\VS.core.utilities\\VS.core.Utilities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

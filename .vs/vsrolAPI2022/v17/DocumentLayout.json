@@ -1,18 +1,33 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\vietbank\\crm\\api\\crm2022be\\",
+  "WorkspaceRootPath": "C:\\vietbank\\crm\\api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\controllers\\smscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\smscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\vsrolapi2022\\controllers\\trackingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\trackingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\controllers\\viewrecordingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\viewrecordingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\vsrolapi2022\\controllers\\reporttalktimecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\reporttalktimecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\crm2022be\\vsrolapi2022\\controllers\\workplacenotedcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\workplacenotedcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|c:\\vietbank\\crm\\api\\vsrolapi2022\\controllers\\campagncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BC88C81-C939-4540-8801-35FB569267EB}|vsrolAPI2022\\VS.core.API.csproj|solutionrelative:vsrolapi2022\\controllers\\campagncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AB30075-1633-4790-8C0D-6A9F0A4539DF}|VS.Core.Business\\VS.Core.Business.csproj|c:\\vietbank\\crm\\api\\vs.core.business\\campagnbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AB30075-1633-4790-8C0D-6A9F0A4539DF}|VS.Core.Business\\VS.Core.Business.csproj|solutionrelative:vs.core.business\\campagnbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AB30075-1633-4790-8C0D-6A9F0A4539DF}|VS.Core.Business\\VS.Core.Business.csproj|c:\\vietbank\\crm\\api\\vs.core.business\\calllogbussiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AB30075-1633-4790-8C0D-6A9F0A4539DF}|VS.Core.Business\\VS.Core.Business.csproj|solutionrelative:vs.core.business\\calllogbussiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AB30075-1633-4790-8C0D-6A9F0A4539DF}|VS.Core.Business\\VS.Core.Business.csproj|c:\\vietbank\\crm\\api\\vs.core.business\\exportfilebussiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AB30075-1633-4790-8C0D-6A9F0A4539DF}|VS.Core.Business\\VS.Core.Business.csproj|solutionrelative:vs.core.business\\exportfilebussiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\.nuget\\packages\\ironxl.excel\\2024.3.3\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +42,92 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SmsController.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\SmsController.cs",
-              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\SmsController.cs",
-              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\SmsController.cs",
-              "RelativeToolTip": "vsrolAPI2022\\Controllers\\SmsController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAA+AAAA",
+              "Title": "TrackingController.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\vsrolAPI2022\\Controllers\\TrackingController.cs",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\TrackingController.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\vsrolAPI2022\\Controllers\\TrackingController.cs",
+              "RelativeToolTip": "vsrolAPI2022\\Controllers\\TrackingController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAA0AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-28T08:14:12.985Z",
+              "WhenOpened": "2024-03-05T07:11:20.725Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ViewRecordingController.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\ViewRecordingController.cs",
-              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\ViewRecordingController.cs",
-              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\ViewRecordingController.cs",
-              "RelativeToolTip": "vsrolAPI2022\\Controllers\\ViewRecordingController.cs",
+              "Title": "ReportTalkTimeController.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
+              "RelativeToolTip": "vsrolAPI2022\\Controllers\\ReportTalkTimeController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-28T08:14:12.272Z",
+              "WhenOpened": "2024-03-05T07:11:19.907Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "WorkplaceNotedController.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\WorkplaceNotedController.cs",
-              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\WorkplaceNotedController.cs",
-              "ToolTip": "C:\\vietbank\\crm\\api\\crm2022be\\vsrolAPI2022\\Controllers\\WorkplaceNotedController.cs",
-              "RelativeToolTip": "vsrolAPI2022\\Controllers\\WorkplaceNotedController.cs",
+              "Title": "CampagnController.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\vsrolAPI2022\\Controllers\\CampagnController.cs",
+              "RelativeDocumentMoniker": "vsrolAPI2022\\Controllers\\CampagnController.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\vsrolAPI2022\\Controllers\\CampagnController.cs",
+              "RelativeToolTip": "vsrolAPI2022\\Controllers\\CampagnController.cs",
+              "ViewState": "AQIAAAEDAAAAAAAAAAAvwBkDAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-05T07:09:06.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CallLogBussiness.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\VS.Core.Business\\CallLogBussiness.cs",
+              "RelativeDocumentMoniker": "VS.Core.Business\\CallLogBussiness.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\VS.Core.Business\\CallLogBussiness.cs",
+              "RelativeToolTip": "VS.Core.Business\\CallLogBussiness.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwB8AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-05T06:36:33.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CampagnBusiness.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\VS.Core.Business\\CampagnBusiness.cs",
+              "RelativeDocumentMoniker": "VS.Core.Business\\CampagnBusiness.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\VS.Core.Business\\CampagnBusiness.cs",
+              "RelativeToolTip": "VS.Core.Business\\CampagnBusiness.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-28T08:14:10.487Z",
+              "WhenOpened": "2024-03-05T06:32:53.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ExportFileBussiness.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\VS.Core.Business\\ExportFileBussiness.cs",
+              "RelativeDocumentMoniker": "VS.Core.Business\\ExportFileBussiness.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\VS.Core.Business\\ExportFileBussiness.cs",
+              "RelativeToolTip": "VS.Core.Business\\ExportFileBussiness.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAEwDYAAABeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-05T06:31:06.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\Admin\\.nuget\\packages\\ironxl.excel\\2024.3.3\\readme.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\Users\\Admin\\.nuget\\packages\\ironxl.excel\\2024.3.3\\readme.txt",
+              "ToolTip": "C:\\Users\\Admin\\.nuget\\packages\\ironxl.excel\\2024.3.3\\readme.txt",
+              "RelativeToolTip": "..\\..\\..\\Users\\Admin\\.nuget\\packages\\ironxl.excel\\2024.3.3\\readme.txt",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-03-05T06:31:25.291Z",
               "EditorCaption": ""
             }
           ]
