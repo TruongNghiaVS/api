@@ -35,6 +35,7 @@ namespace VS.Core.Repository.Infrastructures
             services.AddScoped<ISkipInfoRepository, SkipInfoRepository>();
             services.AddScoped<IWorkplaceNotedRepository, WorkplaceNotedRepository>();
             services.AddScoped<IExportFileRepository, ExportFileRepository>();
+            services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 

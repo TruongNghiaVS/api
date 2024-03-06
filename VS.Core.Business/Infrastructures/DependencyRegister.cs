@@ -35,6 +35,7 @@ namespace VS.Core.Business.Infrastructures
             services.AddScoped<ISkipInfoBussiness, SkipInfoBussiness>();
             services.AddScoped<IWorkplaceNotedBussiness, WorkplaceNotedBussiness>();
             services.AddScoped<IExportFileBussiness, ExportFileBussiness>();
+            services.AddScoped<IStoreBussiness, StoreBusiness>();
 
         }
 

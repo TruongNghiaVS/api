@@ -98,6 +98,11 @@
     }
 
 
+    public class StoreSearch
+    {
+        public string? Token { get; set; }
+    }
+
 
 
 

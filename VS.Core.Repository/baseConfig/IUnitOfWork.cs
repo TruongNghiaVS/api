@@ -14,7 +14,7 @@ namespace VS.Core.Repository.baseConfig
         IMasterDataNewRepository MasterNewRe { get; }
         IGroupReasonRepository GroupRe { get; }
         ICampagnRepository CampagnRe { get; }
-
+        IStoreRepository StoreRe { get; }
         IloginReportRepository LoginRe { get; }
         IProfileCampagnRepository CampagnProfileRe { get; }
         IImpactHistoryRepository ImpactRe { get; }

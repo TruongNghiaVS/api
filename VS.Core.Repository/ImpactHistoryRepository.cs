@@ -92,6 +92,33 @@ namespace VS.Core.Repository
                 return true;
             }
         }
+       
+        public async Task<List<ImpactHistory>> GetAllHistoryBYNoAgree(string noAgree)
+        {
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ImpactHistory>(_Sql.CampaignImpact_getAllHistoryByNoAgree, new
+                    {
+
+                        noAgree
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                    if (result != null)
+                    {
+                        return result.ToList();
+                    }
+                    return new List<ImpactHistory>();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<ImpactHistory>();
+            }
+        }
 
         public async Task<List<ImpactHistory>> GetAllHistory(ImpactHistorySerarchRequest request)
         {

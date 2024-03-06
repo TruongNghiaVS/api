@@ -91,6 +91,7 @@
         public string CampaignProfile_getAllNoted = "sp_campagnProfileGetAllNoted";
         public string CampaignProfile_exportData = "sp_CampaignProfile_ExportData";
 
+
         public string CampaignImpact_insert = "sp_ImpactHistory_Insert";
         public string SkipInfo_insert = "sp_SkipInfo_Insert";
 
@@ -105,6 +106,7 @@
         public string CampaignImpact_getAllv2 = "sp_ImpactHistory_getAllv2";
 
         public string CampaignImpact_getAllHistory = "sp_ImpactHistory_getAllHistory";
+        public string CampaignImpact_getAllHistoryByNoAgree = "sp_ImpactHistory_getAllByNoAgree";
         public string CallLog_getAll = "sp_CallLog_getAll";
         public string CallLog_insert = "sp_CallLog_Insert";
         public string LogCall_insert = "sp_LogCall_Insert";
@@ -182,6 +184,14 @@
         public string CampagnProfileGetAllExport = "sp_CampagnProfileGetAllExport";
 
         public string CheckCallByCondition = "sp_checkCallByCondition";
+
+        public string Store_GetAllSkip = "sp_SkipInfo_getAll1";
+
+        public string Store_GetByNoAgree = "Store_GetByNoAgree";
+
+        public string Store_InserOrUpdate = "Store_InsertOrUpdate";
+
+        public string Store_SkipInsertOrUpdate = "Store_SkipInsertOrUpdate";
 
     }
 }

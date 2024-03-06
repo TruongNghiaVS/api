@@ -9,7 +9,7 @@ namespace VS.Core.Repository.baseConfig
         Task<ImpactHistoryReponse> GetFinal(ImpactHistorySerarchRequest request);
         Task<int> AddHistoryImpact(ImpactHistory entity);
         Task<List<ImpactHistory>> GetAllHistory(ImpactHistorySerarchRequest request);
-
+        Task<List<ImpactHistory>> GetAllHistoryBYNoAgree(string noAgree);
     }
 
 

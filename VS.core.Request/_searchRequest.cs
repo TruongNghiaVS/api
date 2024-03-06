@@ -415,7 +415,7 @@ namespace VS.core.Request
 
     }
 
-
+ 
     public class GetAllProfileByCampangReponse : BaseSearchRepons
 
     {
@@ -424,6 +424,30 @@ namespace VS.core.Request
             Total = 0;
         }
     }
+
+
+    public class GetAllStoreSkipReponse : BaseSearchRepons
+
+    {
+        public GetAllStoreSkipReponse()
+        {
+            Total = 0;
+        }
+    }
+
+    public class StoreLookingReponse 
+
+    {
+        public dynamic Result;
+        public dynamic ListSkipNew;
+        public dynamic listHistory;
+        public StoreLookingReponse()
+        {
+          
+        }
+    }
+
+
 
     public partial class CampagnAsiggeeByCampagnIdReponse : BaseSearchRepons
     {

@@ -28,6 +28,12 @@ namespace VS.Core.Repository.baseConfig
             con.Open();
             return con;
         }
+        protected IDbConnection StoreConnection()
+        {
+            var con = new SqlConnection(_configuration.GetConnectionString("stringConnect7"));
+            con.Open();
+            return con;
+        }
         protected DynamicParameters AddOutputParam(string name, DbType type = DbType.Int32)
         {
             var p = new DynamicParameters();

@@ -36,7 +36,7 @@ namespace VS.Core.Repository
         public IWorkplaceNotedRepository Workplace { get; }
 
         public IExportFileRepository ExportFile { get; }
-
+        public IStoreRepository StoreRe { get; }
         public UnitOfWork(IEmployeeRepository employeeRepository,
              IUserRepository userRepository,
              IMasterDataRepository masterDataRepository,
@@ -58,7 +58,8 @@ namespace VS.Core.Repository
             IViewRecordingRepository _ViewRe,
             ISkipInfoRepository _SkipRe,
             IWorkplaceNotedRepository _workplaceNoted,
-             IExportFileRepository _exportFile 
+             IExportFileRepository _exportFile ,
+             IStoreRepository _storeRe
 
             )
         {
@@ -84,6 +85,7 @@ namespace VS.Core.Repository
             SkipRe = _SkipRe;
             Workplace = _workplaceNoted;
             ExportFile = _exportFile;
+            StoreRe = _storeRe;
 
         }
 
