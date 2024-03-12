@@ -10,5 +10,6 @@ namespace VS.Core.Business.Interface
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
         Task<StoreLookingReponse> GetInfo(string token);
         Task<bool> HandleImport(List<StoreSkipInfo> request, Account userLogin);
+        Task<bool> RunLargefile(string pathFile = "");
     }
 }

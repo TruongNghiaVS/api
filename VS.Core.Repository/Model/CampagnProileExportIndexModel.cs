@@ -4,6 +4,7 @@
     {
 
 
+        public string Id { get; set; }
         public CampagnProileExportIndexModel()
         {
 
@@ -15,7 +16,14 @@
         public string CustomerName { get; set; }
         public string MobilePhone { get; set; }
 
+        public string HouseNumber { get; set; }
+
+        public string Phone1 { get; set; }
+
+        public string OtherPhone { get; set; }
         public DateTime DayOfBirth { get; set; }
+
+        public  string OfficeNumber { get; set; }
 
         public string NationalId { get; set; }
 
@@ -46,14 +54,30 @@
         public string SuburbanDir { get; set; }
 
         public string Provice { get; set; }
+
+        public string? Road1 { get; set; }
+        public string? SuburbanDir1 { get; set; }
+        public string? Provice1 { get; set; }
+        public string? NoteFirstTime { get; set; }
+
+        public string? NoteRel { get; set; }
+
+        public string? AssignedId { get; set; }
         public string AssigneeName { get; set; }
         public string ReasonstatusText
         {
             get; set;
         }
         public DateTime? UpdateAt { get; set; }
-     
-        
+        public DateTime? CreateAt { get; set; }
+
+        public string? NoteCode { get; set; }
+        public string? PlaceCode { get; set; }
+        public string? WayContact { get; set; }
+        public string? Code { get; set; }
+        public string? ColorCode { get; set; }
+
+        public string? Assignee { get; set; }
 
 
     }

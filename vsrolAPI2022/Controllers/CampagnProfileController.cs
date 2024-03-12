@@ -68,11 +68,7 @@ namespace vsrolAPI2022.Controllers
             {
                 VendorId = int.Parse(user.Id);
             }
-            //if (user.RoleId == "1")
-            //{
-            //    return await this.getAll1(request);
-            //}
-
+           
             if (user.RoleId == "4")
             {
                 VendorId = int.Parse(user.Id);
@@ -170,9 +166,6 @@ namespace vsrolAPI2022.Controllers
 
                 }
             }
-
-
-
             if (request.ColorCode == "" || request.ColorCode == "-1" || request.ColorCode == "" || request.ColorCode == "white" || request.ColorCode == null)
             {
                 request.ColorCode = string.Empty;

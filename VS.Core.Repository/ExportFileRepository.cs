@@ -53,7 +53,17 @@ namespace VS.Core.Repository
                     }, commandType: CommandType.StoredProcedure);
 
                     var fistElement = result.FirstOrDefault();
-                    var numberRecord = result.Count();
+                    var numberRecord = 0;
+
+                    if(fistElement != null)
+                    {
+                        numberRecord = result.Count();
+                    }
+                    else
+                    {
+                        result = new List<CampagnProileExportIndexModel> ();
+                    } 
+                        
                    
                     var reponse = new CampagnProfileExportReponse()
                     {

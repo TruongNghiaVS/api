@@ -104,7 +104,7 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-        [HttpPost("~/api/store/importDataSkipInfo")]
+
 
         private DateTime? ReadvalueDateExcel2(ExcelWorksheet excelworksheet, int row, int col)
         {
@@ -164,101 +164,7 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-        private DateTime? ReadvalueDateExcel(ExcelWorksheet excelworksheet, int row, int col)
-        {
-            try
-            {
-                var cellRange = excelworksheet.Cells[row, col];
-                if (cellRange != null)
-                {
-
-                    if (cellRange.Text != null)
-                    {
-                        try
-                        {
-                            var dtp = DateTime.Parse(cellRange.Text.ToString());
-                            return dtp;
-                            return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
-
-                        }
-                        catch (Exception)
-                        {
-
-                            try
-                            {
-                                return DateTime.ParseExact(cellRange.Text.Trim(), "MM/dd/yyyy", null);
-                            }
-                            catch (Exception)
-                            {
-
-                                try
-                                {
-                                    var dtp = DateTime.Parse(cellRange.Text.ToString());
-                                    return dtp;
-                                }
-                                catch (Exception)
-                                {
-                                    try
-                                    {
-                                        return DateTime.ParseExact(cellRange.Text.Trim(), "dd/MM/yyyy", null);
-                                    }
-                                    catch (Exception)
-                                    {
-
-                                        return null;
-                                    }
-                                    return null;
-                                }
-
-                                return null;
-                            }
-
-
-                            return null;
-                        }
-
-                    }
-
-                }
-                return null;
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
-
-
-
-        }
-        private string? ReadvaluestringExcelWidthNull(ExcelWorksheet excelworksheet, int row, int col)
-        {
-            try
-            {
-                var cellRange = excelworksheet.Cells[row, col];
-                if (cellRange == null)
-                {
-                    return null;
-                }
-
-                if (cellRange.Value == null)
-
-                {
-
-                    return null;
-                }
-                var valueCell = cellRange.Value.ToString();
-
-
-                return valueCell;
-            }
-            catch (Exception)
-            {
-
-                return "";
-            }
-
-        }
+    
         private string ReadvalueStringExcel(ExcelWorksheet excelworksheet, int row, int col)
         {
             var cellRange = excelworksheet.Cells[row, col];
@@ -274,79 +180,12 @@ namespace vsrolAPI2022.Controllers
             return "";
 
         }
-
-
-        private int ReadvalueintExcel(ExcelWorksheet excelworksheet, int row, int col)
-        {
-            try
-            {
-                var cellRange = excelworksheet.Cells[row, col];
-                if (cellRange == null)
-                {
-                    return 0;
-                }
-
-                if (cellRange.Value == null)
-
-                {
-
-                    return 0;
-                }
-                var valueCell = cellRange.Value.ToString();
-
-                int b1 = 0;
-                if (!int.TryParse(valueCell, out b1))
-                {
-
-                }
-                return b1;
-            }
-            catch (Exception)
-            {
-
-                return 0;
-            }
-
-        }
-
-        private float ReadvaluefloatExcel(ExcelWorksheet excelworksheet, int row, int col)
-        {
-            try
-            {
-                var cellRange = excelworksheet.Cells[row, col];
-                if (cellRange == null)
-                {
-                    return 0;
-                }
-
-                if (cellRange.Value == null)
-
-                {
-
-                    return 0;
-                }
-                var valueCell = cellRange.Value.ToString();
-
-                float b1 = 0;
-                if (!float.TryParse(valueCell, out b1))
-                {
-
-                }
-                return b1;
-            }
-            catch (Exception)
-            {
-
-                return 0;
-            }
-
-        }
-
+        
+        
         [AllowAnonymous]
         [HttpPost("~/api/store/importDataSkipInfo")]
         public async Task<IResult> ImportDataSkipInfo([FromForm] CampanginDataImport request)
         {
-            int k = 0;
             try
             {
 
@@ -360,18 +199,25 @@ namespace vsrolAPI2022.Controllers
                     return Results.BadRequest("No error report");
                 }
                 var fileHandler = fileRequest.FirstOrDefault();
+
+               
                 if (fileHandler == null)
                 {
                     return Results.BadRequest("No error report");
                 }
                 List<StoreSkipInfo> profileList = new List<StoreSkipInfo>();
+
                 await using (MemoryStream ms = new MemoryStream())
                 {
                     await fileHandler.CopyToAsync(ms);
+
                     using (ExcelPackage package = new ExcelPackage(ms))
                     {
                         ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
                         int totalRows = workSheet.Dimension.Rows;
+
+
+
                         for (int i = 2; i <= totalRows; i++)
                         {
                             if (i < 1)
@@ -404,36 +250,139 @@ namespace vsrolAPI2022.Controllers
                                 PersonContact = ReadvalueStringExcel(workSheet, i, 21),
                                 PersonContactPhone = ReadvalueStringExcel(workSheet, i, 22),
                                 PersonContactEmail = ReadvalueStringExcel(workSheet, i, 23),
-                                CreatedBy ="1",
-                                UpdatedBy ="1",
-                                CreateAt =DateTime.Now,
-                                UpdateAt =DateTime.Now,
-                                Deleted =false,
-                                NoAgree =""
+                                CreatedBy = "1",
+                                UpdatedBy = "1",
+                                CreateAt = DateTime.Now,
+                                UpdateAt = DateTime.Now,
+                                Deleted = false,
+                                NoAgree = ""
 
                             };
-
                             profileList.Add(skipInfo);
+                            if (i % 500 == 0)
+                            {
+                                await _campagnBusiness.HandleImport(profileList, null);
+                                profileList.Clear();
+                            }
+
+
                         }
 
                     }
                 }
 
-                await _campagnBusiness.HandleImport(profileList, null);
+                if(profileList.Count >0)
+                {
+                    await _campagnBusiness.HandleImport(profileList, null);
+                }    
+               
                 
             }
             catch (Exception e)
             {
 
-                return Results.BadRequest(k);
+                return Results.BadRequest(e);
             }
             return Results.Ok();
 
         }
 
+        [AllowAnonymous]
+        [HttpGet("~/store/ImportDataSkipInfov2")]
+        public async Task<IResult> ImportDataSkipInfov2()
+        {
 
 
+            try
+            {
+                var userLogin = new Account()
+                {
+                    Id = "1"
+                };
+                List<StoreSkipInfo> profileList = new List<StoreSkipInfo>();
+                byte[] bytes = System.IO.File.ReadAllBytes("C:\\Users\\Admin\\Desktop\\importFile.xlsx");
+                MemoryStream ms = new MemoryStream(bytes, 0, bytes.Length, true, true);
 
+
+                using (ExcelPackage package = new ExcelPackage(ms))
+                {
+                    ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
+                    int totalRows = workSheet.Dimension.Rows;
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        if (i < 1)
+                        {
+                            continue;
+                        }
+                        var skipInfo = new StoreSkipInfo()
+                        {
+                            NationalId = ReadvalueStringExcel(workSheet, i, 1),
+                            TypeCustomer = ReadvalueStringExcel(workSheet, i, 2),
+                            Name = ReadvalueStringExcel(workSheet, i, 3),
+                            Relation = ReadvalueStringExcel(workSheet, i, 4),
+                            Dob = ReadvalueDateExcel2(workSheet, i, 5),
+                            CMND = ReadvalueStringExcel(workSheet, i, 6),
+                            PhoneNumber = ReadvalueStringExcel(workSheet, i, 7),
+                            Address = ReadvalueStringExcel(workSheet, i, 8),
+                            Address2 = ReadvalueStringExcel(workSheet, i, 9),
+                            FromDay = ReadvalueStringExcel(workSheet, i, 10),
+                            ToDay = ReadvalueStringExcel(workSheet, i, 11),
+                            Timejoin = ReadvalueStringExcel(workSheet, i, 12),
+                            Position = ReadvalueStringExcel(workSheet, i, 13),
+                            SalaryDe = ReadvalueStringExcel(workSheet, i, 14),
+                            Hsl = ReadvalueStringExcel(workSheet, i, 15),
+                            CompanyName = ReadvalueStringExcel(workSheet, i, 16),
+                            WorkPlace = ReadvalueStringExcel(workSheet, i, 17),
+                            WorkContact = ReadvalueStringExcel(workSheet, i, 18),
+                            WhoseCompany = ReadvalueStringExcel(workSheet, i, 19),
+                            PhoneCompany = ReadvalueStringExcel(workSheet, i, 20),
+                            PersonContact = ReadvalueStringExcel(workSheet, i, 21),
+                            PersonContactPhone = ReadvalueStringExcel(workSheet, i, 22),
+                            PersonContactEmail = ReadvalueStringExcel(workSheet, i, 23),
+                            CreatedBy = "1",
+                            UpdatedBy = "1",
+                            CreateAt = DateTime.Now,
+                            UpdateAt = DateTime.Now,
+                            Deleted = false,
+                            NoAgree = ""
+
+                        };
+                        profileList.Add(skipInfo);
+                        if (i % 500 == 0)
+                        {
+                            await _campagnBusiness.HandleImport(profileList, null);
+                            profileList.Clear();
+                        }
+
+
+                    }
+
+                }
+
+
+                if (profileList.Count > 0)
+                {
+                    await _campagnBusiness.HandleImport(profileList, null);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                return Results.BadRequest(e);
+            }
+            return Results.Ok();
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet("~/store/ImportDataSkipInfov3")]
+        public async Task<IResult> ImportDataSkipInfov3()
+        {
+            await _campagnBusiness.RunLargefile("C:\\Users\\Admin\\Desktop\\importFile2.xlsx");
+            return Results.Ok();
+        }
 
 
 
