@@ -38,7 +38,7 @@ namespace VS.Core.Repository.baseConfig
         IViewRecordingRepository ViewRe { get; }
         IWorkplaceNotedRepository Workplace { get; }
         ISkipInfoRepository SkipRe { get; }
-        IExportFileRepository ExportFile { get; }
+        IExportFileRepository DailyReport { get; }
 
     }
 }

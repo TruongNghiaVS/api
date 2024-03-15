@@ -20,12 +20,15 @@ namespace vsrolAPI2022.Controllers
 
         private readonly ICampagnBussiness _campagnBussiness;
 
+        private readonly ICallLogBussiness _logBussiness;
         public ImpactHistoryController(IImpactHistoryBussiness campagnBusiness,
             IUserBusiness userBusiness,
-            ICampagnBussiness campagnBussiness) : base(userBusiness)
+            ICampagnBussiness campagnBussiness,
+            ICallLogBussiness logBussiness) : base(userBusiness)
         {
             _impactBusiness = campagnBusiness;
             _campagnBussiness = campagnBussiness;
+            _logBussiness = logBussiness;
         }
 
         [AllowAnonymous]
@@ -60,9 +63,7 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _impactBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
         }
-
-
-
+        
         [HttpPost("~/api/impacthistory/exportFinal")]
         public async Task<IResult> GetFinal(ImpactHistorySearchInput request)
         {
@@ -98,6 +99,16 @@ namespace vsrolAPI2022.Controllers
                 lineCode = user.LineCode;
             }
             var campangnProfile = await _campagnBussiness.GetProfile(employeeAdd.ProfileId.Value.ToString());
+            var checkHasCall = await _logBussiness.CheckBeforeCall(campangnProfile.NoAgreement,
+                int.Parse(user.Id));
+            if (checkHasCall ==false)
+            {
+                return Results.Ok(new
+                {
+                    isSave = false,
+                    message="Bạn chưa thực hiện cuộc gọi, nên chưa thể lưu lịch sử tác động được"
+                });
+            }
 
             var itemInsert = new ImpactHistory()
             {
@@ -134,7 +145,12 @@ namespace vsrolAPI2022.Controllers
                 await _campagnBussiness.UpdateProfile(campangnProfile);
             }
             var result = await _impactBusiness.Add(itemInsert);
-            return Results.Ok(result);
+            var reponse = new
+            {
+                isSave = true,
+                message = "Lưu thành công"
+            };
+            return Results.Ok(reponse);
         }
 
         [AllowAnonymous]

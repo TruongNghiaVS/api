@@ -35,7 +35,7 @@ namespace VS.Core.Repository
 
         public IWorkplaceNotedRepository Workplace { get; }
 
-        public IExportFileRepository ExportFile { get; }
+        public IExportFileRepository DailyReport { get; }
         public IStoreRepository StoreRe { get; }
         public UnitOfWork(IEmployeeRepository employeeRepository,
              IUserRepository userRepository,
@@ -84,7 +84,7 @@ namespace VS.Core.Repository
             DpdRe = _dpdRe;
             SkipRe = _SkipRe;
             Workplace = _workplaceNoted;
-            ExportFile = _exportFile;
+            DailyReport = _exportFile;
             StoreRe = _storeRe;
 
         }

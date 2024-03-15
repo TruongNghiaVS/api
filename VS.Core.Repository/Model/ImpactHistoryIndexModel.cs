@@ -26,6 +26,8 @@
         public string? ColorCode { get; set; }
         public DateTime? CreateAt { get; set; }
 
+        public string? StatusCode { get; set; }
+
 
     }
 

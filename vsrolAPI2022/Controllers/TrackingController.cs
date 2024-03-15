@@ -32,19 +32,30 @@ namespace vsrolAPI2022.Controllers
 
        
         [HttpPost("~/api/tracking/requestCheck")]
-        public async Task<IResult> ResetCase()
+        public async Task<IResult> requestCheck()
         {
-            await _campagnBusiness.ResetCase();
+            //await _campagnBusiness.ResetCase();
             var resultcheck = new
             {
                 sucecss = false
             };
+
+      
             return Results.Ok(resultcheck);
          
 
         }
 
+        public async Task<IResult> ResetCase()
+        {
+            var resultcheck = new
+            {
+                sucecss = false
+            };
+            return Results.Ok(resultcheck);
 
+
+        }
 
 
 

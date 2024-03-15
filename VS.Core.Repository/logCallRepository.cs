@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Runtime.InteropServices;
+using Org.BouncyCastle.Security;
 using VS.Core.dataEntry.User;
 using VS.Core.Repository.baseConfig;
 
@@ -71,6 +73,34 @@ namespace VS.Core.Repository
 
         }
 
+        public async Task<bool> CheckBeforeCall(string noAgree, int userId )
+        {
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    
+                    
+                    var result = await _con.QuerySingleOrDefaultAsync<ItemCheck>(_Sql.CheckBeforeCall, new
+                    {
+                        noAgree,
+                        userId
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                    return result.Value > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+
+            }
+
+
+        }
+
+        
         public Task<int> Update(LogCall entity)
         {
             throw new NotImplementedException();

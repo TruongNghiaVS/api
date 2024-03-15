@@ -17,5 +17,14 @@
 
     }
 
+    public class ItemCheck
+    {
+
+        public int? Value { get; set; }
+    }
+
+
+   
+
 
 }

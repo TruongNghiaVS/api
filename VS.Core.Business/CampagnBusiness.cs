@@ -8,7 +8,11 @@ namespace VS.Core.Business
 {
     public class CampagnBusiness : BaseBusiness, ICampagnBussiness
     {
-        public CampagnBusiness(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+ 
+        public CampagnBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+
+        }
 
         public Task<int> Add(Campagn entity)
         {

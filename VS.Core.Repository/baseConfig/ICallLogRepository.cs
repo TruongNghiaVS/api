@@ -6,7 +6,8 @@ namespace VS.Core.Repository.baseConfig
     {
 
         Task<int> CountCallBYNoAgree(string noAgree, string phone, string lineCode);
-     
+        Task<bool> CheckBeforeCall(string noAgree, int userId);
+    
 
     }
 

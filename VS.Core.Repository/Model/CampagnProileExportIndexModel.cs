@@ -79,6 +79,8 @@
 
         public string? Assignee { get; set; }
 
+        public string? UserName { get; set; }
+
 
     }
 }

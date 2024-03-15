@@ -15,13 +15,20 @@ namespace VS.Core.Business
         {
             return _unitOfWork.CallRe.Add(entity);
         }
+
         public Task<int> CountCallBYNoAgree(string noAgree, string phone, string lineCode)
         {
             return _unitOfWork.CallRe.CountCallBYNoAgree(noAgree, phone, lineCode);
         }
 
 
-     
+        public Task<bool> CheckBeforeCall(string noAgree, int userId )
+        {
+            return _unitOfWork.CallRe.CheckBeforeCall(noAgree, userId);
+        }
+
+           
+
 
         public Task Delete(LogCall entity)
         {

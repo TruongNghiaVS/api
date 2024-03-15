@@ -84,6 +84,8 @@
         public string CampaignProfile_insert = "sp_CampaignProfile_Insert";
 
         public string CampaignProfile_update = "sp_CampaignProfile_update";
+
+        
         public string CampaignProfile_update_skip = "sp_CampaignProfile_update_skip";
         public string Sp_CampaignProfile_import_update = "sp_CampaignProfile_import_update";
         public string Sp_CampaignProfile_resetCase = "sp_CampaignProfile_resetCase";
@@ -185,6 +187,8 @@
 
         public string CheckCallByCondition = "sp_checkCallByCondition";
 
+
+        public string CheckBeforeCall = "sp_CheckBeforeCall";
         public string Store_GetAllSkip = "sp_SkipInfo_getAll1";
 
         public string Store_GetByNoAgree = "Store_GetByNoAgree";
@@ -193,5 +197,7 @@
 
         public string Store_SkipInsertOrUpdate = "Store_SkipInsertOrUpdate";
 
+
+        public string CampagnProfileGetAllExportv2 = "sp_CampagnProfileGetAllExportv2";
     }
 }

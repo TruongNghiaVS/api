@@ -31,7 +31,7 @@ namespace VS.Core.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<CampagnProfileExportReponse> GetAllCampagnProfile(CampagnProfileExportRequest request)
+        public async Task<CampagnProfileExportReponse> GetAllCase(CampagnProfileExportRequest request)
         {
             int page = request.Page;
             int limit = request.Limit;
@@ -78,7 +78,56 @@ namespace VS.Core.Repository
                 return null;
             }
         }
+        public async Task<CampagnProfileExportReponse> GetAllCasev2(CampagnProfileExportRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CampagnProileExportIndexModel>(_Sql.CampagnProfileGetAllExportv2, new
+                    {
+                        request.From,
+                        request.To,
+                       
+                        
+                        request.VendorId,
+                        request.UserId,
+                        request.CampaignId,
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    }, commandType: CommandType.StoredProcedure);
 
-      
+                    var fistElement = result.FirstOrDefault();
+                    var numberRecord = 0;
+
+                    if (fistElement != null)
+                    {
+                        numberRecord = result.Count();
+                    }
+                    else
+                    {
+                        result = new List<CampagnProileExportIndexModel>();
+                    }
+
+
+                    var reponse = new CampagnProfileExportReponse()
+                    {
+                        Data = result,
+                        NumberRecord = numberRecord
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+  
     }
 }

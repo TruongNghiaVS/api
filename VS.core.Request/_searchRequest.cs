@@ -333,6 +333,26 @@ namespace VS.core.Request
         public int? VendorId { get; set; }
         public string? CampaignId { get; set; }
 
+        public string? Id { get; set; }
+
+        public int? Status { get; set; }
+
+        public int? Dpd { get; set; }
+
+        public string? NoAgree { get; set; }
+
+        public string? LineCode { get; set; }
+
+        public string? PhoneSerach { get; set; }
+        public string? TypegetData { get; set; }
+
+        public string? IdPackage { get; set; }
+
+        public string? ColorCode { get; set; }
+
+        public bool? SkipData { get; set; }
+
+        public string? Cmnd { get; set; }
 
         public CampagnProfileExportRequest()
         {
