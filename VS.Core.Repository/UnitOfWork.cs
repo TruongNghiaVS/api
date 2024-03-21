@@ -37,6 +37,9 @@ namespace VS.Core.Repository
 
         public IExportFileRepository DailyReport { get; }
         public IStoreRepository StoreRe { get; }
+
+        public IAutoRepository AutoRepository { get; }
+
         public UnitOfWork(IEmployeeRepository employeeRepository,
              IUserRepository userRepository,
              IMasterDataRepository masterDataRepository,
@@ -59,7 +62,8 @@ namespace VS.Core.Repository
             ISkipInfoRepository _SkipRe,
             IWorkplaceNotedRepository _workplaceNoted,
              IExportFileRepository _exportFile ,
-             IStoreRepository _storeRe
+             IStoreRepository _storeRe,
+             IAutoRepository _autoResitory
 
             )
         {
@@ -86,6 +90,7 @@ namespace VS.Core.Repository
             Workplace = _workplaceNoted;
             DailyReport = _exportFile;
             StoreRe = _storeRe;
+            AutoRepository = _autoResitory;
 
         }
 

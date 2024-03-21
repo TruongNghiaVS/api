@@ -39,6 +39,8 @@ namespace VS.Core.Repository.baseConfig
         IWorkplaceNotedRepository Workplace { get; }
         ISkipInfoRepository SkipRe { get; }
         IExportFileRepository DailyReport { get; }
+        IAutoRepository AutoRepository { get; }
+        
 
     }
 }

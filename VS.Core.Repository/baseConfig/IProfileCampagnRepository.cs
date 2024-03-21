@@ -8,7 +8,7 @@ namespace VS.Core.Repository.baseConfig
     {
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
         Task<GetAllProfileByCampangReponse> GetAllOriginal(GetAllProfileByCampang request);
-
+        Task<CampagnProfile> GetProfileCall();
 
         Task<GetAllProfileByCampangReponse>
         ExportDataByCampaign(GetAllProfileByCampang request);
@@ -33,8 +33,12 @@ namespace VS.Core.Repository.baseConfig
         Task<int> ResetCase(CampagnProfile entity);
 
         Task<int> ImportUpdate(CampagnProfile entity);
-        Task<CampagnProfile> GetProfileByNoCMNDv2(string noNational, string cmnd, string phoneNumber);
-
+        Task<CampagnProfile> GetProfileByNoCMNDv2(
+            string noNational,
+            string cmnd, 
+            string phoneNumber
+            );
+      
 
     }
 }

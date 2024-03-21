@@ -92,7 +92,7 @@
         public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
         public string CampaignProfile_getAllNoted = "sp_campagnProfileGetAllNoted";
         public string CampaignProfile_exportData = "sp_CampaignProfile_ExportData";
-
+        public string AutoCall_getProfileCall = "sp_getProfileCall";
 
         public string CampaignImpact_insert = "sp_ImpactHistory_Insert";
         public string SkipInfo_insert = "sp_SkipInfo_Insert";
@@ -196,7 +196,7 @@
         public string Store_InserOrUpdate = "Store_InsertOrUpdate";
 
         public string Store_SkipInsertOrUpdate = "Store_SkipInsertOrUpdate";
-
+        public string CampaignProfile_getAllAutoCall = "sp_CampaignProfile_getAllAutoCall";
 
         public string CampagnProfileGetAllExportv2 = "sp_CampagnProfileGetAllExportv2";
     }

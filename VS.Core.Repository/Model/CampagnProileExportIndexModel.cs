@@ -75,6 +75,47 @@
         public string? PlaceCode { get; set; }
         public string? WayContact { get; set; }
         public string? Code { get; set; }
+
+        public string? CodeInput { get
+            {
+
+                if (this.Code == "CAB")
+                {
+                    return "CALLBACK";
+                }
+                else if (this.Code == "DWI" ||
+                    this.Code == "HUP"
+
+                    )
+                {
+                    return "LMN";
+                }
+                else if (this.Code == "IGN4" || this.Code == "MCW"
+
+                    )
+                {
+                    return "LM";
+                }
+
+                else if (this.Code == "NAB" || this.Code == "NCP" || this.Code == "NKP" || this.Code == "NRP"
+
+                    )
+                {
+                    return "NCON";
+                }
+                else if (this.Code == "RTP")
+                {
+                    return "RFTP";
+                }
+
+                else if (this.Code == "TER")
+                {
+                    return "CONFIRM";
+                }
+                return this.Code;
+            }
+        
+        }
         public string? ColorCode { get; set; }
 
         public string? Assignee { get; set; }

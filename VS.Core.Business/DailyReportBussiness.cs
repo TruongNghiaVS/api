@@ -672,7 +672,6 @@ public class DailyReportBussiness : IDailyReportBussiness
                 indexloop++;
                 var row = new Row();
                 row.RowIndex = (uint)indexloop;
-               
                 row.Append(new Cell
                 {
                     DataType = CellValues.String,
@@ -701,7 +700,6 @@ public class DailyReportBussiness : IDailyReportBussiness
                 {
                     valueDateText = item.RegisterDay.Value.ToString("dd/MM/yyyy");
                 }
-                
                 row.Append(new Cell
                 {
                     DataType = CellValues.String,
@@ -712,7 +710,6 @@ public class DailyReportBussiness : IDailyReportBussiness
                     DataType = CellValues.String,
                     CellValue = new CellValue(item.CodeProduct)
                 });
-
                 row.Append(new Cell
                 {
                     DataType = CellValues.String,
@@ -912,9 +909,6 @@ public class DailyReportBussiness : IDailyReportBussiness
                     DataType = CellValues.String,
                     CellValue = new CellValue(item.UserName)
                 });
-
-
-              
                 var actionCode = item.Code;
                 if (!string.IsNullOrEmpty(actionCode))
                 {
@@ -922,10 +916,9 @@ public class DailyReportBussiness : IDailyReportBussiness
                         new Cell
                         {
                             DataType = CellValues.String,
-                            CellValue = new CellValue(item.Code)
+                            CellValue = new CellValue(item.CodeInput)
                         }
                     );
-
                     row.Append(
                         new Cell
                         {
@@ -986,12 +979,9 @@ public class DailyReportBussiness : IDailyReportBussiness
                 }
 
                 var itemCreaeAt = item.CreateAt.Value;
-
-
                 var itemUpdate = itemCreaeAt;
                 if (item.UpdateAt == null || item.UpdateAt.HasValue == false)
                 {
-
                 }
                 else
                 {

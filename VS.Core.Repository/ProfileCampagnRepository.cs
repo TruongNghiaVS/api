@@ -126,6 +126,58 @@ namespace VS.Core.Repository
             }
         }
 
+
+        public async Task<GetAllProfileByCampangReponse> GetAllData(GetAllProfileByCampang request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<ProileIndexModel>(_Sql.CampaignProfile_getAll, new
+                    {
+                        request.Id,
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.DpdMax,
+                        request.DpdMin,
+                        request.LineCode,
+                        request.Limit,
+                        request.NoAgreement,
+                        request.Page,
+                        request.PhoneSerach,
+                        request.TypegetData,
+                        request.OrderBy,
+                        request.VendorId,
+                        request.ColorCode,
+                        request.UserId,
+                        request.Cmnd
+                    }, commandType: CommandType.StoredProcedure);
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    if (fistElement != null)
+                    {
+                        totalRecord = fistElement.TotalRecord;
+                    }
+                    var reponse = new GetAllProfileByCampangReponse()
+                    {
+                        Total = totalRecord,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public async Task<GetAllProfileByCampangReponse> GetAllOriginal(GetAllProfileByCampang request)
         {
             int page = request.Page;
@@ -427,7 +479,36 @@ namespace VS.Core.Repository
                 return new List<CampagnProfile>();
             }
         }
+      
 
+        public async Task<CampagnProfile> GetProfileCall( )
+        {
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CampagnProfile>(_Sql.AutoCall_getProfileCall, new
+                    {
+                       
+                    }, commandType: CommandType.StoredProcedure);
+                    if(result == null )
+                    {
+                        return new CampagnProfile()
+                        {
+                            Id = "-1"
+                        };
+                    }    
+                    return result.First();
+                }
+            }
+            catch (Exception e)
+            {
+                return new CampagnProfile()
+                {
+                    Id = "-1"
+                };
+            }
+        }
         public async Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp)
         {
             try

@@ -53,10 +53,7 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _campagnBusiness.GetAllReason();
             return Results.Ok(resultSearch);
         }
-
-
-
-
+        
         [Authorize]
         [HttpPost("~/api/campagnProfile/getAll")]
         public async Task<IResult> getAll(CampagnProfileSearchInput request)
