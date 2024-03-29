@@ -11,7 +11,7 @@ namespace VS.Core.Business.Interface
         Task<GetAllProfileByCampangReponse> GetAllCampagn(GetAllProfileByCampang request);
         Task<CampagnProfile> GetProfileCall();
         Task<bool> Run();
-
+        Task<bool> HandleAutoBussiness();
 
     }
 }

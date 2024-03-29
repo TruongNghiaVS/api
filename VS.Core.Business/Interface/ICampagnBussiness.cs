@@ -9,6 +9,7 @@ namespace VS.Core.Business.Interface
     {
         Task<MasterDataReponse> GetAllReason();
         Task<Campagn> Getbyid(string Id);
+        Task<bool> Close(string Id);
         Task<bool> CheckDuplicate(string code);
         Task<CampagnRequestReponse> GetALl(CampagnRequest request);
         Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(CampangnOverviewByIdRequest request);

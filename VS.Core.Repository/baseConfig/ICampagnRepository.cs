@@ -1,4 +1,5 @@
-﻿using VS.core.Request;
+﻿using System.Data;
+using VS.core.Request;
 using VS.Core.dataEntry.User;
 
 
@@ -7,7 +8,8 @@ namespace VS.Core.Repository.baseConfig
     public interface ICampagnRepository : IGenericRepository<Campagn>
     {
         Task<CampagnRequestReponse> GetALl(CampagnRequest request);
-
+        Task<bool> Close(string campagnid);
+       
 
         Task<CampangnOverviewByIdReponse> GetOverViewDashboardById(CampangnOverviewByIdRequest request);
 

@@ -152,6 +152,33 @@ namespace VS.Core.Repository
                 return null;
             }
         }
+
+        public async Task<bool> Close(string campagnid)
+        {
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.Campaign_closeCampagn,
+
+                        new
+                        {
+                            campagnid
+                        }
+                        , commandType: CommandType.StoredProcedure);
+                    return 1;
+
+
+                }
+               
+            }
+            catch (Exception e)
+            {
+                return 0;
+
+            }
+
+        }
         public async Task<CampagnRequestReponse> GetALl(CampagnRequest request)
         {
             int page = request.Page;

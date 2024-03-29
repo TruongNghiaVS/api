@@ -42,7 +42,18 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(result);
 
         }
+        [HttpPost("~/api/campagn/closeByid")]
+        public async Task<IResult> CloseByid(InputIdRequest inputRequest)
+        {
+            if (string.IsNullOrEmpty(inputRequest.Id) ||
+                string.IsNullOrEmpty(inputRequest.Id))
+            {
+                return Results.BadRequest(_message.CommonError_ErrorRequestInput);
+            }
+            var result = await  _campagnBusiness.Close(inputRequest.Id);
+            return Results.Ok(result);
 
+        }
 
 
         [HttpPost("~/api/campagn/getAll")]

@@ -69,6 +69,11 @@ namespace VS.Core.Business
         {
             return _unitOfWork.CampagnRe.GetById(Id);
         }
+        public async Task<bool> Close(string Id)
+        {
+            return await _unitOfWork.CampagnRe.Close(Id);
+        }
+
 
         public Task<Campagn> GetByIdAsync(string id)
         {

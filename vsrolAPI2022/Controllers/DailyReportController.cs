@@ -69,6 +69,19 @@ public class DailyReportController : BaseController
         return Ok(filePath);
     }
 
+
+    [AllowAnonymous]
+    [HttpGet("~/api/dailyReport/GetFileReportTotal")]
+    public async Task<ActionResult> GetFileReportTotal()
+    {
+       
+        var result = await _business.ExportFileExcel(new CampagnProfileExportRequest(), "it");
+
+        var filePath = "/api/dailyReport/getFileExport?fileName=" + "it" + "/" + result;
+
+        return Ok(filePath);
+    }
+
     [AllowAnonymous]
     [HttpGet("~/api/dailyReport/getFileExport")]
     public async Task<ActionResult> GetFileExport(string? fileName)

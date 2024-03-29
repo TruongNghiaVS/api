@@ -264,8 +264,6 @@ namespace vsrolAPI2022.Controllers
                                 await _campagnBusiness.HandleImport(profileList, null);
                                 profileList.Clear();
                             }
-
-
                         }
 
                     }

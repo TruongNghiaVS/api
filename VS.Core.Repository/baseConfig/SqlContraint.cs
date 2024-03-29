@@ -71,6 +71,7 @@
         public string Campaign_update = "sp_Campaign_update";
 
         public string Campaign_update_caseSkip = "sp_CampaignProfile_updateCaseSkip";
+        public string Campaign_closeCampagn = "sp_closeCampagn";
 
         public string Campaign_getOverviewbyId = "sp_campaign_getOverviewbyId";
 
@@ -199,5 +200,9 @@
         public string CampaignProfile_getAllAutoCall = "sp_CampaignProfile_getAllAutoCall";
 
         public string CampagnProfileGetAllExportv2 = "sp_CampagnProfileGetAllExportv2";
+
+        public string CampagnProfileAutoCall = "sp_CampagnProfileAutoCall";
+
+        public string CampagnProfileAutoUpdate = "sp_CampagnProfileAutoUpdate";
     }
 }

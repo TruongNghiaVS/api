@@ -302,12 +302,12 @@ public class DailyReportBussiness : IDailyReportBussiness
             document.PackageProperties.Created = DateTime.UtcNow;
             var requestQuery = new CampagnProfileExportRequest
             {
-                CampaignId = request.CampaignId,
+                CampaignId = "1044",
                 From = request.From,
                 To = request.To,
                 Limit = 50000,
                 Page = 1,
-                UserId = request.UserId
+                UserId = "-1"
             };
             var resultData = await _unitOfWork1.DailyReport.GetAllCasev2(requestQuery);
             var listData = resultData.Data as List<CampagnProileExportIndexModel>;

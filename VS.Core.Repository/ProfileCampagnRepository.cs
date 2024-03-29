@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System.Data;
 using VS.core.Request;
 using VS.Core.dataEntry.User;
@@ -73,8 +74,7 @@ namespace VS.Core.Repository
 
             }
         }
-
-
+        
         public async Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request)
         {
             int page = request.Page;
@@ -509,6 +509,55 @@ namespace VS.Core.Repository
                 };
             }
         }
+        
+        public async Task <List<ReportQuerryCallResult>> GetInfomationCall(string linecode,
+            string phoneNumber
+
+         )
+        {
+            using (var con = GetConnectionAutoCall())
+            {
+                var sqlQuerry = " SELECT * FROM  cdr WHERE src ='3000' AND dst =@phoneNumber ";
+                var result = await con.QueryAsync<ReportQuerryCallResult>
+                    (sqlQuerry, new
+                    {
+                        phoneNumber
+                    });
+                var data = result.ToList();
+                if(data ==null)
+                {
+                    data = new List<ReportQuerryCallResult>();
+                }
+                return data;
+            }
+            return new List<ReportQuerryCallResult>();
+        }
+
+
+        public async Task<bool> UpdateCampagnAuto(string id,
+         bool resultCall)
+         {
+            try
+            {
+
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.ExecuteAsync(_Sql.CampagnProfileAutoUpdate,
+                        new
+                        {
+                            id,
+                            resultCall
+                        },
+                        commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+      
         public async Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp)
         {
             try
@@ -653,7 +702,6 @@ WHERE  ";
                 return result.ToList();
             }
         }
-
 
     }
 }

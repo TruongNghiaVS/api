@@ -11,7 +11,7 @@ using System.Net.Http.Headers;
 namespace vsrolAPI2022.Controllers
 {
     [ApiController]
-    [Authorize]
+ 
     [Route("[controller]")]
 
     public class AutoController : BaseController
@@ -26,42 +26,19 @@ namespace vsrolAPI2022.Controllers
             _business = autoBussiness;
         }
        
-        private async Task<IResult> MakeCall(string phoneNumber = "")
-        {
-            var data = new StringContent(JsonConvert.SerializeObject(new
-            {
-                phoneNumber = phoneNumber,
-                userid = 1,
-                lineCode = "3000"
-            }));
-            data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var linkUrl = "http://192.168.1.10:3002";
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(linkUrl);
-                var reponse = await client.PostAsync("api/client/makeCall", data);
-                var result = await reponse.Content.ReadAsStringAsync();
-                return Results.Ok(result);
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpGet("~/api/auto/handlerAutoCall")]
+        
+        [HttpGet("~/api/auto/nextCall")]
         public async Task<IResult> HandlerAutoCall()
         {
-            //lay danh sach
-            var camprofileGet = await _business.GetProfileCall();
-            await MakeCall("0383338840");
+            await _business.Run();
             return Results.Ok(new { success = true });
         }
-
+        
         [AllowAnonymous]
         [HttpGet("~/api/auto/handleBusinessCall")]
         public async Task<IResult> HandleBusinessCall()
         {
-            //lay danh sach
-            var camprofileGet = await _business.GetProfileCall();
-            await MakeCall("0383338840");
+            await _business.HandleAutoBussiness();
             return Results.Ok(new { success = true });
         }
 

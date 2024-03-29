@@ -1,14 +1,23 @@
 ﻿using VS.core.Request;
 using VS.Core.dataEntry.User;
+using VS.Core.Repository.Model;
 
 
 namespace VS.Core.Repository.baseConfig
 {
     public interface IProfileCampagnRepository : IGenericRepository<CampagnProfile>
     {
+
+        public  Task<List<ReportQuerryCallResult>> GetInfomationCall(
+            string linecode,
+           string phoneNumber
+
+        );
         Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request);
         Task<GetAllProfileByCampangReponse> GetAllOriginal(GetAllProfileByCampang request);
         Task<CampagnProfile> GetProfileCall();
+        Task<bool> UpdateCampagnAuto(string id,
+           bool result  );
 
         Task<GetAllProfileByCampangReponse>
         ExportDataByCampaign(GetAllProfileByCampang request);
@@ -16,7 +25,7 @@ namespace VS.Core.Repository.baseConfig
         Task<int> UpdateSkip(CampagnProfile entity);
 
         Task<int> UpdateSkipData(CampagnProfile entity);
-
+  
 
         Task<List<CampagnProfile>> GetALLAsiggnee(GetAllProfileByCampang request);
 

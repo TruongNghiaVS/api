@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.SqlClient;
 using VS.Core.dataEntry;
@@ -31,7 +32,7 @@ namespace VS.Core.Repository.baseConfig
 
         protected IDbConnection GetConnectionAutoCall()
         {
-            var con = new SqlConnection(_configuration.GetConnectionString("mysqlStringConnect9"));
+            var con = new MySqlConnection(_configuration.GetConnectionString("mysqlStringConnect9"));
             con.Open();
             return con;
         }
