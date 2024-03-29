@@ -408,39 +408,34 @@ namespace VS.Core.Repository
 
             try
             {
-                using (var con = GetConnection())
-                {
-                    string listOfIdsJoined = "(" + String.Join(",", dataDelete.ToArray()) + ")";
-                    string arrayResult = "( ";
+                //string listOfIdsJoined = "(" + String.Join(",'", dataDelete.ToArray()) + ")";
+                //string arrayResult = "( ";
+   
                     for (int i = 0; i < dataDelete.Count; i++)
+                {
+                    using (var con = GetConnection())
                     {
-                        if (i + 1 == dataDelete.Count)
-                        {
-                            arrayResult += "" + dataDelete[i] + "";
-                        }
-                        else
-                        {
-                            arrayResult += "" + dataDelete[i] + "" + ',';
-
-                        }
-
+                        var sql = "update CampaignProfile set Deleted = 1, " +
+                            "UpdateAt =getdate() " +
+                            " where CampaignId = @CampaignId and  NoAgreement = @NoAgreement ";
+                        var result = await con.ExecuteAsync(sql, new { CampaignId = @requestId, NoAgreement = dataDelete[i] });
 
                     }
-
-                    arrayResult += " ) ";
-                    var sql = "update CampaignProfile set Deleted = 1, UpdateAt =getdate()  where CampaignId = @CampaignId and  NoAgreement in @dataDelete";
-                    var result = await con.ExecuteAsync(sql, new
-                    {
-                        dataDelete = arrayResult,
-                        CampaignId = requestId
-                    });
-
-                    if (result > 0)
-                    {
-                        return true;
-                    }
-                    return false;
                 }
+                
+
+                return true;
+
+                    //arrayResult += " ) ";
+                    //var sql = "update CampaignProfile set Deleted = 1, UpdateAt =getdate()  where CampaignId = @CampaignId and  NoAgreement in @dataDelete";
+                    //var result = await con.ExecuteAsync(sql, new
+                    //{
+                    //    dataDelete = arrayResult,
+                    //    CampaignId = requestId
+                    //});
+                  
+
+                
             }
             catch (Exception e)
             {

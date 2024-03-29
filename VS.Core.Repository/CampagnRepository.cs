@@ -166,7 +166,7 @@ namespace VS.Core.Repository
                             campagnid
                         }
                         , commandType: CommandType.StoredProcedure);
-                    return 1;
+                    return true;
 
 
                 }
@@ -174,7 +174,7 @@ namespace VS.Core.Repository
             }
             catch (Exception e)
             {
-                return 0;
+                return false;
 
             }
 

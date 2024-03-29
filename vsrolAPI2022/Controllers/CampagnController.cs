@@ -628,11 +628,8 @@ namespace vsrolAPI2022.Controllers
                             try
                             {
                                 var noAgree = ReadvalueStringExcel(workSheet, i, 1);
-                                var hasDelete = ReadvalueStringExcel(workSheet, i, 2);
-                                if (hasDelete == "1")
-                                {
-                                    listNo.Add(noAgree);
-                                }
+                                //var hasDelete = ReadvalueStringExcel(workSheet, i, 2);
+                                listNo.Add(noAgree);
 
 
                             }
