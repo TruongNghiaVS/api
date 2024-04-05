@@ -173,7 +173,11 @@ namespace vsrolAPI2022.Controllers
                 Status = request.Status,
                 Page = request.Page,
                 Limit = request.Limit,
-               
+                GroupId = request.GroupId,
+                MemberId  =request.MemberId,
+
+
+
                 To = request.To,
                 DpdMax = dpdMax,
                 DpdMin = dpdMin,

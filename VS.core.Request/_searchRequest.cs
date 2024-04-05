@@ -353,7 +353,8 @@ namespace VS.core.Request
         public bool? SkipData { get; set; }
 
         public string? Cmnd { get; set; }
-
+        public int? GroupId { get; set; }
+        public int? MemberId { get; set; }
         public CampagnProfileExportRequest()
         {
             this.Page = 1;
@@ -414,7 +415,8 @@ namespace VS.core.Request
 
         public int? Status { get; set; }
         public string? TypegetData { get; set; }
-
+        public int? GroupId { get; set; }
+        public int? MemberId { get; set; }
         public int? DpdMax { get; set; }
         public int? DpdMin { get; set; }
 
@@ -800,6 +802,10 @@ namespace VS.core.Request
         public int? TimeFrom2 { get; set; }
 
         public int? VendorId { get; set; }
+
+        public int? GroupId { get; set; }
+
+        public int? MemberId { get; set; }
         public ReportCDRequest()
         {
             TimeFrom2 = 64800;
@@ -848,7 +854,9 @@ namespace VS.core.Request
     {
         public string? LineCode { get; set; }
         public DateTime? TimeSelect { get; set; }
+        public int? GroupId { get; set; }
 
+        public int? MemberId { get; set; }
         public int? VendorId { get; set; }
 
         public GetAllRecordGroupByLineCodeRequest()
@@ -975,6 +983,8 @@ namespace VS.core.Request
         public int DurationBill { get; set; }
         public double DurationReal { get; set; }
         public string? NoAgree { get; set; }
+
+        public string? UserName { get; set; }
 
         public bool IsCal { get; set; }
         public bool IsShow
@@ -1294,6 +1304,9 @@ namespace VS.core.Request
 
         public string? UserName { get; set; }
 
+        public int? GroupId { get; set; }
+
+        public int? MemberId { get; set; }
 
     }
 

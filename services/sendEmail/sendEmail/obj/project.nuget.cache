@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FpLbwP0gcnMiwgP0YETDYRQbrYq1Zmw/QsUoCZtgaaT11+u8t9zhZb8vJt11ZKgxk+qIiHz6Fz1mcW1jZ2BHoQ==",
+  "dgSpecHash": "jhspU5Aye2ixR7mlZC7KofPXYdfTgDYA+rneSm/C7UUceOwj1or9miTlITD0K9jm4Au4C5JWMk95+CxSOsdg/Q==",
   "success": true,
-  "projectFilePath": "C:\\vietbank\\crm\\api\\sendmail\\sendEmail\\sendEmail\\sendEmail.csproj",
+  "projectFilePath": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendEmail.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

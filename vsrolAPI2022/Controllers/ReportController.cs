@@ -143,8 +143,8 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _impactBusiness.getAllCall(_input);
             return Results.Ok(resultSearch);
         }
-
-
+        
+        
         [HttpPost("~/api/report/getAllRecordingFile")]
         public async Task<IResult> getAllRecordingFile(ReportCDRequest _input)
         {

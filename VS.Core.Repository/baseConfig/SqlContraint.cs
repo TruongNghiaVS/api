@@ -136,7 +136,7 @@
 
         public string GroupEmpl_update = "sp_GroupEmpl_Update";
 
-        public string GroupEmpl_getAll = "sp_GroupEmpl_getAll";
+        public string GroupEmpl_getAll = "sp_GroupEmpl_getAllv2";
 
         public string Sp_GetAllMeberHaveNotGroup = "sp_GetAllMeberHaveNotGroup";
         public string sp_GetAllMeberByGroupId = "sp_GetAllMeberByGroupId";

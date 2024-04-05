@@ -91,7 +91,7 @@ namespace VS.Core.Business
         {
             var camprofileGet = await GetProfileCall();
             ConatinnerCall.Contanner.DataCall.Add(camprofileGet);
-            await MakeCall("0377110265");
+            await MakeCall("0383338840");
             return true;
             
         }
@@ -117,7 +117,8 @@ namespace VS.Core.Business
           
             if(ConatinnerCall.Contanner.DataCall.Count < 1)
             {
-                ConatinnerCall.Contanner.DataCall.Add(new CampagnProfile()
+                ConatinnerCall.Contanner.DataCall.Add(
+                new CampagnProfile()
                 {
                     Id = "860386"
                 });
@@ -126,47 +127,24 @@ namespace VS.Core.Business
 
             foreach (var item in callList.ToList())
             {
-                var phoneNumber = "0377110265";
+                var phoneNumber = "0383338840";
                 var infomationResult = await GetInfomationCall("3000", phoneNumber);
-                var answerphone = false;
-                var busyphone = false;
-                var airplane = false;
-                var isBusylast = false;
-                var isAnswered = false;
+              
                 var islive = false;
                 var Lastdata = "";
                 foreach (var item1 in infomationResult)
                 {
                     Lastdata = item1.Lastdata;
-                    if (item1.Disposition == "ANSWERED" ||
-                        item1.Disposition == "BUSY")
+                    if (item1.Disposition == "ANSWERED")
                     {
-                        if (item1.Lastapp == "Dial")
-                        {
-                            isAnswered = true;
-                        }
-                        else if (item1.Lastapp == "Busy")
-                        {
-                            isBusylast = true;
-                        }
+
+                        islive = true;
+                       
                     }
 
                 }
-
-                if (isAnswered == true && isBusylast == false)
-                {
-                    islive = true;
-                }
-                else if(isAnswered ==true && isBusylast== true)
-                {
-                    islive = true;
-                }
-                else
-                {
-                    islive = false;
-                } 
-                    
-                ListCall.Remove(item);
+                
+                callList.Remove(item);
                 await UpdateCampagnAuto(item.Id.ToString(), islive);
 
             }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\vietbank\\crm\\api\\sendmail\\sendEmail\\sendEmail\\sendEmail.csproj": {}
+    "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendEmail.csproj": {}
   },
   "projects": {
-    "C:\\vietbank\\crm\\api\\sendmail\\sendEmail\\sendEmail\\sendEmail.csproj": {
+    "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendEmail.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\vietbank\\crm\\api\\sendmail\\sendEmail\\sendEmail\\sendEmail.csproj",
+        "projectUniqueName": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendEmail.csproj",
         "projectName": "sendEmail",
-        "projectPath": "C:\\vietbank\\crm\\api\\sendmail\\sendEmail\\sendEmail\\sendEmail.csproj",
+        "projectPath": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendEmail.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\vietbank\\crm\\api\\sendmail\\sendEmail\\sendEmail\\obj\\",
+        "outputPath": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

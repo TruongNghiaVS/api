@@ -17,9 +17,6 @@ namespace sendEmail
                services.AddQuartz(q =>
                {
                q.UseMicrosoftDependencyInjectionJobFactory();
-               //var job = JobBuilder.Create<DaillyReport>()
-               //    .WithIdentity("sendReport", "daillyReport")
-               //    .Build();
                var jobKey = new JobKey("sendReportJob");
                q.AddJob<DaillyReport>(opts => opts.WithIdentity(jobKey));
                    q.AddTrigger(opts => opts
@@ -28,12 +25,7 @@ namespace sendEmail
                 .WithCronSchedule("0 30 8 ? * MON,TUE,WED,THU,FRI *")
                 .WithCronSchedule("0 30 17 ? * SAT *")
                 );
-                 //var tooJobScheduleCrm = new JobKey("tooJobScheduleCrm");
-                //q.AddJob<ScheduleCRM>(opts => opts.WithIdentity(tooJobScheduleCrm));
-                //q.AddTrigger(opts => opts
-                //.ForJob(tooJobScheduleCrm) 
-                //.WithIdentity("tooJobScheduleCrm-trigger")
-                //.WithCronSchedule("0 0/3 7-19 ? * MON,TUE,WED,THU,FRI,SAT *"));
+               
              });
             services.AddQuartzHostedService(opt =>
             {

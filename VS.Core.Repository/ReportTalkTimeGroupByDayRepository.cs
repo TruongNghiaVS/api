@@ -307,6 +307,8 @@ namespace VS.Core.Repository
                         request.LineCode,
                         request.Limit,
                         request.UserId,
+                        request.GroupId,
+                        request.MemberId,
                         request.Page,
                         request.OrderBy
                     }, commandType: CommandType.StoredProcedure);
@@ -347,6 +349,8 @@ namespace VS.Core.Repository
                         request.LineCode,
                         request.VendorId,
                         request.UserId,
+                        request.GroupId,
+                        request.MemberId,
                         request.Limit,
                         request.Page,
                         request.OrderBy

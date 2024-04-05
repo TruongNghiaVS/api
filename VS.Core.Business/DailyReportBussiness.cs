@@ -300,14 +300,21 @@ public class DailyReportBussiness : IDailyReportBussiness
             //add document properties
             document.PackageProperties.Creator = "nghiait";
             document.PackageProperties.Created = DateTime.UtcNow;
+            if(string.IsNullOrEmpty(request.UserId))
+            {
+                request.UserId = "-1";
+            }
             var requestQuery = new CampagnProfileExportRequest
             {
-                CampaignId = "1044",
+                CampaignId = "1045",
                 From = request.From,
                 To = request.To,
+                GroupId = request.GroupId,
+                MemberId = request.MemberId,
                 Limit = 50000,
+                TypegetData = request.TypegetData,
                 Page = 1,
-                UserId = "-1"
+                UserId = request.UserId
             };
             var resultData = await _unitOfWork1.DailyReport.GetAllCasev2(requestQuery);
             var listData = resultData.Data as List<CampagnProileExportIndexModel>;

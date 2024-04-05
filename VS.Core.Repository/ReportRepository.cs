@@ -305,6 +305,8 @@ namespace VS.Core.Repository
                             request.Token,
                             request.VendorId,
                             request.NoAgree,
+                            request.MemberId,
+                            request.GroupId,
                             from,
                             to,
                             TimeTalkBegin,
@@ -564,6 +566,9 @@ namespace VS.Core.Repository
                             request.NoAgree,
 
                             request.Limit,
+                            request.MemberId,
+                            request.GroupId,
+                            
                             request.Page,
                             request.OrderBy,
                             request.UserId

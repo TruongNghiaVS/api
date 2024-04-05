@@ -103,6 +103,8 @@ namespace VS.Core.Repository
                         request.VendorId,
                         request.ColorCode,
                         request.UserId,
+                        request.GroupId,
+                        request.MemberId,
                         request.Cmnd
                     }, commandType: CommandType.StoredProcedure);
                     var fistElement = result.FirstOrDefault();
@@ -512,7 +514,7 @@ namespace VS.Core.Repository
         {
             using (var con = GetConnectionAutoCall())
             {
-                var sqlQuerry = " SELECT * FROM  cdr WHERE src ='3000' AND dst =@phoneNumber ";
+                var sqlQuerry = " SELECT * FROM  cdr WHERE src ='3000' AND dst =@phoneNumber and lastapp ='Dial'  ";
                 var result = await con.QueryAsync<ReportQuerryCallResult>
                     (sqlQuerry, new
                     {

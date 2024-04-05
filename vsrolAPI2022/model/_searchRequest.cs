@@ -52,6 +52,9 @@
 
         public int? Status { get; set; }
 
+        public int? GroupId { get; set; }
+
+        public int? MemberId { get; set; }
         public int? Dpd { get; set; }
 
         public string? NoAgree { get; set; }

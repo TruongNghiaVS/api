@@ -37,6 +37,8 @@
         public decimal? PerPercent { get; set; }
 
         public decimal? TimeTalking { get; set; }
+
+        public string? UserName { get; set; }
     }
 
 

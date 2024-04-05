@@ -87,23 +87,23 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<CampagnProileExportIndexModel>(_Sql.CampagnProfileGetAllExportv2, new
+                    var result = await con.QueryAsync<CampagnProileExportIndexModel>(
+                        _Sql.CampagnProfileGetAllExportv2, new
                     {
                         request.From,
                         request.To,
-                       
-                        
                         request.VendorId,
                         request.UserId,
+                        request.TypegetData,
                         request.CampaignId,
                         request.Limit,
                         request.Page,
+                        request.GroupId,
+                        request.MemberId,
                         request.OrderBy
                     }, commandType: CommandType.StoredProcedure);
-
                     var fistElement = result.FirstOrDefault();
                     var numberRecord = 0;
-
                     if (fistElement != null)
                     {
                         numberRecord = result.Count();
@@ -112,8 +112,6 @@ namespace VS.Core.Repository
                     {
                         result = new List<CampagnProileExportIndexModel>();
                     }
-
-
                     var reponse = new CampagnProfileExportReponse()
                     {
                         Data = result,
