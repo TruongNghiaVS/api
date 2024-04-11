@@ -849,6 +849,15 @@ namespace VS.core.Request
         }
     }
 
+    public class GetAllTrackingGroupByLineCodeReponse : BaseSearchRepons
+
+    {
+    
+        public GetAllTrackingGroupByLineCodeReponse()
+        {
+            Total = 0;
+        }
+    }
 
     public class GetAllRecordGroupByLineCodeRequest : BaseSearchRequest
     {

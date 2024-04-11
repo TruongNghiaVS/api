@@ -626,6 +626,13 @@ public class DailyReportBussiness : IDailyReportBussiness
             );
 
             row1.Append(
+               new Cell
+               {
+                   DataType = CellValues.String,
+                   CellValue = new CellValue("Giao cho")
+               }
+           );
+            row1.Append(
                 new Cell
                 {
                     DataType = CellValues.String,
@@ -915,6 +922,265 @@ public class DailyReportBussiness : IDailyReportBussiness
                 {
                     DataType = CellValues.String,
                     CellValue = new CellValue(item.UserName)
+                });
+                row.Append(new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(item.FullName)
+                });
+                var actionCode = item.Code;
+                if (!string.IsNullOrEmpty(actionCode))
+                {
+                    row.Append(
+                        new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(item.CodeInput)
+                        }
+                    );
+                    row.Append(
+                        new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(item.WayContact)
+                        }
+                    );
+                    row.Append(
+                        new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(item.PlaceCode)
+                        }
+                    );
+                    row.Append(
+                        new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(item.ColorCode)
+                        }
+                    );
+                }
+                else
+                {
+                    var cellEmpty = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue("Mới")
+                    };
+
+
+                    row.Append(
+                        cellEmpty
+                    );
+                    row.Append(
+                        new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue("")
+                        }
+                    );
+
+                    row.Append(
+                        new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue("")
+                        }
+                    );
+
+                    row.Append(
+                        new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue("")
+                        }
+                    );
+                }
+
+                var itemCreaeAt = item.CreateAt.Value;
+                var itemUpdate = itemCreaeAt;
+                if (item.UpdateAt == null || item.UpdateAt.HasValue == false)
+                {
+                }
+                else
+                {
+                    itemUpdate = item.UpdateAt.Value;
+                }
+                row.Append(
+                    new Cell
+                    {
+                        DataType = CellValues.Date,
+                        CellValue = new CellValue(itemCreaeAt)
+                    }
+                );
+
+                row.Append(
+                    new Cell
+                    {
+                        DataType = CellValues.Date,
+                        CellValue = new CellValue(itemUpdate)
+                    }
+                );
+                sheetData.Append(row);
+            }
+
+            document.Save();
+        }
+
+        return fileName;
+
+    }
+
+
+    public async Task<string> ExportFileNormal(CampagnProfileExportRequest request, string userName)
+    {
+        var dateGet = DateTime.Now;
+        var fileName = dateGet.ToString("dd.MM.yy") + ".xlsx";
+        var rootPath = "C:\\vietbank\\crm\\api\\vsrolAPI2022\\report";
+        var pathFolder = Path.Combine(rootPath, userName);
+        var exists = Directory.Exists(pathFolder);
+        var pathfileName = userName + "\\" + fileName;
+        if (!exists)
+            Directory.CreateDirectory(pathFolder);
+        var pathFile = Path.Combine(pathFolder, fileName);
+        if (File.Exists(pathFile)) File.Delete(pathFile);
+        using (var document = SpreadsheetDocument.Create(pathFile,
+                   SpreadsheetDocumentType.Workbook))
+        {
+            var relationshipId = "report";
+            var workbookPart = document.AddWorkbookPart();
+            var workbook = new Workbook();
+            var sheets = new Sheets();
+            var sheet1 = new Sheet
+            {
+                Name = "report",
+                SheetId = 1,
+                Id = relationshipId
+            };
+            sheets.Append(sheet1);
+            workbook.Append(sheets);
+            workbookPart.Workbook = workbook;
+            var workSheetPart = workbookPart.AddNewPart<WorksheetPart>(relationshipId);
+            var workSheet = new Worksheet();
+            var sheetData = new SheetData();
+            workSheet.Append(sheetData);
+            workSheetPart.Worksheet = workSheet;
+            //add document properties
+            document.PackageProperties.Creator = "nghiait";
+            document.PackageProperties.Created = DateTime.UtcNow;
+            if (string.IsNullOrEmpty(request.UserId))
+            {
+                request.UserId = "-1";
+            }
+            var requestQuery = new CampagnProfileExportRequest
+            {
+                CampaignId = "1045",
+                From = request.From,
+                To = request.To,
+                GroupId = request.GroupId,
+                MemberId = request.MemberId,
+                Limit = 50000,
+                TypegetData = request.TypegetData,
+                Page = 1,
+                UserId = request.UserId
+            };
+            var resultData = await _unitOfWork1.DailyReport.GetAllCasev2(requestQuery);
+            var listData = resultData.Data as List<CampagnProileExportIndexModel>;
+            var indexloop = 1;
+            var row1 = new Row();
+            row1.RowIndex = 1;
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("CONTRACT NUMBER\r\nHợp đồng")
+                }
+            );
+           
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("   user Name")
+                }
+            );
+            row1.Append(
+              new Cell
+              {
+                  DataType = CellValues.String,
+                  CellValue = new CellValue("   Họ và tên")
+              }
+          );
+
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("  Tình trạng")
+                }
+            );
+
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Phương thức liên hệ\r\n")
+                }
+            );
+
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Nơi liên hệ")
+                }
+            );
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Phân loại hồ sơ")
+                }
+            );
+
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Ngày tạo")
+                }
+            );
+
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Ngày cập nhật")
+                }
+            );
+            sheetData.Append(row1);
+
+            foreach (var item in listData)
+            {
+                indexloop++;
+                var row = new Row();
+                row.RowIndex = (uint)indexloop;
+                row.Append(new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(item.NoAgreement)
+                });
+
+                row.Append(new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(item.UserName)
+                });
+
+                row.Append(new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(item.FullName)
                 });
                 var actionCode = item.Code;
                 if (!string.IsNullOrEmpty(actionCode))

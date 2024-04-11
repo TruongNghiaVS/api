@@ -13,6 +13,8 @@ namespace VS.Core.Repository
 
         private readonly IConfiguration _configuration;
 
+
+
         private readonly string tableName = "ReportTalkTimeGroupByDay";
         public ReportTalkTimeGroupByDayRepository(IConfiguration configuration) : base(configuration)
         {
@@ -334,8 +336,54 @@ namespace VS.Core.Repository
             }
         }
 
+        public async Task<GetAllTrackingGroupByLineCodeReponse> GetAllTracking(GetAllRecordGroupByLineCodeRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
+
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<TrackingRecordGroupByLineCodeIndexModel>(_Sql.TrackingRecordGroupByLineCode_getAll, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.VendorId,
+                        request.LineCode,
+                        request.Limit,
+                        request.UserId,
+                        request.GroupId,
+                        request.MemberId,
+                        request.Page,
+                        request.OrderBy
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var totalRecord = 0;
+                    if (fistElement != null)
+                    {
+                        totalRecord = fistElement.TotalRecord;
+                    }
+                    var reponse = new GetAllTrackingGroupByLineCodeReponse()
+                    {
+                        Total = totalRecord,
+
+                        Data = result
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
         public async Task<GetOverViewDashboardReponse> GetOverViewDashBoard(GetOverViewDashboard request)
+        
         {
             try
             {

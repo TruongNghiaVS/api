@@ -9,7 +9,7 @@ namespace VS.Core.Repository.baseConfig
         Task<GetAllRecordGroupByLineCodeReponse> GetAll(GetAllRecordGroupByLineCodeRequest entity);
         Task<GetAllRecordGroupByLineCodeExportReponse> Export(GetAllRecordGroupByLineCodeExportRequest entity);
 
-
+        Task<GetAllTrackingGroupByLineCodeReponse> GetAllTracking(GetAllRecordGroupByLineCodeRequest entity);
         Task<GetOverViewDashboardReponse> GetOverViewDashBoard(GetOverViewDashboard entity);
 
     }

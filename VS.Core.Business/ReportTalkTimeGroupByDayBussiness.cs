@@ -41,6 +41,10 @@ namespace VS.Core.Business
         }
 
 
+        public Task<GetAllTrackingGroupByLineCodeReponse> GetAllTracking(GetAllRecordGroupByLineCodeRequest entity)
+        {
+            return _unitOfWork.ReportTalkTimeGroupByDay.GetAllTracking(entity);
+        }
         public Task<GetAllRecordGroupByLineCodeExportReponse> Export(GetAllRecordGroupByLineCodeExportRequest request)
         {
             return _unitOfWork.ReportTalkTimeGroupByDay.Export(request);

@@ -15,5 +15,7 @@ namespace VS.Core.Business.Interface
 
         Task<GetOverViewDashboardReponse> GetOverViewDashBoard(GetOverViewDashboard request);
 
+        Task<GetAllTrackingGroupByLineCodeReponse> GetAllTracking(GetAllRecordGroupByLineCodeRequest request);
+
     }
 }

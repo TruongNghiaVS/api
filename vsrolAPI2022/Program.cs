@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-
+using Quartz;
 using System.Text;
+using VS.core.API.job;
 using VS.Core.Business.Infrastructures;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,35 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterBusiness();
+builder.Services.AddQuartz(q =>
+{
+    var jobKey = new JobKey("UpdateTrackingCall");
+    q.AddJob<UpdateTrackingCall>(opts => opts.WithIdentity(jobKey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("UpdateTrackingCall-trigger")
+        //This Cron interval can be described as "run every minute" (when second is zero)
+        .WithCronSchedule(" 0/1 * * * * ? *")
+    );
+});
+
+builder.Services.AddQuartz(q =>
+{
+    var jobKey = new JobKey("UpdateDataGroupDB");
+    q.AddJob<UpdateDataGroupDB>(opts => opts.WithIdentity(jobKey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("UpdateDataGroupDB-trigger")
+        //This Cron interval can be described as "run every minute" (when second is zero)
+        .WithCronSchedule(" 0/15 * * * * ? *")
+    );
+});
+
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

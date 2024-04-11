@@ -3,8 +3,13 @@
 
     public class GroupEmployeeViewIndexModel : EmployeeIndexModel
     {
+        public int Groupid { get; set; }
 
         public string? ManagementName { get; set; }
+        public GroupEmployeeViewIndexModel()
+        {
+            Groupid = 0;
+        }
     }
     public class EmployeeIndexModel : BaseIndexModel
     {

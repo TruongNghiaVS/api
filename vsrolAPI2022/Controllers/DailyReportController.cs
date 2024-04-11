@@ -51,7 +51,7 @@ public class DailyReportController : BaseController
         return Results.Ok(result);
     }
 
-    [AllowAnonymous]
+   
     [HttpPost("~/api/dailyReport/exportFile")]
     public async Task<ActionResult> ExportFile(
         CampagnProfileExportRequest request
@@ -60,10 +60,23 @@ public class DailyReportController : BaseController
         var userCurrent = GetCurrentUser();
         request.UserId = userCurrent.Id;
         var userName = userCurrent.UserName;
-        var result = await _business.ExportFileExcel(request, userName);
-        var filePath = "/api/dailyReport/getFileExport?fileName=" + userName + "/" + result;
-        return Ok(filePath);
+        var filepath = "";
+        if(userCurrent.RoleId == "2")
+        {
+            var result = await _business.ExportFileExcel(request, userName);
+            filepath = "/api/dailyReport/getFileExport?fileName=" + userName + "/" + result;
+        }
+        else
+        {
+            var result = await _business.ExportFileNormal(request, userName);
+            filepath = "/api/dailyReport/getFileExport?fileName=" + userName + "/" + result;
+        }
+        return Ok(filepath);
     }
+   
+
+
+
     [AllowAnonymous]
     [HttpGet("~/api/dailyReport/GetFileReportTotal")]
     public async Task<ActionResult> GetFileReportTotal()

@@ -10,6 +10,9 @@ namespace VS.Core.Business.Interface
 
         Task<string> ExportFileExcel(CampagnProfileExportRequest request, string userName);
 
+        Task<string> ExportFileNormal(CampagnProfileExportRequest request, string userName);
+
+
 
     }
 }

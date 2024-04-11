@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using VS.core.Request;
 using VS.Core.Business.Interface;
+using VS.Core.dataEntry.User;
 
 
 namespace vsrolAPI2022.Controllers
@@ -16,6 +17,8 @@ namespace vsrolAPI2022.Controllers
         private readonly IReportBussiness _impactBusiness;
         private readonly ICallLogBussiness callLogBussiness;
         private IHandleReportBussiness _handleReportBussiness;
+
+        public static List<LogCall> GlobalLogCall = new List<LogCall>();
         public MakeCallController(IReportBussiness campagnBusiness,
             IUserBusiness userBusiness,
             ICallLogBussiness _callLogBussiness,
@@ -47,7 +50,7 @@ namespace vsrolAPI2022.Controllers
 
             }
             _input.PhoneNumber = _input.PhoneNumber.Trim();
-            await callLogBussiness.Add(new VS.Core.dataEntry.User.LogCall()
+            var tiemInsert = new VS.Core.dataEntry.User.LogCall()
             {
                 Phone = _input.PhoneNumber,
                 CreateAt = DateTime.Now,
@@ -59,7 +62,23 @@ namespace vsrolAPI2022.Controllers
                 CreatedBy = _userCurrent.Id,
                 UserId = _userCurrent.Id
 
-            });
+            };
+
+            var itemUpdate = TrackingCallController.OutPutData
+                                .Where(x => x.LineCode == linecode).FirstOrDefault();
+
+            if(itemUpdate  != null )
+            {
+                itemUpdate.LastCallcrm = DateTime.Now;
+            }
+
+            if(GlobalLogCall.Count >1000)
+            { 
+                
+                GlobalLogCall.RemoveAt(1000);
+            }
+            GlobalLogCall.Add(tiemInsert);
+            await callLogBussiness.Add(tiemInsert);
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
                 phoneNumber = _input.PhoneNumber,

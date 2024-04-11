@@ -178,7 +178,7 @@
 
 
         public string GetAllRecordGroupByLineCode_getAll = "sp_GetAllRecordGroupByLineCode_getAll";
-
+        public string TrackingRecordGroupByLineCode_getAll = "sp_GetTrackingCallGroupByDate";
         public string GetAllRecordGroupByLineCodeExport_getAll = "sp_GetAllRecordGroupByLineCodeExport_getAll";
 
         public string Sp_ProcessingCalTimeIndexModel_getAll = "sp_ProcessingCalTimeIndexModel_getAll";
