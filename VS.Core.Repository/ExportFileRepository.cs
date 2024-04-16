@@ -126,6 +126,200 @@ namespace VS.Core.Repository
             }
         }
 
-  
+        public async Task<CampagnProfileExportReponse> ExprotCrmTalkTime(
+                    CrmReportRequest request
+
+
+             )
+        {
+           
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CrmReprotIndexModel>(_Sql.CrmReport_Talktime, new
+                    {
+                        request.From,
+                        request.UserId,
+                        request.To,
+                      
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var numberRecord = 0;
+
+                    if (fistElement != null)
+                    {
+                        numberRecord = result.Count();
+                    }
+                    else
+                    {
+                        result = new List<CrmReprotIndexModel>();
+                    }
+
+
+                    var reponse = new CampagnProfileExportReponse()
+                    {
+                        Data = result,
+                        NumberRecord = numberRecord
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+
+        public async Task<CampagnProfileExportReponse> ExprotCrmByStatus(
+                  CrmReportRequest request
+
+
+           )
+        {
+
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CrmReprotStatusIndexModel>(_Sql.CrmReport_BystatusFolow, new
+                    {
+                        request.From,
+                        request.UserId,
+                        request.To,
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var numberRecord = 0;
+
+                    if (fistElement != null)
+                    {
+                        numberRecord = result.Count();
+                    }
+                    else
+                    {
+                        result = new List<CrmReprotStatusIndexModel>();
+                    }
+
+
+                    var reponse = new CampagnProfileExportReponse()
+                    {
+                        Data = result,
+                        NumberRecord = numberRecord
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+
+        public async Task<CampagnProfileExportReponse> ExprotCrmByStatusDetail(
+             CrmReportRequest request
+
+
+      )
+        {
+
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CrmReprotStatusIndexModel>(_Sql.CrmReport_ByDetailGroupStatus, new
+                    {
+                        request.From,
+                        request.UserId,
+                        request.To
+                    
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var numberRecord = 0;
+
+                    if (fistElement != null)
+                    {
+                        numberRecord = result.Count();
+                    }
+                    else
+                    {
+                        result = new List<CrmReprotStatusIndexModel>();
+                    }
+
+
+                    var reponse = new CampagnProfileExportReponse()
+                    {
+                        Data = result,
+                        NumberRecord = numberRecord
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+        public async Task<CampagnProfileExportReponse> GetSumupTalktime(
+             CrmReportRequest request
+
+
+      )
+        {
+
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var result = await con.QueryAsync<CrmReportTalktimeIndexModel>(_Sql.CrmReport_CrmReport_SumupTalktime, new
+                    {
+                        request.From,
+                        request.UserId,
+                        request.To,
+
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var fistElement = result.FirstOrDefault();
+                    var numberRecord = 0;
+
+                    if (fistElement != null)
+                    {
+                        numberRecord = result.Count();
+                    }
+                    else
+                    {
+                        result = new List<CrmReportTalktimeIndexModel>();
+                    }
+
+
+                    var reponse = new CampagnProfileExportReponse()
+                    {
+                        Data = result,
+                        NumberRecord = numberRecord
+                    };
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
     }
 }

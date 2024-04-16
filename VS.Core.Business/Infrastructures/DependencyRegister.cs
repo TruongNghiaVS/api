@@ -37,7 +37,7 @@ namespace VS.Core.Business.Infrastructures
             services.AddScoped<IDailyReportBussiness, DailyReportBussiness>();
             services.AddScoped<IStoreBussiness, StoreBusiness>();
             services.AddScoped<IAutoBussiness, AutoBusiness>();
-            
+            services.AddScoped<IReportCrmBussiness, ReportCrmBussiness>();
 
         }
 

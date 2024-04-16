@@ -1404,4 +1404,60 @@ namespace VS.core.Request
         public IEnumerable? Data { get; set; }
         public int?  NumberRecord { get; set; }
     }
+
+
+
+    public class CrmReportRequest 
+    {
+        public string UserId { get; set; }
+        private DateTime? FromTimeAss { get; set; }
+
+        public string? UserName { get; set; }
+
+        public DateTime? From
+        {
+
+            get
+            {
+                return FromTimeAss;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    FromTimeAss = new DateTime(value.Value.Year, value.Value.Month, value.Value.Day, 0, 0, 0);
+
+                }
+                else
+                {
+                    FromTimeAss = null;
+                }
+
+            }
+        }
+
+
+        private DateTime? ToTimeAss { get; set; }
+        public DateTime? To
+        {
+            get
+            {
+                return ToTimeAss;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    ToTimeAss = new DateTime(value.Value.Year, value.Value.Month, value.Value.Day, 23, 59, 59);
+
+                }
+                else
+                {
+                    ToTimeAss = null;
+                }
+
+            }
+        }
+    }
+
 }

@@ -157,7 +157,6 @@ namespace vsrolAPI2022.Controllers
             {
                 GroupMemer.Add(33);
                 GroupMemer.Add(28);
-                GroupMemer.Add(29);
                 GroupMemer.Add(31);
                 GroupMemer.Add(32);
             }

@@ -204,5 +204,14 @@
         public string CampagnProfileAutoCall = "sp_CampagnProfileAutoCall";
 
         public string CampagnProfileAutoUpdate = "sp_CampagnProfileAutoUpdate";
+
+
+
+        public string CrmReport_Talktime = "CrmReport_Talktime";
+
+        public string CrmReport_BystatusFolow = "CrmReport_BystatusFolow";
+        public string CrmReport_ByDetailGroupStatus = "CrmReport_ByDetailGroupStatus";
+        public string CrmReport_CrmReport_SumupTalktime = "CrmReport_SumupTalktime";
+
     }
 }
