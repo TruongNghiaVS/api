@@ -42,8 +42,7 @@ namespace sendEmail
                                 SendEmailReport(streamToReadFrom).Wait();
                             }
                         }
-                        //urlDowLoad = linkUrl + "" + urlDowLoad;
-                        //Console.WriteLine(urlDowLoad);
+                   
                        
                     } 
                     

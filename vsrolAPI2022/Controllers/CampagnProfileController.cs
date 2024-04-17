@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VS.core.API.Error.Model;
 using VS.core.API.model;
+using VS.core.API.policy;
 using VS.core.Request;
 using VS.core.Utilities;
 using VS.Core.Business.Interface;
@@ -11,6 +12,7 @@ namespace vsrolAPI2022.Controllers
 {
     [ApiController]
     [Authorize]
+    [VietstarAuthorize]
     [Route("[controller]")]
     public class CampagnProfileController : BaseController
     {

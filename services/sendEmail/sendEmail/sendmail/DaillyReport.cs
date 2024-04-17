@@ -11,7 +11,7 @@ namespace sendEmail.sendmail
         {
             var sendmailObject = new Sendmail();
             await sendmailObject.Send();
-            Console.WriteLine("Mail dailly report.");
+            Console.WriteLine("Completed send at:" + DateTime.Now.ToString("yyyy/MM/dd : HH:mm:ss" ));
             
         }
     }

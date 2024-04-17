@@ -100,9 +100,9 @@ string? pathFile
             To = DateTime.Now,
             UserId = "1"
         };
-        //CrmReportRequest request = null
+
         var userCurrent = GetCurrentUser();
-        //request.UserId = userCurrent.Id;
+       
         var userName = userCurrent.UserName;
         var filepath = "";
         var pathFile = await _business.ExportImpactStatusDetail(request2);

@@ -103,13 +103,7 @@ namespace vsrolAPI2022.Controllers
 
             if (OutPutData.Count < 1)
             {
-                //Start = DateTime.Now;
-                //dataGroupCheck = new GetAllTrackingGroupByLineCodeReponse();
-                //dataGroupCheck = await _reportTalkTimeGroupByDayBussiness.GetAllTracking(_input);
-                //if (dataGroupCheck != null)
-                //{
-                //    OutPutData = dataGroupCheck.Data as List<TrackingRecordGroupByLineCodeIndexModel>;
-                //}
+             
                await LoadData();
 
             }

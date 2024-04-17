@@ -1503,8 +1503,8 @@ CellValue = new CellValue("Grand Total")
                 
 
 
-                    var row = new Row();
-                    row.RowIndex = (uint)indexloop;
+                    var rowData = new Row();
+                    rowData.RowIndex = (uint)indexloop;
                   
                     if (item.ManagerName != managerNameWrite)
                     {
@@ -1516,7 +1516,7 @@ CellValue = new CellValue("Grand Total")
                             StyleIndex = (UInt32Value)1U,
                             CellValue = new CellValue(managerNameWrite)
                         };
-                        row.Append(cell2);
+                        rowData.Append(cell2);
                     }
                     else
                     {
@@ -1525,7 +1525,7 @@ CellValue = new CellValue("Grand Total")
                             DataType = CellValues.String,
                             CellValue = new CellValue("")
                         };
-                        row.Append(cell2);
+                        rowData.Append(cell2);
 
                     }
 
@@ -1543,10 +1543,10 @@ CellValue = new CellValue("Grand Total")
 
 
                    
-                    row.Append(cell3);
-                    row.Append(cell4);
+                    rowData.Append(cell3);
+                    rowData.Append(cell4);
 
-                    sheetData.Append(row);
+                    sheetData.Append(rowData);
                 }
 
                 var rowtotal = new Row();
@@ -1591,7 +1591,7 @@ CellValue = new CellValue("Grand Total")
                 {
                     DataType = CellValues.String,
                     StyleIndex = (UInt32Value)1U,
-                    DataType = CellValues.SharedString.
+                    
                     CellValue = new CellValue("Grand total")
                 }
             );

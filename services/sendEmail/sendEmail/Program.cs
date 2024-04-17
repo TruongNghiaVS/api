@@ -22,12 +22,27 @@ namespace sendEmail
                    q.AddTrigger(opts => opts
                 .ForJob(jobKey)
                 .WithIdentity("HelloWorldJob-trigger")
-                .WithCronSchedule("0 30 8 ? * MON,TUE,WED,THU,FRI *")
                 .WithCronSchedule("0 30 17 ? * SAT *")
                 );
                
-             });
-            services.AddQuartzHostedService(opt =>
+             }
+            );
+
+
+               services.AddQuartz(q =>
+               {
+                   q.UseMicrosoftDependencyInjectionJobFactory();
+                   var jobKey = new JobKey("sendReportJob2");
+                   q.AddJob<DaillyReport>(opts => opts.WithIdentity(jobKey));
+                   q.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity("HelloWorldJob-trigger")
+                .WithCronSchedule("0 30 8 ? * MON,TUE,WED,THU,FRI,SAT *")
+                );
+
+               }
+           );
+               services.AddQuartzHostedService(opt =>
             {
                 opt.WaitForJobsToComplete = true;
             });

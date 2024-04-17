@@ -40,6 +40,19 @@ builder.Services.AddQuartz(q =>
     );
 });
 
+builder.Services.AddQuartz(q =>
+{
+    var jobKey = new JobKey("ClearLogCallJob");
+    q.AddJob<ClearLogCallJob>(opts => opts.WithIdentity(jobKey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("ClearLogCallJob-trigger")
+        //This Cron interval can be described as "run every minute" (when second is zero)
+        .WithCronSchedule("0 0 20 ? * * *")
+    );
+});
+
 builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 
