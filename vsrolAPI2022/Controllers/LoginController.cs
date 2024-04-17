@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VS.core.API.Global;
 using VS.core.API.model;
 using VS.core.Report.Model;
 using VS.core.Utilities;
@@ -48,6 +49,8 @@ namespace vsrolAPI2022.Controllers
 
 
             await _loginReportBussiness.Add(loginreport);
+
+            UserContainer.GlobalContainer().AddUser(loginreport.UserName);
 
             string token = GetToken(loginUser);
             return Results.Ok(token);

@@ -4,6 +4,7 @@ using VS.core.Request;
 using vsrolAPI2022.Controllers;
 using VS.Core.Business.Interface;
 using DocumentFormat.OpenXml.Drawing;
+using VS.core.API.Global;
 
 namespace VS.core.API.job
 {
@@ -20,6 +21,7 @@ namespace VS.core.API.job
         {
             MakeCallController.GlobalLogCall.Clear();
             TrackingCallController.DataMember.Clear();
+            UserContainer.GlobalContainer().ClearData();
             await Task.FromResult(true);
         }
     }

@@ -22,7 +22,7 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("UpdateTrackingCall-trigger")
-        //This Cron interval can be described as "run every minute" (when second is zero)
+  
         .WithCronSchedule(" 0/1 * * * * ? *")
     );
 });
@@ -35,7 +35,7 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("UpdateDataGroupDB-trigger")
-        //This Cron interval can be described as "run every minute" (when second is zero)
+  
         .WithCronSchedule(" 0/15 * * * * ? *")
     );
 });
@@ -48,7 +48,7 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("ClearLogCallJob-trigger")
-        //This Cron interval can be described as "run every minute" (when second is zero)
+       
         .WithCronSchedule("0 0 20 ? * * *")
     );
 });
