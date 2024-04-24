@@ -35,7 +35,7 @@ namespace vsrolAPI2022.Controllers
         {
 
             var timerun = DateTime.Now;
-            timerun = timerun.AddMinutes(-12);
+            timerun = timerun.AddMinutes(-240);
             var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
 

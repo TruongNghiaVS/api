@@ -14,42 +14,28 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterBusiness();
+
 builder.Services.AddQuartz(q =>
 {
-    var jobKey = new JobKey("UpdateTrackingCall");
-    q.AddJob<UpdateTrackingCall>(opts => opts.WithIdentity(jobKey));
+    var jobKey = new JobKey("CalTimeJob");
+    q.AddJob<CalTimeJob>(opts => opts.WithIdentity(jobKey));
 
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
-        .WithIdentity("UpdateTrackingCall-trigger")
-  
-        .WithCronSchedule(" 0/1 * * * * ? *")
+        .WithIdentity("CalTimeJob-trigger")
+        .WithCronSchedule(" 0 */4 * ? * *")
     );
 });
 
 builder.Services.AddQuartz(q =>
 {
-    var jobKey = new JobKey("UpdateDataGroupDB");
-    q.AddJob<UpdateDataGroupDB>(opts => opts.WithIdentity(jobKey));
+    var jobKey = new JobKey("CalTimeJobCheck");
+    q.AddJob<CalTimeJobCheck>(opts => opts.WithIdentity(jobKey));
 
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
-        .WithIdentity("UpdateDataGroupDB-trigger")
-  
-        .WithCronSchedule(" 0/15 * * * * ? *")
-    );
-});
-
-builder.Services.AddQuartz(q =>
-{
-    var jobKey = new JobKey("ClearLogCallJob");
-    q.AddJob<ClearLogCallJob>(opts => opts.WithIdentity(jobKey));
-
-    q.AddTrigger(opts => opts
-        .ForJob(jobKey)
-        .WithIdentity("ClearLogCallJob-trigger")
-       
-        .WithCronSchedule("0 0 20 ? * * *")
+        .WithIdentity("CalTimeJobCheck-trigger")
+        .WithCronSchedule(" 0 0 */3 ? * *")
     );
 });
 
@@ -75,6 +61,8 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true
     };
 });
+
+
 
 builder.Services.AddAuthorization();
 

@@ -50,7 +50,7 @@ namespace vsrolAPI2022.Controllers
 
             await _loginReportBussiness.Add(loginreport);
 
-            UserContainer.GlobalContainer().AddUser(loginreport.UserName);
+            UserContainer.GlobalContainer().AddUser(userInput.UserName);
 
             string token = GetToken(loginUser);
             return Results.Ok(token);

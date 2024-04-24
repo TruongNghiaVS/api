@@ -8,13 +8,13 @@ using DocumentFormat.OpenXml.Drawing;
 
 namespace VS.core.API.job
 {
-    public class CalTimeJob : IJob
+    public class CalTimeJobCheck : IJob
     {
         private IHandleReportBussiness _handleReportBussiness;
    
         private readonly IReportTalkTimeGroupByDayBussiness _reportTalkTimeGroupByDayBussiness;
 
-        public CalTimeJob(
+        public CalTimeJobCheck(
             IReportTalkTimeGroupByDayBussiness reportTalkTimeGroupByDayBussiness,
             IHandleReportBussiness handleReportBussiness
             )
@@ -26,7 +26,7 @@ namespace VS.core.API.job
         public async Task Execute(IJobExecutionContext context)
         {
             var timerun = DateTime.Now;
-            timerun = timerun.AddMinutes(-12);
+            timerun = timerun.AddMinutes(-220);
             await _handleReportBussiness.CalTalkingTime(timerun);
             await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
             {
