@@ -4,6 +4,7 @@
     {
         public string? LineCode { get; set; }
         public string? NoAgree { get; set; }
+        public string? Linkedid { get; set; }
 
         public string? PhoneLog { get; set; }
 
@@ -16,8 +17,11 @@
         public int? CampangnId { get; set; }
 
         public DateTime? CallDate { get; set; }
-
         public DateTime? EventTime { get; set; }
+        public string? Lastapp { get; set; }
+        public string? LastData { get; set; }
+
+        public string? Disposition { get; set; }
 
         public ReportTalkTimeIndexModel()
         {

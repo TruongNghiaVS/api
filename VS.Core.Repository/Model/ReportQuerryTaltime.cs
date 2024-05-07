@@ -27,7 +27,8 @@
 
         public int DurationBill { get; set; }
         public double DurationReal { get; set; }
-
+        public string? Lastapp { get; set; }
+        public string? Lastdata { get; set; }
     }
 
 

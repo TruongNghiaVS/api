@@ -211,10 +211,6 @@ namespace vsrolAPI2022.Controllers
         }
         public async Task LoadData(int userId = 1)
         {
-
-                
-
-
             var request = new GetAllRecordGroupByLineCodeRequest()
             {
                 From = DateTime.Now,

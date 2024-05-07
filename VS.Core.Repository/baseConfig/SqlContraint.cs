@@ -94,6 +94,8 @@
         public string CampaignProfile_getAllNoted = "sp_campagnProfileGetAllNoted";
         public string CampaignProfile_exportData = "sp_CampaignProfile_ExportData";
         public string AutoCall_getProfileCall = "sp_getProfileCall";
+        public string AutoCallGetData = "sp_getProfileCall";
+
 
         public string CampaignImpact_insert = "sp_ImpactHistory_Insert";
         public string SkipInfo_insert = "sp_SkipInfo_Insert";
@@ -156,9 +158,9 @@
         public string ReportCampaignProfile = "sp_CampaignProfile_getOverviewDashboard";
 
 
-        public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert2";
+        public string ReportTalkTime_insert = "sp_ReportTalkTime_InsertAutoCall";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
-        public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
+        public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAllAutoCall";
         public string ReportgetAllCall = "sp_ReportgetAllCall";
         public string sms_getAll = "sp_sms_getAll";
         public string View_Recording = "sp_view_Recording";

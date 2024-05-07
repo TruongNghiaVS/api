@@ -3,8 +3,7 @@
     public interface IHandleReportBussiness
     {
         Task<int> CalTalkingTime(DateTime? dateGet = null);
-        Task<int> CalTalkingTimeAll(DateTime? dateGet = null);
+        Task<bool> HandleData();
 
-        Task<int> DeleteFileRecoring(bool? DeleteAll = false);
     }
 }

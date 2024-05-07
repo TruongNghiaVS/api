@@ -22,36 +22,42 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("UpdateTrackingCall-trigger")
-  
+        //This Cron interval can be described as "run every minute" (when second is zero)
         .WithCronSchedule(" 0/1 * * * * ? *")
     );
 });
 
+
 builder.Services.AddQuartz(q =>
 {
-    var jobKey = new JobKey("UpdateDataGroupDB");
-    q.AddJob<UpdateDataGroupDB>(opts => opts.WithIdentity(jobKey));
+
+    var jobkey = new JobKey("updatedatagroupdb");
+    q.AddJob<UpdateDataGroupDB>(opts => opts.WithIdentity(jobkey));
 
     q.AddTrigger(opts => opts
-        .ForJob(jobKey)
-        .WithIdentity("UpdateDataGroupDB-trigger")
-  
+        .ForJob(jobkey)
+        .WithIdentity("updatedatagroupdb-trigger")
         .WithCronSchedule(" 0/15 * * * * ? *")
     );
 });
 
+
+
 builder.Services.AddQuartz(q =>
 {
-    var jobKey = new JobKey("ClearLogCallJob");
-    q.AddJob<ClearLogCallJob>(opts => opts.WithIdentity(jobKey));
+
+    var jobkey = new JobKey("clearlogcalljob");
+    q.AddJob<ClearLogCallJob>(opts => opts.WithIdentity(jobkey));
 
     q.AddTrigger(opts => opts
-        .ForJob(jobKey)
-        .WithIdentity("ClearLogCallJob-trigger")
-       
+        .ForJob(jobkey)
+        .WithIdentity("clearlogcalljob-trigger")
         .WithCronSchedule("0 0 20 ? * * *")
     );
 });
+
+
+
 
 builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 

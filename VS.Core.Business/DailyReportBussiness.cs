@@ -1,14 +1,13 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using VS.core.Request;
 using VS.Core.Business.Interface;
 using VS.Core.Repository.baseConfig;
 using VS.Core.Repository.Model;
-using VS.core.Request;
-using Workbook = DocumentFormat.OpenXml.Spreadsheet.Workbook;
 using Sheets = DocumentFormat.OpenXml.Spreadsheet.Sheets;
+using Workbook = DocumentFormat.OpenXml.Spreadsheet.Workbook;
 using Worksheet = DocumentFormat.OpenXml.Spreadsheet.Worksheet;
-using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace VS.Core.Business;
 
@@ -227,11 +226,11 @@ public class DailyReportBussiness : IDailyReportBussiness
 
                 var itemCreaeAt = item.CreateAt.Value;
 
-                
+
                 var itemUpdate = itemCreaeAt;
-                if ( item.UpdateAt == null || item.UpdateAt.HasValue == false)
+                if (item.UpdateAt == null || item.UpdateAt.HasValue == false)
                 {
-                    
+
                 }
                 else
                 {
@@ -251,7 +250,7 @@ public class DailyReportBussiness : IDailyReportBussiness
                         DataType = CellValues.Date,
                         CellValue = new CellValue(itemUpdate)
                     }
-                );  
+                );
                 sheetData.Append(row);
             }
 
@@ -300,13 +299,13 @@ public class DailyReportBussiness : IDailyReportBussiness
             //add document properties
             document.PackageProperties.Creator = "nghiait";
             document.PackageProperties.Created = DateTime.UtcNow;
-            if(string.IsNullOrEmpty(request.UserId))
+            if (string.IsNullOrEmpty(request.UserId))
             {
                 request.UserId = "-1";
             }
             var requestQuery = new CampagnProfileExportRequest
             {
-                CampaignId = "1045",
+                CampaignId = "1046",
                 From = request.From,
                 To = request.To,
                 GroupId = request.GroupId,
@@ -707,7 +706,7 @@ public class DailyReportBussiness : IDailyReportBussiness
                     CellValue = new CellValue(item.NationalId)
                 });
 
-              
+
 
                 var valueDateText = "";
                 if (item.RegisterDay.HasValue)
@@ -798,7 +797,7 @@ public class DailyReportBussiness : IDailyReportBussiness
                     CellValue = new CellValue(item.TotalFines)
                 });
 
-                
+
 
                 row.Append(new Cell
                 {
@@ -829,7 +828,7 @@ public class DailyReportBussiness : IDailyReportBussiness
                 row.Append(new Cell
                 {
                     DataType = CellValues.Number,
-                    CellValue = new CellValue(item.DPD.HasValue?item.DPD.Value:0)
+                    CellValue = new CellValue(item.DPD.HasValue ? item.DPD.Value : 0)
                 });
 
                 row.Append(new Cell
@@ -1074,7 +1073,7 @@ public class DailyReportBussiness : IDailyReportBussiness
             }
             var requestQuery = new CampagnProfileExportRequest
             {
-                CampaignId = "1045",
+                CampaignId = "1046",
                 From = request.From,
                 To = request.To,
                 GroupId = request.GroupId,
@@ -1096,7 +1095,7 @@ public class DailyReportBussiness : IDailyReportBussiness
                     CellValue = new CellValue("CONTRACT NUMBER\r\nHợp đồng")
                 }
             );
-           
+
             row1.Append(
                 new Cell
                 {

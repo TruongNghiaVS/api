@@ -55,39 +55,21 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
         }
 
-        [HttpGet("~/api/job/CalculatingTalktime3")]
-        public async Task<ActionResult> CalculatingTalktime3()
+        [HttpGet("~/api/job/HanleData")]
+        public async Task<ActionResult> HanleData()
         {
+            var resultSearch = await _handleReportBussiness.HandleData();
 
-            var timerun = new DateTime(2024, 2, 15, 0, 0, 0);
-            var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
-            Task.WaitAll();
-
-            var startTime = timerun;
-            var endTime = DateTime.Now.AddDays(1).EndDateTime();
-            while (startTime < endTime)
-            {
-                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-                {
-                    TimeSelect = startTime
-
-                });
-                Task.WaitAll();
-                startTime = startTime.AddDays(1);
-            }
             Task.WaitAll();
             return Ok(true);
         }
 
-        [HttpGet("~/api/job/CalculatingTalktime2")]
-        public async Task<ActionResult> CalculatingTalktime2()
+        [HttpGet("~/api/job/handleBusiness")]
+        public async Task<ActionResult> HandleBusiness()
         {
 
             var timerun = DateTime.Now;
-            timerun = timerun.AddMinutes(-60);
-
-
-
+            timerun = timerun.AddMinutes(-12);
             var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
 
@@ -107,72 +89,6 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
         }
 
-        [HttpGet("~/api/job/RunCalTimeEndDay")]
-        public async Task<ActionResult> RunCalTimeEndDay()
-        {
-            var timerun = DateTime.UtcNow;
-            timerun = timerun.AddHours(-3);
-            var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
-            Task.WaitAll();
-
-            var startTime = timerun;
-            var endTime = DateTime.Now.AddDays(1).EndDateTime();
-            while (startTime < endTime)
-            {
-                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-                {
-                    TimeSelect = startTime
-
-                });
-                Task.WaitAll();
-                startTime = startTime.AddDays(1);
-            }
-            Task.WaitAll();
-            return Ok(true);
-        }
-
-
-
-        [HttpGet("~/api/job/GroupByDate")]
-        public async Task<ActionResult> GroupByDate()
-        {
-            var timeSelect = DateTime.UtcNow;
-            await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-            {
-                TimeSelect = timeSelect
-            });
-            Task.WaitAll();
-            return Ok(true);
-
-
-        }
-
-
-        [HttpGet("~/api/job/RunSumCampagnOverview")]
-        public async Task<ActionResult> RunSumCampagnOverview()
-        {
-            await _campagnBusiness.UpdateOverViewAllCampagn();
-
-            return Ok(true);
-
-        }
-
-
-        private async void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            var resultSearch = await _handleReportBussiness.CalTalkingTime();
-        }
-
-
-        private async void OnTimedEventGroupByDay(Object source, System.Timers.ElapsedEventArgs e)
-        {
-
-            await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
-            {
-
-            });
-
-        }
 
 
     }

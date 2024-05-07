@@ -30,6 +30,9 @@
 
         public int? Sourcecall { get; set; }
 
+
+        public string Lastapp { get; set; }
+        public string LastData { get; set; }
         public ReportTalkTime()
         {
 

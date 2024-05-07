@@ -1,21 +1,17 @@
 ﻿using Quartz;
-using VS.Core.Repository.Model;
-using VS.core.Request;
-using vsrolAPI2022.Controllers;
-using VS.Core.Business.Interface;
-using DocumentFormat.OpenXml.Drawing;
 using VS.core.API.Global;
+using vsrolAPI2022.Controllers;
 
 namespace VS.core.API.job
 {
     public class ClearLogCallJob : IJob
     {
-        
+
 
         public ClearLogCallJob(
            )
         {
-        
+
         }
         public async Task Execute(IJobExecutionContext context)
         {

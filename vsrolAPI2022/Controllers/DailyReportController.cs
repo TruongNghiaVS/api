@@ -1,8 +1,7 @@
-﻿using DocumentFormat.OpenXml.VariantTypes;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VS.Core.Business.Interface;
 using VS.core.Request;
+using VS.Core.Business.Interface;
 
 namespace vsrolAPI2022.Controllers;
 
@@ -18,7 +17,7 @@ public class DailyReportController : BaseController
     public DailyReportController(IUserBusiness userBusiness,
         IDailyReportBussiness handleReportBussiness) : base(userBusiness)
     {
-    
+
         _business = handleReportBussiness;
     }
 
@@ -26,7 +25,7 @@ public class DailyReportController : BaseController
     [HttpGet("~/api/dailyReport/GetFileFinalReport")]
     public async Task<ActionResult> GetFileFinalReport(string? fileName)
     {
-        if (string.IsNullOrEmpty(fileName)) 
+        if (string.IsNullOrEmpty(fileName))
             fileName = DateTime.Now.ToString("dd.MM.yy") + ".xlsx";
         var pathfolder = "C:\\vietbank\\crm\\api\\vsrolAPI2022\\DaillyReport\\totalReport";
         var path = Path.Combine(pathfolder, fileName);
@@ -44,14 +43,14 @@ public class DailyReportController : BaseController
             To = DateTime.Now,
             Limit = 10,
             VendorId = 8,
-            CampaignId = "1045"
+            CampaignId = "1046"
         };
         var result = await _business.ExportFileTotal(request, "totalReport");
 
         return Results.Ok(result);
     }
 
-   
+
     [HttpPost("~/api/dailyReport/exportFile")]
     public async Task<ActionResult> ExportFile(
         CampagnProfileExportRequest request
@@ -61,7 +60,7 @@ public class DailyReportController : BaseController
         request.UserId = userCurrent.Id;
         var userName = userCurrent.UserName;
         var filepath = "";
-        if(userCurrent.RoleId == "2")
+        if (userCurrent.RoleId == "2")
         {
             var result = await _business.ExportFileExcel(request, userName);
             filepath = "/api/dailyReport/getFileExport?fileName=" + userName + "/" + result;
@@ -73,7 +72,7 @@ public class DailyReportController : BaseController
         }
         return Ok(filepath);
     }
-   
+
 
 
 
@@ -88,7 +87,7 @@ public class DailyReportController : BaseController
         return Ok(filePath);
     }
 
-   
+
 
     [AllowAnonymous]
     [HttpGet("~/api/dailyReport/getFileExport")]
