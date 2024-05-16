@@ -117,15 +117,9 @@ namespace VS.Core.Business
 
         }
         public async Task<bool> Run()
-        {   //load data
-
-
+        {
             await CenterCall();
-
             return true;
-
-
-
         }
 
 
@@ -158,11 +152,7 @@ namespace VS.Core.Business
                         continue;
 
                     }
-
                     allChanel.Add(textArray[0]);
-
-
-
                 }
                 listActive = ChanelCall.Where(p => allChanel.All(p2 => !p2.Contains(p))).ToList();
 
@@ -170,8 +160,6 @@ namespace VS.Core.Business
                 {
                     return true;
                 }
-
-
             }
 
             foreach (var item2 in listActive)
@@ -222,19 +210,16 @@ namespace VS.Core.Business
                 var infomationResult = await GetInfomationCall("3000", phoneNumber);
 
                 var islive = false;
-                var Lastdata = "";
+                var lastdata = "";
                 foreach (var item1 in infomationResult)
                 {
-                    Lastdata = item1.Lastdata;
+                    lastdata = item1.Lastdata;
                     if (item1.Disposition == "ANSWERED")
                     {
-
                         islive = true;
-
                     }
 
                 }
-
                 callList.Remove(item);
                 await UpdateCampagnAuto(item.Id.ToString(), islive);
 

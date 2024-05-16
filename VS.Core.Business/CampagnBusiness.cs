@@ -8,7 +8,7 @@ namespace VS.Core.Business
 {
     public class CampagnBusiness : BaseBusiness, ICampagnBussiness
     {
- 
+
         public CampagnBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
@@ -40,11 +40,6 @@ namespace VS.Core.Business
         {
             return _unitOfWork.CampagnRe.GetOverViewDashboardById(request);
         }
-
-        //public Task<CampangnOverviewByIdReponse> getOverViewDashboardById(CampangnOverviewByIdRequest request)
-        //{
-        //    return _unitOfWork.CampagnRe.getOverViewDashboardById(request);
-        //}
 
 
         public async Task<CampagnAsiggeeByCampagnIdReponse> GetAllAsiggeeByCampagnId(
@@ -157,10 +152,10 @@ namespace VS.Core.Business
             var vendorId = _campagnImport.VendorId;
             foreach (var item in listData)
             {
-                if ( string.IsNullOrEmpty(item.AssignedId))
+                if (string.IsNullOrEmpty(item.AssignedId))
                 {
                     continue;
-                }    
+                }
                 var itemInsert = new CampagnProfile
                 {
                     CustomerName = item.CustomerName,
@@ -247,7 +242,7 @@ namespace VS.Core.Business
                     result.MobilePhone = item.MobilePhone;
                     result.Phone1 = item.Phone1;
                     result.AmountLoan = item.AmountLoan;
-                   
+
                     result.CampaignId = item.CampaignId;
                     result.CodeProduct = item.CodeProduct;
                     result.CreateAt = item.CreateAt;
@@ -645,7 +640,7 @@ namespace VS.Core.Business
                 return reponse;
             }
 
-            
+
             var allImpactHistory = await _unitOfWork.ImpactRe.GetALl(
                 new ImpactHistorySerarchRequest() { ProfileId = id, NoAgreement = result.NoAgreement }
             );
@@ -665,11 +660,11 @@ namespace VS.Core.Business
             reponse.ListUser = listUser.Data;
             reponse.Result = result;
             var statusText = "Chưa rõ trạng thái";
-            if (allImpactHistory !=null )
+            if (allImpactHistory != null)
             {
                 reponse.ListHistory = allImpactHistory.Data;
-            } 
-          
+            }
+
 
             if (result.Status == 0)
             {
