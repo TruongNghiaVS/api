@@ -16,7 +16,7 @@ namespace VS.core.API.job
         public async Task Execute(IJobExecutionContext context)
         {
             MakeCallController.GlobalLogCall.Clear();
-            TrackingCallController.DataMember.Clear();
+
             UserContainer.GlobalContainer().ClearData();
             await Task.FromResult(true);
         }

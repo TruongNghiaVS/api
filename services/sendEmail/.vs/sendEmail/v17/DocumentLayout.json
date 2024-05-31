@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\vietbank\\crm\\api\\services\\sendEmail\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\sendmail\\daillyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\sendmail\\daillyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\sendmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\sendmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DaillyReport.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\DaillyReport.cs",
-              "RelativeDocumentMoniker": "sendEmail\\sendmail\\DaillyReport.cs",
-              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\DaillyReport.cs",
-              "RelativeToolTip": "sendEmail\\sendmail\\DaillyReport.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "Sendmail.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\Sendmail.cs",
+              "RelativeDocumentMoniker": "sendEmail\\Sendmail.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\Sendmail.cs",
+              "RelativeToolTip": "sendEmail\\Sendmail.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAowBcAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T02:57:39.396Z",
+              "WhenOpened": "2024-05-16T01:51:42.081Z",
               "EditorCaption": ""
             }
           ]

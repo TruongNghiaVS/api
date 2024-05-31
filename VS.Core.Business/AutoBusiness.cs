@@ -11,7 +11,11 @@ namespace VS.Core.Business
 {
 
 
-
+    public class PhoneLive
+    {
+        public string Phone { get; set; }
+        public int Status { get; set; }
+    }
     public class ChanelStatusApi
     {
 
@@ -25,29 +29,16 @@ namespace VS.Core.Business
     {
 
         public static List<CampagnProfile> ListCall { get; set; }
-
-
         private static List<string> ChanelCall { get; set; }
         private DataCallContainer DataCall { get; set; }
         public AutoBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             ListCall = new List<CampagnProfile>();
             ChanelCall = new List<string>();
-            ChanelCall.Add("8888");
-            ChanelCall.Add("9999");
+            ChanelCall.Add("3000");
+            //ChanelCall.Add("9999");
             DataCall = DataCallContainer.GlobalContainer();
 
-        }
-
-
-        public Task<int> Add(CampagnProfile entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(CampagnProfile entity)
-        {
-            throw new NotImplementedException();
         }
 
         public Task<GetAllProfileByCampangReponse> GetAllCampagn(
@@ -83,12 +74,7 @@ namespace VS.Core.Business
             return data;
         }
 
-
-        public Task<CampagnProfile> GetByIdAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-        private async Task<bool> MakeCall(string phoneNumber = "", string chanel = "8888")
+        private async Task<bool> MakeCall(string phoneNumber, string chanel)
         {
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
@@ -97,7 +83,7 @@ namespace VS.Core.Business
                 lineCode = chanel
             }));
             data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var linkUrl = "http://192.168.1.151:3002";
+            var linkUrl = "http://192.168.1.10:3002";
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(linkUrl);
@@ -107,8 +93,6 @@ namespace VS.Core.Business
             }
             return true;
         }
-
-
         private async Task ACD(string chanel)
         {
             var itemCall = await DataCall.GetDataCall();
@@ -121,11 +105,8 @@ namespace VS.Core.Business
             await CenterCall();
             return true;
         }
-
-
         private async Task<bool> CenterCall()
         {
-
             if (!DataCall.CheckValidCall())
             {
                 return false;
@@ -135,7 +116,7 @@ namespace VS.Core.Business
 
             }));
             data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var linkUrl = "http://192.168.1.151:3002";
+            var linkUrl = "http://192.168.1.10:3002";
             var listActive = new List<string>();
             using (var client = new HttpClient())
             {
@@ -143,19 +124,18 @@ namespace VS.Core.Business
                 var reponse = await client.PostAsync("api/chanelGetStatus", data);
                 var result = await reponse.Content.ReadAsStringAsync();
                 var allChanel = new List<string>();
-                var resultPart = JsonConvert.DeserializeObject<ChanelStatusApi>(result);
+                var resultPart = JsonConvert
+                                .DeserializeObject<ChanelStatusApi>(result);
                 foreach (var item in resultPart.Output)
                 {
                     var textArray = item.Split(' ');
                     if (textArray.Length < 1 || textArray[0].Length < 8)
                     {
                         continue;
-
                     }
                     allChanel.Add(textArray[0]);
                 }
                 listActive = ChanelCall.Where(p => allChanel.All(p2 => !p2.Contains(p))).ToList();
-
                 if (listActive == null)
                 {
                     return true;
@@ -165,64 +145,120 @@ namespace VS.Core.Business
             foreach (var item2 in listActive)
             {
                 await ACD(item2);
-
-
             }
             return true;
 
-        }
-
-
-
-        private bool LoadDataCall()
-        {
-            return true;
         }
         public async Task<bool> GetData()
         {
-            var camprofileGet = await GetProfileCall();
-            await MakeCall("0383338840");
+            await GetProfileCall();
+            await MakeCall("0383338840", "3000");
             return true;
 
         }
 
-        public Task<int> UpdateAsyn(CampagnProfile entity)
+        private async Task HandleTwoCase(IGrouping<string, ReportQuerryCallResult> listHandle,
+            List<PhoneLive> DataLists)
         {
-            throw new NotImplementedException();
-        }
+            var itemlist = listHandle.ToList();
 
-        public async Task<bool> HandleAutoBussiness()
-        {
-
-            if (ConatinnerCall.Contanner.DataCall.Count < 1)
+            var item1 = itemlist[0];
+            var item2 = itemlist[1];
+            if (item1.Lastapp == "Dial" && item1.Disposition == "BUSY")
             {
-                ConatinnerCall.Contanner.DataCall.Add(
-                new CampagnProfile()
+                if (item1.DurationBill > 40)  // case goi khong bat may ( de troi)
                 {
-                    Id = "860386"
+                    DataLists.Add(new PhoneLive()
+                    {
+                        Phone = item1.PhoneLog,
+                        Status = 2  //goi khong bat may
+
+                    });
+                    return;
+                }
+                else if (item2.DurationBill > 20 && item2.DurationBill <= 25)
+                {
+                    DataLists.Add(new PhoneLive()
+                    {
+                        Phone = item1.PhoneLog,
+                        Status = 4  //goi thuê bao
+
+                    });
+                    return;
+                }
+                //case may bay
+
+                // case busy . thue bao
+                DataLists.Add(new PhoneLive()
+                {
+                    Phone = item1.PhoneLog,
+                    Status = 0  //busy  
+
+                });
+
+                return;
+
+
+            }
+            else if (item1.Lastapp == "Dial" && item1.Disposition == "NO ANSWER")
+            {
+
+                if (item2.Lastapp == "Congestion")
+                {
+                    DataLists.Add(new PhoneLive()  // số điện thoại không đúng
+                    {
+                        Phone = item1.PhoneLog,
+                        Status = 3
+
+                    });
+                }
+
+                else
+                {
+                    DataLists.Add(new PhoneLive()  // số điện thoại không đúng cas2
+                    {
+                        Phone = item1.PhoneLog,
+                        Status = 5
+                    });
+                }
+
+            }
+
+            else
+            {
+                DataLists.Add(new PhoneLive()  // số điện thoại không đúng
+                {
+                    Phone = item1.PhoneLog,
+                    Status = 6 // no underfile
+
+
                 });
             }
-            var callList = ConatinnerCall.Contanner.DataCall;
+        }
 
-            foreach (var item in callList.ToList())
+        private async Task HandleCase(IGrouping<string, ReportQuerryCallResult> listHandle,
+            List<PhoneLive> DataLists)
+        {
+            if (listHandle.Count() < 2)
             {
-                var phoneNumber = "0383338840";
-                var infomationResult = await GetInfomationCall("3000", phoneNumber);
+                await HandleOneCase(listHandle, DataLists);
+                return;
+            }
+            await HandleTwoCase(listHandle, DataLists);
 
-                var islive = false;
-                var lastdata = "";
-                foreach (var item1 in infomationResult)
+        }
+        public async Task<bool> HandleAutoBussiness()
+        {
+            var infomationResult = await GetInfomationCall("3000", "");
+            var groupByLineCode = infomationResult.GroupBy(x => x.LineCode);
+            var phoneLive = new List<PhoneLive>();
+            foreach (var itemgroup in groupByLineCode)
+            {
+                var linkEds = itemgroup.GroupBy(x => x.Linkedid).ToList();
+                foreach (var itemRow in linkEds)
                 {
-                    lastdata = item1.Lastdata;
-                    if (item1.Disposition == "ANSWERED")
-                    {
-                        islive = true;
-                    }
-
+                    await HandleCase(itemRow, phoneLive);
                 }
-                callList.Remove(item);
-                await UpdateCampagnAuto(item.Id.ToString(), islive);
-
             }
             return true;
         }

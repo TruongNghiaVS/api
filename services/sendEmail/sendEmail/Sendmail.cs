@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sendEmail
 {
@@ -18,7 +12,7 @@ namespace sendEmail
 
 
         public async Task Send()
-  
+
         {
             var data = new StringContent("nghia");
             data.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -30,35 +24,29 @@ namespace sendEmail
                     requestInfo.BaseAddress = new Uri(linkUrl);
                     var reponse = await requestInfo.GetAsync("api/dailyReport/GetFileReportTotal");
                     var urlDowLoad = await reponse.Content.ReadAsStringAsync();
-                    if(urlDowLoad != "")
+                    if (urlDowLoad != "")
                     {
                         urlDowLoad = linkUrl + "" + urlDowLoad;
                         using (HttpClient client3 = new HttpClient())
                         {
-                           
+
                             using (HttpResponseMessage response = await client3.GetAsync(urlDowLoad))
                             using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
                             {
                                 SendEmailReport(streamToReadFrom).Wait();
                             }
                         }
-                   
-                       
-                    } 
-                    
 
 
-
-
-
-                }  
+                    }
+                }
 
             }
 
 
         }
 
-  
+
         public async Task SendEmailReport(Stream urlDowLoad)
         {
             using (SmtpClient client = new SmtpClient("mail92115.maychuemail.com", 587))
@@ -81,7 +69,7 @@ namespace sendEmail
                 message.Body = body;
                 message.Attachments.Add
                     (new Attachment(urlDowLoad,
-                    DateTime.Now.ToString("yyyy.MM.dd")+ "StatusAllCase.xlsx")); 
+                    DateTime.Now.ToString("yyyy.MM.dd") + "StatusAllCase.xlsx"));
                 client.Send(message);
                 Console.WriteLine("Mail dailly report.");
                 Console.Read();

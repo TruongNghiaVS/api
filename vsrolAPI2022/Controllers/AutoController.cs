@@ -4,13 +4,12 @@ namespace vsrolAPI2022.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AutoController : BaseController
+    public class AutoController
     {
         private readonly IAutoBussiness _business;
         public AutoController(
-            IAutoBussiness autoBussiness,
-            IUserBusiness userBusiness
-       ) : base(userBusiness)
+            IAutoBussiness autoBussiness
+       )
         {
             _business = autoBussiness;
         }
@@ -18,6 +17,13 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> HandlerAutoCall()
         {
             await _business.Run();
+            return Results.Ok(new { success = true });
+        }
+
+        [HttpGet("~/api/auto/handle")]
+        public async Task<IResult> HandleAutoBussiness()
+        {
+            await _business.HandleAutoBussiness();
             return Results.Ok(new { success = true });
         }
     }

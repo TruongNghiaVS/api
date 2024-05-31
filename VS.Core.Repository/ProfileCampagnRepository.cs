@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System.Data;
 using VS.core.Request;
 using VS.Core.dataEntry.User;
@@ -74,7 +73,7 @@ namespace VS.Core.Repository
 
             }
         }
-        
+
         public async Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request)
         {
             int page = request.Page;
@@ -358,10 +357,10 @@ namespace VS.Core.Repository
         public async Task<int> ImportUpdate(CampagnProfile entity)
         {
 
-            if(string.IsNullOrEmpty(entity.Assignee))
+            if (string.IsNullOrEmpty(entity.Assignee))
             {
                 return 0;
-            }    
+            }
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
             var par = GetParams(entity, new string[] {
@@ -412,8 +411,8 @@ namespace VS.Core.Repository
             {
                 //string listOfIdsJoined = "(" + String.Join(",'", dataDelete.ToArray()) + ")";
                 //string arrayResult = "( ";
-   
-                    for (int i = 0; i < dataDelete.Count; i++)
+
+                for (int i = 0; i < dataDelete.Count; i++)
                 {
                     using (var con = GetConnection())
                     {
@@ -424,20 +423,20 @@ namespace VS.Core.Repository
 
                     }
                 }
-                
+
 
                 return true;
 
-                    //arrayResult += " ) ";
-                    //var sql = "update CampaignProfile set Deleted = 1, UpdateAt =getdate()  where CampaignId = @CampaignId and  NoAgreement in @dataDelete";
-                    //var result = await con.ExecuteAsync(sql, new
-                    //{
-                    //    dataDelete = arrayResult,
-                    //    CampaignId = requestId
-                    //});
-                  
+                //arrayResult += " ) ";
+                //var sql = "update CampaignProfile set Deleted = 1, UpdateAt =getdate()  where CampaignId = @CampaignId and  NoAgreement in @dataDelete";
+                //var result = await con.ExecuteAsync(sql, new
+                //{
+                //    dataDelete = arrayResult,
+                //    CampaignId = requestId
+                //});
 
-                
+
+
             }
             catch (Exception e)
             {
@@ -476,9 +475,9 @@ namespace VS.Core.Repository
                 return new List<CampagnProfile>();
             }
         }
-      
 
-        public async Task<CampagnProfile> GetProfileCall( )
+
+        public async Task<CampagnProfile> GetProfileCall()
         {
             try
             {
@@ -486,15 +485,15 @@ namespace VS.Core.Repository
                 {
                     var result = await con.QueryAsync<CampagnProfile>(_Sql.AutoCall_getProfileCall, new
                     {
-                       
+
                     }, commandType: CommandType.StoredProcedure);
-                    if(result == null )
+                    if (result == null)
                     {
                         return new CampagnProfile()
                         {
                             Id = "-1"
                         };
-                    }    
+                    }
                     return result.First();
                 }
             }
@@ -506,34 +505,30 @@ namespace VS.Core.Repository
                 };
             }
         }
-        
-        public async Task <List<ReportQuerryCallResult>> GetInfomationCall(string linecode,
+
+        public async Task<List<ReportQuerryCallResult>> GetInfomationCall(string linecode,
             string phoneNumber
 
          )
         {
             using (var con = GetConnectionAutoCall())
             {
-                var sqlQuerry = " SELECT * FROM  cdr WHERE src ='3000' AND dst =@phoneNumber and lastapp ='Dial'  ";
-                var result = await con.QueryAsync<ReportQuerryCallResult>
-                    (sqlQuerry, new
-                    {
-                        phoneNumber
-                    });
+                var sqlQuerry = "  SELECT d.src AS 'LineCode',  d.dst AS 'PhoneLog', d.lastapp AS Lastapp , d.lastdata AS lastdata , d.duration AS  Duration ,\r\n\r\nd.billsec AS  DurationBill, d.disposition AS Disposition ,d.linkedid AS Linkedid , d.calldate AS CallDate ,d.recordingfile  AS FileRecording   FROM cdr d ORDER BY  d.src ASC , d.calldate asc ";
+                var result = await con.QueryAsync<ReportQuerryCallResult>(sqlQuerry);
                 var data = result.ToList();
-                if(data ==null)
+                if (data == null)
                 {
                     data = new List<ReportQuerryCallResult>();
                 }
                 return data;
             }
-            return new List<ReportQuerryCallResult>();
+
         }
 
 
         public async Task<bool> UpdateCampagnAuto(string id,
          bool resultCall)
-         {
+        {
             try
             {
 
@@ -554,7 +549,7 @@ namespace VS.Core.Repository
                 return false;
             }
         }
-      
+
         public async Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp)
         {
             try

@@ -1,65 +1,35 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Quartz;
 using System.Text;
-using VS.core.API.job;
 using VS.Core.Business.Infrastructures;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterBusiness();
-builder.Services.AddQuartz(q =>
-{
-    var jobKey = new JobKey("UpdateTrackingCall");
-    q.AddJob<UpdateTrackingCall>(opts => opts.WithIdentity(jobKey));
-
-    q.AddTrigger(opts => opts
-        .ForJob(jobKey)
-        .WithIdentity("UpdateTrackingCall-trigger")
-        //This Cron interval can be described as "run every minute" (when second is zero)
-        .WithCronSchedule(" 0/1 * * * * ? *")
-    );
-});
 
 
-builder.Services.AddQuartz(q =>
-{
+//builder.Services.AddQuartz(q =>
+//{
 
-    var jobkey = new JobKey("updatedatagroupdb");
-    q.AddJob<UpdateDataGroupDB>(opts => opts.WithIdentity(jobkey));
+//    var jobkey = new JobKey("updatedatagroupdb");
+//    q.AddJob<UpdateDataGroupDB>(opts => opts.WithIdentity(jobkey));
 
-    q.AddTrigger(opts => opts
-        .ForJob(jobkey)
-        .WithIdentity("updatedatagroupdb-trigger")
-        .WithCronSchedule(" 0/15 * * * * ? *")
-    );
-});
-
-
-
-builder.Services.AddQuartz(q =>
-{
-
-    var jobkey = new JobKey("clearlogcalljob");
-    q.AddJob<ClearLogCallJob>(opts => opts.WithIdentity(jobkey));
-
-    q.AddTrigger(opts => opts
-        .ForJob(jobkey)
-        .WithIdentity("clearlogcalljob-trigger")
-        .WithCronSchedule("0 0 20 ? * * *")
-    );
-});
+//    q.AddTrigger(opts => opts
+//        .ForJob(jobkey)
+//        .WithIdentity("updatedatagroupdb-trigger")
+//        .WithCronSchedule(" 0/15 * * * * ? *")
+//    );
+//});
 
 
 
 
-builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
+
+
+//builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 
 builder.Services.AddAuthentication(options =>
