@@ -1,22 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using VS.core.Request;
-using VS.Core.Business;
-using VS.Core.Business.Interface;
 using System.Net.Http.Headers;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using DocumentFormat.OpenXml.VariantTypes;
-using VS.Core.Repository.Model;
-using System.Linq;
 using System.Text.RegularExpressions;
-using NAudio.Wave;
-using AutoMapper;
+using VS.core.Request;
+using VS.Core.Business.Interface;
+using VS.Core.Repository.Model;
 
 namespace vsrolAPI2022.Controllers
 {
 
-    public class  TrackingCallApi
+    public class TrackingCallApi
     {
 
         public string Response { get; set; }
@@ -27,7 +21,8 @@ namespace vsrolAPI2022.Controllers
     }
 
     public class TrackingCallAs
-    {   public string Channel { get; set; }
+    {
+        public string Channel { get; set; }
         public string Context { get; set; }
         public string Extension { get; set; }
         public string Prio { get; set; }
@@ -103,8 +98,8 @@ namespace vsrolAPI2022.Controllers
 
             if (OutPutData.Count < 1)
             {
-             
-               await LoadData();
+
+                await LoadData();
 
             }
             if (DataMember.Count < 1)
@@ -171,7 +166,7 @@ namespace vsrolAPI2022.Controllers
                 GroupMemer.Add(23);
                 GroupMemer.Add(29);
             }
-            if(userIdInput ==1)
+            if (userIdInput == 1)
             {
                 return Results.Ok(new
                 {
@@ -183,21 +178,21 @@ namespace vsrolAPI2022.Controllers
             else
             {
                 var listLineCode = DataMember.Where(x => GroupMemer.Contains(x.Groupid)).Select(x => x.LineCode).ToArray();
-                 return Results.Ok(new
+                return Results.Ok(new
                 {
                     Data = OutPutData.Where(x => listLineCode.Contains(x.LineCode)).ToList(),
                     Total = OutPutData.Count
 
                 });
-            } 
-                
-            
+            }
+
+
         }
 
 
         public static List<GroupEmployeeViewIndexModel> DataMember = new List<GroupEmployeeViewIndexModel>();
 
-        public async Task LoadAllMember ()
+        public async Task LoadAllMember()
         {
             var memberList = await _groupEmpBussiness.getMemberByGroup(new MemberGroupByIdRequest()
             {
@@ -216,10 +211,10 @@ namespace vsrolAPI2022.Controllers
                 From = DateTime.Now,
                 To = DateTime.Now,
                 UserId = "1",
-                TimeSelect =DateTime.Now
+                TimeSelect = DateTime.Now
             };
             dataGroupCheck = await _reportTalkTimeGroupByDayBussiness.GetAllTracking
-                
+
             (
                 request
             );
@@ -238,50 +233,50 @@ namespace vsrolAPI2022.Controllers
 
         public static bool IsValidPhoneNumber(string phoneCheck)
         {
-            if (phoneCheck.Length < 9 || phoneCheck.Length >12)
+            if (phoneCheck.Length < 9 || phoneCheck.Length > 12)
             {
                 return false;
             }
             var regex = "^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$";
             var phoneNumber = phoneCheck.Trim()
-                .Replace("\"","")
+                .Replace("\"", "")
                 .Replace(" ", "")
                 .Replace("-", "")
                 .Replace("(", "")
                 .Replace(")", "");
             return Regex.Match(phoneNumber, regex).Success;
         }
-        
-       private   bool IsValidChanel( string chanelCheck)
-    {
-        if(chanelCheck.Length != 4)
-        {
-             return false;
-        }
-        var regex = @"\d{4}";
-        var phoneNumber = chanelCheck.Trim()
-            .Replace(" ", "")
-            .Replace("-", "")
-            .Replace("(", "")
-            .Replace(")", "");
-        return Regex.Match(phoneNumber, regex).Success;
-    }
 
-       private  bool IsValidTiemHour( string This)
-    {
-        var regex = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$";
-        var phoneNumber = This.Trim()
-            .Replace(" ", "")
-            .Replace("-", "")
-            .Replace("(", "")
-            .Replace(")", "");
-        return Regex.Match(phoneNumber, regex).Success;
-    }
+        private bool IsValidChanel(string chanelCheck)
+        {
+            if (chanelCheck.Length != 4)
+            {
+                return false;
+            }
+            var regex = @"\d{4}";
+            var phoneNumber = chanelCheck.Trim()
+                .Replace(" ", "")
+                .Replace("-", "")
+                .Replace("(", "")
+                .Replace(")", "");
+            return Regex.Match(phoneNumber, regex).Success;
+        }
+
+        private bool IsValidTiemHour(string This)
+        {
+            var regex = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$";
+            var phoneNumber = This.Trim()
+                .Replace(" ", "")
+                .Replace("-", "")
+                .Replace("(", "")
+                .Replace(")", "");
+            return Regex.Match(phoneNumber, regex).Success;
+        }
         [AllowAnonymous]
         [HttpGet("~/api/trackingCall/getListActive")]
         public async Task<IResult> GetListActive()
         {
-         
+
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
 
@@ -304,7 +299,7 @@ namespace vsrolAPI2022.Controllers
                     var timehour = "";
                     foreach (var item1 in cdrItem)
                     {
-                        if(IsValidPhoneNumber(item1))
+                        if (IsValidPhoneNumber(item1))
                         {
                             phoneNumber = item1;
                         }
@@ -319,7 +314,7 @@ namespace vsrolAPI2022.Controllers
                     }
 
                     var callidtemp = chanel;
-                    if(!string.IsNullOrEmpty(phoneNumber))
+                    if (!string.IsNullOrEmpty(phoneNumber))
                     {
                         callidtemp = phoneNumber;
                     }
@@ -328,7 +323,7 @@ namespace vsrolAPI2022.Controllers
                     {
                         var tiemCall = MakeCallController.GlobalLogCall.Where(x => x.Phone == callidtemp)
                             .FirstOrDefault();
-                        if(tiemCall != null)
+                        if (tiemCall != null)
                         {
                             lineInput = tiemCall.LineCode;
                         }
@@ -340,9 +335,9 @@ namespace vsrolAPI2022.Controllers
                     }
 
                     var itemGroupUpdate = OutPutData.Where(x => x.LineCode == lineInput).FirstOrDefault();
-                    if(itemGroupUpdate == null)
+                    if (itemGroupUpdate == null)
                     {
-                    } 
+                    }
                     else
                     {
                         itemGroupUpdate.DurationRealTime = timehour;
@@ -350,11 +345,11 @@ namespace vsrolAPI2022.Controllers
                     }
                 }
                 return Results.Ok(true);
-           
+
             }
         }
-       
-       
+
+
 
 
 

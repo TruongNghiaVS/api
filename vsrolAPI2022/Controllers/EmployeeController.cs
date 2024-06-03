@@ -23,7 +23,6 @@ namespace vsrolAPI2022.Controllers
             _employeeBusiness = employeeBusiness;
         }
 
-
         [HttpPost("~/api/employee/getById")]
         public async Task<IResult> GetById(InputIdRequest inputRequest)
         {
@@ -36,20 +35,15 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(result);
         }
 
-
-
         [HttpPost("~/api/employee/getAll")]
         public async Task<IResult> getAll(EmployeeSearchInput request)
         {
             var user = GetCurrentUser();
-
             int? VendorId = null;
-
             if (user.RoleId == "4")
             {
                 VendorId = int.Parse(user.Id);
             }
-
             var searchRequest = new EmployeeSearchRequest()
             {
                 UserId = user.Id,
@@ -75,7 +69,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin tên đăng nhập");
             }
-            if (!employeeAdd.LineId.HasValue)
+            if (employeeAdd.RoleId == "1" && !employeeAdd.LineId.HasValue)
             {
                 return Results.BadRequest("Chưa chọn thông tin lineCode");
             }
@@ -206,11 +200,6 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest("Không có thông tin họ tên");
             }
-            //if (string.IsNullOrEmpty(request.LineCode))
-            //{
-            //    return Results.BadRequest("Không có thông mã gọi");
-            //}
-
             var accoutUpdate = await _employeeBusiness.GetByIdAsync(request.Id);
             if (accoutUpdate == null)
             {
@@ -231,7 +220,6 @@ namespace vsrolAPI2022.Controllers
             {
                 accoutUpdate.LineCode = request.LineCode;
             }
-
             var result = await _employeeBusiness.UpdateAsyn(accoutUpdate);
             return Results.Ok(result);
         }
@@ -269,7 +257,6 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/employee/exportData")]
         public async Task<IResult> ExportData(EmployeeSearchInput request)
         {
-
             var searchRequest = new EmployeeSearchRequest()
             {
                 UserId = "1",
