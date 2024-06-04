@@ -23,7 +23,7 @@
         public string OtherPhone { get; set; }
         public DateTime DayOfBirth { get; set; }
 
-        public  string OfficeNumber { get; set; }
+        public string OfficeNumber { get; set; }
 
         public string NationalId { get; set; }
 
@@ -46,7 +46,7 @@
 
         public decimal DebitOriginal { get; set; }
 
-        public int? DPD { get; set; }
+        public string? DPD { get; set; }
 
 
         public string Road { get; set; }
@@ -76,7 +76,9 @@
         public string? WayContact { get; set; }
         public string? Code { get; set; }
 
-        public string? CodeInput { get
+        public string? CodeInput
+        {
+            get
             {
 
                 if (this.Code == "CAB")
@@ -114,7 +116,7 @@
                 }
                 return this.Code;
             }
-        
+
         }
         public string? ColorCode { get; set; }
 

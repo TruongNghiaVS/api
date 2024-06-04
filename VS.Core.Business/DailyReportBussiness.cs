@@ -305,7 +305,7 @@ public class DailyReportBussiness : IDailyReportBussiness
             }
             var requestQuery = new CampagnProfileExportRequest
             {
-                CampaignId = "1046",
+                CampaignId = "1047",
                 From = request.From,
                 To = request.To,
                 GroupId = request.GroupId,
@@ -828,7 +828,7 @@ public class DailyReportBussiness : IDailyReportBussiness
                 row.Append(new Cell
                 {
                     DataType = CellValues.Number,
-                    CellValue = new CellValue(item.DPD.HasValue ? item.DPD.Value : 0)
+                    CellValue = new CellValue(item.DPD == null ? item.DPD : "0")
                 });
 
                 row.Append(new Cell
