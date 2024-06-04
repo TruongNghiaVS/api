@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[3.0.1, )"
             },
+            "IronXL.Excel": {
+              "target": "Package",
+              "version": "[2024.5.5, )"
+            },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[6.0.0, )"

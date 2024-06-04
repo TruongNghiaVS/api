@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using IronXL;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using VS.core.Request;
 using VS.Core.Business.GlobalClass;
@@ -16,6 +17,8 @@ namespace VS.Core.Business
         public string Phone { get; set; }
         public int Status { get; set; }
     }
+
+
     public class ChanelStatusApi
     {
 
@@ -31,6 +34,8 @@ namespace VS.Core.Business
         public static List<CampagnProfile> ListCall { get; set; }
         private static List<string> ChanelCall { get; set; }
         private DataCallContainer DataCall { get; set; }
+
+        private List<Object> listData = new List<Object>();
         public AutoBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             ListCall = new List<CampagnProfile>();
@@ -54,9 +59,6 @@ namespace VS.Core.Business
         {
             return _unitOfWork.CampagnProfileRe.GetProfileCall();
         }
-
-
-
         public async Task<bool> UpdateCampagnAuto(
             string id, bool result
          )
@@ -66,14 +68,11 @@ namespace VS.Core.Business
         }
 
         public async Task<List<ReportQuerryCallResult>> GetInfomationCall(string linecode,
-            string phoneNumber
-
-     )
+            string phoneNumber)
         {
             var data = await _unitOfWork.CampagnProfileRe.GetInfomationCall(linecode, phoneNumber);
             return data;
         }
-
         private async Task<bool> MakeCall(string phoneNumber, string chanel)
         {
             var data = new StringContent(JsonConvert.SerializeObject(new
@@ -88,16 +87,20 @@ namespace VS.Core.Business
             {
                 client.BaseAddress = new Uri(linkUrl);
                 var reponse = await client.PostAsync("api/client/makeCall", data);
-                var result = await reponse.Content.ReadAsStringAsync();
-
             }
             return true;
         }
         private async Task ACD(string chanel)
         {
-            var itemCall = await DataCall.GetDataCall();
-            await MakeCall(itemCall.Phone, chanel);
-            DataCall.RemoveData(itemCall.Phone, itemCall.NoAgree);
+            if (listData.Count < 1)
+            {
+                return;
+            }
+            var itemCall = listData.First() as dynamic;
+
+            await MakeCall(itemCall.phone1, chanel);
+            listData.Remove(itemCall);
+
 
         }
         public async Task<bool> Run()
@@ -105,11 +108,27 @@ namespace VS.Core.Business
             await CenterCall();
             return true;
         }
+
+        public async Task<bool> LoadData()
+        {
+            WorkBook workBook = WorkBook.Load("C:\\Users\\Admin\\Desktop\\fileMirae.xlsx");
+            WorkSheet workSheet = workBook.WorkSheets.First();
+            var noAgree = workSheet["A2"].StringValue;
+            var phone1 = workSheet["Z2"].StringValue;
+            listData.Add(new
+            {
+                noAgree,
+                phone1
+            });
+            return true;
+        }
+
         private async Task<bool> CenterCall()
         {
-            if (!DataCall.CheckValidCall())
+            await LoadData();
+            if (!listData.Any())
             {
-                return false;
+                return true;
             }
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
@@ -230,8 +249,6 @@ namespace VS.Core.Business
                 {
                     Phone = item1.PhoneLog,
                     Status = 6 // no underfile
-
-
                 });
             }
         }
@@ -241,7 +258,7 @@ namespace VS.Core.Business
         {
             if (listHandle.Count() < 2)
             {
-                await HandleOneCase(listHandle, DataLists);
+                //await HandleOneCase(listHandle, DataLists);
                 return;
             }
             await HandleTwoCase(listHandle, DataLists);
