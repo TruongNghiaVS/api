@@ -16,7 +16,6 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> LoadData()
         {
             await _business.LoadData();
-
             return Results.Ok(new { success = true });
         }
 

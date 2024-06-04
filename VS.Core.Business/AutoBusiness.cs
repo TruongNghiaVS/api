@@ -87,6 +87,7 @@ namespace VS.Core.Business
             {
                 client.BaseAddress = new Uri(linkUrl);
                 var reponse = await client.PostAsync("api/client/makeCall", data);
+                var result = await reponse.Content.ReadAsStringAsync();
             }
             return true;
         }
@@ -97,15 +98,29 @@ namespace VS.Core.Business
                 return;
             }
             var itemCall = listData.First() as dynamic;
-
             await MakeCall(itemCall.phone1, chanel);
             listData.Remove(itemCall);
+        }
+
+
+        public async Task RunTask()
+        {
+            if (listData.Count < 1)
+            {
+                await LoadData();
+            }
+            await CenterCall();
 
 
         }
         public async Task<bool> Run()
         {
+            if (listData.Count < 1)
+            {
+                await LoadData();
+            }
             await CenterCall();
+
             return true;
         }
 
@@ -113,19 +128,26 @@ namespace VS.Core.Business
         {
             WorkBook workBook = WorkBook.Load("C:\\Users\\Admin\\Desktop\\fileMirae.xlsx");
             WorkSheet workSheet = workBook.WorkSheets.First();
-            var noAgree = workSheet["A2"].StringValue;
-            var phone1 = workSheet["Z2"].StringValue;
-            listData.Add(new
+            for (int i = 0; i < workSheet.RowCount; i++)
             {
-                noAgree,
-                phone1
-            });
+                if (i < 2)
+                {
+                    continue;
+                }
+                var inputNoAgree = workSheet["A" + i].StringValue;
+                var inputNoPhone = workSheet["Z" + i].StringValue;
+                listData.Add(new
+                {
+                    noAgree = inputNoAgree,
+                    phone1 = inputNoPhone
+                });
+            }
             return true;
         }
 
         private async Task<bool> CenterCall()
         {
-            await LoadData();
+
             if (!listData.Any())
             {
                 return true;

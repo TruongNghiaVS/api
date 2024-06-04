@@ -19,47 +19,6 @@
         public List<DataCall> Data { get; set; }
         public DataCallContainer()
         {
-            Data = new List<DataCall>()
-            {
-                    new DataCall()
-                         {
-                             NoAgree ="930270003643396000",
-                             Phone = "0383338840"
-
-                         },
-                         new DataCall()
-                         {
-                             NoAgree ="1798542",
-                             Phone = "0383338840"
-
-                         },
-                          new DataCall()
-                         {
-                             NoAgree ="1798542",
-                             Phone = "0383338840"
-
-                         },
-                           new DataCall()
-                         {
-                             NoAgree ="1798542",
-                             Phone = "0383338840"
-
-                         },
-                            new DataCall()
-                         {
-                             NoAgree ="1798542",
-                             Phone = "0383338840"
-
-                         },
-                             new DataCall()
-                         {
-                             NoAgree ="1798542",
-                             Phone = "0383338840"
-
-                         }
-
-
-            };
 
         }
 
