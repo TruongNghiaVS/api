@@ -166,6 +166,11 @@ namespace vsrolAPI2022.Controllers
                 GroupMemer.Add(23);
                 GroupMemer.Add(29);
             }
+            else if (userIdInput == 3590)
+            {
+                GroupMemer.Add(34);
+            }
+
             if (userIdInput == 1)
             {
                 return Results.Ok(new
