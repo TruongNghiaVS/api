@@ -93,13 +93,13 @@ namespace VS.Core.Business
         }
         private async Task ACD(string chanel)
         {
-            if (listData.Count < 1)
+            if (!DataCall.CheckValidCall())
             {
                 return;
             }
-            var itemCall = listData.First() as dynamic;
-            await MakeCall(itemCall.phone1, chanel);
-            listData.Remove(itemCall);
+            var itemCall = DataCall.Data.First();
+            await MakeCall(itemCall.Phone, chanel);
+            DataCall.Data.Remove(itemCall);
         }
 
 
@@ -136,11 +136,8 @@ namespace VS.Core.Business
                 }
                 var inputNoAgree = workSheet["A" + i].StringValue;
                 var inputNoPhone = workSheet["Z" + i].StringValue;
-                listData.Add(new
-                {
-                    noAgree = inputNoAgree,
-                    phone1 = inputNoPhone
-                });
+                DataCall.AddUser(inputNoAgree, inputNoPhone);
+
             }
             return true;
         }
@@ -148,7 +145,7 @@ namespace VS.Core.Business
         private async Task<bool> CenterCall()
         {
 
-            if (!listData.Any())
+            if (!DataCall.CheckValidCall())
             {
                 return true;
             }
