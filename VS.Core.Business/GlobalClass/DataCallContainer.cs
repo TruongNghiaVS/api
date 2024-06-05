@@ -19,7 +19,7 @@
         public List<DataCall> Data { get; set; }
         public DataCallContainer()
         {
-
+            Data = new List<DataCall>();
         }
 
         public static DataCallContainer GlobalContainer()

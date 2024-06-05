@@ -41,7 +41,6 @@ namespace VS.Core.Business
             ListCall = new List<CampagnProfile>();
             ChanelCall = new List<string>();
             ChanelCall.Add("3000");
-            //ChanelCall.Add("9999");
             DataCall = DataCallContainer.GlobalContainer();
 
         }
@@ -115,12 +114,9 @@ namespace VS.Core.Business
         }
         public async Task<bool> Run()
         {
-            if (listData.Count < 1)
-            {
-                await LoadData();
-            }
-            await CenterCall();
 
+
+            await CenterCall();
             return true;
         }
 
@@ -136,7 +132,7 @@ namespace VS.Core.Business
                 }
                 var inputNoAgree = workSheet["A" + i].StringValue;
                 var inputNoPhone = workSheet["Z" + i].StringValue;
-                DataCall.AddUser(inputNoAgree, inputNoPhone);
+                DataCall.AddUser(inputNoPhone, inputNoAgree);
 
             }
             return true;
@@ -214,7 +210,7 @@ namespace VS.Core.Business
                     });
                     return;
                 }
-                else if (item2.DurationBill > 20 && item2.DurationBill <= 25)
+                else if (item1.DurationBill > 18 && item1.DurationBill <= 25)
                 {
                     DataLists.Add(new PhoneLive()
                     {
@@ -261,7 +257,6 @@ namespace VS.Core.Business
                 }
 
             }
-
             else
             {
                 DataLists.Add(new PhoneLive()  // số điện thoại không đúng
@@ -272,12 +267,58 @@ namespace VS.Core.Business
             }
         }
 
+        private async Task HandleOneCase(IGrouping<string, ReportQuerryCallResult> listHandle,
+            List<PhoneLive> DataLists)
+        {
+            var itemlist = listHandle.ToList();
+
+            var item1 = itemlist[0];
+
+            if (item1.Lastapp == "Dial" && item1.Disposition == "ANSWERED")
+            {
+                DataLists.Add(new PhoneLive()
+                {
+                    Phone = item1.PhoneLog,
+                    Status = 1
+
+                });
+                return;
+
+
+            }
+            else if (item1.Lastapp == "Dial" && item1.Disposition == "NO ANSWER")
+            {
+
+                DataLists.Add(new PhoneLive()  // số điện thoại không đúng cas2
+                {
+                    Phone = item1.PhoneLog,
+                    Status = 5
+                });
+
+
+            }
+
+            else if (item1.Lastapp == "Dial" && item1.Disposition == "NO ANSWER")
+            {
+
+                DataLists.Add(new PhoneLive()  // số điện thoại không đúng cas2
+                {
+                    Phone = item1.PhoneLog,
+                    Status = 5
+                });
+
+
+            }
+
+
+        }
+
         private async Task HandleCase(IGrouping<string, ReportQuerryCallResult> listHandle,
             List<PhoneLive> DataLists)
         {
             if (listHandle.Count() < 2)
             {
-                //await HandleOneCase(listHandle, DataLists);
+                await HandleOneCase(listHandle, DataLists);
                 return;
             }
             await HandleTwoCase(listHandle, DataLists);
