@@ -144,34 +144,29 @@ namespace vsrolAPI2022.Controllers
 
             else if (userIdInput == 3446)
             {
-                GroupMemer.Add(33);
-                GroupMemer.Add(28);
-                GroupMemer.Add(31);
-                GroupMemer.Add(32);
+                //GroupMemer.Add(33);
+                //GroupMemer.Add(28);
+                //GroupMemer.Add(31);
+                //GroupMemer.Add(32);
             }
-            else if (userIdInput == 2226)
-            {
-                GroupMemer.Add(30);
-                GroupMemer.Add(23);
-                GroupMemer.Add(29);
-            }
+
             else if (userIdInput == 1)
             {
-                GroupMemer.Add(33);
-                GroupMemer.Add(28);
-                GroupMemer.Add(29);
-                GroupMemer.Add(31);
-                GroupMemer.Add(32);
-                GroupMemer.Add(30);
-                GroupMemer.Add(23);
-                GroupMemer.Add(29);
+                //GroupMemer.Add(33);
+                //GroupMemer.Add(28);
+                //GroupMemer.Add(29);
+                //GroupMemer.Add(31);
+                //GroupMemer.Add(32);
+                //GroupMemer.Add(30);
+                //GroupMemer.Add(23);
+                //GroupMemer.Add(29);
             }
             else if (userIdInput == 3590)
             {
                 GroupMemer.Add(34);
             }
 
-            if (userIdInput == 1)
+            if (userIdInput == 1 || userIdInput == 3446)
             {
                 return Results.Ok(new
                 {
