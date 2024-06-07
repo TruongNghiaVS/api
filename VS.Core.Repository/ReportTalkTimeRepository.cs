@@ -28,6 +28,7 @@ namespace VS.Core.Repository
             var par = GetParams(entity, new string[] {
                 nameof(entity.UpdatedBy),
                 nameof(entity.UpdateAt),
+                nameof(entity.LastData),
                 nameof(entity.Id),
                 nameof(entity.CreateAt),
                 nameof(entity.Deleted)

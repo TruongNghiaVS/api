@@ -25,7 +25,7 @@ namespace VS.Core.Repository.baseConfig
         }
         protected IDbConnection GetConnection()
         {
-            var con = new SqlConnection(_configuration.GetConnectionString("stringConnect"));
+            var con = new SqlConnection(_configuration.GetConnectionString("stringConnectAutoCall"));
             con.Open();
             return con;
         }

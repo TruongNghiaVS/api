@@ -513,7 +513,7 @@ namespace VS.Core.Repository
         {
             using (var con = GetConnectionAutoCall())
             {
-                var sqlQuerry = "  SELECT d.src AS 'LineCode',  d.dst AS 'PhoneLog', d.lastapp AS Lastapp , d.lastdata AS lastdata , d.duration AS  Duration ,\r\n\r\nd.billsec AS  DurationBill, d.disposition AS Disposition ,d.linkedid AS Linkedid , d.calldate AS CallDate ,d.recordingfile  AS FileRecording   FROM cdr d ORDER BY  d.src ASC , d.calldate asc ";
+                var sqlQuerry = "SELECT d.src AS 'LineCode',  d.dst AS 'PhoneLog', d.lastapp AS Lastapp , d.lastdata AS lastdata , d.duration AS  Duration ,\r\n\r\nd.billsec AS  DurationBill, d.disposition AS Disposition ,d.linkedid AS Linkedid , d.calldate AS CallDate ,d.recordingfile  AS FileRecording   FROM cdr d ORDER BY  d.src ASC , d.calldate asc ";
                 var result = await con.QueryAsync<ReportQuerryCallResult>(sqlQuerry);
                 var data = result.ToList();
                 if (data == null)

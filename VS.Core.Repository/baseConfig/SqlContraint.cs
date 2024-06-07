@@ -86,7 +86,7 @@
 
         public string CampaignProfile_update = "sp_CampaignProfile_update";
 
-        
+
         public string CampaignProfile_update_skip = "sp_CampaignProfile_update_skip";
         public string Sp_CampaignProfile_import_update = "sp_CampaignProfile_import_update";
         public string Sp_CampaignProfile_resetCase = "sp_CampaignProfile_resetCase";
@@ -158,7 +158,7 @@
         public string ReportCampaignProfile = "sp_CampaignProfile_getOverviewDashboard";
 
 
-        public string ReportTalkTime_insert = "sp_ReportTalkTime_InsertAutoCall";
+        public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert4";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAllAutoCall";
         public string ReportgetAllCall = "sp_ReportgetAllCall";

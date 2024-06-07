@@ -15,6 +15,8 @@ namespace VS.Core.Business
     public class PhoneLive
     {
         public string Phone { get; set; }
+
+
         public int Status { get; set; }
     }
 
@@ -36,13 +38,13 @@ namespace VS.Core.Business
         private DataCallContainer DataCall { get; set; }
 
         private List<Object> listData = new List<Object>();
-        public AutoBusiness(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private ICallLogBussiness CallLogBussiness;
+        public AutoBusiness(IUnitOfWork unitOfWork, ICallLogBussiness callLogBussiness) : base(unitOfWork)
         {
             ListCall = new List<CampagnProfile>();
             ChanelCall = new List<string>();
-            ChanelCall.Add("3000");
             DataCall = DataCallContainer.GlobalContainer();
-
+            CallLogBussiness = callLogBussiness;
         }
 
         public Task<GetAllProfileByCampangReponse> GetAllCampagn(
@@ -97,11 +99,23 @@ namespace VS.Core.Business
                 return;
             }
             var itemCall = DataCall.Data.First();
+            var itemInsert = new LogCall
+            {
+                CreateAt = DateTime.Now,
+                CreatedBy = "-1",
+                Deleted = false,
+                Phone = itemCall.Phone,
+                NoAgree = itemCall.NoAgree,
+                TimeBuisiness = DateTime.Now,
+                VendorId = 8,
+                ProfileId = 1,
+                UserId = "-1",
+                LineCode = chanel
+            };
+            await CallLogBussiness.Add(itemInsert);
             await MakeCall(itemCall.Phone, chanel);
             DataCall.Data.Remove(itemCall);
         }
-
-
         public async Task RunTask()
         {
             if (listData.Count < 1)
@@ -147,7 +161,6 @@ namespace VS.Core.Business
             }
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
-
             }));
             data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var linkUrl = "http://192.168.1.10:3002";
@@ -198,9 +211,35 @@ namespace VS.Core.Business
 
             var item1 = itemlist[0];
             var item2 = itemlist[1];
+
+            var itemRecord = new ReportTalkTime()
+            {
+                DurationBill = item1.DurationBill,
+                DurationReal = item1.DurationBill,
+                Lastapp = item1.Lastapp,
+                Disposition = item1.Disposition,
+                FileRecording = item1.FileRecording,
+                CallDate = item1.CallDate,
+                CreateAt = DateTime.Now,
+                Duration = item1.Duration,
+                EventTime = item1.EventTime,
+                NoAgree = item1.NoAgree,
+                Linkedid = item1.Linkedid,
+                PhoneLog = item1.PhoneLog,
+                VendorId = -1,
+                CompanyId = -1,
+                LastData = item1.Lastdata,
+                LineCode = item1.LineCode,
+                CreatedBy = "-1",
+                CampangnId = -1,
+                UpdatedBy = "-1",
+                Sourcecall = -1,
+                Deleted = false
+            };
+            var statusCall = -1;
             if (item1.Lastapp == "Dial" && item1.Disposition == "BUSY")
             {
-                if (item1.DurationBill > 40)  // case goi khong bat may ( de troi)
+                if (item1.DurationBill > 30)  // case goi khong bat may ( de troi)
                 {
                     DataLists.Add(new PhoneLive()
                     {
@@ -208,7 +247,7 @@ namespace VS.Core.Business
                         Status = 2  //goi khong bat may
 
                     });
-                    return;
+                    statusCall = 2;
                 }
                 else if (item1.DurationBill > 18 && item1.DurationBill <= 25)
                 {
@@ -216,21 +255,16 @@ namespace VS.Core.Business
                     {
                         Phone = item1.PhoneLog,
                         Status = 4  //goi thuê bao
-
                     });
-                    return;
+                    statusCall = 4;
                 }
-                //case may bay
-
-                // case busy . thue bao
                 DataLists.Add(new PhoneLive()
                 {
                     Phone = item1.PhoneLog,
-                    Status = 0  //busy  
-
+                    Status = 0
                 });
+                statusCall = 4;
 
-                return;
 
 
             }
@@ -245,6 +279,7 @@ namespace VS.Core.Business
                         Status = 3
 
                     });
+                    statusCall = 3;
                 }
 
                 else
@@ -254,6 +289,7 @@ namespace VS.Core.Business
                         Phone = item1.PhoneLog,
                         Status = 5
                     });
+                    statusCall = 5;
                 }
 
             }
@@ -264,58 +300,89 @@ namespace VS.Core.Business
                     Phone = item1.PhoneLog,
                     Status = 6 // no underfile
                 });
+                statusCall = 6;
             }
+            itemRecord.StatusCall = statusCall;
+            await _unitOfWork.ReportTalkTimeRepository.Add(itemRecord);
         }
 
         private async Task HandleOneCase(IGrouping<string, ReportQuerryCallResult> listHandle,
             List<PhoneLive> DataLists)
         {
+
+
+
             var itemlist = listHandle.ToList();
 
             var item1 = itemlist[0];
-
+            var itemRecord = new ReportTalkTime()
+            {
+                DurationBill = item1.DurationBill,
+                DurationReal = item1.DurationBill,
+                Lastapp = item1.Lastapp,
+                Disposition = item1.Disposition,
+                FileRecording = item1.FileRecording,
+                CallDate = item1.CallDate,
+                CreateAt = DateTime.Now,
+                Duration = item1.Duration,
+                EventTime = item1.EventTime,
+                NoAgree = item1.NoAgree,
+                Linkedid = item1.Linkedid,
+                PhoneLog = item1.PhoneLog,
+                VendorId = -1,
+                CompanyId = -1,
+                LastData = item1.Lastdata,
+                LineCode = item1.LineCode,
+                CreatedBy = "-1",
+                CampangnId = -1,
+                UpdatedBy = "-1",
+                Sourcecall = -1,
+                Deleted = false
+            };
+            var statusCall = -1;
             if (item1.Lastapp == "Dial" && item1.Disposition == "ANSWERED")
             {
-                DataLists.Add(new PhoneLive()
+                if (item1.DurationBill > 105 && item1.DurationBill <= 110)
                 {
-                    Phone = item1.PhoneLog,
-                    Status = 1
+                    DataLists.Add(new PhoneLive()
+                    {
+                        Phone = item1.PhoneLog,
+                        Status = 8
 
-                });
-                return;
+                    });
+                    statusCall = 8;
+                }
+                else
+                {
+                    DataLists.Add(new PhoneLive()
+                    {
+                        Phone = item1.PhoneLog,
+                        Status = 1
 
+                    });
+                    statusCall = 1;
+                }
 
             }
             else if (item1.Lastapp == "Dial" && item1.Disposition == "NO ANSWER")
             {
-
                 DataLists.Add(new PhoneLive()  // số điện thoại không đúng cas2
                 {
                     Phone = item1.PhoneLog,
                     Status = 5
                 });
-
-
-            }
-
-            else if (item1.Lastapp == "Dial" && item1.Disposition == "NO ANSWER")
-            {
-
-                DataLists.Add(new PhoneLive()  // số điện thoại không đúng cas2
-                {
-                    Phone = item1.PhoneLog,
-                    Status = 5
-                });
-
+                statusCall = 5;
 
             }
-
+            itemRecord.StatusCall = statusCall;
+            await _unitOfWork.ReportTalkTimeRepository.Add(itemRecord);
 
         }
 
         private async Task HandleCase(IGrouping<string, ReportQuerryCallResult> listHandle,
             List<PhoneLive> DataLists)
         {
+
             if (listHandle.Count() < 2)
             {
                 await HandleOneCase(listHandle, DataLists);

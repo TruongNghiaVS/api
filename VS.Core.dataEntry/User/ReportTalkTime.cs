@@ -33,6 +33,8 @@
 
         public string Lastapp { get; set; }
         public string LastData { get; set; }
+
+        public int? StatusCall { get; set; }
         public ReportTalkTime()
         {
 
