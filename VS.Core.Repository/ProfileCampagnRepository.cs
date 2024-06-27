@@ -82,9 +82,11 @@ namespace VS.Core.Repository
             try
 
             {
-                using (var con = GetConnection())
+                using (var con = GetConnection2())
                 {
-                    var result = await con.QueryAsync<ProileIndexModel>(_Sql.CampaignProfile_getAll, new
+
+                    request.TypegetData = "0";
+                    var result = await con.QueryAsync<RequestCallIndexModel>(_Sql.CampaignProfile_getAll, new
                     {
                         request.Id,
                         request.Token,

@@ -2,8 +2,9 @@
 
 namespace VS.Core.Repository.Model
 {
-    public class ProileIndexModel : CampagnProfile
+    public class ProfileIndexModel : CampagnProfile
     {
+
 
         public int TotalRecord { get; set; }
 
@@ -29,10 +30,10 @@ namespace VS.Core.Repository.Model
         public string ReasonstatusText
         {
 
-            get;set;
-            
+            get; set;
 
-          
+
+
         }
 
         public bool? Skipp { get; set; }
@@ -56,7 +57,7 @@ namespace VS.Core.Repository.Model
 
         public bool? SkipData { get; set; }
 
-        public ProileIndexModel()
+        public ProfileIndexModel()
         {
             SkipData = false;
         }

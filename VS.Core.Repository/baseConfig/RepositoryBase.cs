@@ -30,6 +30,13 @@ namespace VS.Core.Repository.baseConfig
             return con;
         }
 
+        protected IDbConnection GetConnection2()
+        {
+            var con = new SqlConnection(_configuration.GetConnectionString("stringConnectMain"));
+            con.Open();
+            return con;
+        }
+
         protected IDbConnection GetConnectionAutoCall()
         {
             var con = new MySqlConnection(_configuration.GetConnectionString("mysqlStringConnect9"));

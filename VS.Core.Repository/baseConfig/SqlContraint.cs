@@ -90,7 +90,7 @@
         public string CampaignProfile_update_skip = "sp_CampaignProfile_update_skip";
         public string Sp_CampaignProfile_import_update = "sp_CampaignProfile_import_update";
         public string Sp_CampaignProfile_resetCase = "sp_CampaignProfile_resetCase";
-        public string CampaignProfile_getAll = "sp_CampaignProfile_getAll";
+        public string CampaignProfile_getAll = "sp_CampaignProfile_requestCall";
         public string CampaignProfile_getAllNoted = "sp_campagnProfileGetAllNoted";
         public string CampaignProfile_exportData = "sp_CampaignProfile_ExportData";
         public string AutoCall_getProfileCall = "sp_getProfileCall";
@@ -160,7 +160,7 @@
 
         public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert4";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
-        public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAllAutoCall";
+        public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAll";
         public string ReportgetAllCall = "sp_ReportgetAllCall";
         public string sms_getAll = "sp_sms_getAll";
         public string View_Recording = "sp_view_Recording";

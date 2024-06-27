@@ -23,6 +23,8 @@
 
         public string? Disposition { get; set; }
 
+
+        public int StatusCall { get; set; }
         public ReportTalkTimeIndexModel()
         {
 

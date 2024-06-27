@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[3.0.1, )"
             },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[4.5.3.2, )"
+            },
             "IronXL.Excel": {
               "target": "Package",
               "version": "[2024.5.5, )"
