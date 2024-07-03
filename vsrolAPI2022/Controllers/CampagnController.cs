@@ -50,7 +50,7 @@ namespace vsrolAPI2022.Controllers
             {
                 return Results.BadRequest(_message.CommonError_ErrorRequestInput);
             }
-            var result = await  _campagnBusiness.Close(inputRequest.Id);
+            var result = await _campagnBusiness.Close(inputRequest.Id);
             return Results.Ok(result);
 
         }
@@ -533,7 +533,7 @@ namespace vsrolAPI2022.Controllers
                                     Provice2 = "",
                                     StatusPayMent = ReadvalueStringExcel(workSheet, i, 23),
                                     RegisterDay = registerDate,
-                                   
+
 
                                     DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
                                     AmountLoan = ReadvaluefloatExcel(workSheet, i, 12),
@@ -558,9 +558,9 @@ namespace vsrolAPI2022.Controllers
 
                                 });
                             }
-                            catch (Exception)
+                            catch (Exception e)
                             {
-
+                                throw e;
 
                             }
 
@@ -583,7 +583,7 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-      
+
         [AllowAnonymous]
         [HttpPost("~/api/campagn/deleteProfile")]
         public async Task<IResult> DeleteFile([FromForm] CampanginDataImport request)

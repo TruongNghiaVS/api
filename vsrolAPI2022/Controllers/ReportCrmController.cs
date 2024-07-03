@@ -1,8 +1,7 @@
-﻿using DocumentFormat.OpenXml.VariantTypes;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VS.Core.Business.Interface;
 using VS.core.Request;
+using VS.Core.Business.Interface;
 
 namespace vsrolAPI2022.Controllers;
 
@@ -18,24 +17,24 @@ public class ReportCrmController : BaseController
     public ReportCrmController(IUserBusiness userBusiness,
         IReportCrmBussiness handleReportBussiness) : base(userBusiness)
     {
-    
+
         _business = handleReportBussiness;
     }
- 
+
     [HttpPost("~/api/reportCrm/GetFileReportTalktime")]
     public async Task<ActionResult> GetFileReportTalktime(
             GetAllRecordGroupByLineCodeExportRequest _input
         )
     {
         var userCurrent = GetCurrentUser();
-     
+
         var request2 = new CrmReportRequest()
         {
-            From= _input.From,
+            From = _input.From,
             To = _input.To,
-            UserId = userCurrent.Id, 
-            UserName =userCurrent.UserName
-            
+            UserId = userCurrent.Id,
+            UserName = userCurrent.UserName
+
         };
         var userName = userCurrent.UserName;
         var filepath = "";
@@ -58,8 +57,8 @@ string? pathFile
     {
         if (System.IO.File.Exists(pathFile))
             return File(System.IO.File.OpenRead(pathFile), "application/octet-stream", Path.GetFileName(pathFile));
-          return NotFound();
-      
+        return NotFound();
+
     }
 
     [AllowAnonymous]
@@ -74,14 +73,28 @@ string? pathFile
             From = _input.From,
             To = _input.To,
             UserId = userCurrent.Id,
+
             UserName = userCurrent.UserName
 
         };
-        var pathFile = await _business.ExportStatusOverview(request2);
+
+        var pathFile = "";
+
+        if (userCurrent.VendorId == 3614)
+        {
+            pathFile = await _business.ExportStatusOverviewVPbank(request2);
+        }
+        else
+        {
+            pathFile = await _business.ExportStatusOverview(request2);
+        }
+
+
+
 
         var objectReturn = new
         {
-            pathFile = pathFile,
+            pathFile,
             success = true
         };
         return Ok(objectReturn);
@@ -102,7 +115,7 @@ string? pathFile
         };
 
         var userCurrent = GetCurrentUser();
-       
+
         var userName = userCurrent.UserName;
         var filepath = "";
         var pathFile = await _business.ExportImpactStatusDetail(request2);
@@ -111,7 +124,7 @@ string? pathFile
             return File(System.IO.File.OpenRead(pathFile), "application/octet-stream", Path.GetFileName(pathFile));
         return NotFound();
     }
-    
+
     [HttpPost("~/api/reportCrm/GetsumoffTalktime")]
     public async Task<ActionResult> GetsumoffTalktime(
   GetAllRecordGroupByLineCodeExportRequest _input

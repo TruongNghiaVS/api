@@ -81,7 +81,6 @@ namespace vsrolAPI2022.Controllers
             if (currentUser.RoleId == "2" || currentUser.RoleId == "4" || currentUser.RoleId == "3")
             {
 
-
             }
             else
             {
@@ -141,13 +140,17 @@ namespace vsrolAPI2022.Controllers
             {
                 GroupMemer.Add(33);
             }
-
-            else if (userIdInput == 3446)
+            else if (userIdInput == 3640)
             {
-                //GroupMemer.Add(33);
-                //GroupMemer.Add(28);
-                //GroupMemer.Add(31);
-                //GroupMemer.Add(32);
+
+                GroupMemer.Add(36);
+                GroupMemer.Add(35);
+            }
+            else if (userIdInput == 3614)
+            {
+                GroupMemer.Add(36);
+                GroupMemer.Add(35);
+
             }
 
             else if (userIdInput == 1)

@@ -68,4 +68,21 @@
 
     }
 
+    public class ImpactHistoryv2IndexModelVP
+    {
+        public DateTime? ActivityDate { get; set; }
+        public string? Account_Number { get; set; }
+        public string? Invoice_Number { get; set; }
+        public string? Agent_Name { get; set; }
+        public string? Activity_Type { get; set; }
+        public string? Phone_Number { get; set; }
+        public string? Call_Disposition { get; set; }
+        public string? Call_Outcome { get; set; }
+        public string? NoteCode { get; set; }
+        public string? Noted { get; set; }
+        public DateTime? Promiseday { get; set; }
+        public string? MoneyPromise { get; set; }
+
+    }
+
 }

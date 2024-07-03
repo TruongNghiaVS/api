@@ -92,7 +92,7 @@ namespace VS.Core.Repository
                 return true;
             }
         }
-       
+
         public async Task<List<ImpactHistory>> GetAllHistoryBYNoAgree(string noAgree)
         {
 
@@ -158,28 +158,43 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<ImpactHistoryv2IndexModel>(_Sql.ImpactHistoryFinal_getAll, new
-                    {
-                        request.Token,
-                        request.From,
-                        request.To,
-                        request.Status,
-                        request.VendorId,
-                        request.ProfileId,
-                        request.Limit,
-                        request.Page,
-                        request.OrderBy
-                    }, commandType: CommandType.StoredProcedure);
-
-                    var fistElement = result.FirstOrDefault();
-                    var totalRecord = 0;
-
                     var reponse = new ImpactHistoryReponse()
                     {
-                        Total = totalRecord,
 
-                        Data = result
                     };
+                    if (request.VendorId != "3614")
+                    {
+                        var result = await con.QueryAsync<ImpactHistoryv2IndexModel>(_Sql.ImpactHistoryFinal_getAll, new
+                        {
+                            request.Token,
+                            request.From,
+                            request.To,
+                            request.Status,
+                            request.VendorId,
+                            request.ProfileId,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy
+                        }, commandType: CommandType.StoredProcedure);
+                        reponse.Data = result;
+                    }
+                    else
+                    {
+                        var result = await con.QueryAsync<ImpactHistoryv2IndexModelVP>(_Sql.ImpactHistoryFinal_getAllVP, new
+                        {
+                            request.Token,
+                            request.From,
+                            request.To,
+                            request.Status,
+                            request.VendorId,
+                            request.ProfileId,
+                            request.Limit,
+                            request.Page,
+                            request.OrderBy
+                        }, commandType: CommandType.StoredProcedure);
+
+                        reponse.Data = result;
+                    }
                     return reponse;
                 }
             }

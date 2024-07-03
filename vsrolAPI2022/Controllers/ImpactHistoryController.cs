@@ -63,7 +63,7 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _impactBusiness.GetALl(searchRequest);
             return Results.Ok(resultSearch);
         }
-        
+
         [HttpPost("~/api/impacthistory/exportFinal")]
         public async Task<IResult> GetFinal(ImpactHistorySearchInput request)
         {
@@ -101,14 +101,28 @@ namespace vsrolAPI2022.Controllers
             var campangnProfile = await _campagnBussiness.GetProfile(employeeAdd.ProfileId.Value.ToString());
             var checkHasCall = await _logBussiness.CheckBeforeCall(campangnProfile.NoAgreement,
                 int.Parse(user.Id));
-            if (checkHasCall ==false)
+            if (checkHasCall == false)
             {
                 return Results.Ok(new
                 {
                     isSave = false,
-                    message="Bạn chưa thực hiện cuộc gọi, nên chưa thể lưu lịch sử tác động được"
+                    message = "Bạn chưa thực hiện cuộc gọi, nên chưa thể lưu lịch sử tác động được"
                 });
             }
+
+            if (!string.IsNullOrEmpty(employeeAdd.Activetype))
+            {
+                employeeAdd.StatusIm = employeeAdd.CallOutcome;
+                employeeAdd.WayContact = employeeAdd.CallDisposition;
+                employeeAdd.PlaceCode = employeeAdd.Activetype;
+            }
+            else
+            {
+                employeeAdd.CallOutcome = "";
+                employeeAdd.CallDisposition = "";
+                employeeAdd.Activetype = "";
+            }
+
 
             var itemInsert = new ImpactHistory()
             {
@@ -129,8 +143,12 @@ namespace vsrolAPI2022.Controllers
                 UpdatedBy = user.Id,
                 AssigeeId = campangnProfile.Assignee,
                 LineCode = lineCode,
-                WayContact = employeeAdd.WayContact
-
+                WayContact = employeeAdd.WayContact,
+                Activetype = employeeAdd.Activetype,
+                CallDisposition = employeeAdd.CallDisposition,
+                CallOutcome = employeeAdd.CallOutcome,
+                PhoneNumber = employeeAdd.PhoneNumber,
+                PhoneSelect = employeeAdd.PhoneSelect
             };
 
             if (campangnProfile.Status == 16)

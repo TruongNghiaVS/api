@@ -52,10 +52,17 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAllReason(CampagnProfileSearchInput request)
         {
             var user = GetCurrentUser();
-            var resultSearch = await _campagnBusiness.GetAllReason();
+            var groupIdRequest = "4";
+
+
+            if (user.VendorId == 3614)
+            {
+                groupIdRequest = "5";
+            }
+            var resultSearch = await _campagnBusiness.GetAllReason(groupIdRequest);
             return Results.Ok(resultSearch);
         }
-        
+
         [Authorize]
         [HttpPost("~/api/campagnProfile/getAll")]
         public async Task<IResult> getAll(CampagnProfileSearchInput request)
@@ -67,7 +74,7 @@ namespace vsrolAPI2022.Controllers
             {
                 VendorId = int.Parse(user.Id);
             }
-           
+
             if (user.RoleId == "4")
             {
                 VendorId = int.Parse(user.Id);
@@ -176,7 +183,7 @@ namespace vsrolAPI2022.Controllers
                 Page = request.Page,
                 Limit = request.Limit,
                 GroupId = request.GroupId,
-                MemberId  =request.MemberId,
+                MemberId = request.MemberId,
 
 
 
@@ -382,7 +389,7 @@ namespace vsrolAPI2022.Controllers
                 DpdMax = dpdMax,
                 DpdMin = dpdMin,
                 Id = request.Id,
-                Cmnd =request.Cmnd,
+                Cmnd = request.Cmnd,
                 From = request.From,
                 UserId = user.Id,
                 ColorCode = request.ColorCode,

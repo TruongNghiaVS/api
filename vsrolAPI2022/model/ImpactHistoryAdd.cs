@@ -31,6 +31,17 @@
         public string ColorCode { get; set; }
 
         public string WayContact { get; set; }
+
+
+        public string? Activetype { get; set; }
+        public string? CallDisposition { get; set; }
+        public string? CallOutcome { get; set; }
+
+        public string? PhoneNumber { get; set; }
+
+        public int? PhoneSelect { get; set; }
+
+
     }
     public class ImpactHistoryUpdate
     {

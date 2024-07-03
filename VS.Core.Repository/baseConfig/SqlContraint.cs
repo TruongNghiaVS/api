@@ -56,6 +56,7 @@
         public string Group_reason_update = "sp_groupReason_Update";
 
         public string ImpactHistoryFinal_getAll = "sp_ImpactHistoryFinal_getAll";
+        public string ImpactHistoryFinal_getAllVP = "sp_ImpactHistoryFinal_getAllVP";
 
         public string Group_reason_getAll = "sp_Reason_getAll";
 
@@ -86,7 +87,7 @@
 
         public string CampaignProfile_update = "sp_CampaignProfile_update";
 
-        
+
         public string CampaignProfile_update_skip = "sp_CampaignProfile_update_skip";
         public string Sp_CampaignProfile_import_update = "sp_CampaignProfile_import_update";
         public string Sp_CampaignProfile_resetCase = "sp_CampaignProfile_resetCase";

@@ -1,20 +1,13 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using VS.core.Request;
 using VS.Core.Business.Interface;
 using VS.Core.Repository.baseConfig;
 using VS.Core.Repository.Model;
-using VS.core.Request;
-using Workbook = DocumentFormat.OpenXml.Spreadsheet.Workbook;
 using Sheets = DocumentFormat.OpenXml.Spreadsheet.Sheets;
+using Workbook = DocumentFormat.OpenXml.Spreadsheet.Workbook;
 using Worksheet = DocumentFormat.OpenXml.Spreadsheet.Worksheet;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-using System.Linq;
-using Org.BouncyCastle.Asn1.Crmf;
-using DocumentFormat.OpenXml.VariantTypes;
-using DocumentFormat.OpenXml.Drawing;
-using System.IO;
 
 namespace VS.Core.Business;
 
@@ -29,7 +22,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
 
     private string ConvertToHHMMSS(string number1)
     {
-        if( string.IsNullOrEmpty(number1))
+        if (string.IsNullOrEmpty(number1))
         {
             return "00:00:00";
         }
@@ -39,7 +32,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
 
         try
         {
-            number =  double.Parse(number1);
+            number = double.Parse(number1);
         }
         catch (Exception)
         {
@@ -60,7 +53,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
     }
     private string ConvertToHHMMSS(double number2)
     {
-        if( number2 < 1)
+        if (number2 < 1)
         {
             return "00:00:00";
         }
@@ -91,16 +84,16 @@ public class ReportCrmBussiness : IReportCrmBussiness
     {
 
         Random rnd = new Random();
-   
+
         var dateGet = DateTime.Now;
-        var fileName = request.UserName+"_ReportCall."+ dateGet.ToString("dd.MM.yy") + rnd.Next(10, 100) + ".xlsx";      
+        var fileName = request.UserName + "_ReportCall." + dateGet.ToString("dd.MM.yy") + rnd.Next(10, 100) + ".xlsx";
         var rootPath = "C:\\vietbank\\crm\\api\\vsrolAPI2022\\crmReport\\reportCall";
         var pathFolder = System.IO.Path.Combine(rootPath, request.UserName);
         var exists = Directory.Exists(pathFolder);
         if (!exists)
             Directory.CreateDirectory(pathFolder);
         var pathFile = System.IO.Path.Combine(pathFolder, fileName);
-        if (File.Exists(pathFile)) 
+        if (File.Exists(pathFile))
             File.Delete(pathFile);
         using (var document = SpreadsheetDocument.Create(pathFile,
                    SpreadsheetDocumentType.Workbook))
@@ -127,11 +120,11 @@ public class ReportCrmBussiness : IReportCrmBussiness
             document.PackageProperties.Created = DateTime.UtcNow;
             var requestQuery = new CrmReportRequest
             {
-                
+
                 From = request.From,
                 To = request.To,
                 UserId = request.UserId
-               
+
             };
             var resultData = await _unitOfWork1.DailyReport.ExprotCrmTalkTime(requestQuery);
             var listData = resultData.Data as List<CrmReprotIndexModel>;
@@ -161,7 +154,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
 
             var rowempty = new Row();
             rowempty.RowIndex = 2;
-             sheetData.Append(rowempty);
+            sheetData.Append(rowempty);
             indexloop++;
             var row1 = new Row();
             row1.RowIndex = 2;
@@ -179,7 +172,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
                     CellValue = new CellValue("Số HĐ")
                 }
             );
-      
+
 
             row1.Append(
                 new Cell
@@ -210,7 +203,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
                     CellValue = new CellValue("Talk đàm thoại")
                 }
             );
-          
+
             sheetData.Append(row1);
             indexloop++;
 
@@ -240,8 +233,8 @@ public class ReportCrmBussiness : IReportCrmBussiness
                         CellValue = new CellValue(itemfrist.ManagerFullName + " total")
                     };
                     rowinfoLead.Append(cell22);
-                } 
-                    
+                }
+
 
 
 
@@ -252,7 +245,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
                 var timeTalking = itemData.Sum(x => x.TimeTalking);
 
 
-             
+
                 rowinfoLead.Append(new Cell
                 {
                     DataType = CellValues.String,
@@ -273,7 +266,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
                 rowinfoLead.Append(new Cell
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(ConvertToHHMMSS( timewaiting))
+                    CellValue = new CellValue(ConvertToHHMMSS(timewaiting))
                 });
                 rowinfoLead.Append(new Cell
                 {
@@ -282,7 +275,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
                 });
                 sheetData.Append(rowinfoLead);
 
-             
+
                 foreach (var item in itemData)
                 {
 
@@ -349,7 +342,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
             rowinfofooter.Append(new Cell
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(listData.Sum(x=> int.Parse(x.SumNoAgree)))
+                CellValue = new CellValue(listData.Sum(x => int.Parse(x.SumNoAgree)))
             });
 
             rowinfofooter.Append(new Cell
@@ -361,7 +354,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
             rowinfofooter.Append(new Cell
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue( ConvertToHHMMSS( listData.Sum(x => x.Timcall)))
+                CellValue = new CellValue(ConvertToHHMMSS(listData.Sum(x => x.Timcall)))
             });
 
             rowinfofooter.Append(new Cell
@@ -376,11 +369,12 @@ public class ReportCrmBussiness : IReportCrmBussiness
             });
             sheetData.Append(rowinfofooter);
             document.Save();
-            
+
         }
 
         return pathFile;
     }
+
 
 
     public async Task<string> ExportStatusOverview(
@@ -388,11 +382,11 @@ public class ReportCrmBussiness : IReportCrmBussiness
     )
     {
 
-       
+
 
         Random rnd = new Random();
         var dateGet = DateTime.Now;
-        var fileName = request.UserName + "_tacdong." + dateGet.ToString("dd.MM.yy") +rnd.Next(10,100) + ".xlsx";
+        var fileName = request.UserName + "_tacdong." + dateGet.ToString("dd.MM.yy") + rnd.Next(10, 100) + ".xlsx";
         var rootPath = "C:\\vietbank\\crm\\api\\vsrolAPI2022\\groupStatus";
         var pathFolder = System.IO.Path.Combine(rootPath, request.UserName);
         var exists = Directory.Exists(pathFolder);
@@ -466,13 +460,13 @@ public class ReportCrmBussiness : IReportCrmBussiness
                 }
             );
 
-           rowHeader.Append(
-               new Cell
-               {
-                   DataType = CellValues.String,
-                   CellValue = new CellValue(DateTime.Now.ToString("dd/MM/yyyy"))
-               }
-           );
+            rowHeader.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(DateTime.Now.ToString("dd/MM/yyyy"))
+                }
+            );
 
             sheetData.Append(rowHeader);
 
@@ -572,11 +566,11 @@ public class ReportCrmBussiness : IReportCrmBussiness
 
                     sheetData.Append(row);
 
-                   
+
 
                 }
                 indexloop++;
-                var row2 = new Row(); 
+                var row2 = new Row();
                 row2.RowIndex = (uint)indexloop;
                 row2.Append(new Cell()
                 {
@@ -594,13 +588,13 @@ public class ReportCrmBussiness : IReportCrmBussiness
                     CellValue = new CellValue(totalgrand)
                 });
                 sheetData.Append(row2);
-             
+
 
             }
 
-           
 
-          
+
+
             var grandTotalStatus = listData.Sum(x => int.Parse(x.Total));
 
             var rowFooter = new Row();
@@ -625,8 +619,8 @@ public class ReportCrmBussiness : IReportCrmBussiness
             rowFooter.Append(
             new Cell
             {
-            DataType = CellValues.String,
-            CellValue = new CellValue(grandTotalStatus)
+                DataType = CellValues.String,
+                CellValue = new CellValue(grandTotalStatus)
             }
             );
             sheetData.Append(rowFooter);
@@ -654,7 +648,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
             sheetData2.Append(rowHeader2);
             var resultData2 = await _unitOfWork1.DailyReport.ExprotCrmByStatusDetail(requestQuery);
             var listData2 = resultData2.Data as List<CrmReprotStatusIndexModel>;
-            
+
             var listOUtput = listData2.GroupBy(u => u.CreatedBy)
             .Select(grp => grp.ToList())
             .ToList();
@@ -664,7 +658,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
                 var itemData = new CrmReportStatusDeatailIndexModel();
                 var itemfrist = createby.FirstOrDefault();
                 var sumTotal = createby.Sum(x => x.Total2);
-                if(itemfrist == null)
+                if (itemfrist == null)
                 {
                     continue;
                 }
@@ -674,8 +668,8 @@ public class ReportCrmBussiness : IReportCrmBussiness
 
                 foreach (var item in createby)
                 {
-                  
-                    if( item.ReasonCode == "BPTP")
+
+                    if (item.ReasonCode == "BPTP")
                     {
                         itemData.BPTP = item.Total2;
                     }
@@ -729,11 +723,11 @@ public class ReportCrmBussiness : IReportCrmBussiness
                         itemData.RONA = item.Total2;
                     }
                 }
-                
-                
 
 
-                
+
+
+
                 dataList.Add(itemData);
 
                 //var itemfooter = new CrmReportStatusDeatailIndexModel();
@@ -757,7 +751,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
                 //itemData.TotalGrand = createby.Where(x => x.ReasonCode == "RONA").Sum(x => x.Total2);
             }
 
-           
+
             var rowHeader3 = new Row();
             rowHeader3.RowIndex = 2;
             rowHeader3.Append(
@@ -784,13 +778,13 @@ public class ReportCrmBussiness : IReportCrmBussiness
              }
          );
 
-          rowHeader3.Append(
-          new Cell
-          {
-              DataType = CellValues.String,
-              CellValue = new CellValue("CALLBACK")
-          }
-      );
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("CALLBACK")
+            }
+        );
 
             rowHeader3.Append(
           new Cell
@@ -811,39 +805,39 @@ public class ReportCrmBussiness : IReportCrmBussiness
             rowHeader3.Append(
 new Cell
 {
-DataType = CellValues.String,
-CellValue = new CellValue("DIF")
+    DataType = CellValues.String,
+    CellValue = new CellValue("DIF")
 }
 );
 
             rowHeader3.Append(
 new Cell
 {
- DataType = CellValues.String,
- CellValue = new CellValue("LM")
+    DataType = CellValues.String,
+    CellValue = new CellValue("LM")
 }
 );
             rowHeader3.Append(
 new Cell
 {
-DataType = CellValues.String,
-CellValue = new CellValue("LMN")
-}
-);
-
-            rowHeader3.Append(
-new Cell
-{
-DataType = CellValues.String,
-CellValue = new CellValue("NCON")
+    DataType = CellValues.String,
+    CellValue = new CellValue("LMN")
 }
 );
 
             rowHeader3.Append(
 new Cell
 {
-DataType = CellValues.String,
-CellValue = new CellValue("OTHER")
+    DataType = CellValues.String,
+    CellValue = new CellValue("NCON")
+}
+);
+
+            rowHeader3.Append(
+new Cell
+{
+    DataType = CellValues.String,
+    CellValue = new CellValue("OTHER")
 }
 );
             rowHeader3.Append(
@@ -857,24 +851,24 @@ new Cell
             rowHeader3.Append(
 new Cell
 {
-DataType = CellValues.String,
-CellValue = new CellValue("RFTP")
+    DataType = CellValues.String,
+    CellValue = new CellValue("RFTP")
 }
 );
 
             rowHeader3.Append(
 new Cell
 {
-DataType = CellValues.String,
-CellValue = new CellValue("RONA")
+    DataType = CellValues.String,
+    CellValue = new CellValue("RONA")
 }
 );
 
             rowHeader3.Append(
 new Cell
 {
-DataType = CellValues.String,
-CellValue = new CellValue("Grand Total")
+    DataType = CellValues.String,
+    CellValue = new CellValue("Grand Total")
 }
 );
             sheetData2.Append(rowHeader3);
@@ -1132,14 +1126,14 @@ CellValue = new CellValue("Grand Total")
             {
                 DataType = CellValues.String,
                 CellValue = new CellValue("Grand total")
-            }); 
+            });
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
                 CellValue = new CellValue("")
             });
 
-            
+
 
 
             var itemfooter2 = new CrmReportStatusDeatailIndexModel();
@@ -1162,7 +1156,7 @@ CellValue = new CellValue("Grand Total")
                 + itemfooter2.DIF + itemfooter2.DIE + itemfooter2.LM + itemfooter2.LMN + itemfooter2.NCON
                 + itemfooter2.OTHER + itemfooter2.PTP + itemfooter2.RFTP + itemfooter2.RONA;
 
-       
+
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
@@ -1234,6 +1228,1151 @@ CellValue = new CellValue("Grand Total")
                 CellValue = new CellValue(itemfooter2.TotalGrand)
             });
             sheetData2.Append(row3);
+            document.Save();
+        }
+        return pathFile;
+    }
+
+
+    public async Task<string> ExportStatusOverviewVPbank(
+  CrmReportRequest request
+ )
+    {
+
+
+
+        Random rnd = new Random();
+        var dateGet = DateTime.Now;
+        var fileName = request.UserName + "_tacdong." + dateGet.ToString("dd.MM.yy") + rnd.Next(10, 100) + ".xlsx";
+        var rootPath = "C:\\vietbank\\crm\\api\\vsrolAPI2022\\groupStatus";
+        var pathFolder = System.IO.Path.Combine(rootPath, request.UserName);
+        var exists = Directory.Exists(pathFolder);
+        if (!exists)
+            Directory.CreateDirectory(pathFolder);
+        var pathFile = System.IO.Path.Combine(pathFolder, fileName);
+        if (File.Exists(pathFile))
+
+            File.Delete(pathFile);
+        using (var document = SpreadsheetDocument.Create(pathFile,
+                   SpreadsheetDocumentType.Workbook))
+        {
+            var relationshipId = "actionCodeOverview";
+            var relationshipI2 = "detailactionCode";
+            var workbookPart = document.AddWorkbookPart();
+            var workbook = new Workbook();
+            var sheets = new Sheets();
+            var sheet1 = new Sheet
+            {
+                Name = "Báo cáo tác động(tổng quan)",
+                SheetId = 1,
+                Id = relationshipId
+            };
+            var sheet2 = new Sheet
+            {
+                Name = "Báo cáo chi tiết (Tác động)",
+                SheetId = 2,
+                Id = relationshipI2
+            };
+
+
+            sheets.Append(sheet1);
+            sheets.Append(sheet2);
+            workbook.Append(sheets);
+            workbookPart.Workbook = workbook;
+            var workSheetPart = workbookPart.AddNewPart<WorksheetPart>(relationshipId);
+            var workSheetPart2 = workbookPart.AddNewPart<WorksheetPart>(relationshipI2);
+
+            var workSheet = new Worksheet();
+            var sheetData = new SheetData();
+
+            workSheet.Append(sheetData);
+            workSheetPart.Worksheet = workSheet;
+
+            var workSheet2 = new Worksheet();
+            var sheetData2 = new SheetData();
+
+            workSheet2.Append(sheetData2);
+            workSheetPart2.Worksheet = workSheet2;
+
+            document.PackageProperties.Creator = "Vietstargroup";
+            document.PackageProperties.Created = DateTime.UtcNow;
+            var requestQuery = new CrmReportRequest
+            {
+
+                From = request.From,
+                To = request.To,
+                UserId = request.UserId
+
+            };
+            var resultData = await _unitOfWork1.DailyReport.ExprotCrmByStatus(requestQuery);
+            var listData = resultData.Data as List<CrmReprotStatusIndexModel>;
+            var indexloop = 1;
+            var rowHeader = new Row();
+            rowHeader.RowIndex = 1;
+            rowHeader.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Ngày Báo cáo")
+                }
+            );
+
+            rowHeader.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(DateTime.Now.ToString("dd/MM/yyyy"))
+                }
+            );
+
+            sheetData.Append(rowHeader);
+
+            var rowempty = new Row();
+            rowempty.RowIndex = 2;
+            sheetData.Append(rowempty);
+            indexloop++;
+            var row1 = new Row();
+            row1.RowIndex = 3;
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Team lead")
+                }
+            );
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Nhân viên")
+                }
+            );
+
+
+            row1.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Total")
+                }
+            );
+
+            sheetData.Append(row1);
+            indexloop++;
+
+            var managerNameWrite1 = "";
+
+
+            var listOUtput1 = listData.GroupBy(u => u.ManagerFullName)
+         .Select(grp => grp.ToList())
+         .ToList();
+
+            foreach (var itemlead in listOUtput1)
+            {
+
+                var totalgrand = itemlead.Sum(x => int.Parse(x.Total));
+
+                var lastItem = itemlead.Last();
+                foreach (var item in itemlead)
+                {
+                    indexloop++;
+
+                    var row = new Row();
+                    row.RowIndex = (uint)indexloop;
+
+
+
+                    if (item.ManagerFullName != managerNameWrite1)
+                    {
+                        managerNameWrite1 = item.ManagerFullName;
+
+                        var cell2 = new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(managerNameWrite1)
+                        };
+                        row.Append(cell2);
+                    }
+                    else
+                    {
+                        var cell2 = new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue("")
+                        };
+                        row.Append(cell2);
+
+                    }
+
+                    var cell3 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.FullName)
+                    };
+
+                    var cell4 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.Total)
+                    };
+
+
+
+                    row.Append(cell3);
+                    row.Append(cell4);
+
+                    sheetData.Append(row);
+
+
+
+                }
+                indexloop++;
+                var row2 = new Row();
+                row2.RowIndex = (uint)indexloop;
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(lastItem.ManagerFullName + " total")
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("")
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(totalgrand)
+                });
+                sheetData.Append(row2);
+
+
+            }
+
+
+
+
+            var grandTotalStatus = listData.Sum(x => int.Parse(x.Total));
+
+            var rowFooter = new Row();
+            indexloop++;
+            rowFooter.RowIndex = (uint)indexloop;
+
+            rowFooter.Append(
+               new Cell
+               {
+                   DataType = CellValues.String,
+                   CellValue = new CellValue("Grand total")
+               }
+           );
+
+            rowFooter.Append(
+               new Cell
+               {
+                   DataType = CellValues.String,
+                   CellValue = new CellValue("")
+               }
+           );
+            rowFooter.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue(grandTotalStatus)
+            }
+            );
+            sheetData.Append(rowFooter);
+
+            var indexloop2 = 1;
+            var rowHeader2 = new Row();
+            rowHeader2.RowIndex = 1;
+            rowHeader2.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Ngày Báo cáo2")
+                }
+            );
+
+            rowHeader2.Append(
+               new Cell
+               {
+                   DataType = CellValues.String,
+                   CellValue = new CellValue(DateTime.Now.ToString("dd/MM/yyyy"))
+               }
+           );
+
+
+            sheetData2.Append(rowHeader2);
+            var resultData2 = await _unitOfWork1.DailyReport.ExprotCrmByStatusDetail(requestQuery);
+            var listData2 = resultData2.Data as List<CrmReprotStatusIndexModel>;
+
+            var listOUtput = listData2.GroupBy(u => u.CreatedBy)
+            .Select(grp => grp.ToList())
+            .ToList();
+            var dataList = new List<CrmReportStatusDeataiVPBanklIndexModel>();
+            foreach (var createby in listOUtput)
+            {
+                var itemData = new CrmReportStatusDeataiVPBanklIndexModel();
+                var itemfrist = createby.FirstOrDefault();
+                var sumTotal = createby.Sum(x => x.Total2);
+                if (itemfrist == null)
+                {
+                    continue;
+                }
+                itemData.ManagerFullName = itemfrist.ManagerFullName;
+                itemData.FullName = itemfrist.FullName;
+                itemData.TotalGrand = sumTotal;
+
+                foreach (var item in createby)
+                {
+                    if (item.ReasonCode == "Invalid Address")
+                    {
+                        itemData.InvalidAddress = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "Voice Message / Operator")
+                    {
+                        itemData.VoiceMessageOperator = item.Total2;
+                    }
+                    if (item.ReasonCode == "Unknown Contact")
+                    {
+                        itemData.UnknownContact = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "UC")
+                    {
+                        itemData.UC = item.Total2;
+                    }
+                    if (item.ReasonCode == "System Hang Up")
+                    {
+                        itemData.SystemHangUp = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "Not Reached")
+                    {
+                        itemData.NotReached = item.Total2;
+                    }
+                    if (item.ReasonCode == "Not In Service")
+                    {
+                        itemData.NotInService = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "No Answer")
+                    {
+                        itemData.NoAnswer = item.Total2;
+                    }
+                    if (item.ReasonCode == "Invalid Number")
+                    {
+                        itemData.InvalidNumber = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "Drop")
+                    {
+                        itemData.Drop = item.Total2;
+                    }
+                    if (item.ReasonCode == "Busy")
+                    {
+                        itemData.Busy = item.Total2;
+                    }
+                    if (item.ReasonCode == "Wrong Party Contact")
+                    {
+                        itemData.WrongPartyContact = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "Third Party Contact")
+                    {
+                        itemData.ThirdPartyContact = item.Total2;
+                    }
+                    if (item.ReasonCode == "RTP - Financial Difficulty")
+                    {
+                        itemData.RTPFinancialDifficulty = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "RTP - DC")
+                    {
+                        itemData.RTPDC = item.Total2;
+                    }
+
+                    if (item.ReasonCode == "RTP - BKY")
+                    {
+                        itemData.RTPBKY = item.Total2;
+                    }
+                    if (item.ReasonCode == "PP - Reminder")
+                    {
+                        itemData.PPReminder = item.Total2;
+                    }
+                    if (item.ReasonCode == "PP - Pending")
+                    {
+                        itemData.PPPending = item.Total2;
+                    }
+                    if (item.ReasonCode == "PP - Approved")
+                    {
+                        itemData.PPApproved = item.Total2;
+                    }
+                    if (item.ReasonCode == "Claim - NC")
+                    {
+                        itemData.ClaimNC = item.Total2;
+                    }
+                    if (item.ReasonCode == "Claim - FP")
+                    {
+                        itemData.ClaimFP = item.Total2;
+                    }
+                    if (item.ReasonCode == "Claim - DCD")
+                    {
+                        itemData.ClaimDCD = item.Total2;
+                    }
+                    if (item.ReasonCode == "Claim - BKY")
+                    {
+                        itemData.ClaimBKY = item.Total2;
+                    }
+                    if (item.ReasonCode == "Callback")
+                    {
+                        itemData.Callback = item.Total2;
+                    }
+                }
+
+
+
+
+
+                dataList.Add(itemData);
+
+                //var itemfooter = new CrmReportStatusDeatailIndexModel();
+
+
+
+            }
+
+
+            var rowHeader3 = new Row();
+            rowHeader3.RowIndex = 2;
+            rowHeader3.Append(
+                new Cell
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("Team lead")
+                }
+            );
+
+            rowHeader3.Append(
+               new Cell
+               {
+                   DataType = CellValues.String,
+                   CellValue = new CellValue("Nhân viên")
+               }
+           );
+
+            rowHeader3.Append(
+                    new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue("Callback")
+                    }
+            );
+
+            rowHeader3.Append(
+             new Cell
+             {
+                 DataType = CellValues.String,
+                 CellValue = new CellValue("Invalid Address")
+             }
+         );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Voice Message / Operator")
+            }
+        );
+
+            rowHeader3.Append(
+          new Cell
+          {
+              DataType = CellValues.String,
+              CellValue = new CellValue("Unknown Contact")
+          }
+      );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("UC")
+            }
+            );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("System Hang Up")
+            }
+            );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Not Reached")
+            }
+            );
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Not In Service")
+            }
+            );
+
+            rowHeader3.Append(
+        new Cell
+        {
+            DataType = CellValues.String,
+            CellValue = new CellValue("No Answer")
+        }
+        );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Invalid Number")
+            }
+            );
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Drop")
+            }
+            );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Busy")
+            }
+            );
+
+            rowHeader3.Append(
+        new Cell
+        {
+            DataType = CellValues.String,
+            CellValue = new CellValue("Wrong Party Contact")
+        }
+        );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Third Party Contact")
+            }
+            );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("RTP - Financial Difficulty")
+            }
+            );
+
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("RTP - DC")
+            }
+            );
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("RTP - BKY")
+            }
+            );
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("PP - Reminder")
+            }
+            );
+
+            rowHeader3.Append(
+            new Cell
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("PP - Pending")
+            }
+            );
+
+
+            rowHeader3.Append(
+                    new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue("PP - Approved")
+                    }
+                    );
+
+            rowHeader3.Append(
+        new Cell
+        {
+            DataType = CellValues.String,
+            CellValue = new CellValue("Claim - NC")
+        }
+        );
+
+            rowHeader3.Append(
+    new Cell
+    {
+        DataType = CellValues.String,
+        CellValue = new CellValue("Claim - FP")
+    }
+    );
+
+            rowHeader3.Append(
+new Cell
+{
+    DataType = CellValues.String,
+    CellValue = new CellValue("Claim - DCD")
+}
+);
+
+            rowHeader3.Append(
+new Cell
+{
+    DataType = CellValues.String,
+    CellValue = new CellValue("Claim - BKY")
+}
+);
+
+
+
+            sheetData2.Append(rowHeader3);
+            indexloop2++;
+            var managerNameWrite = "";
+
+
+
+
+            var listOUtput2 = dataList.GroupBy(u => u.ManagerFullName)
+     .Select(grp => grp.ToList())
+     .ToList();
+
+            foreach (var itemdata in listOUtput2)
+            {
+
+                foreach (var item in itemdata)
+                {
+
+
+                    indexloop2++;
+                    var row = new Row();
+                    row.RowIndex = (uint)indexloop2;
+                    if (item.ManagerFullName != managerNameWrite)
+                    {
+                        managerNameWrite = item.ManagerFullName;
+
+                        var cell2 = new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(managerNameWrite)
+                        };
+                        row.Append(cell2);
+                    }
+                    else
+                    {
+                        var cell2 = new Cell
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue("")
+                        };
+                        row.Append(cell2);
+
+                    }
+
+
+
+                    var cell3 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.FullName)
+                    };
+
+                    var cellCallback = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.Callback)
+                    };
+
+                    var cell4 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.InvalidAddress)
+                    };
+                    var cell5 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.VoiceMessageOperator)
+                    };
+
+                    var cell6 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.UnknownContact)
+                    };
+                    var cell7 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.UC)
+                    };
+
+                    var cell8 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.SystemHangUp)
+                    };
+
+                    var cell9 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.NotReached)
+                    };
+                    var cell10 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.NotInService)
+                    };
+                    var cell11 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.NoAnswer)
+                    };
+                    var cell12 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.InvalidNumber)
+                    };
+                    var cell13 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.Drop)
+                    };
+                    var cell14 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.Busy)
+                    };
+                    var cell15 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.WrongPartyContact)
+                    };
+
+                    var cell16 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.ThirdPartyContact)
+                    };
+                    var cell17 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.RTPFinancialDifficulty)
+                    };
+
+                    var cell18 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.RTPDC)
+                    };
+
+                    var cell19 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.RTPBKY)
+                    };
+                    var cell20 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.PPReminder)
+                    };
+                    var cell21 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.PPPending)
+                    };
+                    var cell22 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.PPApproved)
+                    };
+                    var cell23 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.ClaimNC)
+                    };
+                    var cell24 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.ClaimFP)
+                    };
+
+                    var cell25 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.ClaimDCD)
+                    };
+                    var cell26 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.ClaimBKY)
+                    };
+
+
+                    var cell28 = new Cell
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(item.TotalGrand)
+                    };
+
+                    row.Append(cell3);
+                    row.Append(cellCallback);
+
+                    row.Append(cell4);
+                    row.Append(cell5);
+                    row.Append(cell6);
+                    row.Append(cell7);
+                    row.Append(cell8);
+                    row.Append(cell9);
+                    row.Append(cell10);
+                    row.Append(cell11);
+                    row.Append(cell12);
+                    row.Append(cell13);
+                    row.Append(cell14);
+                    row.Append(cell15);
+                    row.Append(cell16);
+                    row.Append(cell17);
+                    row.Append(cell18);
+                    row.Append(cell19);
+                    row.Append(cell20);
+                    row.Append(cell21);
+                    row.Append(cell22);
+                    row.Append(cell23);
+                    row.Append(cell24);
+                    row.Append(cell25);
+                    row.Append(cell26);
+
+                    row.Append(cell28);
+                    sheetData2.Append(row);
+
+                }
+
+                var lastItem = itemdata.Last();
+
+                var itemfooter = new CrmReportStatusDeataiVPBanklIndexModel();
+
+
+                itemfooter.InvalidAddress = itemdata.Sum(x => x.InvalidAddress);
+                itemfooter.VoiceMessageOperator = itemdata.Sum(x => x.VoiceMessageOperator);
+                itemfooter.UnknownContact = itemdata.Sum(x => x.UnknownContact);
+                itemfooter.UC = itemdata.Sum(x => x.UC);
+                itemfooter.SystemHangUp = itemdata.Sum(x => x.SystemHangUp);
+                itemfooter.NotReached = itemdata.Sum(x => x.NotReached);
+                itemfooter.NotInService = itemdata.Sum(x => x.NotInService);
+                itemfooter.NoAnswer = itemdata.Sum(x => x.NoAnswer);
+                itemfooter.InvalidNumber = itemdata.Sum(x => x.InvalidNumber);
+                itemfooter.Drop = itemdata.Sum(x => x.Drop);
+                itemfooter.Busy = itemdata.Sum(x => x.Busy);
+                itemfooter.WrongPartyContact = itemdata.Sum(x => x.WrongPartyContact);
+                itemfooter.ThirdPartyContact = itemdata.Sum(x => x.ThirdPartyContact);
+                itemfooter.RTPFinancialDifficulty = itemdata.Sum(x => x.RTPFinancialDifficulty);
+                itemfooter.RTPDC = itemdata.Sum(x => x.RTPDC);
+                itemfooter.RTPBKY = itemdata.Sum(x => x.RTPBKY);
+                itemfooter.PPReminder = itemdata.Sum(x => x.PPReminder);
+                itemfooter.PPPending = itemdata.Sum(x => x.PPPending);
+                itemfooter.PPApproved = itemdata.Sum(x => x.PPApproved);
+                itemfooter.ClaimNC = itemdata.Sum(x => x.ClaimNC);
+                itemfooter.ClaimFP = itemdata.Sum(x => x.ClaimFP);
+                itemfooter.ClaimDCD = itemdata.Sum(x => x.ClaimDCD);
+                itemfooter.ClaimBKY = itemdata.Sum(x => x.ClaimBKY);
+                itemfooter.Callback = itemdata.Sum(x => x.Callback);
+
+                itemfooter.TotalGrand = itemfooter.InvalidAddress + itemfooter.VoiceMessageOperator +
+                itemfooter.UnknownContact
+                + itemfooter.UC + itemfooter.SystemHangUp + itemfooter.NotReached + itemfooter.NotInService
+                + itemfooter.NoAnswer
+                + itemfooter.InvalidNumber + itemfooter.Drop + itemfooter.Busy
+                + itemfooter.WrongPartyContact +
+                itemfooter.ThirdPartyContact + itemfooter.RTPFinancialDifficulty + itemfooter.RTPDC
+                + itemfooter.RTPBKY +
+                itemfooter.PPReminder + itemfooter.PPPending + itemfooter.PPApproved
+                + itemfooter.ClaimNC +
+                    itemfooter.ClaimFP + itemfooter.ClaimDCD + itemfooter.ClaimBKY
+                + itemfooter.Callback;
+
+                indexloop2++;
+                var row2 = new Row();
+                row2.RowIndex = (uint)indexloop2;
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(lastItem.ManagerFullName + " total")
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue("")
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.InvalidAddress)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.VoiceMessageOperator)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.UnknownContact)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.UC)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.SystemHangUp)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.NotReached)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.NotInService)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.NoAnswer)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.InvalidNumber)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.Drop)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.Busy)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.WrongPartyContact)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.ThirdPartyContact)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.RTPDC)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.RTPBKY)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.PPReminder)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.PPPending)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.PPApproved)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.ClaimNC)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.ClaimFP)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.ClaimDCD)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.ClaimBKY)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.Callback)
+                });
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.TotalGrand)
+                });
+                sheetData2.Append(row2);
+
+            }
+
+            indexloop2++;
+            var row3 = new Row();
+            row3.RowIndex = (uint)indexloop2;
+            row3.Append(new Cell()
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("Grand total")
+            });
+            row3.Append(new Cell()
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue("")
+            });
+
+
+
+
+            //var itemfooter2 = new CrmReportStatusDeataiVPBanklIndexModel();
+
+
+            //itemfooter2.BPTP = dataList.Sum(x => x.BPTP);
+            //itemfooter2.CALLBACK = dataList.Sum(x => x.CALLBACK);
+            //itemfooter2.CONFIRM = dataList.Sum(x => x.CONFIRM);
+            //itemfooter2.DIE = dataList.Sum(x => x.DIE);
+            //itemfooter2.DIF = dataList.Sum(x => x.DIF);
+            //itemfooter2.LM = dataList.Sum(x => x.LM);
+            //itemfooter2.LMN = dataList.Sum(x => x.LMN);
+            //itemfooter2.NCON = dataList.Sum(x => x.NCON);
+            //itemfooter2.OTHER = dataList.Sum(x => x.OTHER);
+            //itemfooter2.PTP = dataList.Sum(x => x.PTP);
+            //itemfooter2.RFTP = dataList.Sum(x => x.RFTP);
+            //itemfooter2.RONA = dataList.Sum(x => x.RONA);
+
+            //itemfooter2.TotalGrand = itemfooter2.BPTP + itemfooter2.CALLBACK + itemfooter2.CONFIRM
+            //    + itemfooter2.DIF + itemfooter2.DIE + itemfooter2.LM + itemfooter2.LMN + itemfooter2.NCON
+            //    + itemfooter2.OTHER + itemfooter2.PTP + itemfooter2.RFTP + itemfooter2.RONA;
+
+
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.BPTP)
+            //});
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.CALLBACK)
+            //});
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.CONFIRM)
+            //});
+
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.DIE)
+            //});
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.DIF)
+            //});
+
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.LM)
+            //});
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.LMN)
+            //});
+
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.NCON)
+            //});
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.OTHER)
+            //});
+
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.PTP)
+            //});
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.RFTP)
+            //});
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.RONA)
+            //});
+
+            //row3.Append(new Cell()
+            //{
+            //    DataType = CellValues.String,
+            //    CellValue = new CellValue(itemfooter2.TotalGrand)
+            //});
+            //sheetData2.Append(row3);
             document.Save();
         }
         return pathFile;
@@ -1385,7 +2524,7 @@ CellValue = new CellValue("Grand Total")
         var dateGet = DateTime.Now;
 
         Random rnd = new Random();
-       
+
 
 
         var fileName = request.UserName + "_sumoffTalkTime." + dateGet.ToString("dd.MM.yy") + rnd.Next(10, 100) + ".xlsx";
@@ -1434,9 +2573,9 @@ CellValue = new CellValue("Grand Total")
             var resultData = await _unitOfWork1.DailyReport.GetSumupTalktime(requestQuery);
             var listData = resultData.Data as List<CrmReportTalktimeIndexModel>;
 
-              var listOUtput2 = listData.GroupBy(u => u.ManagerName)
-     .Select(grp => grp.ToList())
-     .ToList();
+            var listOUtput2 = listData.GroupBy(u => u.ManagerName)
+   .Select(grp => grp.ToList())
+   .ToList();
 
             var indexloop = 1;
             var rowHeader = new Row();
@@ -1490,7 +2629,7 @@ CellValue = new CellValue("Grand Total")
             );
 
             sheetData.Append(row1);
-    
+
             indexloop++;
             var managerNameWrite = "";
             foreach (var itemdata in listOUtput2)
@@ -1500,12 +2639,12 @@ CellValue = new CellValue("Grand Total")
                 {
                     indexloop++;
 
-                
+
 
 
                     var rowData = new Row();
                     rowData.RowIndex = (uint)indexloop;
-                  
+
                     if (item.ManagerName != managerNameWrite)
                     {
                         managerNameWrite = item.ManagerName;
@@ -1542,7 +2681,7 @@ CellValue = new CellValue("Grand Total")
                     };
 
 
-                   
+
                     rowData.Append(cell3);
                     rowData.Append(cell4);
 
@@ -1556,7 +2695,7 @@ CellValue = new CellValue("Grand Total")
                     new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(firstName.ManagerName +" total"),
+                        CellValue = new CellValue(firstName.ManagerName + " total"),
                         StyleIndex = (UInt32Value)1U,
                     }
                 );
@@ -1572,14 +2711,14 @@ CellValue = new CellValue("Grand Total")
                     new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(itemdata.Sum(x=>x.Total))
+                        CellValue = new CellValue(itemdata.Sum(x => x.Total))
                     }
                 );
-              
+
                 sheetData.Append(rowtotal);
             }
 
-             indexloop++;
+            indexloop++;
 
 
 
@@ -1591,7 +2730,7 @@ CellValue = new CellValue("Grand Total")
                 {
                     DataType = CellValues.String,
                     StyleIndex = (UInt32Value)1U,
-                    
+
                     CellValue = new CellValue("Grand total")
                 }
             );
@@ -1607,10 +2746,10 @@ CellValue = new CellValue("Grand Total")
                 new Cell
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(listData.Sum(x=>x.Total))
+                    CellValue = new CellValue(listData.Sum(x => x.Total))
                 }
             );
-          
+
             sheetData.Append(rowfooter);
             indexloop++;
             document.Save();

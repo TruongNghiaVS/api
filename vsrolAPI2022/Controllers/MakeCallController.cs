@@ -39,10 +39,10 @@ namespace vsrolAPI2022.Controllers
                 return Results.BadRequest("Dữ liệu không hợp lệ");
 
             }
-            if (linecode.Length < 4)
-            {
-                return Results.BadRequest("không gọi được");
-            }
+            //if (linecode.Length < 4)
+            //{
+            //    return Results.BadRequest("không gọi được");
+            //}
 
             if (string.IsNullOrEmpty(_input.PhoneNumber))
             {
@@ -67,14 +67,14 @@ namespace vsrolAPI2022.Controllers
             var itemUpdate = TrackingCallController.OutPutData
                                 .Where(x => x.LineCode == linecode).FirstOrDefault();
 
-            if(itemUpdate  != null )
+            if (itemUpdate != null)
             {
                 itemUpdate.LastCallcrm = DateTime.Now;
             }
 
-            if(GlobalLogCall.Count >1000)
-            { 
-                
+            if (GlobalLogCall.Count > 1000)
+            {
+
                 GlobalLogCall.RemoveAt(1000);
             }
             GlobalLogCall.Add(tiemInsert);

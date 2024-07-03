@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.ObjectModel;
 
 namespace VS.core.Request
 {
@@ -364,7 +363,7 @@ namespace VS.core.Request
         }
     }
 
-    
+
     public class CampagnRequestReponse : BaseSearchRepons
 
     {
@@ -437,7 +436,7 @@ namespace VS.core.Request
 
     }
 
- 
+
     public class GetAllProfileByCampangReponse : BaseSearchRepons
 
     {
@@ -457,7 +456,7 @@ namespace VS.core.Request
         }
     }
 
-    public class StoreLookingReponse 
+    public class StoreLookingReponse
 
     {
         public dynamic Result;
@@ -465,7 +464,7 @@ namespace VS.core.Request
         public dynamic listHistory;
         public StoreLookingReponse()
         {
-          
+
         }
     }
 
@@ -852,7 +851,7 @@ namespace VS.core.Request
     public class GetAllTrackingGroupByLineCodeReponse : BaseSearchRepons
 
     {
-    
+
         public GetAllTrackingGroupByLineCodeReponse()
         {
             Total = 0;
@@ -1398,21 +1397,23 @@ namespace VS.core.Request
         }
     }
 
-    public class CampagnProfileExportReponse 
+    public class CampagnProfileExportReponse
 
     {
         public IEnumerable? Data { get; set; }
-        public int?  NumberRecord { get; set; }
+        public int? NumberRecord { get; set; }
     }
 
 
 
-    public class CrmReportRequest 
+    public class CrmReportRequest
     {
         public string UserId { get; set; }
         private DateTime? FromTimeAss { get; set; }
 
         public string? UserName { get; set; }
+
+
 
         public DateTime? From
         {

@@ -7,7 +7,7 @@ namespace VS.Core.Business.Interface
 {
     public interface ICampagnBussiness : IGenericBussine<Campagn>
     {
-        Task<MasterDataReponse> GetAllReason();
+        Task<MasterDataReponse> GetAllReason(string groupId = "4");
         Task<Campagn> Getbyid(string Id);
         Task<bool> Close(string Id);
         Task<bool> CheckDuplicate(string code);

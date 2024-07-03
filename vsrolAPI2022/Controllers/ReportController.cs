@@ -36,6 +36,11 @@ namespace vsrolAPI2022.Controllers
                 request.LineCode = user.LineCode;
             }
 
+            if (user.Id == "3614")
+            {
+                request.UserId = user.Id;
+            }
+
             if (request.To.HasValue)
             {
                 request.To = request.To.EndDateTime();
@@ -143,8 +148,8 @@ namespace vsrolAPI2022.Controllers
             var resultSearch = await _impactBusiness.getAllCall(_input);
             return Results.Ok(resultSearch);
         }
-        
-        
+
+
         [HttpPost("~/api/report/getAllRecordingFile")]
         public async Task<IResult> getAllRecordingFile(ReportCDRequest _input)
         {
