@@ -43,6 +43,9 @@ namespace VS.Core.Business
         {
             ListCall = new List<CampagnProfile>();
             ChanelCall = new List<string>();
+            ChanelCall.Add("3000");
+            ChanelCall.Add("3200");
+            ChanelCall.Add("3201");
             DataCall = DataCallContainer.GlobalContainer();
             CallLogBussiness = callLogBussiness;
         }
@@ -151,13 +154,13 @@ namespace VS.Core.Business
 
         public async Task<bool> LoadData()
         {
-            var filestrem = new FileStream("C:\\Users\\Admin\\Desktop\\fileMirae.xlsx", FileMode.Open);
+            var filestrem = new FileStream("C:\\Users\\Admin\\Desktop\\sourceData\\09.07.24.xlsx", FileMode.Open);
             await using (MemoryStream ms = new MemoryStream())
             {
                 await filestrem.CopyToAsync(ms);
                 using (ExcelPackage package = new ExcelPackage(ms))
                 {
-                    ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                    ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
                     int totalRows = workSheet.Dimension.Rows;
                     for (int i = 2; i <= totalRows; i++)
                     {
@@ -178,15 +181,14 @@ namespace VS.Core.Business
             {
 
             };
-
             var dataCal = _unitOfWork.CampagnProfileRe.GetALlProfileByCampaign(requestSearch);
-            var filestrem = new FileStream("C:\\Users\\Admin\\Desktop\\fileMirae.xlsx", FileMode.Open);
+            var filestrem = new FileStream("C:\\Users\\Admin\\Desktop\\sourceData\\09.07.24.xlsx", FileMode.Open);
             await using (MemoryStream ms = new MemoryStream())
             {
                 await filestrem.CopyToAsync(ms);
                 using (ExcelPackage package = new ExcelPackage(ms))
                 {
-                    ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                    ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
                     int totalRows = workSheet.Dimension.Rows;
                     for (int i = 2; i <= totalRows; i++)
                     {

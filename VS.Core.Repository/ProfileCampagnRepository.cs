@@ -140,7 +140,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<ProileIndexModel>(_Sql.CampaignProfile_getAll, new
+                    var result = await con.QueryAsync<ProfileIndexModel>(_Sql.CampaignProfile_getAll, new
                     {
                         request.Id,
                         request.Token,
@@ -191,7 +191,7 @@ namespace VS.Core.Repository
             {
                 using (var con = GetConnection())
                 {
-                    var result = await con.QueryAsync<ProileIndexModel>(_Sql.CampaignProfile_getAllNoted, new
+                    var result = await con.QueryAsync<ProfileIndexModel>(_Sql.CampaignProfile_getAllNoted, new
                     {
                         request.Id,
                         request.Token,
