@@ -43,9 +43,9 @@ namespace VS.Core.Business
         {
             ListCall = new List<CampagnProfile>();
             ChanelCall = new List<string>();
-            ChanelCall.Add("3000");
-            ChanelCall.Add("3200");
-            ChanelCall.Add("3201");
+            ChanelCall.Add("5000");
+            //ChanelCall.Add("5001");
+            //ChanelCall.Add("5002");
             DataCall = DataCallContainer.GlobalContainer();
             CallLogBussiness = callLogBussiness;
         }
@@ -86,7 +86,7 @@ namespace VS.Core.Business
                 lineCode = chanel
             }));
             data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var linkUrl = "http://192.168.1.10:3002";
+            var linkUrl = "http://192.168.1.151:3002";
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(linkUrl);
@@ -154,7 +154,7 @@ namespace VS.Core.Business
 
         public async Task<bool> LoadData()
         {
-            var filestrem = new FileStream("C:\\Users\\Admin\\Desktop\\sourceData\\09.07.24.xlsx", FileMode.Open);
+            var filestrem = new FileStream("C:\\Users\\Admin\\Desktop\\sourceData\\12.07.24.xlsx", FileMode.Open);
             await using (MemoryStream ms = new MemoryStream())
             {
                 await filestrem.CopyToAsync(ms);
@@ -212,7 +212,7 @@ namespace VS.Core.Business
             {
             }));
             data.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var linkUrl = "http://192.168.1.10:3002";
+            var linkUrl = "http://192.168.1.151:3002";
             var listActive = new List<string>();
             using (var client = new HttpClient())
             {
