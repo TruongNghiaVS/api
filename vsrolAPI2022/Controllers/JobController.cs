@@ -55,6 +55,32 @@ namespace vsrolAPI2022.Controllers
             return Ok(true);
         }
 
+
+        [HttpGet("~/api/job/CalculatingTalktime3")]
+        public async Task<ActionResult> CalculatingTalktime3()
+        {
+
+            var timerun = DateTime.Now;
+            timerun = timerun.AddDays(-3);
+            var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
+            Task.WaitAll();
+
+            var startTime = timerun;
+            var endTime = DateTime.Now.AddDays(1).EndDateTime();
+            while (startTime < endTime)
+            {
+                await _reportTalkTimeGroupByDayBussiness.ProcessCalReportGroupByDay(new GetAllRecordGroupByLineCodeRequest()
+                {
+                    TimeSelect = startTime
+
+                });
+                Task.WaitAll();
+                startTime = startTime.AddDays(1);
+            }
+            Task.WaitAll();
+            return Ok(true);
+        }
+
         [HttpGet("~/api/job/HanleData")]
         public async Task<ActionResult> HanleData()
         {
