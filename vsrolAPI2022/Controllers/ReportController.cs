@@ -166,6 +166,17 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = user.Id;
+
+
+
+            if (_input.ProjectId > 0)
+            {
+                _input.VendorId = _input.ProjectId;
+            }
+
+
+
+
             var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
             return Results.Ok(resultSearch);
         }

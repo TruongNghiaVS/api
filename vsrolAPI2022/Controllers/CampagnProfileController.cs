@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VS.core.API.Error.Model;
+using VS.core.API.Global;
 using VS.core.API.model;
 using VS.core.API.policy;
 using VS.core.Request;
@@ -95,6 +96,8 @@ namespace vsrolAPI2022.Controllers
 
                 request.IdPackage = "";
             }
+
+
             int dpdMax = -1;
             int dpdMin = -1;
             if (request.Dpd == 0)
@@ -176,6 +179,8 @@ namespace vsrolAPI2022.Controllers
             {
                 request.ColorCode = string.Empty;
             }
+
+            var campagnIdTemp = ProjectContainer.GetProject().GetCampagnByProject(request.ProjectId);
             var searchRequest = new GetAllProfileByCampang()
             {
                 Token = request.Token,
@@ -184,9 +189,6 @@ namespace vsrolAPI2022.Controllers
                 Limit = request.Limit,
                 GroupId = request.GroupId,
                 MemberId = request.MemberId,
-
-
-
                 To = request.To,
                 DpdMax = dpdMax,
                 DpdMin = dpdMin,
@@ -200,7 +202,8 @@ namespace vsrolAPI2022.Controllers
                 NoAgreement = request.NoAgree,
                 TypegetData = request.TypegetData,
                 SkipData = request.SkipData,
-                Cmnd = request.Cmnd
+                Cmnd = request.Cmnd,
+                CampagnId = campagnIdTemp
 
             };
             if (searchRequest.To.HasValue)

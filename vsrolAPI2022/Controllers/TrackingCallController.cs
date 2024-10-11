@@ -120,6 +120,15 @@ namespace vsrolAPI2022.Controllers
             {
                 GroupMemer.Add(29);
             }
+            else if (userIdInput == 4705)
+            {
+                GroupMemer.Add(40);
+            }
+
+            else if (userIdInput == 4714)
+            {
+                GroupMemer.Add(41);
+            }
             else if (userIdInput == 3471)
             {
                 GroupMemer.Add(30);
@@ -153,18 +162,7 @@ namespace vsrolAPI2022.Controllers
 
             }
 
-            else if (userIdInput == 1)
-            {
-                //GroupMemer.Add(33);
-                //GroupMemer.Add(28);
-                //GroupMemer.Add(29);
-                //GroupMemer.Add(31);
-                //GroupMemer.Add(32);
-                //GroupMemer.Add(30);
-                //GroupMemer.Add(23);
-                //GroupMemer.Add(29);
-            }
-            else if (userIdInput == 3590)
+            if (userIdInput == 3590)
             {
                 GroupMemer.Add(34);
             }

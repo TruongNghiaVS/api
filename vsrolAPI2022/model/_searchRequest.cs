@@ -71,9 +71,12 @@
         public bool? SkipData { get; set; }
 
         public string? Cmnd { get; set; }
+
+        public int? ProjectId { get; set; }
         public CampagnProfileSearchInput()
         {
             Status = 0;
+            ProjectId = -1;
         }
 
     }

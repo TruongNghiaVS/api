@@ -1,12 +1,8 @@
-﻿
-using Newtonsoft.Json;
-using Quartz;
-using System.Text.RegularExpressions;
-using vsrolAPI2022.Controllers;
-using System.Net.Http.Headers;
+﻿using Quartz;
+using VS.core.Request;
 using VS.Core.Business.Interface;
 using VS.Core.Repository.Model;
-using VS.core.Request;
+using vsrolAPI2022.Controllers;
 namespace VS.core.API.job
 {
     public class UpdateDataGroupDB : IJob
@@ -27,10 +23,10 @@ namespace VS.core.API.job
                 UserId = "1",
                 TimeSelect = DateTime.Now
             };
-     
 
 
-            var result =    await _reportTalkTimeGroupByDayBussiness
+
+            var result = await _reportTalkTimeGroupByDayBussiness
                 .GetAllTracking(request);
             if (result != null)
             {
