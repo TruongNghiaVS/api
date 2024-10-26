@@ -432,6 +432,7 @@ namespace VS.core.Request
 
         public string? Cmnd { get; set; }
 
+        public int? CampagnId { get; set; }
 
 
     }
@@ -805,6 +806,8 @@ namespace VS.core.Request
         public int? GroupId { get; set; }
 
         public int? MemberId { get; set; }
+
+        public int? ProjectId { get; set; }
         public ReportCDRequest()
         {
             TimeFrom2 = 64800;

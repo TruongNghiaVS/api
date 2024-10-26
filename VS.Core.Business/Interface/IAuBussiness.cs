@@ -4,7 +4,7 @@ using VS.Core.dataEntry.User;
 
 namespace VS.Core.Business.Interface
 {
-    public interface IAutoBussiness : IGenericBussine<CampagnProfile>
+    public interface IAuBussiness : IGenericBussine<CampagnProfile>
     {
 
         Task<GetAllProfileByCampangReponse> GetAllCampagn(GetAllProfileByCampang request);

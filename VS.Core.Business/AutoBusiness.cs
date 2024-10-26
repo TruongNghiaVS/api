@@ -21,7 +21,7 @@ namespace VS.Core.Business
 
         public List<string> Output { get; set; }
     }
-    public class AutoBusiness : BaseBusiness, IAutoBussiness
+    public class AutoBusiness : BaseBusiness, IAuBussiness
     {
 
         public static List<CampagnProfile> ListCall { get; set; }

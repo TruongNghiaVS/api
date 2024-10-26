@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System.Data;
 using VS.core.Request;
 using VS.Core.dataEntry.User;
@@ -74,7 +73,7 @@ namespace VS.Core.Repository
 
             }
         }
-        
+
         public async Task<GetAllProfileByCampangReponse> GetALlProfileByCampaign(GetAllProfileByCampang request)
         {
             int page = request.Page;
@@ -105,6 +104,7 @@ namespace VS.Core.Repository
                         request.UserId,
                         request.GroupId,
                         request.MemberId,
+                        request.CampagnId,
                         request.Cmnd
                     }, commandType: CommandType.StoredProcedure);
                     var fistElement = result.FirstOrDefault();
@@ -358,10 +358,10 @@ namespace VS.Core.Repository
         public async Task<int> ImportUpdate(CampagnProfile entity)
         {
 
-            if(string.IsNullOrEmpty(entity.Assignee))
+            if (string.IsNullOrEmpty(entity.Assignee))
             {
                 return 0;
-            }    
+            }
             entity.CreateAt = DateTime.Now;
             entity.UpdateAt = DateTime.Now;
             var par = GetParams(entity, new string[] {
@@ -390,8 +390,12 @@ namespace VS.Core.Repository
             using (var con = GetConnection())
             {
                 var sql = "update CampaignProfile set assignee =@assignee  where Id =@id";
-                var result = await con.ExecuteAsync(sql, new { assignee = userId, id = profileId });
-
+                var result = await con.ExecuteAsync(sql,
+                    new
+                    {
+                        assignee = userId,
+                        id = profileId
+                    });
                 if (result > 0)
                 {
                     return true;
@@ -412,8 +416,8 @@ namespace VS.Core.Repository
             {
                 //string listOfIdsJoined = "(" + String.Join(",'", dataDelete.ToArray()) + ")";
                 //string arrayResult = "( ";
-   
-                    for (int i = 0; i < dataDelete.Count; i++)
+
+                for (int i = 0; i < dataDelete.Count; i++)
                 {
                     using (var con = GetConnection())
                     {
@@ -424,20 +428,20 @@ namespace VS.Core.Repository
 
                     }
                 }
-                
+
 
                 return true;
 
-                    //arrayResult += " ) ";
-                    //var sql = "update CampaignProfile set Deleted = 1, UpdateAt =getdate()  where CampaignId = @CampaignId and  NoAgreement in @dataDelete";
-                    //var result = await con.ExecuteAsync(sql, new
-                    //{
-                    //    dataDelete = arrayResult,
-                    //    CampaignId = requestId
-                    //});
-                  
+                //arrayResult += " ) ";
+                //var sql = "update CampaignProfile set Deleted = 1, UpdateAt =getdate()  where CampaignId = @CampaignId and  NoAgreement in @dataDelete";
+                //var result = await con.ExecuteAsync(sql, new
+                //{
+                //    dataDelete = arrayResult,
+                //    CampaignId = requestId
+                //});
 
-                
+
+
             }
             catch (Exception e)
             {
@@ -476,9 +480,9 @@ namespace VS.Core.Repository
                 return new List<CampagnProfile>();
             }
         }
-      
 
-        public async Task<CampagnProfile> GetProfileCall( )
+
+        public async Task<CampagnProfile> GetProfileCall()
         {
             try
             {
@@ -486,15 +490,15 @@ namespace VS.Core.Repository
                 {
                     var result = await con.QueryAsync<CampagnProfile>(_Sql.AutoCall_getProfileCall, new
                     {
-                       
+
                     }, commandType: CommandType.StoredProcedure);
-                    if(result == null )
+                    if (result == null)
                     {
                         return new CampagnProfile()
                         {
                             Id = "-1"
                         };
-                    }    
+                    }
                     return result.First();
                 }
             }
@@ -506,8 +510,8 @@ namespace VS.Core.Repository
                 };
             }
         }
-        
-        public async Task <List<ReportQuerryCallResult>> GetInfomationCall(string linecode,
+
+        public async Task<List<ReportQuerryCallResult>> GetInfomationCall(string linecode,
             string phoneNumber
 
          )
@@ -521,7 +525,7 @@ namespace VS.Core.Repository
                         phoneNumber
                     });
                 var data = result.ToList();
-                if(data ==null)
+                if (data == null)
                 {
                     data = new List<ReportQuerryCallResult>();
                 }
@@ -533,7 +537,7 @@ namespace VS.Core.Repository
 
         public async Task<bool> UpdateCampagnAuto(string id,
          bool resultCall)
-         {
+        {
             try
             {
 
@@ -554,7 +558,7 @@ namespace VS.Core.Repository
                 return false;
             }
         }
-      
+
         public async Task<bool> HanldleCase(int? id, bool? resetCase, bool? skipp)
         {
             try

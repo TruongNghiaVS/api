@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\vietbank\\crm\\api\\services\\sendEmail\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\sendmail\\schedulecrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\sendmail\\schedulecrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\sendmail\\daillyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\sendmail\\daillyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,6 +27,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\Program.cs",
+              "RelativeDocumentMoniker": "sendEmail\\Program.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\Program.cs",
+              "RelativeToolTip": "sendEmail\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T02:40:09.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ScheduleCRM.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\ScheduleCRM.cs",
+              "RelativeDocumentMoniker": "sendEmail\\sendmail\\ScheduleCRM.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\ScheduleCRM.cs",
+              "RelativeToolTip": "sendEmail\\sendmail\\ScheduleCRM.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T02:40:07.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "DaillyReport.cs",
               "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\DaillyReport.cs",
               "RelativeDocumentMoniker": "sendEmail\\sendmail\\DaillyReport.cs",
@@ -28,6 +62,10 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-17T02:57:39.396Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

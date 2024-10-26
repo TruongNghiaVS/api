@@ -1,5 +1,5 @@
 ﻿using Quartz;
-using VS.Core.Business.Interface;
+using VS.core.AutoCall;
 
 namespace VS.core.API.job
 {
@@ -15,7 +15,7 @@ namespace VS.core.API.job
         }
         public async Task Execute(IJobExecutionContext context)
         {
-            await _autoBussiness.Run();
+            await _autoBussiness.MakeCall();
         }
     }
 }

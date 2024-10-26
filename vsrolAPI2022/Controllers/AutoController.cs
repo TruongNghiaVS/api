@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VS.core.AutoCall;
 using VS.Core.Business.Interface;
+
 namespace vsrolAPI2022.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
     public class AutoController : BaseController
     {
         private readonly IAutoBussiness _business;
@@ -14,11 +17,9 @@ namespace vsrolAPI2022.Controllers
         {
             _business = autoBussiness;
         }
-        [HttpGet("~/api/auto/run")]
-        public async Task<IResult> HandlerAutoCall()
-        {
-            await _business.Run();
-            return Results.Ok(new { success = true });
-        }
+
+
+
     }
 }
+

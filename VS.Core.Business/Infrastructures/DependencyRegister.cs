@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VS.Core.Business.Interface;
-using VS.Core.Repository.baseConfig;
-using VS.Core.Repository;
 using VS.Core.Repository.Infrastructures;
 
 namespace VS.Core.Business.Infrastructures
@@ -36,7 +34,7 @@ namespace VS.Core.Business.Infrastructures
             services.AddScoped<IWorkplaceNotedBussiness, WorkplaceNotedBussiness>();
             services.AddScoped<IDailyReportBussiness, DailyReportBussiness>();
             services.AddScoped<IStoreBussiness, StoreBusiness>();
-            services.AddScoped<IAutoBussiness, AutoBusiness>();
+            services.AddScoped<IAuBussiness, AutoBusiness>();
             services.AddScoped<IReportCrmBussiness, ReportCrmBussiness>();
 
         }

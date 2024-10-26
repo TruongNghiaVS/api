@@ -28,14 +28,11 @@ namespace vsrolAPI2022.Controllers
         [HttpPost("~/api/qc/getData")]
         public async Task<IResult> getData(GetDashboardQcRequest request)
         {
-
             var searchRequest = new GetDashboardQcRequest()
             {
-
                 From = request.From,
                 To = request.To,
                 LineCode = request.LineCode,
-
             };
             var resultSearch = await _viewRecordingBussiness.GetDataQc(searchRequest);
             return Results.Ok(resultSearch);

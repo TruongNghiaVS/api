@@ -18,7 +18,7 @@
           }
         }
       },
-      "Dapper/2.0.123": {
+      "Dapper/2.1.35": {
         "type": "package",
         "compile": {
           "lib/net5.0/Dapper.dll": {
@@ -2315,6 +2315,23 @@
           }
         }
       },
+      "VS.core.AutoCall/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Dapper": "2.1.35",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "MySql.Data": "8.0.31",
+          "Newtonsoft.Json": "11.0.2",
+          "System.Data.SqlClient": "4.8.3"
+        },
+        "compile": {
+          "bin/placeholder/VS.core.AutoCall.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/VS.core.AutoCall.dll": {}
+        }
+      },
       "VS.Core.Business/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -2419,22 +2436,25 @@
         "lib/netstandard2.1/AutoMapper.xml"
       ]
     },
-    "Dapper/2.0.123": {
-      "sha512": "RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+    "Dapper/2.1.35": {
+      "sha512": "YKRwjVfrG7GYOovlGyQoMvr1/IJdn+7QzNXJxyMh0YfFF5yvDmTYaJOVYWsckreNjGsGSEtrMTpnzxTUq/tZQw==",
       "type": "package",
-      "path": "dapper/2.0.123",
+      "path": "dapper/2.1.35",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Dapper.png",
-        "dapper.2.0.123.nupkg.sha512",
+        "dapper.2.1.35.nupkg.sha512",
         "dapper.nuspec",
         "lib/net461/Dapper.dll",
         "lib/net461/Dapper.xml",
         "lib/net5.0/Dapper.dll",
         "lib/net5.0/Dapper.xml",
+        "lib/net7.0/Dapper.dll",
+        "lib/net7.0/Dapper.xml",
         "lib/netstandard2.0/Dapper.dll",
-        "lib/netstandard2.0/Dapper.xml"
+        "lib/netstandard2.0/Dapper.xml",
+        "readme.md"
       ]
     },
     "DocumentFormat.OpenXml/3.0.1": {
@@ -6789,6 +6809,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "VS.core.AutoCall/1.0.0": {
+      "type": "project",
+      "path": "../VS.core.AutoCall/VS.core.AutoCall.csproj",
+      "msbuildProject": "../VS.core.AutoCall/VS.core.AutoCall.csproj"
+    },
     "VS.Core.Business/1.0.0": {
       "type": "project",
       "path": "../VS.Core.Business/VS.Core.Business.csproj",
@@ -6831,6 +6856,7 @@
       "Quartz.Extensions.Hosting >= 3.8.1",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "VS.Core.Business >= 1.0.0",
+      "VS.core.AutoCall >= 1.0.0",
       "VS.core.Utilities >= 1.0.0"
     ]
   },
@@ -6861,6 +6887,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\vietbank\\crm\\api\\VS.core.AutoCall\\VS.core.AutoCall.csproj": {
+              "projectPath": "C:\\vietbank\\crm\\api\\VS.core.AutoCall\\VS.core.AutoCall.csproj"
+            },
             "C:\\vietbank\\crm\\api\\VS.Core.Business\\VS.Core.Business.csproj": {
               "projectPath": "C:\\vietbank\\crm\\api\\VS.Core.Business\\VS.Core.Business.csproj"
             },

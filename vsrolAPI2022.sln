@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.RMI", "VS.core.RMI\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.Report", "VS.core.Report\VS.core.Report.csproj", "{AFDABC85-72F3-466B-A6CE-441EC645C38D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.AutoCall", "VS.core.AutoCall\VS.core.AutoCall.csproj", "{2A2DB43D-B2EC-4F02-B4B5-B46951EBD828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAutocall", "WebAutocall\WebAutocall.csproj", "{89FBA79C-E361-4FB9-AB7F-022DBC6BB1A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{AFDABC85-72F3-466B-A6CE-441EC645C38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFDABC85-72F3-466B-A6CE-441EC645C38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFDABC85-72F3-466B-A6CE-441EC645C38D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A2DB43D-B2EC-4F02-B4B5-B46951EBD828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2DB43D-B2EC-4F02-B4B5-B46951EBD828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2DB43D-B2EC-4F02-B4B5-B46951EBD828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2DB43D-B2EC-4F02-B4B5-B46951EBD828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89FBA79C-E361-4FB9-AB7F-022DBC6BB1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89FBA79C-E361-4FB9-AB7F-022DBC6BB1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89FBA79C-E361-4FB9-AB7F-022DBC6BB1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89FBA79C-E361-4FB9-AB7F-022DBC6BB1A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
