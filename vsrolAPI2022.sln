@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.Report", "VS.core.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS.core.AutoCall", "VS.core.AutoCall\VS.core.AutoCall.csproj", "{2A2DB43D-B2EC-4F02-B4B5-B46951EBD828}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAutocall", "WebAutocall\WebAutocall.csproj", "{89FBA79C-E361-4FB9-AB7F-022DBC6BB1A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAutocall", "WebAutocall\WebAutocall.csproj", "{89FBA79C-E361-4FB9-AB7F-022DBC6BB1A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

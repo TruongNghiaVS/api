@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VS.core.API.model;
 using VS.core.AutoCall;
 using VS.Core.Business.Interface;
 namespace vsrolAPI2022.Controllers
@@ -47,18 +48,46 @@ namespace vsrolAPI2022.Controllers
         [HttpGet("~/api/ACD/TurnOfAutoCall")]
         public async Task<IResult> TurnOfAutoCall()
         {
-
             var result = await _business.TurnOffAutoCall(true);
             return Results.Ok(result);
         }
+
         [AllowAnonymous]
         [HttpGet("~/api/ACD/TurnOnAutocall")]
         public async Task<IResult> TurnOnAutocall()
         {
-
             var result = await _business.TurnOffAutoCall(false);
             return Results.Ok(result);
         }
+
+        [HttpPost("~/api/ACD/GetDurationTalk")]
+        public async Task<IResult> GetDurationAutocall(AutoCallRequest request)
+        {
+            var noAgree = request.NoAgreeId;
+            var user = GetCurrentUser();
+            var result = await _business.GetDurationAutocall(noAgree);
+            return Results.Ok(result);
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("~/api/ACD/SetChanel")]
+        public async Task<IResult> SetChanel(int limitchanel = 25)
+        {
+            var result = await _business.SetChanel(limitchanel);
+
+            return Results.Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("~/api/ACD/SetLoadDataSip")]
+        public async Task<IResult> SetLoadDataSip(bool loadSip = false)
+        {
+            var result = await _business.SetLoadDataSip(loadSip);
+            return Results.Ok(result);
+        }
+
+
     }
 }
 

@@ -59,10 +59,6 @@ namespace vsrolAPI2022.Controllers
 
         public static List<TrackingRecordGroupByLineCodeIndexModel> OutPutData = new List<TrackingRecordGroupByLineCodeIndexModel>();
 
-
-
-
-
         [AllowAnonymous]
         [HttpGet("~/api/trackingCall/getValue")]
         public async Task<IResult> GetValue()
@@ -108,69 +104,24 @@ namespace vsrolAPI2022.Controllers
 
             List<int> GroupMemer = new List<int>();
             var userIdInput = int.Parse(currentUser.Id);
-            if (userIdInput == 2366)
+            if (userIdInput == 4760)
             {
-                GroupMemer.Add(23);
-            }
-            else if (userIdInput == 3447)
-            {
-                GroupMemer.Add(28);
-            }
-            else if (userIdInput == 3463)
-            {
-                GroupMemer.Add(29);
-            }
-            else if (userIdInput == 4705)
-            {
-                GroupMemer.Add(40);
+                GroupMemer.Add(1);
             }
 
-            else if (userIdInput == 4714)
+            else if (userIdInput == 4781)
             {
-                GroupMemer.Add(41);
+                GroupMemer.Add(2);
             }
-            else if (userIdInput == 3471)
+            else if (userIdInput == 4806)
             {
-                GroupMemer.Add(30);
+                GroupMemer.Add(3);
             }
-            else if (userIdInput == 3487)
+            else if (userIdInput == 4790)
             {
-                GroupMemer.Add(31);
+                GroupMemer.Add(4);
             }
-            else if (userIdInput == 3509)
-            {
-                GroupMemer.Add(32);
-            }
-            else if (userIdInput == 3518)
-            {
-                GroupMemer.Add(33);
-            }
-            else if (userIdInput == 3518)
-            {
-                GroupMemer.Add(33);
-            }
-            else if (userIdInput == 3640)
-            {
-
-                GroupMemer.Add(36);
-                GroupMemer.Add(35);
-            }
-            else if (userIdInput == 3614)
-            {
-                GroupMemer.Add(36);
-                GroupMemer.Add(35);
-
-            }
-
-            if (userIdInput == 3590)
-            {
-                GroupMemer.Add(34);
-            }
-            if (userIdInput == 4757)
-            {
-                GroupMemer.Add(42);
-            }
-            if (userIdInput == 1 || userIdInput == 3446)
+            if (userIdInput == 1 || userIdInput == 4812)
             {
                 return Results.Ok(new
                 {
@@ -189,7 +140,6 @@ namespace vsrolAPI2022.Controllers
 
                 });
             }
-
 
         }
 

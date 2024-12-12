@@ -204,6 +204,36 @@ namespace VS.Core.Repository
             }
         }
 
+
+        public async Task<ImpactHistoryReponse> ExportMiraeCallReport(DateTime from, DateTime to)
+        {
+
+            try
+            {
+                using (var con = GetConnection())
+                {
+                    var reponse = new ImpactHistoryReponse()
+                    {
+
+                    };
+                    var datetimehandle = from;
+                    from = datetimehandle.Date;
+                    to = new DateTime(from.Year, from.Month, from.Day, 23, 59, 59);
+                    var result = await con.QueryAsync<MiraeCallReportIndexModel>("sp_getReportImpactCall", new
+                    {
+                        from,
+                        to
+                    }, commandType: CommandType.StoredProcedure);
+                    reponse.Data = result;
+                    return reponse;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public async Task<ImpactHistoryReponse> GetALl(ImpactHistorySerarchRequest request)
         {
             int page = request.Page;

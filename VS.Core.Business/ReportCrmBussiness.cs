@@ -669,59 +669,52 @@ public class ReportCrmBussiness : IReportCrmBussiness
                 foreach (var item in createby)
                 {
 
-                    if (item.ReasonCode == "BPTP")
+                    if (item.ReasonCode == "CAB")
                     {
-                        itemData.BPTP = item.Total2;
+                        itemData.CAB = item.Total2;
                     }
 
-                    if (item.ReasonCode == "CALLBACK")
+                    if (item.ReasonCode == "HUP")
                     {
-                        itemData.CALLBACK = item.Total2;
+                        itemData.HUP = item.Total2;
                     }
-                    if (item.ReasonCode == "CONFIRM")
+                    if (item.ReasonCode == "NAB")
                     {
-                        itemData.CONFIRM = item.Total2;
-                    }
-
-                    if (item.ReasonCode == "DIE")
-                    {
-                        itemData.DIE = item.Total2;
-                    }
-                    if (item.ReasonCode == "DIF")
-                    {
-                        itemData.DIF = item.Total2;
+                        itemData.NAB = item.Total2;
                     }
 
-                    if (item.ReasonCode == "LM")
+                    if (item.ReasonCode == "NKP")
                     {
-                        itemData.LM = item.Total2;
+                        itemData.NKP = item.Total2;
                     }
-                    if (item.ReasonCode == "LMN")
+                    if (item.ReasonCode == "NCP")
                     {
-                        itemData.LMN = item.Total2;
-                    }
-
-                    if (item.ReasonCode == "NCON")
-                    {
-                        itemData.NCON = item.Total2;
-                    }
-                    if (item.ReasonCode == "OTHER")
-                    {
-                        itemData.OTHER = item.Total2;
+                        itemData.NCP = item.Total2;
                     }
 
                     if (item.ReasonCode == "PTP")
                     {
                         itemData.PTP = item.Total2;
                     }
-                    if (item.ReasonCode == "RFTP")
+                    if (item.ReasonCode == "RTP")
                     {
-                        itemData.RFTP = item.Total2;
+                        itemData.RTP = item.Total2;
                     }
-                    if (item.ReasonCode == "RONA")
+
+                    if (item.ReasonCode == "TER")
                     {
-                        itemData.RONA = item.Total2;
+                        itemData.TER = item.Total2;
                     }
+                    if (item.ReasonCode == "WFP")
+                    {
+                        itemData.WFP = item.Total2;
+                    }
+                    if (item.ReasonCode == "DIE")
+                    {
+                        itemData.DIE = item.Total2;
+                    }
+
+
                 }
 
 
@@ -774,7 +767,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
              new Cell
              {
                  DataType = CellValues.String,
-                 CellValue = new CellValue("BPTP")
+                 CellValue = new CellValue("CAB")
              }
          );
 
@@ -782,7 +775,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
             new Cell
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue("CALLBACK")
+                CellValue = new CellValue("HUP")
             }
         );
 
@@ -790,7 +783,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
           new Cell
           {
               DataType = CellValues.String,
-              CellValue = new CellValue("CONFIRM")
+              CellValue = new CellValue("NAB")
           }
       );
 
@@ -798,7 +791,7 @@ public class ReportCrmBussiness : IReportCrmBussiness
      new Cell
      {
          DataType = CellValues.String,
-         CellValue = new CellValue("DIE")
+         CellValue = new CellValue("NKP")
      }
  );
 
@@ -806,40 +799,10 @@ public class ReportCrmBussiness : IReportCrmBussiness
 new Cell
 {
     DataType = CellValues.String,
-    CellValue = new CellValue("DIF")
+    CellValue = new CellValue("NCP")
 }
 );
 
-            rowHeader3.Append(
-new Cell
-{
-    DataType = CellValues.String,
-    CellValue = new CellValue("LM")
-}
-);
-            rowHeader3.Append(
-new Cell
-{
-    DataType = CellValues.String,
-    CellValue = new CellValue("LMN")
-}
-);
-
-            rowHeader3.Append(
-new Cell
-{
-    DataType = CellValues.String,
-    CellValue = new CellValue("NCON")
-}
-);
-
-            rowHeader3.Append(
-new Cell
-{
-    DataType = CellValues.String,
-    CellValue = new CellValue("OTHER")
-}
-);
             rowHeader3.Append(
 new Cell
 {
@@ -847,12 +810,11 @@ new Cell
     CellValue = new CellValue("PTP")
 }
 );
-
             rowHeader3.Append(
 new Cell
 {
     DataType = CellValues.String,
-    CellValue = new CellValue("RFTP")
+    CellValue = new CellValue("RTP")
 }
 );
 
@@ -860,9 +822,27 @@ new Cell
 new Cell
 {
     DataType = CellValues.String,
-    CellValue = new CellValue("RONA")
+    CellValue = new CellValue("TER")
 }
 );
+
+            rowHeader3.Append(
+    new Cell
+    {
+        DataType = CellValues.String,
+        CellValue = new CellValue("WFP")
+    }
+    );
+
+            rowHeader3.Append(
+new Cell
+{
+    DataType = CellValues.String,
+    CellValue = new CellValue("DIE")
+}
+);
+
+
 
             rowHeader3.Append(
 new Cell
@@ -925,71 +905,58 @@ new Cell
                     var cell4 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.BPTP)
+                        CellValue = new CellValue(item.CAB)
                     };
                     var cell5 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.CALLBACK)
+                        CellValue = new CellValue(item.HUP)
                     };
 
                     var cell6 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.CONFIRM)
+                        CellValue = new CellValue(item.NAB)
                     };
                     var cell7 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.DIE)
+                        CellValue = new CellValue(item.NKP)
                     };
 
                     var cell8 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.DIF)
+                        CellValue = new CellValue(item.NCP)
                     };
 
                     var cell9 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.LM)
+                        CellValue = new CellValue(item.PTP)
                     };
                     var cell10 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.LMN)
+                        CellValue = new CellValue(item.RTP)
                     };
                     var cell11 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.NCON)
+                        CellValue = new CellValue(item.TER)
                     };
                     var cell12 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.OTHER)
+                        CellValue = new CellValue(item.WFP)
                     };
-                    var cell13 = new Cell
-                    {
-                        DataType = CellValues.String,
-                        CellValue = new CellValue(item.PTP)
-                    };
+
                     var cell14 = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(item.RFTP)
+                        CellValue = new CellValue(item.DIE)
                     };
-                    var cell15 = new Cell
-                    {
-                        DataType = CellValues.String,
-                        CellValue = new CellValue(item.RONA)
-                    };
-                    var cell16 = new Cell
-                    {
-                        DataType = CellValues.String,
-                        CellValue = new CellValue(item.TotalGrand)
-                    };
+
 
                     row.Append(cell3);
                     row.Append(cell4);
@@ -1001,10 +968,8 @@ new Cell
                     row.Append(cell10);
                     row.Append(cell11);
                     row.Append(cell12);
-                    row.Append(cell13);
+
                     row.Append(cell14);
-                    row.Append(cell15);
-                    row.Append(cell16);
 
                     sheetData2.Append(row);
 
@@ -1015,23 +980,19 @@ new Cell
                 var itemfooter = new CrmReportStatusDeatailIndexModel();
 
 
-                itemfooter.BPTP = itemdata.Sum(x => x.BPTP);
-                itemfooter.CALLBACK = itemdata.Sum(x => x.CALLBACK);
-                itemfooter.CONFIRM = itemdata.Sum(x => x.CONFIRM);
-                itemfooter.DIE = itemdata.Sum(x => x.DIE);
-                itemfooter.DIF = itemdata.Sum(x => x.DIF);
-                itemfooter.LM = itemdata.Sum(x => x.LM);
-                itemfooter.LMN = itemdata.Sum(x => x.LMN);
-                itemfooter.NCON = itemdata.Sum(x => x.NCON);
-                itemfooter.OTHER = itemdata.Sum(x => x.OTHER);
+                itemfooter.CAB = itemdata.Sum(x => x.CAB);
+                itemfooter.HUP = itemdata.Sum(x => x.HUP);
+                itemfooter.NAB = itemdata.Sum(x => x.NAB);
+                itemfooter.NKP = itemdata.Sum(x => x.NKP);
+                itemfooter.NCP = itemdata.Sum(x => x.NCP);
                 itemfooter.PTP = itemdata.Sum(x => x.PTP);
-                itemfooter.RFTP = itemdata.Sum(x => x.RFTP);
-                itemfooter.RONA = itemdata.Sum(x => x.RONA);
-
-                itemfooter.TotalGrand = itemfooter.BPTP + itemfooter.CALLBACK + itemfooter.CONFIRM
-                    + itemfooter.DIF + itemfooter.DIE + itemfooter.LM + itemfooter.LMN + itemfooter.NCON
-                    + itemfooter.OTHER + itemfooter.PTP + itemfooter.RFTP + itemfooter.RONA;
-
+                itemfooter.RTP = itemdata.Sum(x => x.RTP);
+                itemfooter.TER = itemdata.Sum(x => x.TER);
+                itemfooter.WFP = itemdata.Sum(x => x.WFP);
+                itemfooter.DIE = itemdata.Sum(x => x.DIE);
+                itemfooter.TotalGrand = itemfooter.CAB + itemfooter.HUP + itemfooter.NAB
+                    + itemfooter.NCP + itemfooter.NKP + itemfooter.PTP + itemfooter.RTP + itemfooter.TER
+                    + itemfooter.WFP + itemfooter.DIE;
                 indexloop2++;
                 var row2 = new Row();
                 row2.RowIndex = (uint)indexloop2;
@@ -1048,50 +1009,28 @@ new Cell
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.BPTP)
+                    CellValue = new CellValue(itemfooter.CAB)
                 });
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.CALLBACK)
+                    CellValue = new CellValue(itemfooter.HUP)
                 });
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.CONFIRM)
-                });
-
-                row2.Append(new Cell()
-                {
-                    DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.DIE)
-                });
-                row2.Append(new Cell()
-                {
-                    DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.DIF)
+                    CellValue = new CellValue(itemfooter.NAB)
                 });
 
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.LM)
+                    CellValue = new CellValue(itemfooter.NKP)
                 });
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.LMN)
-                });
-
-                row2.Append(new Cell()
-                {
-                    DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.NCON)
-                });
-                row2.Append(new Cell()
-                {
-                    DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.OTHER)
+                    CellValue = new CellValue(itemfooter.NCP)
                 });
 
                 row2.Append(new Cell()
@@ -1102,23 +1041,32 @@ new Cell
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.RFTP)
+                    CellValue = new CellValue(itemfooter.RTP)
+                });
+
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.TER)
                 });
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
-                    CellValue = new CellValue(itemfooter.RONA)
+                    CellValue = new CellValue(itemfooter.WFP)
                 });
 
+                row2.Append(new Cell()
+                {
+                    DataType = CellValues.String,
+                    CellValue = new CellValue(itemfooter.DIE)
+                });
                 row2.Append(new Cell()
                 {
                     DataType = CellValues.String,
                     CellValue = new CellValue(itemfooter.TotalGrand)
                 });
                 sheetData2.Append(row2);
-
             }
-
             indexloop2++;
             var row3 = new Row();
             row3.RowIndex = (uint)indexloop2;
@@ -1133,77 +1081,46 @@ new Cell
                 CellValue = new CellValue("")
             });
 
-
-
-
             var itemfooter2 = new CrmReportStatusDeatailIndexModel();
-
-
-            itemfooter2.BPTP = dataList.Sum(x => x.BPTP);
-            itemfooter2.CALLBACK = dataList.Sum(x => x.CALLBACK);
-            itemfooter2.CONFIRM = dataList.Sum(x => x.CONFIRM);
-            itemfooter2.DIE = dataList.Sum(x => x.DIE);
-            itemfooter2.DIF = dataList.Sum(x => x.DIF);
-            itemfooter2.LM = dataList.Sum(x => x.LM);
-            itemfooter2.LMN = dataList.Sum(x => x.LMN);
-            itemfooter2.NCON = dataList.Sum(x => x.NCON);
-            itemfooter2.OTHER = dataList.Sum(x => x.OTHER);
+            itemfooter2.CAB = dataList.Sum(x => x.CAB);
+            itemfooter2.HUP = dataList.Sum(x => x.HUP);
+            itemfooter2.NAB = dataList.Sum(x => x.NAB);
+            itemfooter2.NKP = dataList.Sum(x => x.NKP);
+            itemfooter2.NCP = dataList.Sum(x => x.NCP);
             itemfooter2.PTP = dataList.Sum(x => x.PTP);
-            itemfooter2.RFTP = dataList.Sum(x => x.RFTP);
-            itemfooter2.RONA = dataList.Sum(x => x.RONA);
-
-            itemfooter2.TotalGrand = itemfooter2.BPTP + itemfooter2.CALLBACK + itemfooter2.CONFIRM
-                + itemfooter2.DIF + itemfooter2.DIE + itemfooter2.LM + itemfooter2.LMN + itemfooter2.NCON
-                + itemfooter2.OTHER + itemfooter2.PTP + itemfooter2.RFTP + itemfooter2.RONA;
-
-
+            itemfooter2.RTP = dataList.Sum(x => x.RTP);
+            itemfooter2.TER = dataList.Sum(x => x.TER);
+            itemfooter2.WFP = dataList.Sum(x => x.WFP);
+            itemfooter2.PTP = dataList.Sum(x => x.PTP);
+            itemfooter2.DIE = dataList.Sum(x => x.DIE);
+            itemfooter2.TotalGrand = itemfooter2.CAB + itemfooter2.HUP + itemfooter2.NAB
+                + itemfooter2.NCP + itemfooter2.NKP + itemfooter2.RTP + itemfooter2.TER
+                + itemfooter2.WFP + itemfooter2.PTP + itemfooter2.DIE;
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.BPTP)
+                CellValue = new CellValue(itemfooter2.CAB)
             });
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.CALLBACK)
+                CellValue = new CellValue(itemfooter2.HUP)
             });
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.CONFIRM)
-            });
-
-            row3.Append(new Cell()
-            {
-                DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.DIE)
-            });
-            row3.Append(new Cell()
-            {
-                DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.DIF)
+                CellValue = new CellValue(itemfooter2.NAB)
             });
 
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.LM)
+                CellValue = new CellValue(itemfooter2.NKP)
             });
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.LMN)
-            });
-
-            row3.Append(new Cell()
-            {
-                DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.NCON)
-            });
-            row3.Append(new Cell()
-            {
-                DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.OTHER)
+                CellValue = new CellValue(itemfooter2.NCP)
             });
 
             row3.Append(new Cell()
@@ -1214,13 +1131,26 @@ new Cell
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.RFTP)
+                CellValue = new CellValue(itemfooter2.RTP)
+            });
+
+            row3.Append(new Cell()
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue(itemfooter2.TER)
             });
             row3.Append(new Cell()
             {
                 DataType = CellValues.String,
-                CellValue = new CellValue(itemfooter2.RONA)
+                CellValue = new CellValue(itemfooter2.WFP)
             });
+
+            row3.Append(new Cell()
+            {
+                DataType = CellValues.String,
+                CellValue = new CellValue(itemfooter2.DIE)
+            });
+
 
             row3.Append(new Cell()
             {

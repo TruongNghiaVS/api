@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.8.0, )"
+            },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -60,6 +64,10 @@
             "Quartz.Extensions.Hosting": {
               "target": "Package",
               "version": "[3.8.1, )"
+            },
+            "SSH.NET": {
+              "target": "Package",
+              "version": "[2024.1.0, )"
             }
           },
           "imports": [

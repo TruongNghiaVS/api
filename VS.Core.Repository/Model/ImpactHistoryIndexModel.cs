@@ -85,4 +85,20 @@
 
     }
 
+    public class MiraeCallReportIndexModel
+    {
+
+        public string? Username { get; set; }
+        public string? Teamlead { get; set; }
+        public string? Agrreement_id { get; set; }
+        public string? Action_code { get; set; }
+        public DateTime? Primise_date { get; set; }
+        public string? Promise_amt { get; set; }
+        public string? Remark { get; set; }
+        public DateTime? Calldate { get; set; }
+        public string? ContactPerson { get; set; }
+
+
+    }
+
 }

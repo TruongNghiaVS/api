@@ -71,8 +71,8 @@ namespace VS.core.Request
 
     public class BaseSearchRepons
     {
-        
-    public int Total { get; set; }
+
+        public int Total { get; set; }
         public IEnumerable? Data { get; set; }
     }
 }

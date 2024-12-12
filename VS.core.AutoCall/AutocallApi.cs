@@ -3,7 +3,6 @@ using System.Net.Http.Headers;
 
 namespace VS.core.AutoCall
 {
-
     public class WashDataItem
     {
 
@@ -74,6 +73,7 @@ namespace VS.core.AutoCall
         {
             Token = "";
             DateExprise = null;
+            dataAccess = new DataAccess();
         }
         public CreateTokenReponse CreateToken()
         {
@@ -105,9 +105,9 @@ namespace VS.core.AutoCall
             return new CreateTokenReponse() { Token = "" };
 
         }
-        public async Task<bool> MakeCall(string phoneNumber, string sip)
+        public async Task<bool> MakeCall(string phoneNumber, string sip, int noId)
         {
-
+            //sip = "3001";
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
                 phone_number = phoneNumber
@@ -141,17 +141,19 @@ namespace VS.core.AutoCall
 
                     var result = JsonConvert.DeserializeObject<MakeCallReponse>(responseContent);
                     //Write to a file
-                    using (StreamWriter writer = new StreamWriter("C:\\Users\\Administrator\\Desktop\\autocall\\logMakeCall.txt", true))
-                    {
-                        writer.WriteLine(result.Data.Extension + ";" + result.Data.Phone_number);
-                    }
+                    //using (StreamWriter writer = new StreamWriter("C:\\Users\\Administrator\\Desktop\\autocall\\logMakeCall.txt", true))
+                    //{
+                    //    writer.WriteLine(result.Data.Extension + ";" + result.Data.Phone_number);
+                    //}
+                    var dataResult = result.Data;
+                    await dataAccess.AddLogCall(dataResult.Phone_number,
+                        noId, dataResult.Extension);
                     return true;
 
 
                 };
 
             }
-
             return true;
 
         }

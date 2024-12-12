@@ -6,7 +6,7 @@
 
         public string UserName { get; set; }
 
-        public DateTime?  LoginAt { get; set; }
+        public DateTime? LoginAt { get; set; }
 
 
 
@@ -25,7 +25,7 @@
 
         public static UserContainer GlobalContainer()
         {
-       
+
 
             if (_instance == null)
             {
@@ -38,7 +38,7 @@
         public void AddUser(string UserName)
         {
             var item = DataUser.Where(x => x.UserName == UserName).FirstOrDefault();
-            if(item == null)
+            if (item == null)
             {
 
             }
@@ -51,18 +51,18 @@
                 UserName = UserName,
                 LoginAt = DateTime.Now
             });
-               
+
 
         }
 
         public bool ValidAcess(string _userName)
         {
-             if(string.IsNullOrEmpty(_userName))
+            if (string.IsNullOrEmpty(_userName))
             {
                 return false;
             }
-            var item = DataUser.Where(x=>x.UserName== _userName).FirstOrDefault();
-            if(item == null)
+            var item = DataUser.Where(x => x.UserName == _userName).FirstOrDefault();
+            if (item == null)
             {
                 //AddUser(_userName);
                 return false;
@@ -70,7 +70,7 @@
             return true;
         }
 
-        public void ClearData ()
+        public void ClearData()
         {
             DataUser.Clear();
         }

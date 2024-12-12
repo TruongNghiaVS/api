@@ -13,9 +13,10 @@
             var data = await bussiness.GetStatusList();
             return data.Calls.ToList();
         }
-        public async Task<bool> CallNumber(string phoneNumber, string sip = "")
+        public async Task<bool> CallNumber(string phoneNumber, string sip,
+            int noId)
         {
-            return await bussiness.MakeCall(phoneNumber, sip);
+            return await bussiness.MakeCall(phoneNumber, sip, noId);
         }
     }
 }

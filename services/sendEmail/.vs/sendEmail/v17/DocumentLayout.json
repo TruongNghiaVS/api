@@ -7,12 +7,19 @@
       "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\sendmail\\schedulecrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\sendmail\\schedulecrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\servicesfcp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\servicesfcp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\sendmail\\daillyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\sendmail\\daillyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\sendmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\sendmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|c:\\vietbank\\crm\\api\\services\\sendemail\\sendemail\\daillygetfilereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC01AA48-13BC-4E76-A9BE-26AE9A208DD7}|sendEmail\\sendEmail.csproj|solutionrelative:sendemail\\daillygetfilereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +29,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AQIAAIAUAAAAAAAAAAAAwJQUAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-11-20T23:09:54.127Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Sendmail.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\Sendmail.cs",
+              "RelativeDocumentMoniker": "sendEmail\\Sendmail.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\Sendmail.cs",
+              "RelativeToolTip": "sendEmail\\Sendmail.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAIAwwCEAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T01:55:23.79Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -32,7 +67,7 @@
               "RelativeDocumentMoniker": "sendEmail\\Program.cs",
               "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\Program.cs",
               "RelativeToolTip": "sendEmail\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-27T02:40:09.212Z",
               "EditorCaption": ""
@@ -40,28 +75,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ScheduleCRM.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\ScheduleCRM.cs",
-              "RelativeDocumentMoniker": "sendEmail\\sendmail\\ScheduleCRM.cs",
-              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\ScheduleCRM.cs",
-              "RelativeToolTip": "sendEmail\\sendmail\\ScheduleCRM.cs",
+              "Title": "ServiceSFCP.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\ServiceSFCP.cs",
+              "RelativeDocumentMoniker": "sendEmail\\ServiceSFCP.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\ServiceSFCP.cs",
+              "RelativeToolTip": "sendEmail\\ServiceSFCP.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T02:40:07.955Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-21T02:13:44.937Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DaillyReport.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\DaillyReport.cs",
-              "RelativeDocumentMoniker": "sendEmail\\sendmail\\DaillyReport.cs",
-              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\sendmail\\DaillyReport.cs",
-              "RelativeToolTip": "sendEmail\\sendmail\\DaillyReport.cs",
+              "DocumentIndex": 4,
+              "Title": "DaillyGetFileReport.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\DaillyGetFileReport.cs",
+              "RelativeDocumentMoniker": "sendEmail\\DaillyGetFileReport.cs",
+              "ToolTip": "C:\\vietbank\\crm\\api\\services\\sendEmail\\sendEmail\\DaillyGetFileReport.cs",
+              "RelativeToolTip": "sendEmail\\DaillyGetFileReport.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T02:57:39.396Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-08T02:10:53.946Z"
             },
             {
               "$type": "Bookmark",

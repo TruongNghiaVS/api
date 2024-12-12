@@ -46,10 +46,8 @@ builder.Services.AddQuartz(q =>
 
 builder.Services.AddQuartz(q =>
 {
-
     var jobkey = new JobKey("clearlogcalljob");
     q.AddJob<ClearLogCallJob>(opts => opts.WithIdentity(jobkey));
-
     q.AddTrigger(opts => opts
         .ForJob(jobkey)
         .WithIdentity("clearlogcalljob-trigger")
@@ -57,19 +55,58 @@ builder.Services.AddQuartz(q =>
     );
 });
 
+builder.Services.AddQuartz(q =>
+{
+
+    var jobkey = new JobKey("updateautoJob");
+    q.AddJob<AutoJob>(opts => opts.WithIdentity(jobkey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobkey)
+        .WithIdentity("updateautoJob-trigger")
+        .WithCronSchedule(" 0/20 * * * * ? *")
+    );
+});
+
 
 //builder.Services.AddQuartz(q =>
 //{
 
-//    var jobkey = new JobKey("updateautoJob");
-//    q.AddJob<AutoJob>(opts => opts.WithIdentity(jobkey));
+//    var jobkey = new JobKey("JobMiraeGetDaillyCallReport");
+//    q.AddJob<JobMiraeGetDaillyCallReport>(opts => opts.WithIdentity(jobkey));
 
 //    q.AddTrigger(opts => opts
 //        .ForJob(jobkey)
-//        .WithIdentity("updateautoJob-trigger")
-//        .WithCronSchedule(" 0/15 * * * * ? *")
+//        .WithIdentity("JobMiraeGetDaillyCallReport-trigger")
+//        .WithCronSchedule("0 40 8 ? * * *")
 //    );
 //});
+//builder.Services.AddQuartz(q =>
+//{
+
+//    var jobkey = new JobKey("JobMiraeGetWorkingTimeReport");
+//    q.AddJob<JobMiraeGetWorkingTimeReport>(opts => opts.WithIdentity(jobkey));
+
+//    q.AddTrigger(opts => opts
+//        .ForJob(jobkey)
+//        .WithIdentity("JobMiraeGetWorkingTimeReport-trigger")
+//        .WithCronSchedule("0 35 8 ? * * *")
+//    );
+//});
+
+
+builder.Services.AddQuartz(q =>
+{
+
+    var jobkey = new JobKey("JobAutoGetStatusReport");
+    q.AddJob<JobAutoGetStatus>(opts => opts.WithIdentity(jobkey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobkey)
+        .WithIdentity("JobAutoGetStatusReport-trigger")
+       .WithCronSchedule(" 0/1 * * * * ? *")
+    );
+});
 
 
 builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);

@@ -1,78 +1,64 @@
-﻿using Microsoft.Extensions.Hosting;
-using Quartz;
-using sendEmail.sendmail;
-namespace sendEmail
+﻿namespace sendEmail
 {
+    using Microsoft.Extensions.Hosting;
+    using Quartz;
+    using sendEmail.sendmail;
 
 
     internal class Program
     {
 
-       public static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
-
             var builder = Host.CreateDefaultBuilder()
-           .ConfigureServices((cxt, services) =>
-           {
-               services.AddQuartz(q =>
-               {
-               q.UseMicrosoftDependencyInjectionJobFactory();
-               var jobKey = new JobKey("sendReportJob");
-               q.AddJob<DaillyReport>(opts => opts.WithIdentity(jobKey));
-                   q.AddTrigger(opts => opts
-                .ForJob(jobKey)
-                .WithIdentity("HelloWorldJob-trigger")
-                .WithCronSchedule("0 30 17 ? * SAT *")
-                );
-               
-             }
-            );
-
-
-               services.AddQuartz(q =>
-               {
-                   q.UseMicrosoftDependencyInjectionJobFactory();
-                   var jobKey = new JobKey("sendReportJob2");
-                   q.AddJob<DaillyReport>(opts => opts.WithIdentity(jobKey));
-                   q.AddTrigger(opts => opts
-                .ForJob(jobKey)
-                .WithIdentity("HelloWorldJob-trigger")
-                .WithCronSchedule("0 30 8 ? * MON,TUE,WED,THU,FRI,SAT *")
-                );
-
-               }
-           );
-               services.AddQuartzHostedService(opt =>
+            .ConfigureServices((cxt, services) =>
             {
-                opt.WaitForJobsToComplete = true;
-            });
-           }).Build();
+                services.AddQuartz(q =>
+                {
+                    q.UseMicrosoftDependencyInjectionJobFactory();
+                    var jobKey = new JobKey("DaillySendMailReport");
+                    q.AddJob<DaillySendMailReport>(opts => opts.WithIdentity(jobKey));
+                    q.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity("DaillySendMailReportJob-trigger")
+                .WithCronSchedule("0 1,48 8-15 ? * MON,TUE,WED,THU,FRI,SAT *")
+                );
 
+                }
+                );
+                // services.AddQuartz(q =>
+                // {
+                //     q.UseMicrosoftDependencyInjectionJobFactory();
+                //     var jobKey = new JobKey("DowloadFilePaymentReport");
+                //     q.AddJob<DowloadFilePaymentReport>(opts => opts.WithIdentity(jobKey));
+                //     q.AddTrigger(opts => opts
+                // .ForJob(jobKey)
+                // .WithIdentity("DowloadFilePaymentReportJob-trigger")
+                // .WithCronSchedule("0 0,30 8-14 ? * MON,TUE,WED,THU,FRI,SAT *")
+                // );
 
-            //var schedulerFactory = builder.Services.GetService(typeof(IScheduleBuilder));
-                
-            //var scheduler = await schedulerFactory.
+                // }
+                //);
+                //services.AddQuartz(q =>
+                //{
+                //    q.UseMicrosoftDependencyInjectionJobFactory();
+                //    var jobKey = new JobKey("UploadFileReport");
+                //    q.AddJob<UploadFileReport>(opts => opts.WithIdentity(jobKey));
+                //    q.AddTrigger(opts => opts
+                //.ForJob(jobKey)
+                //.WithIdentity("UploadFileReporttrigger")
+                //.WithCronSchedule("0 20,45 8-12 ? * MON,TUE,WED,THU,FRI,SAT *")
+                //);
 
-            //// define the job and tie it to our HelloJob class
-            //var job = JobBuilder.Create<DaillyReport>()
-            //    .WithIdentity("sendReport", "daillyReport")
-            //    .Build();
+                //}
+                //);
 
-            //// Trigger the job to run now, and then every 40 seconds
-            //var trigger = TriggerBuilder.Create()
-            //    .WithIdentity("myTrigger", "group1")
-            //    .StartNow()
-            //    .WithSimpleSchedule(x => x
-            //        .WithIntervalInSeconds(10)
-            //        .RepeatForever())
-            //    .Build();
-
-            //await scheduler.ScheduleJob(job, trigger);
-            //// will block until the last running job completes
+                services.AddQuartzHostedService(opt =>
+                {
+                    opt.WaitForJobsToComplete = true;
+                });
+            }).Build();
             await builder.RunAsync();
-            
         }
-
-
     }
 }

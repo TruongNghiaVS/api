@@ -110,18 +110,9 @@ namespace vsrolAPI2022.Controllers
                 });
             }
 
-            if (!string.IsNullOrEmpty(employeeAdd.Activetype))
-            {
-                employeeAdd.StatusIm = employeeAdd.CallOutcome;
-                employeeAdd.WayContact = employeeAdd.CallDisposition;
-                employeeAdd.PlaceCode = employeeAdd.Activetype;
-            }
-            else
-            {
-                employeeAdd.CallOutcome = "";
-                employeeAdd.CallDisposition = "";
-                employeeAdd.Activetype = "";
-            }
+            employeeAdd.CallOutcome = "";
+            employeeAdd.CallDisposition = "";
+            employeeAdd.Activetype = "";
 
 
             var itemInsert = new ImpactHistory()

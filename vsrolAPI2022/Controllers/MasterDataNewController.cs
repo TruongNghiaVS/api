@@ -37,8 +37,6 @@ namespace vsrolAPI2022.Controllers
 
         }
 
-
-
         [HttpPost("~/api/masterdataNew/getAll")]
         public async Task<IResult> getAll(MasterDataNewSearchInput request)
         {

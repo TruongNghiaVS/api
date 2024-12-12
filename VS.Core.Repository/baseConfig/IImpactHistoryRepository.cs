@@ -7,6 +7,8 @@ namespace VS.Core.Repository.baseConfig
     {
         Task<ImpactHistoryReponse> GetALl(ImpactHistorySerarchRequest request);
         Task<ImpactHistoryReponse> GetFinal(ImpactHistorySerarchRequest request);
+
+        Task<ImpactHistoryReponse> ExportMiraeCallReport(DateTime from, DateTime to);
         Task<int> AddHistoryImpact(ImpactHistory entity);
         Task<List<ImpactHistory>> GetAllHistory(ImpactHistorySerarchRequest request);
         Task<List<ImpactHistory>> GetAllHistoryBYNoAgree(string noAgree);

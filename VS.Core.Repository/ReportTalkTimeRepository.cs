@@ -30,7 +30,9 @@ namespace VS.Core.Repository
                 nameof(entity.UpdateAt),
                 nameof(entity.Id),
                 nameof(entity.CreateAt),
-                nameof(entity.Deleted)
+                nameof(entity.Deleted),
+                nameof(entity.Lastapp),
+                nameof(entity.LastData)
             }, "Id");
 
             try
@@ -272,7 +274,7 @@ namespace VS.Core.Repository
                     {
                         request.Linked = DateTime.UtcNow.AddDays(-5);
                     }
-                    var sqlQuerry = "SELECT d.cnum AS 'LineCode', '2' as SourceCall, d.lastapp,d.lastdata, d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration',\r\n d.recordingfile AS 'FileRecording'  FROM cdr d WHERE  \r\n d.cnum = '8888' or d.cnum = '9999'  ORDER BY calldate DESC, Linkedid  DESC ";
+                    var sqlQuerry = "SELECT d.cnum AS 'LineCode', '2' as SourceCall,  d.dst AS  'PhoneLog', d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE   d.calldate >= @timeFrom and d.calldate <= @timeTo and d.lastapp = 'Dial'";
                     var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
                     {
                         request.Token,
@@ -293,7 +295,45 @@ namespace VS.Core.Repository
                 return null;
             }
         }
+        public async Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecordingServeAutoCall(HandlelFileRecordingRequest request)
+        {
+            int page = request.Page;
+            int limit = request.Limit;
 
+            ProcessInputPaging(ref page, ref limit, out offset);
+            try
+            {
+                using (var con = GetMysqlConnection3())
+                {
+                    if (request.Linked.HasValue)
+                    {
+
+                    }
+                    else
+                    {
+                        request.Linked = DateTime.UtcNow.AddDays(-5);
+                    }
+                    var sqlQuerry = "SELECT d.cnum AS 'LineCode', '3' as SourceCall,  d.userfield AS  'PhoneLog', d.lastapp,  d.linkedid AS 'Linkedid', d.calldate,  d.disposition, d.billsec AS 'DurationBill', d.duration AS 'Duration', d.recordingfile AS 'FileRecording'  FROM cdr d WHERE   d.calldate >= @timeFrom and d.calldate <= @timeTo  and d.lastapp = 'Dial'  AND  d.dcontext ='outgoing_calls'  AND d.disposition = 'ANSWERED' ";
+                    var result = await con.QueryAsync<ReportQuerryTaltimeIndex>(sqlQuerry, new
+                    {
+                        request.Token,
+                        request.From,
+                        request.To,
+                        request.TimeFrom,
+                        request.TimeTo,
+                        request.Linked,
+                        request.Limit,
+                        request.Page,
+                        request.OrderBy
+                    });
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
         public async Task<IEnumerable<ReportQuerryTaltimeIndex>> HandlelFileRecordingServe3(HandlelFileRecordingRequest request)
         {

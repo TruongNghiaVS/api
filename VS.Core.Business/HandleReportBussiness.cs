@@ -46,7 +46,9 @@ namespace VS.Core.Business
                 dateGet = DateTime.Now;
             }
             IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
-            allcdrHaving = await _unitOfWork1.ReportTalkTimeRepository.HandlelFileRecordingServe2(
+            allcdrHaving = await _unitOfWork1
+                    .ReportTalkTimeRepository
+                    .HandlelFileRecordingServe2(
                     new core.Request.HandlelFileRecordingRequest()
                     {
                         TimeSelect = dateGet,
@@ -80,6 +82,80 @@ namespace VS.Core.Business
                 if (item.Lastapp == "Dial" && item.Disposition == "ANSWERED" && !string.IsNullOrWhiteSpace(item.FileRecording))
                 {
                     reportTalkTime.FileRecording = Utils.GetFileRecordingFile(item.FileRecording, item.CallDate);
+                    reportTalkTime.DurationReal = reportTalkTime.FileRecording.GetDurationAudio();
+
+                }
+                if (usergetByLinecode != null)
+                {
+
+                    reportTalkTime.VendorId = 8;
+                }
+
+                var resultInsert = await _unitOfWork1.ReportTalkTimeRepository.Add(reportTalkTime);
+
+            }
+            Task.WaitAll();
+            return await Task.FromResult(0);
+
+
+        }
+
+
+        public async Task<int> CalTalkingTimeAutoBusiness(DateTime? dateGet)
+        {
+            var timerun = DateTime.Now;
+            if (dateGet.HasValue)
+            {
+                timerun = dateGet.Value;
+            }
+            else
+            {
+                timerun = timerun.AddMinutes(-12);
+            }
+            var startTime = timerun;
+            var endTime = DateTime.Now.EndDateTime();
+            Task.WaitAll();
+            if (dateGet == null)
+            {
+                dateGet = DateTime.Now;
+            }
+            IEnumerable<ReportQuerryTaltimeIndex> allcdrHaving;
+            allcdrHaving = await _unitOfWork1
+                    .ReportTalkTimeRepository
+                    .HandlelFileRecordingServeAutoCall(
+                    new core.Request.HandlelFileRecordingRequest()
+                    {
+                        TimeSelect = dateGet,
+                        TimeFrom = startTime,
+                        TimeTo = endTime
+
+                    }
+             );
+
+            var data = allcdrHaving;
+            if (data == null)
+            {
+                return 0;
+            }
+            foreach (var item in data)
+            {
+                var usergetByLinecode = await _unitOfWork1.Employees.GetByLineCode(item.LineCode);
+                var reportTalkTime = new ReportTalkTime()
+                {
+                    CallDate = item.CallDate,
+                    Sourcecall = item.SourceCall,
+                    LineCode = item.LineCode,
+                    PhoneLog = item.PhoneLog,
+                    Linkedid = item.Linkedid,
+                    Disposition = item.Disposition,
+                    DurationBill = item.DurationBill,
+                    Lastapp = item.Lastapp,
+                    LastData = item.Lastdata
+                };
+                reportTalkTime.Duration = item.Duration;
+                if (item.Lastapp == "Dial" && item.Disposition == "ANSWERED" && !string.IsNullOrWhiteSpace(item.FileRecording))
+                {
+                    reportTalkTime.FileRecording = item.FileRecording;
                     reportTalkTime.DurationReal = reportTalkTime.FileRecording.GetDurationAudio();
 
                 }

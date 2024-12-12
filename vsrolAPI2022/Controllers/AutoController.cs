@@ -18,8 +18,6 @@ namespace vsrolAPI2022.Controllers
             _business = autoBussiness;
         }
 
-
-
     }
 }
 

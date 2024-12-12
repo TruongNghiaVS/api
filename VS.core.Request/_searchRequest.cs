@@ -512,6 +512,20 @@ namespace VS.core.Request
         }
     }
 
+
+    public class ImpactHistoryExportMiraeCallReqeust : BaseSearchRequest
+    {
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
+        public ImpactHistoryExportMiraeCallReqeust()
+        {
+            var nowTime = DateTime.Now;
+            From = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, 0, 0, 0);
+            To = From.AddDays(1).AddSeconds(-1);
+
+        }
+    }
+
     public class SkipInfoSerarchRequest : BaseSearchRequest
     {
 
@@ -670,17 +684,21 @@ namespace VS.core.Request
         public string? ProfileId { get; set; }
 
         public string? UserName { get; set; }
+
+
         public LoginReportSerarchRequest()
         {
             this.Page = 1;
             this.Limit = 10;
-
+            From = DateTime.Now;
         }
     }
 
-    public class LoginReportReponse : BaseSearchRepons
+    public class LoginReportReponse
 
     {
+        public int Total { get; set; }
+        public IEnumerable? Data { get; set; }
         public LoginReportReponse()
         {
             Total = 0;

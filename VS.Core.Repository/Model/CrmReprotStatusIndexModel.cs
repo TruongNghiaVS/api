@@ -39,22 +39,21 @@
 
         public int CreatedBy { get; set; }
 
-        public int BPTP { get; set; }
-
-        public int CALLBACK { get; set; }
-        public int CONFIRM { get; set; }
-        public int DIE { get; set; }
-        public int DIF { get; set; }
-
-        public int LM { get; set; }
-        public int LMN { get; set; }
-        public int NCON { get; set; }
-        public int OTHER { get; set; }
+        public int CAB { get; set; }
+        public int HUP { get; set; }
+        public int NAB { get; set; }
+        public int NKP { get; set; }
+        public int NCP { get; set; }
         public int PTP { get; set; }
+        public int RTP { get; set; }
+        public int TER { get; set; }
+        public int WFP { get; set; }
+        public int DIE { get; set; }
+        public int CSO { get; set; }
 
-        public int RFTP { get; set; }
 
-        public int RONA { get; set; }
+
+
     }
 
 

@@ -11,6 +11,8 @@ namespace VS.Core.Business.Interface
         Task<ImpactHistoryReponse> GetALl(ImpactHistorySerarchRequest request);
 
         Task<ImpactHistoryReponse> GetFinal(ImpactHistorySerarchRequest request);
+        Task<string> ExportFileCallReportMirae(ImpactHistoryExportMiraeCallReqeust request = null);
 
+        Task<dynamic> GetDataReportMirae(ImpactHistoryExportMiraeCallReqeust request = null);
     }
 }

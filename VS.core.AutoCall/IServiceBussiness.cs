@@ -4,7 +4,7 @@
     {
         public Task<List<StatusItem>> GetStatus();
 
-        public Task<bool> CallNumber(string phoneNumber, string sip = "");
+        public Task<bool> CallNumber(string phoneNumber, string sip, int noId);
 
     }
 }

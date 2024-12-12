@@ -106,10 +106,51 @@ namespace VS.Core.Repository.Report
                 return null;
             }
         }
+        public async Task<List<LoginReportMiraeIndexModel>> ExportLogin(LoginReportSerarchRequest loginRequest)
+        {
+            var dataReponse = new List<LoginReportMiraeIndexModel>();
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.QueryAsync<LoginReportMiraeIndexModel>("sp_getTimeReportLogin", new
+                    {
+                        timeHandle = loginRequest.From
+                    }, commandType: CommandType.StoredProcedure);
+
+                    var listData = new List<LoginReportMiraeIndexModel>();
+
+                    var listTotal = result.ToList();
+                    foreach (var item in listTotal)
+                    {
+                        if (item.Typedata == 1)
+                        {
+                            item.CheckIn = item.TimeBusiness;
+                            listData.Add(item);
+                        }
+                    }
+                    foreach (var item in listData)
+                    {
+                        var itemLougout = listTotal
+                            .Where(x => x.Typedata == 0 && x.UserName == item.UserName)
+                            .FirstOrDefault();
+                        if (itemLougout != null)
+                        {
+                            item.Checkout = itemLougout.TimeBusiness;
+                        }
+                    }
+                    dataReponse = listData;
+                }
+            }
+            catch (Exception e)
+            {
+                dataReponse = new List<LoginReportMiraeIndexModel>();
+
+            }
+            return dataReponse;
 
 
-
-
+        }
         public async Task<int> Update(LoginReport entity)
         {
             entity.CreateAt = DateTime.Now;

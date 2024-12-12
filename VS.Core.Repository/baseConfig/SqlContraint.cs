@@ -159,7 +159,7 @@
         public string ReportCampaignProfile = "sp_CampaignProfile_getOverviewDashboard";
 
 
-        public string ReportTalkTime_insert = "sp_ReportTalkTime_InsertAutoCall";
+        public string ReportTalkTime_insert = "sp_ReportTalkTime_Insert2";
         public string ReportTalkTime_update = "sp_ReportTalkTime_Update";
         public string ReportTalkTime_getAll = "sp_ReportTalkTime_getAllAutoCall";
         public string ReportgetAllCall = "sp_ReportgetAllCall";

@@ -31,10 +31,10 @@
           }
         }
       },
-      "DocumentFormat.OpenXml/3.0.1": {
+      "DocumentFormat.OpenXml/3.1.1": {
         "type": "package",
         "dependencies": {
-          "DocumentFormat.OpenXml.Framework": "3.0.1"
+          "DocumentFormat.OpenXml.Framework": "3.1.1"
         },
         "compile": {
           "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {
@@ -47,10 +47,10 @@
           }
         }
       },
-      "DocumentFormat.OpenXml.Framework/3.0.1": {
+      "DocumentFormat.OpenXml.Framework/3.1.1": {
         "type": "package",
         "dependencies": {
-          "System.IO.Packaging": "8.0.0"
+          "System.IO.Packaging": "8.0.1"
         },
         "compile": {
           "lib/net6.0/DocumentFormat.OpenXml.Framework.dll": {
@@ -1703,7 +1703,7 @@
           "lib/netstandard1.3/System.IO.FileSystem.Primitives.dll": {}
         }
       },
-      "System.IO.Packaging/8.0.0": {
+      "System.IO.Packaging/8.0.1": {
         "type": "package",
         "compile": {
           "lib/net6.0/System.IO.Packaging.dll": {
@@ -2337,7 +2337,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper": "12.0.0",
-          "DocumentFormat.OpenXml": "3.0.1",
+          "DocumentFormat.OpenXml": "3.1.1",
+          "EPPlus": "4.5.3.2",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Newtonsoft.Json": "11.0.2",
           "VS.Core.Repository": "1.0.0",
@@ -2457,14 +2458,15 @@
         "readme.md"
       ]
     },
-    "DocumentFormat.OpenXml/3.0.1": {
-      "sha512": "DCK1cwFUJ1FGGyYyo++HWl9H1RkqMWIu+FGOLRy6E4L4y0/HIhlJ7N/n1HKboFfOwKn1cMBRxt1RCuDbIEy5YQ==",
+    "DocumentFormat.OpenXml/3.1.1": {
+      "sha512": "2z9QBzeTLNNKWM9SaOSDMegfQk/7hDuElOsmF77pKZMkFRP/GHA/W/4yOAQD9kn15N/FsFxHn3QVYkatuZghiA==",
       "type": "package",
-      "path": "documentformat.openxml/3.0.1",
+      "path": "documentformat.openxml/3.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "documentformat.openxml.3.0.1.nupkg.sha512",
+        "README.md",
+        "documentformat.openxml.3.1.1.nupkg.sha512",
         "documentformat.openxml.nuspec",
         "icon.png",
         "lib/net35/DocumentFormat.OpenXml.dll",
@@ -2479,14 +2481,15 @@
         "lib/netstandard2.0/DocumentFormat.OpenXml.xml"
       ]
     },
-    "DocumentFormat.OpenXml.Framework/3.0.1": {
-      "sha512": "ifyI7OW7sggz7LQMIAD2aUsY/zVUON9QaHrpZ4MK33iVMeHlTG4uhUE2aLWb31nry+LCs2ALDAwf8OfUJGjgBg==",
+    "DocumentFormat.OpenXml.Framework/3.1.1": {
+      "sha512": "6APEp/ElZV58S/4v8mf4Ke3ONEDORs64MqdD64Z7wWpcHANB9oovQsGIwtqjnKihulOj7T0a6IxHIHOfMqKOng==",
       "type": "package",
-      "path": "documentformat.openxml.framework/3.0.1",
+      "path": "documentformat.openxml.framework/3.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "documentformat.openxml.framework.3.0.1.nupkg.sha512",
+        "README.md",
+        "documentformat.openxml.framework.3.1.1.nupkg.sha512",
         "documentformat.openxml.framework.nuspec",
         "icon.png",
         "lib/net35/DocumentFormat.OpenXml.Framework.dll",
@@ -5293,10 +5296,10 @@
         "system.io.filesystem.primitives.nuspec"
       ]
     },
-    "System.IO.Packaging/8.0.0": {
-      "sha512": "8g1V4YRpdGAxFcK8v9OjuMdIOJSpF30Zb1JGicwVZhly3I994WFyBdV6mQEo8d3T+URQe55/M0U0eIH0Hts1bg==",
+    "System.IO.Packaging/8.0.1": {
+      "sha512": "KYkIOAvPexQOLDxPO2g0BVoWInnQhPpkFzRqvNrNrMhVT6kqhVr0zEb6KCHlptLFukxnZrjuMVAnxK7pOGUYrw==",
       "type": "package",
-      "path": "system.io.packaging/8.0.0",
+      "path": "system.io.packaging/8.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5317,7 +5320,7 @@
         "lib/net8.0/System.IO.Packaging.xml",
         "lib/netstandard2.0/System.IO.Packaging.dll",
         "lib/netstandard2.0/System.IO.Packaging.xml",
-        "system.io.packaging.8.0.0.nupkg.sha512",
+        "system.io.packaging.8.0.1.nupkg.sha512",
         "system.io.packaging.nuspec",
         "useSharedDesignerContext.txt"
       ]

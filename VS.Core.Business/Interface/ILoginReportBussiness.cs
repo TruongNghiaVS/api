@@ -11,8 +11,8 @@ namespace VS.Core.Business.Interface
         Task<LoginReportReponse> GetALl(LoginReportSerarchRequest request);
 
 
-
-
+        Task<string> ExportLogin(LoginReportSerarchRequest request);
+        Task<dynamic> DataLogin(LoginReportSerarchRequest request);
 
     }
 }

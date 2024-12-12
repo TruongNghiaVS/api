@@ -97,8 +97,6 @@ namespace vsrolAPI2022.Controllers
             return Results.Ok(resultSearch);
         }
 
-
-
         [HttpPost("~/api/campagn/add")]
         public async Task<IResult> Add(CampagnAdd employeeAdd)
         {
@@ -533,8 +531,6 @@ namespace vsrolAPI2022.Controllers
                                     Provice2 = "",
                                     StatusPayMent = ReadvalueStringExcel(workSheet, i, 23),
                                     RegisterDay = registerDate,
-
-
                                     DebitOriginal = ReadvaluefloatExcel(workSheet, i, 24),
                                     AmountLoan = ReadvaluefloatExcel(workSheet, i, 12),
                                     EMI = ReadvaluefloatExcel(workSheet, i, 15),
