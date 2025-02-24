@@ -115,9 +115,7 @@ namespace VS.Core.Repository
                     var fistElement = result.FirstOrDefault();
                     var totalRecord = 0;
                     var query = result.GroupBy(x => new { x.LineCode });
-
                     var value = query.ToList();
-
                     foreach (var s in value)
                     {
                         var values = s.ToList();
@@ -383,7 +381,7 @@ namespace VS.Core.Repository
         }
 
         public async Task<GetOverViewDashboardReponse> GetOverViewDashBoard(GetOverViewDashboard request)
-        
+
         {
             try
             {

@@ -33,12 +33,10 @@ namespace vsrolAPI2022.Controllers
         [HttpGet("~/api/job/CalculatingTalktime")]
         public async Task<ActionResult> CalculatingTalktime()
         {
-
             var timerun = DateTime.Now;
             timerun = timerun.AddMinutes(-12);
             var resultSearch = await _handleReportBussiness.CalTalkingTime(timerun);
             Task.WaitAll();
-
             var startTime = timerun;
             var endTime = DateTime.Now.AddDays(1).EndDateTime();
             while (startTime < endTime)

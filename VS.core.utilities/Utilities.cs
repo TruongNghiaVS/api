@@ -24,8 +24,6 @@ namespace VS.core.Utilities
                 return "#2e7d32";
             return "#2e7d32";
         }
-
-
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
             HashSet<TKey> seenKeys = new HashSet<TKey>();
@@ -109,7 +107,6 @@ namespace VS.core.Utilities
         {
             return item.ToDateTime(new DateTime()).EndDateTime();
         }
-
         public static DateTime? ToEndDateTimeNull(this object item)
         {
             return item.ToDateTimeNull().EndDateTime();
@@ -151,7 +148,6 @@ namespace VS.core.Utilities
                     var stream = new MemoryStream(bytes);
                     WaveFileReader wr = new WaveFileReader(stream);
                     TimeSpan span = wr.TotalTime;
-
                     return span.TotalSeconds;
                 }
                 return 0;

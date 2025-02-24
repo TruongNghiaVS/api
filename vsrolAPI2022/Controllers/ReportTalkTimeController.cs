@@ -30,7 +30,7 @@ namespace vsrolAPI2022.Controllers
         public async Task<IResult> getAll(GetAllRecordGroupByLineCodeRequest _input)
         {
             var currentUser = GetCurrentUser();
-            if (currentUser.RoleId == "2" || currentUser.RoleId == "4"  || currentUser.RoleId =="3")
+            if (currentUser.RoleId == "2" || currentUser.RoleId == "4" || currentUser.RoleId == "3")
             {
 
 
@@ -47,7 +47,6 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = currentUser.Id;
-
             var resultSearch = await _reportTalkTimeGroupByDayBussiness.GetAll(_input);
             return Results.Ok(resultSearch);
         }

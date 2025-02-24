@@ -12,16 +12,13 @@ namespace vsrolAPI2022.Controllers
     [Route("[controller]")]
     public class ReportController : BaseController
     {
-
-        private readonly IReportBussiness _impactBusiness;
-
+        private readonly IReportBussiness _businessReport;
         private IHandleReportBussiness _handleReportBussiness;
-
         public ReportController(IReportBussiness campagnBusiness,
             IUserBusiness userBusiness,
             IHandleReportBussiness handleReportBussiness) : base(userBusiness)
         {
-            _impactBusiness = campagnBusiness;
+            _businessReport = campagnBusiness;
             _handleReportBussiness = handleReportBussiness;
         }
 
@@ -35,24 +32,21 @@ namespace vsrolAPI2022.Controllers
                 request.UserId = user.Id;
                 request.LineCode = user.LineCode;
             }
-
             if (user.Id == "3614")
             {
                 request.UserId = user.Id;
             }
-
             if (request.To.HasValue)
             {
                 request.To = request.To.EndDateTime();
             }
-
             int? VendorId = null;
             if (user.RoleId == "4")
             {
                 VendorId = int.Parse(user.Id);
                 request.VendorId = VendorId;
             }
-            var resultSearch = await _impactBusiness.ReportImpactDashboardOverview(request);
+            var resultSearch = await _businessReport.ReportImpactDashboardOverview(request);
             return Results.Ok(resultSearch);
         }
 
@@ -77,7 +71,7 @@ namespace vsrolAPI2022.Controllers
             {
                 _input.To = _input.To.EndDateTime();
             }
-            var resultSearch = await _impactBusiness.GetAllReportImapact(_input);
+            var resultSearch = await _businessReport.GetAllReportImapact(_input);
             return Results.Ok(resultSearch);
         }
 
@@ -102,7 +96,7 @@ namespace vsrolAPI2022.Controllers
             {
                 _input.To = _input.To.EndDateTime();
             }
-            var resultSearch = await _impactBusiness.ExportImpactData(_input);
+            var resultSearch = await _businessReport.ExportImpactData(_input);
 
 
 
@@ -125,7 +119,7 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
 
-            var resultSearch = await _impactBusiness.GetAllReportCDR(_input);
+            var resultSearch = await _businessReport.GetAllReportCDR(_input);
             return Results.Ok(resultSearch);
         }
 
@@ -145,7 +139,7 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
 
-            var resultSearch = await _impactBusiness.getAllCall(_input);
+            var resultSearch = await _businessReport.getAllCall(_input);
             return Results.Ok(resultSearch);
         }
 
@@ -166,18 +160,11 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = user.Id;
-
-
-
             if (_input.ProjectId > 0)
             {
                 _input.VendorId = _input.ProjectId;
             }
-
-
-
-
-            var resultSearch = await _impactBusiness.GetAllRecordingFile(_input);
+            var resultSearch = await _handleReportBussiness.geta(_input);
             return Results.Ok(resultSearch);
         }
 
@@ -197,7 +184,7 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = user.Id;
-            var resultSearch = await _impactBusiness.getAllFirstLastCall(_input);
+            var resultSearch = await _businessReport.getAllFirstLastCall(_input);
             return Results.Ok(resultSearch);
         }
 
@@ -220,7 +207,7 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = user.Id;
-            var resultSearch = await _impactBusiness.getAllRecordingFileWithNo(_input);
+            var resultSearch = await _businessReport.getAllRecordingFileWithNo(_input);
             return Results.Ok(resultSearch);
         }
 
@@ -242,7 +229,7 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = user.Id;
-            var resultSearch = await _impactBusiness.ExportRecordingFile(_input);
+            var resultSearch = await _businessReport.ExportRecordingFile(_input);
             return Results.Ok(resultSearch);
         }
 
@@ -263,7 +250,7 @@ namespace vsrolAPI2022.Controllers
             }
             _input.VendorId = VendorId;
             _input.UserId = user.Id;
-            var resultSearch = await _impactBusiness.ExportRecordingFileNo(_input);
+            var resultSearch = await _businessReport.ExportRecordingFileNo(_input);
             return Results.Ok(resultSearch);
         }
 

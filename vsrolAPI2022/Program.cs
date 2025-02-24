@@ -21,7 +21,6 @@ builder.Services.AddQuartz(q =>
 {
     var jobKey = new JobKey("UpdateTrackingCall");
     q.AddJob<UpdateTrackingCall>(opts => opts.WithIdentity(jobKey));
-
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("UpdateTrackingCall-trigger")
@@ -30,13 +29,10 @@ builder.Services.AddQuartz(q =>
     );
 });
 
-
 builder.Services.AddQuartz(q =>
 {
-
     var jobkey = new JobKey("updatedatagroupdb");
     q.AddJob<UpdateDataGroupDB>(opts => opts.WithIdentity(jobkey));
-
     q.AddTrigger(opts => opts
         .ForJob(jobkey)
         .WithIdentity("updatedatagroupdb-trigger")
@@ -57,17 +53,14 @@ builder.Services.AddQuartz(q =>
 
 builder.Services.AddQuartz(q =>
 {
-
     var jobkey = new JobKey("updateautoJob");
     q.AddJob<AutoJob>(opts => opts.WithIdentity(jobkey));
-
     q.AddTrigger(opts => opts
         .ForJob(jobkey)
         .WithIdentity("updateautoJob-trigger")
         .WithCronSchedule(" 0/20 * * * * ? *")
     );
 });
-
 
 //builder.Services.AddQuartz(q =>
 //{

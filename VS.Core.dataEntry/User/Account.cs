@@ -22,41 +22,7 @@
 
         public string? Pass { get; set; }
 
-        //public bool isHead
-        //{
-        //    get
-        //    {
-        //        return (RoleCode == "head") ? true : false;
-        //    }
-        //}
-        //public bool isDev
-        //{
-        //    get
-        //    {
-        //        return (RoleCode == "dev") ? true : false;
-        //    }
-        //}
-        //public bool isAdmin
-        //{
-        //    get
-        //    {
-        //        return (RoleCode == "admin" || RoleCode == "head") ? true : false;
-        //    }
-        //}
-        //public bool isSale
-        //{
-        //    get
-        //    {
-        //        return (RoleCode == "sale") ? true : false;
-        //    }
-        //}
-        //public bool isRsmAsmSS
-        //{
-        //    get
-        //    {
-        //        return (RoleCode == "rsm" || RoleCode == "asm" || RoleCode == "ss") ? true : false;
-        //    }
-        //}
+
 
     }
 }

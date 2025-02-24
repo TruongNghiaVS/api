@@ -229,7 +229,6 @@ namespace VS.Core.Repository
                             request.OrderBy,
                             request.UserId
                         }, commandType: CommandType.StoredProcedure);
-
                     var dataFirst = result.FirstOrDefault();
                     var total = 0;
                     if (dataFirst != null)
